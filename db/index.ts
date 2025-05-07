@@ -1,16 +1,12 @@
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import ws from "ws";
-import * as schema from "@shared/schema";
+import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
+dotenv.config();
 
-// This is the correct way neon config - DO NOT change this
-neonConfig.webSocketConstructor = ws;
-
-if (!process.env.DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL must be set. Did you forget to provision a database?",
-  );
+const uri = process.env.DATABASE_URL;
+console.log("DATABASE_URL:", uri);
+if (!uri) {
+  throw new Error('DATABASE_URL is not defined in the environment variables');
 }
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-export const db = drizzle({ client: pool, schema });
+
+export const db = new MongoClient(uri).db();

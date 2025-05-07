@@ -1,60 +1,40 @@
 import { db } from "@db";
-import * as schema from "@shared/schema";
-import { eq, desc, and } from "drizzle-orm";
+import { ObjectId } from "mongodb";
 
 export const storage = {
   // Category methods
   async getAllSevaCategories() {
-    return db.query.sevaCategories.findMany({
-      orderBy: schema.sevaCategories.name
-    });
+    return db.collection("sevaCategories").find({}).sort({ name: 1 }).toArray();
   },
 
   async getSevaCategoryBySlug(slug: string) {
-    return db.query.sevaCategories.findFirst({
-      where: eq(schema.sevaCategories.slug, slug)
-    });
+    return db.collection("sevaCategories").findOne({ slug });
   },
 
   // Seva Option methods
-  async getSevaOptionsByCategory(categoryId: number) {
-    return db.query.sevaOptions.findMany({
-      where: eq(schema.sevaOptions.categoryId, categoryId),
-      with: {
-        amounts: true
-      }
-    });
+  async getSevaOptionsByCategory(categoryId: string) {
+    return db.collection("sevaOptions").find({ categoryId: new ObjectId(categoryId) }).toArray();
   },
 
-  async getSevaOptionById(id: number) {
-    return db.query.sevaOptions.findFirst({
-      where: eq(schema.sevaOptions.id, id),
-      with: {
-        amounts: true,
-        category: true
-      }
-    });
+  async getSevaOptionById(id: string) {
+    return db.collection("sevaOptions").findOne({ _id: new ObjectId(id) });
   },
 
   // Donation methods
-  async createDonor(donor: schema.DonorInsert) {
+  async createDonor(donor: any) {
     try {
-      const [newDonor] = await db.insert(schema.donors)
-        .values(donor)
-        .returning();
-      return newDonor;
+      const result = await db.collection("donors").insertOne(donor);
+      return { ...donor, _id: result.insertedId };
     } catch (error) {
       console.error("Error creating donor:", error);
       throw error;
     }
   },
 
-  async createDonation(donation: schema.DonationInsert) {
+  async createDonation(donation: any) {
     try {
-      const [newDonation] = await db.insert(schema.donations)
-        .values(donation)
-        .returning();
-      return newDonation;
+      const result = await db.collection("donations").insertOne(donation);
+      return { ...donation, _id: result.insertedId };
     } catch (error) {
       console.error("Error creating donation:", error);
       throw error;
@@ -63,19 +43,7 @@ export const storage = {
 
   async getRecentDonations(limit = 10) {
     try {
-      return db.query.donations.findMany({
-        where: eq(schema.donations.showPublicly, true),
-        orderBy: desc(schema.donations.createdAt),
-        limit,
-        with: {
-          donor: true,
-          sevaOption: {
-            with: {
-              category: true
-            }
-          }
-        }
-      });
+      return db.collection("donations").find({ showPublicly: true }).sort({ createdAt: -1 }).limit(limit).toArray();
     } catch (error) {
       console.error("Error fetching recent donations:", error);
       throw error;
@@ -85,26 +53,17 @@ export const storage = {
   // Testimonial methods
   async getApprovedTestimonials(limit = 5) {
     try {
-      return db.query.testimonials.findMany({
-        where: eq(schema.testimonials.isApproved, true),
-        orderBy: desc(schema.testimonials.createdAt),
-        limit,
-        with: {
-          donor: true
-        }
-      });
+      return db.collection("testimonials").find({ isApproved: true }).sort({ createdAt: -1 }).limit(limit).toArray();
     } catch (error) {
       console.error("Error fetching testimonials:", error);
       throw error;
     }
   },
 
-  async createTestimonial(testimonial: schema.TestimonialInsert) {
+  async createTestimonial(testimonial: any) {
     try {
-      const [newTestimonial] = await db.insert(schema.testimonials)
-        .values(testimonial)
-        .returning();
-      return newTestimonial;
+      const result = await db.collection("testimonials").insertOne(testimonial);
+      return { ...testimonial, _id: result.insertedId };
     } catch (error) {
       console.error("Error creating testimonial:", error);
       throw error;

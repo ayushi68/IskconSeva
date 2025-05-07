@@ -7,6 +7,7 @@ export interface SevaCategory {
   imageUrl: string | null;
   createdAt: string;
   sevaOptions?: SevaOption[];
+  subSevas?: SevaOption[]; // Added subSevas property to represent subcategories or options
 }
 
 // Seva Option type

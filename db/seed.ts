@@ -1,5 +1,13 @@
-import { db } from "./index";
-import * as schema from "@shared/schema";
+import { db } from "@db";
+import { ObjectId } from "mongodb";
+
+// Define types for categoryData
+interface CategoryData {
+  [key: string]: ObjectId;
+}
+
+// Initialize categoryData
+const categoryData: CategoryData = {};
 
 async function seed() {
   try {
@@ -25,20 +33,16 @@ async function seed() {
       }
     ];
 
-    // Insert categories and collect their IDs
-    const categoryData = {};
-    
+    // Populate categoryData after inserting or retrieving categories
     for (const category of categories) {
-      const existing = await db.query.sevaCategories.findFirst({
-        where: (fields, { eq }) => eq(fields.slug, category.slug)
-      });
-      
+      const existing = await db.collection("sevaCategories").findOne({ slug: category.slug });
+
       if (!existing) {
-        const [inserted] = await db.insert(schema.sevaCategories).values(category).returning();
-        categoryData[category.slug] = inserted.id;
+        const result = await db.collection("sevaCategories").insertOne(category);
+        categoryData[category.slug] = result.insertedId;
         console.log(`Created category: ${category.name}`);
       } else {
-        categoryData[category.slug] = existing.id;
+        categoryData[category.slug] = existing._id;
         console.log(`Category exists: ${category.name}`);
       }
     }
@@ -149,37 +153,33 @@ async function seed() {
 
     // Insert seva options and their amounts
     for (const option of allOptions) {
-      const existing = await db.query.sevaOptions.findFirst({
-        where: (fields, { and, eq }) => and(
-          eq(fields.name, option.name),
-          eq(fields.categoryId, option.categoryId)
-        )
+      const existing = await db.collection("sevaOptions").findOne({
+        name: option.name,
+        categoryId: option.categoryId
       });
       
       let optionId;
       
       if (!existing) {
         const { amounts, ...optionData } = option;
-        const [inserted] = await db.insert(schema.sevaOptions).values(optionData).returning();
-        optionId = inserted.id;
+        const result = await db.collection("sevaOptions").insertOne(optionData);
+        optionId = result.insertedId;
         console.log(`Created option: ${option.name}`);
       } else {
-        optionId = existing.id;
+        optionId = existing._id;
         console.log(`Option exists: ${option.name}`);
       }
       
       // Insert amounts for this option
       const { amounts } = option;
       for (const amount of amounts) {
-        const existingAmount = await db.query.sevaAmounts.findFirst({
-          where: (fields, { and, eq }) => and(
-            eq(fields.sevaOptionId, optionId),
-            eq(fields.amount, amount.toString())
-          )
+        const existingAmount = await db.collection("sevaAmounts").findOne({
+          sevaOptionId: optionId,
+          amount: amount.toString()
         });
         
         if (!existingAmount) {
-          await db.insert(schema.sevaAmounts).values({
+          await db.collection("sevaAmounts").insertOne({
             sevaOptionId: optionId,
             amount: amount.toString(),
             isPopular: false
@@ -200,16 +200,16 @@ async function seed() {
     ];
     
     // Only add sample donors if none exist
-    const existingDonorCount = await db.query.donors.findMany();
-    if (existingDonorCount.length === 0) {
+    const existingDonorCount = await db.collection("donors").countDocuments();
+    if (existingDonorCount === 0) {
       for (const donor of sampleDonors) {
-        const [inserted] = await db.insert(schema.donors).values(donor).returning();
+        const result = await db.collection("donors").insertOne(donor);
         console.log(`Added sample donor: ${donor.fullName}`);
         
         // For the first donor, also add a testimonial
         if (donor.fullName === "Mohan Agarwal") {
-          await db.insert(schema.testimonials).values({
-            donorId: inserted.id,
+          await db.collection("testimonials").insertOne({
+            donorId: result.insertedId,
             testimonialText: "Contributing to the Annadana Seva at ISKCON has been a deeply fulfilling experience for me and my family. The ability to serve prasadam to devotees and knowing that we're participating in service to Lord Krishna brings immense joy. The process was simple, and the temple management keeps us informed about how our contribution is utilized.",
             rating: 5,
             isApproved: true

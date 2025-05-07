@@ -6,6 +6,7 @@ import GaushalaSeva from "@/components/seva/GaushalaSeva";
 import RecentDonors from "@/components/home/RecentDonors";
 import ContactInfo from "@/components/home/ContactInfo";
 import FAQ from "@/components/home/FAQ";
+import { SevaCategory } from "@/lib/types";
 
 export default function SevaDetail() {
   // Get the category slug from the URL
@@ -13,7 +14,7 @@ export default function SevaDetail() {
   const slug = params?.slug || "";
   
   // Fetch the category data
-  const { data: category, isLoading, error } = useQuery({
+  const { data: category, isLoading, error } = useQuery<SevaCategory>({
     queryKey: [`/api/categories/${slug}`],
   });
   
@@ -46,7 +47,7 @@ export default function SevaDetail() {
     <>
       <Helmet>
         <title>{category.name} - ISKCON Raipur-Bhilai</title>
-        <meta name="description" content={category.description} />
+        <meta name="description" content={category.description || "Default description"} />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
       </Helmet>
       

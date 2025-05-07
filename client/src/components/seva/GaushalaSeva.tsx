@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { SevaOption, SevaAmount } from "@/lib/types";
+import { SevaOption, SevaAmount, SevaCategory } from "@/lib/types";
 import { formatCurrency } from "@/lib/utils";
 import { DonationForm } from "@/components/donation/DonationForm";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -16,7 +16,7 @@ export default function GaushalaSeva({ categorySlug }: GaushalaSevaProps) {
   const [selectedAmount, setSelectedAmount] = useState<SevaAmount | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const { data: category, isLoading, error } = useQuery({
+  const { data: category, isLoading, error } = useQuery<SevaCategory>({
     queryKey: [`/api/categories/${categorySlug}`],
   });
 
