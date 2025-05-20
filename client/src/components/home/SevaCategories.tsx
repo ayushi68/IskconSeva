@@ -1,182 +1,217 @@
-import { Link } from "wouter";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-interface SevaCategory {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  imageUrl: string;
-  subSevas?: string[];
-}
-
-const categories: SevaCategory[] = [
+const services = [
   {
-    id: 1,
-    name: "Annadana Seva",
-    slug: "annadana-seva",
-    description: "Support daily meals and special prasadam distribution.",
-    imageUrl: "/src/public/annadana.jpg",
+    title: "Annadana Seva",
+    description:
+      "Support the sacred tradition of feeding devotees and the needy. Your contribution helps provide free, nutritious prasadam to thousands every day.",
+    points: [
+      
+    ],
+    image: "/annadana.jpg",
   },
   {
-    id: 2,
-    name: "Gaushala Seva",
-    slug: "gaushala-seva",
-    description: "Care for sacred cows and support their maintenance.",
-    imageUrl: "/src/public/gaushala.jpg",
+    title: "Gaushala",
+    description:
+      "Help protect and care for cows, considered sacred in Vedic tradition. Our Gaushala provides shelter, food, and medical care for rescued and temple cows.",
+    points: [
+      
+    ],
+    image: "/Gaushala.jpg",
   },
   {
-    id: 3,
-    name: "Nitya Seva",
-    slug: "nitya-seva",
-    description: "Daily services offered to deities including aartis and bhoga.",
-    imageUrl: "/src/public/nityaseva.jpg",
+    title: "Nitya Seva",
+    description:
+      "Support the daily worship and rituals offered to the Deities. Your seva ensures the temple's spiritual activities continue uninterrupted.",
+    points: [
+      
+    ],
+    image: "/nityaseva.jpg",
   },
   {
-    id: 4,
-    name: "Shri Vigraha Seva",
-    slug: "shri-vigraha-seva",
-    description: "Maintain and decorate the deity forms of the Lord.",
-    imageUrl: "/src/public/vigraha.jpg",
-    subSevas: ["Deity Bhoga Seva","Arati Seva","Deity Seva"]
+    title: "Sri Vigraha Seva",
+    description:
+      "Offer your devotion by contributing to the upkeep and adornment of the temple Deities. This seva includes jewelry, dresses, and altar decorations.",
+    points: [
+      "Deity Bhoga Seva",
+      "Arati Seva",
+      "Deity Seva"
+    ],
+    image: "/network-security.jpg",
   },
   {
-    id: 5,
-    name: "Radharani's Kitchen Seva",
-    slug: "radharanis-kitchen-seva",
-    description: "Contribute to cooking for the pleasure of Srimati Radharani.",
-    imageUrl: "/src/public/radharaniseva.jpg",
+    title: "Radharani’s Kitchen Seva",
+    description:
+      "Be a part of the divine kitchen where offerings for the Deities are prepared with devotion. Help sustain the preparation of sattvic meals for bhoga.",
+    points: [
+      
+    ],
+    image: "/network-security.jpg",
   },
   {
-    id: 6,
-    name: "Rajbhog Seva",
-    slug: "rajbhog-seva",
-    description: "Support opulent noon offerings to the deities.",
-    imageUrl: "/src/public/rajbhogseva.jpg",
+    title: "Rajbhog Seva",
+    description:
+      "Sponsor the most opulent daily offering made to the Deities, Rajbhog. This includes a variety of dishes offered with devotion at midday.",
+    points: [
+      
+    ],
+    image: "/network-security.jpg",
   },
   {
-    id: 7,
-    name: "General Donation",
-    slug: "general-donation",
-    description: "Help the temple with regular and flexible donations.",
-    imageUrl: "/src/public/generaldonation.jpg"
+    title: "General Donation",
+    description:
+      "Make a general donation to support all temple activities including worship, maintenance, community service, and educational programs.",
+    points: [
+      
+    ],
+    image: "/network-security.jpg",
   },
   {
-    id: 8,
-    name: "Offline Donation",
-    slug: "offline-donation",
-    description: "Contribute directly by visiting our temple or office.",
-    imageUrl: "/src/public/offlinedonation.jpg"
+    title: "Offline Donation",
+    description:
+      "Prefer to give in person or via bank transfer? Contribute offline to any seva of your choice by contacting the temple office.",
+    points: [
+      
+    ],
+    image: "/network-security.jpg",
   },
   {
-    id: 9,
-    name: "Become a Life Patron",
-    slug: "life-patron",
-    description: "Join our family of lifetime supporters.",
-    imageUrl: "/src/public/Lif Patron membership Mayapur.png"
+    title: "Become a Life Patron",
+    description:
+      "Join our family of Life Patrons and support the temple’s long-term sustainability. Patrons receive blessings and invitations to special events.",
+    points: [
+      "Life Membership Programme (Sevak)",
+      "Life Membership Programme (Dharma Karta)",
+      "Life Membership Programme (Dharmadhikari)",
+      "Life Membership Programme (Maha Dharmadhikari)",
+      "Life Membership Programme (Mukhya Dharmadhikari)",
+    ],
+    image: "/network-security.jpg",
   },
   {
-    id: 10,
-    name: "Special Seva",
-    slug: "special-seva",
-    description: "Offerings during specific occasions or based on unique needs.",
-    imageUrl: "/src/public/specialpuja.jpg",
-    subSevas: ["Sadhu Seva", "Ekadashi Seva", "Gyaan Daan Seva","Gita Daan","Bhagavatam Daan","Sri Narasimha Yajna Seva","Maha Sudarshana Narasimha Yajna Seva"]
+    title: "Special Seva",
+    description:
+      "Sponsor a unique seva tailored for specific spiritual needs or occasions. These offerings bring blessings for personal or family welfare.",
+    points: [
+      "Sadhu Seva",
+      "Ekadashi Seva",
+      "Gyaan Daan Seva",
+      "Gita Daan",
+      "Bhagavatam Daan",
+      "Sri Narasimha Yajna Seva ",
+      "Maha Sudarshana Narasimha Yajna Seva ",
+    ],
+    image: "/network-security.jpg",
   },
   {
-    id: 11,
-    name: "Youth Empowerment Seva",
-    slug: "youth-empowerment-seva",
-    description: "Support training and education for the youth.",
-    imageUrl: "/src/public/youthseva.jpg",
+    title: "Youth Empowerment Seva",
+    description:
+      "Empower the next generation with values-based education, leadership training, and spiritual guidance through youth-centered programs.",
+    points: [
+      
+    ],
+    image: "/network-security.jpg",
   },
   {
-    id: 12,
-    name: "Special Puja",
-    slug: "special-puja",
-    description: "Sponsor special pujas and religious functions.",
-    imageUrl: "/src/public/specialpuja.jpg",
+    title: "Special Puja",
+    description:
+      "Offer a special puja for health, prosperity, or spiritual upliftment. Conducted by qualified priests according to Vedic rituals.",
+    points: [
+      
+    ],
+    image: "/network-security.jpg",
   },
   {
-    id: 13,
-    name: "Festival Seva",
-    slug: "festival-seva",
-    description: "Participate in grand annual celebrations and events.",
-    imageUrl: "/src/public/festivalpuja.jpg",
-  }
+    title: "Festival Seva",
+    description:
+      "Participate in the joy of temple festivals by sponsoring decorations, feasts, and programs. Your support spreads divine celebration.",
+    points: [
+      "Sri Gaura Purnima",
+      "Sri Rama Navami",
+      "Sri Narasimha Jayanti",
+      "Panihati Chida-Dahi Mahotsava",
+      "Jhulan Utsava",
+      "Sri Krishna Janmashtami",
+      "Sri Vyasa Puja",
+      "Sri Radhashtami",
+      "Deepotsava",
+      "Govardhana Puja",
+      "Sri Vaikuntha Ekadashi",
+      "Gita Jayanti",
+     "Sri Nityananda Trayodashi",
+    ],
+    image: "/network-security.jpg",
+  },
 ];
 
-function slugify(text: string) {
-  return text.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "");
-}
 
-export default function SevaCategories() {
+export default function ServicesPage() {
+  const [showAll, setShowAll] = useState(false);
+  const displayedServices = showAll ? services : services.slice(0, 3);
+
   return (
-    <section id="seva-categories" className="py-16 bg-gray-100">
-      <div className="max-w-[1440px] mx-auto px-8 sm:px-12 md:px-16 lg:px-24">
-        <h2 className="text-3xl font-bold mb-10 text-center text-primary">
-          Seva Categories
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-          {categories.map((category, index) => (
-            <motion.div
-              key={category.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="hover:shadow-xl transition-all duration-300"
-            >
-              <Card className="h-full flex flex-col overflow-hidden shadow-md rounded-lg bg-white">
-                <Link href={`/category/${category.slug}`}>
-                  <div className="overflow-hidden h-48 cursor-pointer">
-                    <img
-                      src={category.imageUrl}
-                      alt={category.name}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                    />
-                  </div>
-                </Link>
-
-                <CardContent className="flex flex-col flex-grow p-6">
-                  <Link href={`/category/${category.slug}`}>
-                    <h3 className="font-bold text-xl text-primary mb-3 cursor-pointer hover:underline">
-                      {category.name}
-                    </h3>
-                  </Link>
-                  <p className="text-gray-600 mb-3">{category.description}</p>
-
-                  {category.subSevas && category.subSevas.length > 0 && (
-                    <ul className="text-sm text-gray-600 mb-4 space-y-1 list-disc list-inside">
-                      {category.subSevas.map((sub, idx) => (
-                        <li key={idx}>
-                          <Link
-                            href={`/category/${category.slug}/${slugify(sub)}`}
-                            className="text-blue-600 hover:underline"
-                          >
-                            {sub}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  <div className="mt-auto">
-                    <Link href={`/category/${category.slug}`}>
-                      <Button className="w-full bg-primary hover:bg-secondary text-white">
-                        Explore {category.name}
-                      </Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+    <div className="bg-white py-16 px-[60px] md:px-[100px] lg:px-[150px] xl:px-[200px]">
+      {/* Heading */}
+      <div className="text-center mb-20">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+          Offer Seva
+        </h1>
       </div>
-    </section>
+
+      {/* Service Rows */}
+      <div className="space-y-24">
+        {displayedServices.map((service, index) => (
+          <div
+            key={index}
+            className={`flex flex-col ${
+              index % 2 !== 0 ? "md:flex-row-reverse" : "md:flex-row"
+            } items-center gap-12`}
+          >
+            {/* Text Column */}
+            <div className="md:w-1/2">
+              <h2 className="text-2xl font-bold mb-4">{service.title}</h2>
+              <p className="text-gray-500 mb-6">{service.description}</p>
+              {service.points.length > 0 && (
+                <ul className="mb-6 space-y-2">
+                  {service.points.map((point, i) => (
+                    <li key={i} className="font-semibold text-black">
+                      <span className="text-blue-600 mr-2">✔</span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <Link to="/donation">
+                <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition">
+                  Donate Now <span className="ml-1">↗</span>
+                </button>
+              </Link>
+            </div>
+
+            {/* Image Column */}
+            <div className="md:w-1/2 bg-orange-100 p-3 rounded-lg">
+              <img
+                src={service.image}
+                alt={service.title}
+                className="w-full h-auto object-cover rounded"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* See More Button */}
+      {!showAll && services.length > 3 && (
+        <div className="text-center mt-16">
+          <button
+            onClick={() => setShowAll(true)}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full transition-colors duration-300"
+          >
+            See All Sevas ({services.length - 3} more)
+          </button>
+        </div>
+      )}
+    </div>
   );
 }

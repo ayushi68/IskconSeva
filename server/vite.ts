@@ -23,7 +23,7 @@ export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
-    allowedHosts: true as true, // Explicitly set to 'true' to match the expected type
+    allowedHosts: true as true,
   };
 
   const vite = await createViteServer({
@@ -41,6 +41,7 @@ export async function setupVite(app: Express, server: Server) {
   });
 
   app.use(vite.middlewares);
+
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
 
@@ -52,11 +53,10 @@ export async function setupVite(app: Express, server: Server) {
         "index.html",
       );
 
-      // always reload the index.html file from disk incase it changes
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
-        `src="./src/main.tsx"`,
-        `src="./src/main.tsx?v=${nanoid()}"`,
+        /src="\.\/src\/main\.tsx(\?v=.*)?"/,
+        `src="./src/main.tsx?v=${nanoid()}"`
       );
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
@@ -68,18 +68,20 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(import.meta.dirname, "public");
-
-  if (!fs.existsSync(distPath)) {
-    throw new Error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`,
-    );
+  // 1. Serve static files from the root-level public directory (e.g., /public)
+  const staticAssetsPath = path.resolve(process.cwd(), "public");
+  if (fs.existsSync(staticAssetsPath)) {
+    app.use(express.static(staticAssetsPath));
   }
 
-  app.use(express.static(distPath));
-
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
-  });
+  // 2. Serve the built client from /dist if present (for production)
+  const distPath = path.resolve(import.meta.dirname, "..", "client", "dist");
+  if (fs.existsSync(distPath)) {
+    app.use(express.static(distPath));
+    app.use("*", (_req, res) => {
+      res.sendFile(path.resolve(distPath, "index.html"));
+    });
+  } else {
+    throw new Error(`Missing client build at ${distPath}. Run build before deploying.`);
+  }
 }

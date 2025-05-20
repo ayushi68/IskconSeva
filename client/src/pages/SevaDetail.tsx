@@ -4,8 +4,8 @@ import { Helmet } from "react-helmet";
 import AnnadanaSeva from "@/components/seva/AnnadanaSeva";
 import GaushalaSeva from "@/components/seva/GaushalaSeva";
 import RecentDonors from "@/components/home/RecentDonors";
-import ContactInfo from "@/components/home/ContactInfo";
-import FAQ from "@/components/home/FAQ";
+// import ContactInfo from "@/components/home/ContactInfo";
+// import FAQ from "@/components/home/FAQ";
 import { SevaCategory } from "@/lib/types";
 
 export default function SevaDetail() {
@@ -32,16 +32,16 @@ export default function SevaDetail() {
   }
   
   // Determine which component to render based on the slug
-  const renderSevaComponent = () => {
-    switch(slug) {
-      case 'annadana-seva':
-        return <AnnadanaSeva categorySlug={slug} />;
-      case 'gaushala-seva':
-        return <GaushalaSeva categorySlug={slug} />;
-      default:
-        return <AnnadanaSeva categorySlug={slug} />;
-    }
-  };
+  // const renderSevaComponent = () => {
+  //   switch(slug) {
+  //     case 'annadana-seva':
+  //       return <AnnadanaSeva categorySlug={slug} />;
+  //     case 'gaushala-seva':
+  //       return <GaushalaSeva categorySlug={slug} />;
+  //     default:
+  //       return <AnnadanaSeva categorySlug={slug} />;
+  //   }
+  // };
 
   return (
     <>
@@ -71,12 +71,12 @@ export default function SevaDetail() {
       </section>
       
       {/* Render the appropriate seva component */}
-      {renderSevaComponent()}
+      {/* {renderSevaComponent()}
       
       {/* Common components */}
-      <RecentDonors />
+      {/* <RecentDonors />
       <FAQ />
-      <ContactInfo />
+      <ContactInfo />  */}
     </>
   );
 }

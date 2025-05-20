@@ -1,5 +1,18 @@
 import { Schema, model } from 'mongoose';
+import { pgTable, text, serial, integer, boolean } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
 import { z } from 'zod';
+
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  username: text("username").notNull().unique(),
+  password: text("password").notNull(),
+});
+
+export const insertUserSchema = createInsertSchema(users).pick({
+  username: true,
+  password: true,
+});
 
 // Seva Category schema - for types like Annadana, Gaushala, etc.
 const sevaCategorySchema = new Schema({
@@ -155,3 +168,5 @@ export const testimonialSelectSchema = testimonialInsertSchema.extend({
   _id: z.string()
 });
 export type Testimonial = z.infer<typeof testimonialSelectSchema>;
+export type InsertUser = z.infer<typeof insertUserSchema>;
+export type User = typeof users.$inferSelect;

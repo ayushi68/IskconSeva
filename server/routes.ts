@@ -1,10 +1,100 @@
-import type { Express } from "express";
+import express, { type Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
 import * as schema from "@shared/schema";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import Contact from "../db/contact.model";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const router = express.Router();
 
 export async function registerRoutes(app: Express): Promise<Server> {
+
+  router.post("/api/contact", async (req, res) => {
+  try {
+    const { name, mobile, email, dob } = req.body;
+    console.log("Received contact data:", req.body);
+
+    const newContact = new Contact({
+      name,
+      mobile,
+      email,
+      dob: new Date(dob),
+    });
+
+    console.log("Saving contact:", newContact);
+    await newContact.save();
+    console.log("Contact saved successfully");
+
+    res.status(200).json({ message: "Contact saved successfully" });
+  } catch (err) {
+    console.error("Error saving contact:", err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+});
+
+
+  // Donation form submission endpoint
+  app.post("/api/donations", async (req, res) => {
+    try {
+      const donationSchema = z.object({
+        firstName: z.string().min(2),
+        lastName: z.string().min(2),
+        email: z.string().email(),
+        phoneNumber: z.string().optional(),
+        donationCategory: z.string(),
+        customAmount: z.string(),
+        message: z.string().optional(),
+        receiptNeeded: z.boolean().default(false)
+      });
+
+      const validatedData = donationSchema.parse(req.body);
+      
+      // In a real application, we would persist this data
+      // For this example, we'll just return success
+      
+      res.status(200).json({ 
+        success: true, 
+        message: "Donation received successfully" 
+      });
+    } catch (error) {
+      res.status(400).json({ 
+        success: false, 
+        message: "Invalid donation data", 
+        error: error instanceof Error ? error.message : "Unknown error" 
+      });
+    }
+  });
+  
+  // Newsletter subscription endpoint
+  app.post("/api/newsletter", async (req, res) => {
+    try {
+      const newsletterSchema = z.object({
+        email: z.string().email()
+      });
+
+      const validatedData = newsletterSchema.parse(req.body);
+      
+      // In a real application, we would save this email to a subscribers list
+      // For this example, we'll just return success
+      
+      res.status(200).json({ 
+        success: true, 
+        message: "Newsletter subscription successful" 
+      });
+    } catch (error) {
+      res.status(400).json({ 
+        success: false, 
+        message: "Invalid email address", 
+        error: error instanceof Error ? error.message : "Unknown error" 
+      });
+    }
+  });
+
   // API routes prefix
   const apiPrefix = "/api";
 
@@ -50,7 +140,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Invalid ID format" });
       }
       
-      const sevaOption = await storage.getSevaOptionById(id);
+      const sevaOption = await storage.getSevaOptionById(String(id));
       
       if (!sevaOption) {
         return res.status(404).json({ error: "Seva option not found" });
@@ -86,6 +176,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(500).json({ error: "Failed to fetch testimonials" });
     }
   });
+
+  // Add this new route at the end of registerRoutes function
+  app.get("/api/public-images", (req, res) => {
+    const publicDir = path.resolve(__dirname, "../public");
+  
+    fs.readdir(publicDir, (err, files) => {
+      if (err) {
+        console.error("Error reading public directory:", err);
+        return res.status(500).json({ error: "Failed to read images" });
+      }
+  
+      const imageFiles = files.filter((file) =>
+        /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(file)
+      );
+  
+      const imageUrls = imageFiles.map((file) => `/${file}`);
+      res.json(imageUrls);
+    });
+  });
+  
+
 
   // Submit donation
   app.post(`${apiPrefix}/donate`, async (req, res) => {

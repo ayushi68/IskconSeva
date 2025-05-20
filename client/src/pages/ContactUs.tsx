@@ -1,111 +1,158 @@
-import React, { useState } from "react";
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import React from "react";
+import {
+  Facebook,
+  Instagram,
+  Youtube,
+  Send,
+  MessageSquareText,
+} from "lucide-react"
 
-export default function ContactUs() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("Sending...");
-
-    try {
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          to: "ayushi315645@gmail.com",
-          subject: `Contact Us Form Submission from ${formData.name}`,
-          text: `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`,
-        }),
-      });
-
-      if (response.ok) {
-        setStatus("Message sent successfully!");
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        setStatus("Failed to send message. Please try again later.");
-      }
-    } catch (error) {
-      setStatus("An error occurred. Please try again later.");
-    }
-  };
-
+export default function ContactPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-6 text-blue-600">Contact Us</h1>
-      <p className="text-center text-gray-600 mb-8">
-        We would love to hear from you! Reach out to us using the form below or through our contact details.
-      </p>
+    <div className="min-h-screen bg-white flex flex-col">
+      <div className="max-w-7xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-12">
+        {/* Left Side - Contact Details */}
+        <div>
+          <h1 className="text-4xl font-bold text-gray-900 mt-2 mb-4">Contact us</h1>
+          <p className="text-gray-600 mb-8">
+            Give us a call or drop by anytime. We endeavour to answer all enquiries within
+            24 hours on business days. We will be happy to answer your questions.
+          </p>
+          <div className="space-y-6">
+            {/* Bhilai */}
+            <div className="flex items-start gap-4">
+              <span className="text-2xl">📍</span>
+              <div>
+                <h3 className="font-semibold text-lg">Bhilai Address:</h3>
+                <p className="text-gray-700">
+                  HARE KRISHNA MOVEMENT - BHILAI<br />
+                  Akshaya Patra Campus, Sector - 6,<br />
+                  Bhilai, Durg - 490006.
+                </p>
+                <p className="text-gray-700 mt-1"><strong>Phone:</strong> 0788 - 2284699</p>
+              </div>
+            </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold mb-4 text-blue-600">Get in Touch</h2>
-          <p className="text-gray-700 mb-4">Feel free to contact us for any queries or assistance.</p>
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <FaPhone className="text-blue-600 mr-3" />
-              <span>+91 12345 67890</span>
+            {/* Raipur */}
+            <div className="flex items-start gap-4">
+              <span className="text-2xl">📍</span>
+              <div>
+                <h3 className="font-semibold text-lg">Raipur Address:</h3>
+                <p className="text-gray-700">
+                  HARE KRISHNA MOVEMENT - RAIPUR<br />
+                  A - 2, VIP Estate, Shankar Nagar,<br />
+                  Raipur - 492007.
+                </p>
+                <p className="text-gray-700 mt-1"><strong>Phone:</strong> 0771 - 4056774</p>
+              </div>
             </div>
-            <div className="flex items-center">
-              <FaEnvelope className="text-blue-600 mr-3" />
-              <span>ayushi315645@gmail.com</span>
-            </div>
-            <div className="flex items-center">
-              <FaMapMarkerAlt className="text-blue-600 mr-3" />
-              <span>123 Temple Street, City, Country</span>
+
+            {/* Social Media Links */}
+            <div className="pt-4">
+              <h3 className="font-semibold text-lg mb-2">Connect with us:</h3>
+              <div className="flex items-center gap-4 text-2xl">
+                <a
+                  href="https://www.facebook.com/HKMBHLRPR/"
+                  className="text-blue-600 hover:scale-110 transition-transform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                >
+                  <Facebook size={28} />
+                </a>
+                <a
+                  href="https://www.instagram.com/hkm_bhilai_raipur/"
+                  className="text-pink-500 hover:scale-110 transition-transform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={28} />
+                </a>
+                <a
+                  href="http://bit.ly/hkmbhlrpr"
+                  className="text-red-600 hover:scale-110 transition-transform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="YouTube"
+                >
+                  <Youtube size={28} />
+                </a>
+                <a
+                  href="https://www.youtube.com/@harekrishnabhlrpr/featured"
+                  className="text-red-600 hover:scale-110 transition-transform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="YouTube Channel"
+                >
+                  <Youtube size={28} />
+                </a>
+                <a
+                  href="https://tinyurl.com/HKMTelegram"
+                  className="text-blue-500 hover:scale-110 transition-transform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Telegram"
+                >
+                  <Send size={28} />
+                </a>
+                <a
+                  href="https://tinyurl.com/HKMWhatsapp01"
+                  className="text-green-600 hover:scale-110 transition-transform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp"
+                >
+                  <MessageSquareText size={28} />
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md space-y-4">
-          <h2 className="text-2xl font-bold mb-4 text-blue-600">Send Us a Message</h2>
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+        {/* Right Side - Contact Form */}
+        <div className="bg-gradient-to-r from-cyan-400 to-purple-500 p-10 rounded-md shadow-md text-white">
+          <h2 className="text-2xl font-bold mb-6">Ready to Get Started?</h2>
+          <p className="text-sm mb-4">Your email address will not be published. Required fields are marked *</p>
+          <form className="space-y-4">
             <input
               type="text"
-              id="name"
-              value={formData.name}
-              onChange={handleChange}
+              placeholder="Your Name *"
+              className="w-full p-3 rounded-md text-black"
               required
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
-              id="email"
-              value={formData.email}
-              onChange={handleChange}
+              placeholder="Your Email *"
+              className="w-full p-3 rounded-md text-black"
               required
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
-          </div>
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
             <textarea
-              id="message"
-              value={formData.message}
-              onChange={handleChange}
+              placeholder="Message..."
+              className="w-full p-3 rounded-md text-black"
+              rows={5}
               required
-              rows={4}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
             ></textarea>
-          </div>
-          <button
-            type="submit"
-            className="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            Send Message
-          </button>
-          {status && <p className="text-center text-sm mt-4 text-gray-600">{status}</p>}
-        </form>
+            <button
+              type="submit"
+              className="bg-white text-black font-semibold px-6 py-3 rounded-md hover:bg-gray-100"
+            >
+              SEND MESSAGE
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Map Section */}
+      <div className="w-full h-[500px] mt-10">
+      <iframe
+        src="https://www.google.com/maps/d/embed?mid=1e-WqN8Aa0UWhwJZD7MICluBUPwZkxM0&ehbc=2E312F"
+        width="100%"
+        height="500"
+        allowFullScreen
+        loading="lazy"
+        className="border-0"
+      />
       </div>
     </div>
   );

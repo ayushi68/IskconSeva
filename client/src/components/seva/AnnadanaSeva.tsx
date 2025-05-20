@@ -1,153 +1,107 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
-import { SevaOption, SevaAmount, SevaCategory } from "@/lib/types";
-import { formatCurrency } from "@/lib/utils";
-import { DonationForm } from "@/components/donation/DonationForm";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import React from 'react';
 
-interface AnnadanaSevaProps {
-  categorySlug: string;
-}
-
-export default function AnnadanaSeva({ categorySlug }: AnnadanaSevaProps) {
-  const [selectedOption, setSelectedOption] = useState<SevaOption | null>(null);
-  const [selectedAmount, setSelectedAmount] = useState<SevaAmount | null>(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const { data: category, isLoading, error } = useQuery<SevaCategory>({
-    queryKey: [`/api/categories/${categorySlug}`],
-  });
-
-  if (isLoading) {
-    return (
-      <section id="annadana-seva" className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center mb-12">
-            <div className="w-16 h-1 bg-secondary mr-3"></div>
-            <Skeleton className="h-8 w-48" />
-            <div className="w-16 h-1 bg-secondary ml-3"></div>
-          </div>
-          <Skeleton className="h-16 w-full max-w-4xl mx-auto mb-12" />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <Skeleton key={i} className="h-80 w-full rounded-lg" />
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section id="annadana-seva" className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="section-title">Annadana Seva</h2>
-          <div className="text-center text-red-500">
-            Failed to load seva options. Please try again later.
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  const handleAmountSelect = (option: SevaOption, amount: SevaAmount) => {
-    setSelectedOption(option);
-    setSelectedAmount(amount);
-  };
-
-  const handleDonateClick = (option: SevaOption, amount: SevaAmount) => {
-    setSelectedOption(option);
-    setSelectedAmount(amount);
-    setIsDialogOpen(true);
-  };
-
-  const backgroundClass = categorySlug === "gaushala-seva" 
-    ? "bg-[hsl(var(--deep-blue))]"
-    : "bg-[hsl(var(--spiritual-green))]";
-
-  const title = category?.name || "Loading...";
-
+const AnnadanaSeva: React.FC = () => {
   return (
-    <section id={categorySlug} className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center mb-12">
-          <div className="w-16 h-1 bg-secondary mr-3"></div>
-          <h2 className="font-poppins text-3xl font-bold text-primary">{title}</h2>
-          <div className="w-16 h-1 bg-secondary ml-3"></div>
-        </div>
+    <div
+      className="desc_trig_outter bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url('')",
+        backgroundColor: '#b28e65',
+      }}
+    >
+      <a
+        id="evc_17469342008777"
+        className="desc_trig sin_val evcal_list_a"
+        data-gmap_status="null"
+        data-exlk="0"
+        data-ux_val="3"
+        data-ux_val_mob="-"
+      >
+        <span className="evoet_c2 evoet_cx">
+          <span
+            className="evoet_dayblock evcal_cblock"
+            data-bgcolor="#b28e65"
+            data-smon="May"
+            data-syr="2025"
+          >
+            <span className="evo_start evofxdrc">
+              <em className="year">2025</em>
+              <em className="day">sun</em>
+              <em className="date">11</em>
+              <em className="month">may</em>
+              <em className="time">4:30 am</em>
+            </span>
+            <span className="evo_end only_time evofxdrc">
+              <em className="time">9:30 am</em>
+            </span>
+          </span>
+        </span>
 
-        <div className="max-w-4xl mx-auto mb-12">
-          <p className="text-center text-gray-700">
-            {category?.description || "Loading description..."}
-          </p>
-        </div>
+        <span className="evoet_c3 evoet_cx evcal_desc">
+          <span className="evoet_title evcal_desc2 evcal_event_title" itemProp="name">
+            Nrsimha Caturdasi
+          </span>
+          <span className="evoet_cy evoet_subtitle evo_below_title">
+            <span className="evcal_event_subtitle">The Festival of the Divine Protector</span>
+          </span>
+          <span className="evoet_cy evoet_time_expand level_3">
+            <em className="evcal_time evo_tz_time">
+              <i className="fa fa-clock-o" /> 4:30 am - 9:30 am
+            </em>
+          </span>
+        </span>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {category?.sevaOptions?.map((option: SevaOption) => (
-            <div key={option.id} className="bg-gray-50 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
-              <div className={`${backgroundClass} text-white p-3`}>
-                <h3 className="font-poppins font-bold text-lg">{option.name}</h3>
-              </div>
-              <div className="p-5">
-                <p className="text-gray-600 text-sm mb-4">{option.description}</p>
-                
-                <div className="mb-4">
-                  <h4 className="font-medium text-primary mb-2">Select Amount</h4>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {option.amounts?.map((amount: SevaAmount) => (
-                      <button
-                        key={amount.id}
-                        className={`amount-btn ${selectedOption?.id === option.id && selectedAmount?.id === amount.id ? 'amount-btn-active' : ''}`}
-                        onClick={() => handleAmountSelect(option, amount)}
-                      >
-                        {formatCurrency(amount.amount)}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
-                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                  <DialogTrigger asChild>
-                    <Button
-                      className="w-full bg-secondary hover:bg-primary text-white"
-                      onClick={() => {
-                        // If no amount is selected, use the first one
-                        const amountToUse = selectedOption?.id === option.id && selectedAmount
-                          ? selectedAmount
-                          : option.amounts?.[0];
-                          
-                        if (amountToUse) {
-                          handleDonateClick(option, amountToUse);
-                        }
-                      }}
-                    >
-                      Donate Now
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[600px]">
-                    {selectedOption && selectedAmount && (
-                      <DonationForm 
-                        sevaOption={selectedOption} 
-                        selectedAmount={selectedAmount}
-                        onClose={() => setIsDialogOpen(false)}
-                      />
-                    )}
-                  </DialogContent>
-                </Dialog>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="text-center mt-8">
-          <a href="#" className="inline-block text-primary hover:text-secondary font-medium underline">
-            View All {title} Options
-          </a>
-        </div>
-      </div>
-    </section>
+        <span className="evoet_c4 evoet_cx">
+          <span className="evoet_cmf">
+            <em className="evcal_cmd evocmd_button" data-href="Donate" data-target="no">
+              <i className="fa fa-hand-holding-dollar" /> DONATE
+            </em>
+          </span>
+
+          <span className="evocd_timer evoet_b1 sty_def3">
+            <span className="evocd_text" data-ex_tx="This event has now ended">
+              This event ends in..
+            </span>
+            <span
+              id="event_cd_8777_0_9"
+              className="evocd_time is-countdown"
+              data-et="256682"
+              data-ex_ux="0"
+              data-timetx='{"yr":"Yr","o":"Mo","w":"Wk","d":"Dy","h":"Hr","m":"Mn","s":"Sc"}'
+              data-compact="def3"
+            >
+              <span className="countdown-row countdown-show4">
+                <span className="countdown-section">
+                  <span className="countdown-amount">2</span>
+                  <span className="countdown-period">Dy</span>
+                </span>
+                <span className="countdown-section">
+                  <span className="countdown-amount">23</span>
+                  <span className="countdown-period">Hr</span>
+                </span>
+                <span className="countdown-section">
+                  <span className="countdown-amount">18</span>
+                  <span className="countdown-period">Mn</span>
+                </span>
+                <span className="countdown-section">
+                  <span className="countdown-amount">2</span>
+                  <span className="countdown-period">Sc</span>
+                </span>
+              </span>
+            </span>
+            <em className="clear" />
+          </span>
+
+          <span
+            className="evoet_data"
+            data-d='{"loc.n":"","orgs":[],"tags":[]}'
+            data-bgc="#b28e65"
+          />
+        </span>
+      </a>
+    </div>
   );
-}
+};
+
+export default AnnadanaSeva;
