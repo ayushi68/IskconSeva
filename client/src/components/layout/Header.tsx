@@ -260,35 +260,35 @@ export default function Header() {
           <div className="bg-indigo-600 text-white text-sm py-2 px-4 shadow-md">
             <div className="container mx-auto flex flex-wrap items-center justify-between">
               <div className="flex items-center space-x-4">
-                <Link href="/schedule" className="flex items-center hover:text-yellow-300 transition-colors duration-300">
+                <Link href="/temple/Tsbhilai" className="flex items-center hover:text-yellow-300 transition-colors duration-300">
                   <Clock className="w-4 h-4 mr-1" /> Temple Schedule
                 </Link>
                 <div className="hidden md:flex items-center space-x-4">
-                  <a href="https://wa.me/yournumber" target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-yellow-300 transition-colors duration-300">
+                  <a href="https://tinyurl.com/HKMWhatsapp01" target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-yellow-300 transition-colors duration-300">
                     <MessageSquare className="w-4 h-4 mr-1" /> Join us on WhatsApp
                   </a>
-                  <a href="https://t.me/yourchannel" target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-yellow-300 transition-colors duration-300">
+                  <a href="https://tinyurl.com/HKMTelegram  " target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-yellow-300 transition-colors duration-300">
                     <Bell className="w-4 h-4 mr-1" /> Join us on Telegram
                   </a>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <div className="flex space-x-3">
-                  <a href="https://facebook.com/hkm" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors duration-300">
+                  <a href="https://www.facebook.com/HKMBHLRPR/" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors duration-300">
                     <Facebook className="w-4 h-4" />
                   </a>
-                  <a href="https://youtube.com/hkm" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors duration-300">
+                  <a href="https://www.youtube.com/@harekrishnabhlrpr/featured" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors duration-300">
                     <Youtube className="w-4 h-4" />
                   </a>
-                  <a href="https://instagram.com/hkm" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors duration-300">
+                  <a href="https://www.instagram.com/hkm_bhilai_raipur/" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-300 transition-colors duration-300">
                     <Instagram className="w-4 h-4" />
                   </a>
                 </div>
                 <div className="hidden md:flex items-center space-x-4">
-                  <Link href="/offer-seva" className="flex items-center hover:text-yellow-300 transition-colors duration-300">
+                  <Link href="/Donation" className="flex items-center hover:text-yellow-300 transition-colors duration-300">
                     <HeartHandshake className="w-4 h-4 mr-1" /> Offer Seva
                   </Link>
-                  <Link href="/nitya-sevak" className="flex items-center hover:text-yellow-300 transition-colors duration-300">
+                  <Link href="/donation/Nityaseva" className="flex items-center hover:text-yellow-300 transition-colors duration-300">
                     <HeartHandshake className="w-4 h-4 mr-1" /> Become a Nitya Sevak
                   </Link>
                 </div>
@@ -348,7 +348,7 @@ export default function Header() {
 
               {/* Logo */}
               <div className={`flex-shrink-0 mx-6 md:mx-10 transition-all duration-300 ${isScrolled ? 'scale-90' : 'scale-100'}`}>
-                <img src="/hkm-logo.jpg" alt="Logo" className={`transition-all duration-300 ${isScrolled ? 'h-8 md:h-10' : 'h-12 md:h-16'}`} />
+                <img src="/hkmheader.png" alt="Logo" className={`transition-all duration-300 ${isScrolled ? 'h-8 md:h-10' : 'h-12 md:h-16'}`} />
               </div>
 
               {/* Right Navigation */}
