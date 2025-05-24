@@ -37,7 +37,7 @@ const services = [
     description: "Innovative product design services from concept to final implementation."
   },
   {
-    title: "Gifts and Paraphernalia ",
+    title: "Gifts ",
     img: "/specialpuja.jpg",
     description: "Innovative product design services from concept to final implementation."
   },
@@ -51,21 +51,21 @@ const services = [
     img: "/rajbhogseva.jpg",
     description: "Innovative product design services from concept to final implementation."
   },
-  {
-    title: "Book a ceremony (Samskaras and Ceremonies)",
-    img: "/hkm-logo.jpg",
-    description: "Innovative product design services from concept to final implementation."
-  },
-  {
-    title: "Open Lawn/Banquet Hall",
-    img: "/radharaniseva.jpg",
-    description: "Innovative product design services from concept to final implementation."
-  },
-  {
-    title: "Guest House",
-    img: "/generaldonation.jpg",
-    description: "Innovative product design services from concept to final implementation."
-  },
+  // {
+  //   title: "Book a ceremony (Samskaras and Ceremonies)",
+  //   img: "/hkm-logo.jpg",
+  //   description: "Innovative product design services from concept to final implementation."
+  // },
+  // {
+  //   title: "Open Lawn/Banquet Hall",
+  //   img: "/radharaniseva.jpg",
+  //   description: "Innovative product design services from concept to final implementation."
+  // },
+  // {
+  //   title: "Guest House",
+  //   img: "/generaldonation.jpg",
+  //   description: "Innovative product design services from concept to final implementation."
+  // },
   {
     title: "Pilgrimage Tours",
     img: "/download.jpg",

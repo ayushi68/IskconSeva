@@ -2,6 +2,21 @@
 
 import React from "react";
 
+const quotes = [
+  {
+    text: "Happiness is a state of mind that comes from appreciating what you have.",
+    author: "Srila Prabhupada",
+  },
+  {
+    text: "Chant and be happy.",
+    author: "A.C. Bhaktivedanta Swami",
+  },
+  {
+    text: "True knowledge means knowing who you are.",
+    author: "Bhagavad Gita",
+  },
+];
+
 const Chaitanya = () => {
   return (
     <main className="flex-1 p-10">
@@ -66,6 +81,8 @@ const Chaitanya = () => {
         />
 
         {/* Section 1 */}
+        <div className="flex flex-col md:flex-row gap-6 mb-10">
+        <div className="w-full md:w-1/2">
         <h2 className="text-3xl font-bold text-purple-800 mb-4">Childhood Pastimes </h2>
         <p className="text-lg text-gray-700 mb-10 leading-relaxed">
         The Lord, although a baby, would perform extraordinary pastimes and would fill blissfulness in the minds of his devotees. Once baby Nimai was found to be resting on a snake’s back. Everyone was feared except Nimai. The snake who was Ananta Sesha himself slowly slithered away and the ladies took Nimai into their arms and started reciting benefice mantras and pouring Ganga water.<br />
@@ -73,6 +90,14 @@ const Chaitanya = () => {
         Baby Nimai, revealed his identity to very few. One such fortunate person happened to be a Brahmana, who came as a guest to Jagannath Misra’s home, cooked food and offered it to Gopala Deity. Soon baby Nimai crawled and ate the offerings. The brahmana repeated the process for twice and the same thing happened. The third time Lord revealed himself to the brahmana and blessed him.<br />
         There are many more such blissful pastimes of Lord which filled, surprise and simultaneously love and affection in the hearts of the devotees.<br />
         </p>
+        </div>
+
+        <img
+            src="/cp29.bmp"
+            alt="Early Life"
+            className="rounded-xl shadow-lg w-full md:w-1/2 max-h-[480px] object-cover"
+        />
+        </div>
 
         <div className="flex flex-col md:flex-row gap-6 mb-10">
         {/* Left: Image */}
@@ -115,7 +140,7 @@ const Chaitanya = () => {
 
         {/* Right: Image */}
         <img
-            src="/cp4.jpg"
+            src="/cp26.jpg"
             alt="Early Life"
             className="rounded-xl shadow-lg w-full md:w-1/2 max-h-[480px] object-cover"
         />
@@ -128,7 +153,7 @@ const Chaitanya = () => {
         <div className="flex flex-col md:flex-row gap-6 mb-10">
         {/* Left: Image */}
         <img
-            src="/cp5.jpg"
+            src="/cp17.bmp"
             alt="Early Life"
             className="rounded-xl shadow-lg w-full md:w-1/2 max-h-[480px] object-cover"
         />
@@ -189,6 +214,23 @@ const Chaitanya = () => {
         </div>
         
       </div>
+
+      <section className="bg-gray-50 py-12 px-4 md:px-10">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-2xl md:text-3xl font-bold text-green-700 mb-8">Inspirational Quotes</h2>
+        <div className="space-y-8">
+          {quotes.map((quote, index) => (
+            <div
+              key={index}
+              className="bg-white shadow-md rounded-lg p-6 border border-gray-200"
+            >
+              <p className="text-lg text-gray-700 italic">“{quote.text}”</p>
+              <p className="text-sm text-green-600 font-semibold mt-4">— {quote.author}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
     </main>
   );
 };

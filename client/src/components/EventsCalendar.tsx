@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import EventCard from "@/components/EventCard";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { events } from "@/data/events";
 import {
   format,
@@ -14,10 +16,11 @@ import {
   subMonths,
   parseISO,
 } from "date-fns";
+import { CalendarDays } from "lucide-react";
 
 // Events Header
 const EventsHeader = () => (
-  <header className="bg-green-700 py-10 md:py-14">
+  <header className="bg-blue-700 py-10 md:py-14">
     <div className="container mx-auto px-8 md:px-12 text-center">
       <h1 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wide">
         Events Calendar
@@ -33,12 +36,22 @@ const EventsCalendar = () => {
 
   const currentMonth = format(currentDate, "MMMM yyyy");
 
+  const handleDateChange = (date: Date | null) => {
+    if (date) {
+      setCurrentDate(date);
+    }
+  };
+
   const goToPreviousMonth = () => {
-    setCurrentDate((prev) => subMonths(prev, 1));
+    const prevMonth = new Date(currentDate);
+    prevMonth.setMonth(currentDate.getMonth() - 1);
+    setCurrentDate(prevMonth);
   };
 
   const goToNextMonth = () => {
-    setCurrentDate((prev) => addMonths(prev, 1));
+    const nextMonth = new Date(currentDate);
+    nextMonth.setMonth(currentDate.getMonth() + 1);
+    setCurrentDate(nextMonth);
   };
 
   const generateCalendarDays = (): Date[] => {
@@ -105,11 +118,19 @@ const EventsCalendar = () => {
               &lt;
             </button>
             <div className="text-gray-800 font-medium">
-              {format(currentDate, "dd/MM/yyyy")}
+              {currentDate ? format(currentDate, "dd/MM/yyyy") : "Select date"}
             </div>
             <button onClick={goToNextMonth} className="text-gray-600 px-3 text-xl">
               &gt;
             </button>
+
+            <DatePicker
+              selected={currentDate}
+              onChange={handleDateChange}
+              customInput={
+                <CalendarDays className="w-5 h-5 text-blue-600 cursor-pointer" />
+              }
+            />
           </div>
 
           {/* View Selector */}
@@ -120,7 +141,7 @@ const EventsCalendar = () => {
                 onClick={() => setActiveView(view)}
                 className={`px-4 py-2 text-sm font-medium border rounded ${
                   activeView === view
-                    ? "bg-green-700 text-white border-green-700"
+                    ? "bg-blue-700 text-white border-blue-700"
                     : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
                 }`}
               >
@@ -199,7 +220,7 @@ const EventsCalendar = () => {
           <div className="text-center py-12 text-gray-600">
             <h2 className="text-xl font-semibold mb-4">Subscribe to Event Updates</h2>
             <p className="mb-4">Coming soon: Stay informed about upcoming ISKCON events.</p>
-            <button className="bg-green-700 text-white px-6 py-2 rounded hover:bg-green-800">
+            <button className="bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800">
               Notify Me
             </button>
           </div>

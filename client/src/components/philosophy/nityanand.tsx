@@ -15,7 +15,7 @@ const Nityanand = () => {
         {/* Verse and Image Row */}
         <div className="flex flex-col md:flex-row gap-6 mb-10">
           <img
-            src="/np6.jpg"
+            src="/np2.jpg"
             alt="Sri Nityananda Prabhu"
             className="w-full md:w-1/2 rounded-lg shadow"
           />
@@ -42,7 +42,7 @@ const Nityanand = () => {
             </div>
             {/* 📸 Image */}
             <img
-            src="/np2.jpg"
+            src="/np3.jpg"
             alt="Nityananda Prabhu"
             className="rounded-xl shadow-lg mb-10 w-full md:w-2/3 lg:w-1/2 max-h-[480px] object-cover mx-auto"
             />
@@ -58,7 +58,7 @@ const Nityanand = () => {
         </p>
 
         <img
-          src="/np3.jpg"
+          src="/np4.jpg"
           alt="Early Life"
           className="rounded-xl shadow-lg mb-10 w-full max-h-[480px] object-cover"
         />
@@ -72,7 +72,7 @@ const Nityanand = () => {
         </p>
 
         <img
-          src="/np4.jpg"
+          src="/np5.jpg"
           alt="Meeting Mahaprabhu"
           className="rounded-xl shadow-lg mb-10 w-full max-h-[480px] object-cover"
         />
@@ -85,7 +85,7 @@ const Nityanand = () => {
 
         <div className="flex flex-col md:flex-row gap-6 mb-10"> 
             <img
-            src="/np5.jpg"
+            src="/np6.jpg"
             alt="Mercy"
             className="rounded-xl shadow-lg mb-10 w-full md:w-2/3 lg:w-1/2 max-h-[480px] object-cover mx-auto"
             />
@@ -114,7 +114,7 @@ const Nityanand = () => {
         </p>
 
         <img
-          src="/np1.jpg"
+          src="/np7.jpg"
           alt="Mercy"
           className="rounded-xl shadow-lg mb-10 w-full max-h-[480px] object-cover"
         />

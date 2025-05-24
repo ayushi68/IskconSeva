@@ -16,7 +16,7 @@ const Bhagavadgita = () => {
       <div className="grid md:grid-cols-2 gap-6 mb-6">
         <div className="bg-white/70 shadow-xl rounded-2xl p-4 flex flex-col justify-between">
           <motion.img
-            src="/bg1.jpg"
+            src="/bg9.jpg"
             alt="Krishna and Arjuna"
             className="rounded-xl mb-4 w-full h-74 object-cover"
             whileHover={{ scale: 1.03 }}
@@ -28,7 +28,7 @@ const Bhagavadgita = () => {
 
         <div className="bg-white/70 shadow-xl rounded-2xl p-4 flex flex-col justify-between">
           <motion.img
-            src="/bg2.png"
+            src="/bg13.bmp"
             alt="Srila Prabhupada"
             className="rounded-xl mb-4 w-full h-74 object-cover"
             whileHover={{ scale: 1.03 }}
@@ -47,10 +47,10 @@ const Bhagavadgita = () => {
           transition={{ delay: 0.5, duration: 1 }}
         >
           <h2 className="text-2xl font-semibold text-purple-700 mb-2">Bhagavad Gītā Mahātmya</h2>
-          <p className="text-lg italic">
-            ekaḿ śāstraḿ devakī-putra-gītam<br />
+          <p className="text-lg font-bold">
+            ekaḿ śāstraḿ devakī-putra-gītam
             eko devo devakī-putra eva<br />
-            eko mantras tasya nāmāni yāni<br />
+            eko mantras tasya nāmāni yāni
             karmāpy ekaḿ tasya devasya sevā
           </p>
           <p className="mt-4 text-lg text-gray-800">
@@ -72,14 +72,14 @@ const Bhagavadgita = () => {
 
       <div className="bg-white/70 shadow-xl rounded-2xl p-4 mb-6">
         <h3 className="text-xl font-semibold text-purple-700">Bhagavad Gītā 10.12–13</h3>
-        <p className="italic mt-2">
-          arjuna uvāca<br />
+        <p className="italic mt-2 font-bold">
+          arjuna uvāca
           paraṁ brahma paraṁ dhāma<br />
-          pavitraṁ paramaṁ bhavān<br />
+          pavitraṁ paramaṁ bhavān
           puruṣaṁ śāśvataṁ divyam<br />
-          ādi-devam ajaṁ vibhum<br />
+          ādi-devam ajaṁ vibhum
           āhus tvām ṛṣayaḥ sarve<br />
-          devarṣir nāradas tathā<br />
+          devarṣir nāradas tathā
           asito devalo vyāsaḥ<br />
           svayaṁ caiva bravīṣi me
         </p>
@@ -93,10 +93,10 @@ const Bhagavadgita = () => {
 
       <div className="bg-white/70 shadow-xl rounded-2xl p-4 mb-6">
         <h3 className="text-xl font-semibold text-purple-700">Bhagavad Gītā 18.73</h3>
-        <p className="italic mt-2">
-          arjuna uvāca<br />
+        <p className="italic mt-2 font-bold">
+          arjuna uvāca
           naṣṭo mohaḥ smṛtir labdhā<br />
-          tvat-prasādān mayācyuta<br />
+          tvat-prasādān mayācyuta
           sthito ’smi gata-sandehaḥ<br />
           kariṣye vacanaṁ tava
         </p>

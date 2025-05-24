@@ -1,6 +1,21 @@
+import { MongoClient } from "mongodb";
 import { db } from "@db";
 import { ObjectId } from "mongodb";
 import { type User, type InsertUser } from "@shared/schema";
+
+// MongoDB connection setup
+const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/yourDatabaseName";
+const client = new MongoClient(uri);
+
+export async function connectDB() {
+  try {
+    await client.connect();
+    console.log("MongoDB connected successfully");
+  } catch (error) {
+    console.error("MongoDB connection error:", error);
+    process.exit(1);
+  }
+}
 
 export async function saveContactForm(data: {
   name: string;
@@ -17,6 +32,7 @@ export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  saveDonation(donation: any): Promise<any>; // Add this to the interface
 }
 
 export class MongoStorage implements IStorage {
@@ -24,7 +40,6 @@ export class MongoStorage implements IStorage {
     const doc = await db.collection("users").findOne({ id });
     if (!doc) return undefined;
 
-    // Convert to `unknown` first, then assert to `User`
     return doc as unknown as User;
   }
 
@@ -81,6 +96,21 @@ export class MongoStorage implements IStorage {
       return { ...donation, _id: result.insertedId };
     } catch (error) {
       console.error("Error creating donation:", error);
+      throw error;
+    }
+  }
+
+  async saveDonation(donation: any): Promise<any> {
+    try {
+      const donationWithTimestamp = {
+        ...donation,
+        createdAt: new Date(), // Add timestamp
+        showPublicly: donation.receiptNeeded || false, // Use receiptNeeded to determine if donation should be shown publicly
+      };
+      const result = await db.collection("donations").insertOne(donationWithTimestamp);
+      return { ...donationWithTimestamp, _id: result.insertedId };
+    } catch (error) {
+      console.error("Error saving donation:", error);
       throw error;
     }
   }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const services = [
   {
@@ -89,38 +89,49 @@ const services = [
 
 const Festival = () => {
   return (
-    <div className="bg-white py-16 text-center">
-      <p className="text-purple-600 font-semibold">// OUR FESTIVAL</p>
-      <h2 className="text-3xl font-bold mb-12">FESTIVALS</h2>
+    <div className="bg-gray-50 min-h-screen">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-16">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-yellow-300 font-semibold tracking-wider uppercase">// Our Festivals</p>
+          <h1 className="text-4xl md:text-5xl font-bold mt-2 mb-4">Celebrate with Devotion</h1>
+          <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
+            Join us in celebrating the sacred festivals that bring us closer to the divine through devotion, love, and community.
+          </p>
+        </div>
+      </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-16">
-        {services.map((service, idx) => (
-          <div
-            key={idx}
-            className="relative service-card overflow-hidden bg-white shadow-md rounded-lg p-8 transition-all duration-300 h-full group"
-          >
-            {/* Background image that will slide in */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-20 transition-all duration-500 transform -translate-x-full group-hover:translate-x-0"
-              style={{ 
-                backgroundImage: `url(${service.bgImage})`,
-              }}
-            ></div>
+      {/* Festivals Grid */}
+      <section className="container mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, idx) => (
+            <div
+              key={idx}
+              className="relative bg-white shadow-lg rounded-xl overflow-hidden transition-all duration-500 transform hover:scale-105 group"
+            >
+              {/* Background Image with Fade Effect */}
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-30 transition-opacity duration-700"
+                style={{
+                  backgroundImage: `url(${service.bgImage})`,
+                }}
+              ></div>
 
-            {/* Content */}
-            <div className="relative z-10">
-              <div className="icon text-4xl text-purple-600 mb-4">{service.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-              <p className="text-gray-600">{service.description}</p>
+              {/* Overlay with Subtle Tint */}
+              <div
+                className="absolute inset-0 bg-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-700 delay-100"
+              ></div>
+
+              {/* Card Content */}
+              <div className="relative z-10 p-8 text-center">
+                <div className="text-5xl mb-4 animate-bounce">{service.icon}</div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">{service.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
+              </div>
             </div>
-
-            {/* Sliding effect overlay */}
-            <div 
-              className="absolute inset-0 bg-purple-600 opacity-0 group-hover:opacity-10 transition-all duration-500 transform -translate-x-full group-hover:translate-x-0 delay-100"
-            ></div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

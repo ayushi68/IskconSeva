@@ -34,17 +34,17 @@ const DivineCouple = () => {
       {/* Divine Images Gallery */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl px-6 pb-10 animate-fade-in">
         <img
-            src="/dc1.jpg"
+            src="/dc15.jpg"
             alt="Radha Krishna Pastime"
             className="w-full h-72 object-cover rounded-3xl shadow-xl hover:scale-105 transition duration-700"
         />
         <img
-            src="/dc2.jpg"
+            src="/dc18.bmp"
             alt="Radha Krishna Divine"
             className="w-full h-72 object-cover rounded-3xl shadow-xl hover:scale-105 transition duration-700"
         />
         <img
-            src="/dc3.jpg"
+            src="/dc9.bmp"
             alt="Divine Love"
             className="w-full h-72 object-cover rounded-3xl shadow-xl hover:scale-105 transition duration-700"
         />

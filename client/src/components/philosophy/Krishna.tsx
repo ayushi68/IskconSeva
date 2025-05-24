@@ -27,10 +27,10 @@ const Krishna: React.FC = () => {
           />
           
           <p className="text-lg text-gray-700">
-            māṁ hi pārtha vyapāśritya<br />
+            <b>māṁ hi pārtha vyapāśritya
             ye ’pi syuḥ pāpa-yonayaḥ<br />
-            striyo vaiśyās tathā śūdrās<br />
-            te ’pi yānti parāṁ gatim<br />
+            striyo vaiśyās tathā śūdrās
+            te ’pi yānti parāṁ gatim<br /></b>
           O son of Pṛthā, those who take shelter in Me, though they be of lower birth – women, vaiśyas [merchants] and śūdras [workers] – can attain the supreme destination.</p>
         </div>
       </section>
@@ -40,7 +40,7 @@ const Krishna: React.FC = () => {
         <h2 className="text-3xl font-semibold text-center text-blue-800 mb-8">
           When Lord himself doesn’t differentiate, then who are we to do so? Lord Chaitanya Mahaprabhu, the most munificent incarnation of Lord Krishna  in Kali Yuga has envisioned
         </h2>
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid gap-8 max-w-5xl mx-auto">
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-2xl font-bold text-blue-700 mb-4">
                 pṛthivīte āche yata nagarādi grāma<br />
@@ -63,10 +63,10 @@ const Krishna: React.FC = () => {
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-2xl font-bold text-blue-700 mb-4">Śrīmad-Bhāgavatam 7.6.1</h3>
-            <p className="text-gray-700">
-            śrī-prahrāda uvāca<br />
+            <p className="text-gray-700 font-bold">
+            śrī-prahrāda uvāca
             kaumāra ācaret prājño<br />
-            dharmān bhāgavatān iha<br />
+            dharmān bhāgavatān iha
             durlabhaṁ mānuṣaṁ janma<br />
             tad apy adhruvam arthadam
             </p>
@@ -86,9 +86,9 @@ const Krishna: React.FC = () => {
               The first principle in devotional service is to chant the Hare Krishna mahā-mantra (mahā means “great”; mantra means”sound that liberates the mind from ignorance”):
                 <br />
             <strong className="text-2xl font-bold text-blue-700">
-              hare kṛṣṇa hare kṛṣṇa<br />
+              hare kṛṣṇa hare kṛṣṇa
               kṛṣṇa kṛṣṇa hare hare<br />
-              hare rāma hare rāma<br />
+              hare rāma hare rāma
               rāma rāma hare hare
             </strong>
             <br />
@@ -102,22 +102,22 @@ const Krishna: React.FC = () => {
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-2xl font-bold text-blue-700 mb-4">Śrī Caitanya-caritāmṛta Madhya 6.242</h3>
-            <p className="text-gray-700">
-            harer nāma harer nāma<br />
+            <p className="text-gray-700 ">
+            <b>harer nāma harer nāma
             harer nāmaiva kevalam<br />
-            kalau nāsty eva nāsty eva<br />
-            nāsty eva gatir anyathā<br />
-            “ ‘In this age of quarrel and hypocrisy, the only means of deliverance is the chanting of the holy names of the Lord. There is no other way. There is no other way. There is no other way.’ ”<br />
+            kalau nāsty eva nāsty eva
+            nāsty eva gatir anyathā<br /></b><br />
+            “ ‘In this age of quarrel and hypocrisy, the only means of deliverance is the chanting of the holy names of the Lord. There is no other way. There is no other way. There is no other way.’ ”<br /><br />
 
-            <b>Chanting means, Kṛṣṇa being absolute, Kṛṣṇa's name and Kṛṣṇa there is no difference. Absolute means there is no duality. The Hare Kṛṣṇa mantra chanting means keeping Kṛṣṇa always within your heart.</b><br />
+            <b>Chanting means, Kṛṣṇa being absolute, Kṛṣṇa's name and Kṛṣṇa there is no difference. Absolute means there is no duality. The Hare Kṛṣṇa mantra chanting means keeping Kṛṣṇa always within your heart.</b><br /><br />
             You can chant these holy names of the Lord anywhere and at any time, but it is best to set a specific time of the day to regularly chant. Early morning hours (Braḥma muḥūrtā, one and half hours before sunrise) are ideal.
             The chanting can be done in two ways: singing the mantra, called kīrtana (usually done in a group), and saying the mantra to oneself, called japa (which literally means “to speak softly”). Concentrate on hearing the sound of the holy names. As you chant, pronounce the names clearly and distinctly, addressing Krishna in a prayerful mood. The more attentively and sincerely you chant these names of God, the more spiritual progress you will make.
             Japa should be done on beads (available in HKM Bhilai).  This helps you fix your attention on the holy name and also helps you count the number of times you chant the mantra daily. Each strand of japa beads contains 108 small beads and one large bead, the head bead. 
-            The mantra that has to be chanted on the head bead is Panchatattva Mantra:
-            śrī-kṛṣṇa-caitanya <br />
+            The mantra that has to be chanted on the head bead is Panchatattva Mantra:<br /><br />
+            <b>śrī-kṛṣṇa-caitanya 
             prabhu-nityānanda <br />
-            śrī-advaita gadādhara <br />
-            Śrīvāsādi-gaura-bhakta-vṛnda<br />
+            śrī-advaita gadādhara 
+            Śrīvāsādi-gaura-bhakta-vṛnda<br /></b><br />
             Begin on a bead next to the head bead and gently roll it between the thumb and middle finger of your right hand as you chant the full Hare Krishna mantra. Then move to the next bead and repeat the process. In this way, chant on each of the 108 beads until you reach the head bead again. This is one round of japa. Then, chant on the head bead Panchatattva Mantra, reverse the beads and start your second round on the last bead you chanted on.
             Initiated devotees vow before the spiritual master to chant at least sixteen rounds of the Hare Krishna mantra daily. But even if you can chant only one round a day, the principle is that once you commit yourself to chanting that round, you should try complete it every day without fail. When you feel you can chant more, then increase the minimum number of rounds you chant each day—but don’t fall below that number. Please note that the beads are sacred and therefore should never touch the ground or be put in an unclean place. To keep your beads clean, it’s best to carry them in a special bead bag, also available from HKM Bhilai.
             Aside from chanting japa, you can also sing the Lord’s holy names in kīrtana. While you can perform kīrtana individually, it is generally performed with others. A melodious kīrtana with family or friends is sure to enliven everyone. 
@@ -128,11 +128,11 @@ const Krishna: React.FC = () => {
             <h3 className="text-2xl font-bold text-blue-700 mb-4">Setting Up Your Altar</h3>
             <p className="text-gray-700">
             Though Kali Yuga is an ocean of faults, it is an age for the easiest methods of attaining salvation. Instead of concocting the form of Lord, it's better to focus on the form of Lord given in Śastras and accepted by the Spiritual Master in disciplic succession.
-            <br />
-            veṇuṁ kvaṇantam aravinda-dalāyatākṣam-<br />
+            <br /><br />
+            <b>veṇuṁ kvaṇantam aravinda-dalāyatākṣam-
             barhāvataṁsam asitāmbuda-sundarāṅgam<br />
-            kandarpa-koṭi-kamanīya-viśeṣa-śobhaṁ<br />
-            govindam ādi-puruṣaṁ tam ahaṁ bhajāmi<br />
+            kandarpa-koṭi-kamanīya-viśeṣa-śobhaṁ
+            govindam ādi-puruṣaṁ tam ahaṁ bhajāmi<br /></b><br />
             I worship Govinda, the primeval Lord, who is adept in playing on His flute, with blooming eyes like lotus petals with head decked with peacock's feather, with the figure of beauty tinged with the hue of blue clouds, and His unique loveliness charming millions of Cupids.
 
 
@@ -152,17 +152,17 @@ const Krishna: React.FC = () => {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-2xl font-bold text-blue-700 mb-4">Śrī Caitanya-caritāmṛta Madhya 19.151</h3>
             <p className="text-gray-700">
-            brahmāṇḍa bhramite kona bhāgyavān jīva<br />
-            guru-kṛṣṇa-prasāde pāya bhakti-latā-bīja<br />
+            <b>brahmāṇḍa bhramite kona bhāgyavān jīva<br />
+            guru-kṛṣṇa-prasāde pāya bhakti-latā-bīja<br /></b><br />
             <b>Translation</b>
             “According to their karma, all living entities are wandering throughout the entire universe. Some of them are being elevated to the upper planetary systems, and some are going down into the lower planetary systems. Out of many millions of wandering living entities, one who is very fortunate gets an opportunity to associate with a bona fide spiritual master by the grace of Kṛṣṇa. By the mercy of both Kṛṣṇa and the spiritual master, such a person receives the seed of the creeper of devotional service.
 
             So, only by the causeless mercy of the Spiritual Master one can awaken the Bhakti seed, which was till now in a sleeping state. Spiritual Master (Guru) is the transparent via medium to contact God. And he has been empowered by God to teach Humanity about God consciousness, how to love God. So, he should be respected as we respect God and he receives first worship on the altar. 
             There are two main kinds of gurus: shiksha guru (the instructing guru) and diksha guru (the initiating guru). Srila Prabhupada is the initiating guru for all of us. He will remain so, for the coming 10000 years.We all owe an immense debt of gratitude to Śrīla Prabhupāda. Before Śrīla Prabhupāda left India in 1965 to spread Krishna consciousness abroad, almost no one outside India knew anything about the practice of pure devotional service to Lord Krishna. Therefore, everyone who has learned of the process through his books, his Back to Godhead magazine, his tapes, or contact with his followers should offer immense respect to Śrīla Prabhupāda. 
-            As you progress in bhakti-yoga, you may eventually want to accept initiation. Before he left this world in 1977, Śrīla Prabhupāda authorized a system of Ṛiṭvik initiation in which advanced and qualified devotees would carry on his work by initiating disciples on his behalf in accordance with his instructions. On behalf of Srila Prabhupada, a ṛiṭvik representative would give you dīksha and henceforth you will be the disciple of Śrila Prabhupāda.The second picture on your altar should be one of the pañca-tattva.<strong>śrī-kṛṣṇa-caitanya <br />
-            prabhu-nityānanda <br />
-            śrī-advaita gadādhara <br />
-            Śrīvāsādi-gaura-bhakta-vṛnda<br />
+            As you progress in bhakti-yoga, you may eventually want to accept initiation. Before he left this world in 1977, Śrīla Prabhupāda authorized a system of Ṛiṭvik initiation in which advanced and qualified devotees would carry on his work by initiating disciples on his behalf in accordance with his instructions. On behalf of Srila Prabhupada, a ṛiṭvik representative would give you dīksha and henceforth you will be the disciple of Śrila Prabhupāda.The second picture on your altar should be one of the pañca-tattva.<br /><br /><strong>śrī-kṛṣṇa-caitanya 
+            <b>prabhu-nityānanda <br />
+            śrī-advaita gadādhara 
+            Śrīvāsādi-gaura-bhakta-vṛnda<br /></b><br />
             </strong> 
             Lord Caitanya and His four leading associates. Lord Caitanya is the incarnation of God for Kali Yuga. He is Krishna Himself, descended in the form of His own devotee to teach us how to surrender to Him, specifically by chanting His holy names harer nama harer namaiva kevalam, kalau nasty eva gatir anyatha, and performing other activities of bhakti-yoga. Lord Caitanya is the most merciful incarnation, for He makes it easy for anyone to attain love of God through the chanting of the Hare Krishna mantra.
             And of course the Supreme Personality of Godhead, Lord Śrī Krishna, with His eternal consort, Śrīmatī Rādhārāṇī. Śrīmatī Rādhārāṇī is Krishna’s spiritual potency. She is the dearmost among Gopīs and devotional service personified. Devotees always take shelter of Her to learn how to serve Krishna.           
@@ -171,10 +171,10 @@ const Krishna: React.FC = () => {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-2xl font-bold text-blue-700 mb-4">Śrī Caitanya-caritāmṛta  Ādi-līlā 4.215</h3>
             <p className="text-gray-700">
-            yathā rādhā priyā viṣṇos<br />
+            <b>yathā rādhā priyā viṣṇos
             tasyāḥ kuṇḍaṁ priyaṁ tathā<br />
-            sarva-gopīṣu saivaikā<br />
-            viṣṇor atyanta-vallabhā<br />
+            sarva-gopīṣu saivaikā
+            viṣṇor atyanta-vallabhā<br /></b><br />
            “Just as Rādhā is dear to Lord Kṛsṇa, so Her bathing place [Rādhā-kuṇḍa] is dear to Him. She alone is His most beloved of all the gopīs.” 
             This verse is from the Padma Purāṇa.
             You can arrange the pictures in a triangle, with the picture of Śrīla Prabhupāda on the left, the picture of Lord Caitanya and His associates on the right, and the picture of Rādhā and Krishna, which, if possible, should be slightly larger than the others, on a small raised platform behind and in the center. Or you can hang the picture of Rādhā and Krishna on the wall above.
@@ -188,21 +188,21 @@ const Krishna: React.FC = () => {
                 Prasādam - mercy of Krishna. We are not Vegetarians: Srila Prabhupada said "We’re “Krsnatarians.” Rabbits are vegetarian. With his humorous yet striking words, Srila Prabhupada, taught everyone how just being vegetarian and eating anywhere is unfit for spiritual realization.
 
 
-                As it is enjoined in the Vedas:<br />
+                As it is enjoined in the Vedas:<br /><br />
             <b>āhāra-śuddhau sattva-śuddhiḥ <br />
             sattva-śuddhau dhruvā smṛtiḥ <br />
-            smṛti-lambhe sarva-granthīnāṁ vipramokṣaḥ. <br /></b>
+            smṛti-lambhe sarva-granthīnāṁ vipramokṣaḥ. <br /></b><br />
             By performance of yajña one’s eatables become sanctified, and by eating sanctified foodstuffs one’s very existence becomes purified; by the purification of existence finer tissues in the memory become sanctified, and when memory is sanctified one can think of the path of liberation, and all these combined together lead to Kṛṣṇa consciousness, the great necessity of present-day society.
                                                                 (Bhagavad-gītā 3.11 Purport)
             Yajna prescribed for Kali Yuga is Sankirtana Yajna. Following in the footsteps of Acharyas, if we perform this yajna, cook and offer eatbles to Krishna (Bhoga) with love and devotion, then he, mercifully with his glance itself, sanctifies the foodstuffs, thus making it prasādam. As said in Śrī brahma-saṁhitā 5.32 aṅgāni yasya sakalendriya-vṛtti-manti Each of the limbs of that transcendental figure possesses in Himself, the full-fledged functions of all the organs..
 
             Bhakti Yoga, Krishna Consciousness is so full of ānanda, that once the nectar touches the jīva, he can never forget it. Honoring Prasādam is an important aspect of Krishna Consciousness. It spiritualizes the material senses, giving transcendental bliss. 
             Lord Caitanya said of prasādam, “Everyone has tasted these foods before. However, now that they have been prepared for Krishna and offered to Him with devotion, these foods have acquired extraordinary tastes and uncommon fragrances. Just taste them and see the difference in the experience. Apart from the taste, even the fragrance pleases the mind and makes one forget any other fragrance. Therefore, it should be understood that the spiritual nectar of Krishna’s lips must have touched these ordinary foods and imparted to them all their transcendental qualities.”
-            Krishna says in Bhagavad Gita:
+            Krishna says in Bhagavad Gita:<br /><br />
             <b>yajña-śiṣṭāśinaḥ santo<br />
             mucyante sarva-kilbiṣaiḥ<br />
             bhuñjate te tv aghaṁ pāpā<br />
-            ye pacanty ātma-kāraṇāt</b><br />
+            ye pacanty ātma-kāraṇāt</b><br /><br />
             The devotees of the Lord are released from all kinds of sins because they eat food which is offered first for sacrifice. Others, who prepare food for personal sense enjoyment, verily eat only sin.
  
             Foods cooked by non–devotees must be avoided. According to the subtle laws of nature, the cook acts upon the food not only physically but mentally as well. Food thus becomes an agent for subtle influences on your consciousness. The principle is the same as that at work with a painting: a painting is not simply a collection of strokes on a canvas but an expression of the artist’s state of mind, which affects the viewer. So if you eat food cooked by non devotees—employees working in a factory, for example—then you’re sure to absorb a dose of materialism and karma.
@@ -213,12 +213,12 @@ const Krishna: React.FC = () => {
             <h3 className="text-2xl font-bold text-blue-700 mb-4">How to prepare and offer Bhoga to Their Lordships</h3>
             <p className="text-gray-700">
                 Though cooking comes before, but here it is placed other way because, generally first people honor prasadam, then they become addicted to the taste of Krishna prasādam and then learn how to cook for Krishna!! 
-                Now this is of prime importance, because choosing from the aisles of Supermarket, to cook and offer to Krishna is not an easy task, as there are so many dos and don'ts for offering . <br />
-            <b>Bhagavad-gītā 9.26 </b><br />
+                Now this is of prime importance, because choosing from the aisles of Supermarket, to cook and offer to Krishna is not an easy task, as there are so many dos and don'ts for offering . <br /><br />
+            <b>Bhagavad-gītā 9.26 <br />
             patraṁ puṣpaṁ phalaṁ toyaṁ<br />
             yo me bhaktyā prayacchati<br />
             tad ahaṁ bhakty-upahṛtam<br />
-            aśnāmi prayatātmanaḥ<br />
+            aśnāmi prayatātmanaḥ<br /></b><br />
            If one offers Me with love and devotion a leaf, a flower, a fruit or water, I will accept it.
             From this verse it is understood that we can offer Kṛṣṇa foods prepared from milk products, vegetables, fruits, nuts, and grains. Meat, fish, and eggs are not offerable. And a few vegetarian items are also forbidden—mushroom, garlic and onions, for example, which are in the mode of darkness. (Hing, or asafoetida, is a tasty substitute for them in cooking and is available at most Indian groceries) Nor can we offer to Krṣṇa coffee or tea or chocolate because those contains caffeine. Animal products, meat, eggs, etc may be added to certain foods, hence reading ingredients is a must. For instance, some brands of yogurt and sour cream contain gelatin, a substance made from the horns, hooves, and bones of slaughtered animals. Also, certain brands of cheese might contain rennet, an enzyme extracted from the stomach tissues of slaughtered calves. So as far as possible use only fresh, natural ingredients.
 
@@ -238,15 +238,15 @@ const Krishna: React.FC = () => {
                 nirviśeṣa-śūnyavādi-pāścātya-deśa-tāriṇe<br />
                 “I offer my respectful obeisances unto His Divine Grace A.C. Bhaktivedanta Swami Prabhupāda, who is very dear to Lord Kṛṣṇa, having taken shelter at His lotus feet. Our respectful obeisances are unto you, O spiritual master, servant of Bhaktisiddhānta Sarasvatī Gosvāmī. You are kindly preaching the message of Lord Caitanyadeva and delivering the Western countries, which are filled with impersonalism and voidism.”
                 </li>
-                <li>Prayer to Lord Caitanya:<br />
-                namo mahā-vadānyāya kṛṣṇa-prema-pradāya te<br />
-                kṛṣṇāya kṛṣṇa-caitanya-nāmne gaura-tviṣe namaḥ<br />
+                <li>Prayer to Lord Caitanya:<br /><br />
+                <b>namo mahā-vadānyāya kṛṣṇa-prema-pradāya te<br />
+                kṛṣṇāya kṛṣṇa-caitanya-nāmne gaura-tviṣe namaḥ<br /></b><br />
                 [Cc. Madhya 19.53]
                 “O most munificent incarnation! You are Kṛṣṇa Himself appearing as Śrī Kṛṣṇa Caitanya Mahāprabhu. You have assumed the golden color of Śrīmatī Rādhārāṇī, and You are widely distributing pure love of Kṛṣṇa. We offer our respectful obeisances unto You.”
                 </li>
-                <li>Prayer to Lord Kṛṣṇa:<br />
-                namo brahmaṇya-devāya go-brāhmaṇa-hitāya ca<br />
-                jagad-dhitāya kṛṣṇāya govindāya namo namaḥ<br />
+                <li>Prayer to Lord Kṛṣṇa:<br /><br />
+                <b>namo brahmaṇya-devāya go-brāhmaṇa-hitāya ca<br />
+                jagad-dhitāya kṛṣṇāya govindāya namo namaḥ<br /></b><br />
                 “I offer my respectful obeisances unto Lord Kṛṣṇa, who is the worshipable Deity for all brāhmaṇas, the well-wisher of the cows and the brāhmaṇas, and the benefactor of the whole world. I offer my repeated obeisances to the Personality of Godhead, known as Kṛṣṇa and Govinda.”
                 After offering the food to the Lord, wait at least ten minutes for the Lord to partake of the preparations. Then ring the bell, and chant Hare Krishna Mahamantra. Remove the plate, transfer the food to a serving plate, and wash Krishna’s dinnerware. The food is now prasādam, or “mercy” from Krishna.
                 Now you and any guests may eat the prasādam. While you eat, try to appreciate the spiritual value of the food. Remember that because Kṛṣṇa has accepted it, it is non different from Him, and therefore by eating it you will become purified.
@@ -276,11 +276,11 @@ const Krishna: React.FC = () => {
 
 
             Lord Krishna says in Bhagavad Gītā:<br />
-            Bhagavad-gītā 3.9 <br />
-            yajñārthāt karmaṇo ’nyatra<br />
+            Bhagavad-gītā 3.9 <br /><br />
+            <b>yajñārthāt karmaṇo ’nyatra
             loko ’yaṁ karma-bandhanaḥ<br />
-            tad-arthaṁ karma kaunteya<br />
-            mukta-saṅgaḥ samācara<br />
+            tad-arthaṁ karma kaunteya
+            mukta-saṅgaḥ samācara<br /></b><br />
 
 
             Work done as a sacrifice for Viṣṇu has to be performed; otherwise work causes bondage in this material world. Therefore, O son of Kuntī, perform your prescribed duties for His satisfaction, and in that way you will always remain free from bondage.<br />

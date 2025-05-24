@@ -17,7 +17,7 @@ const caseStudies = [
     images: ["/annadana.jpg", "/annadana.jpg"],
     tag: "Founder",
     background: "bg-[#D4FCE5]",
-    link: "./philosophy/Sprabhupada",
+    link: "./philosophy/Sprabhpada",
   },
   {
     title: "Nityananda Prabhu",

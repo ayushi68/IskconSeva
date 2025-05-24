@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,8 +11,15 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { donationCategories, DonationCategory, SubCategory, SuperSubCategory} from "@/lib/donationdata";
+import { donationCategories, DonationCategory, SubCategory, SuperSubCategory } from "@/lib/donationdata";
 import { motion } from "framer-motion";
+import axios from 'axios';
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
 
 const formSchema = z.object({
   firstName: z.string().min(2, { message: "First name must be at least 2 characters" }),
@@ -63,39 +70,117 @@ const DonationForm = () => {
     },
   });
 
-  const handlePayment = (amount: number, paymentMethod: string) => {
-  const options = {
-    key: "YOUR_RAZORPAY_KEY_ID", // Replace with your Razorpay key
-    amount: amount * 100, // Amount in paise
-    currency: "INR",
-    name: "Your Organization",
-    description: "Donation Payment",
-    image: "/logo.png", // Optional logo
-    handler: function (response: any) {
-      console.log("Payment successful:", response);
-      // You can call your backend API here to confirm the payment
-    },
-    prefill: {
-      name: form.getValues().firstName,
-      email: form.getValues().email,
-      contact: form.getValues().phoneNumber,
-    },
-    theme: {
-      color: "#0F172A",
-    },
-    method: {
-      upi: paymentMethod === "upi",
-      card: paymentMethod === "credit_card",
-      netbanking: paymentMethod === "bank_transfer",
-      wallet: paymentMethod === "paypal",
-    },
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
   };
 
-  const rzp = new (window as any).Razorpay(options);
-  rzp.open();
-};
+  const handlePayment = async (amount: number, formData: FormValues) => {
+    const isScriptLoaded = await loadRazorpayScript();
+    if (!isScriptLoaded) {
+      toast({
+        title: "Payment Error",
+        description: "Failed to load payment processor. Please try again.",
+        variant: "destructive",
+      });
+      return;
+    }
 
+    try {
+      // In a real app, you would call your backend to create an order
+      // This is a mock implementation - replace with actual API call
+      const orderResponse = {
+        data: {
+          order: {
+            id: 'order_mock_' + Math.random().toString(36).substring(2, 9),
+            amount: amount * 100, // Razorpay expects amount in paise
+            currency: 'INR'
+          }
+        }
+      };
 
+      const options = {
+        key: 'rzp_live_EdsZTyd9tKGyHF', // Your Razorpay key
+        amount: orderResponse.data.order.amount,
+        currency: orderResponse.data.order.currency,
+        name: 'Spiritual Organization',
+        description: `Donation for ${formData.donationCategory}`,
+        order_id: orderResponse.data.order.id,
+        handler: async function (response: any) {
+          // On successful payment
+          try {
+            const donationPayload = {
+              ...formData,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_signature: response.razorpay_signature,
+              amount: amount,
+            };
+
+            // Save donation to your database
+            await apiRequest("POST", "/api/donations", donationPayload);
+
+            toast({
+              title: "Donation Successful!",
+              description: "Thank you for your generous contribution!",
+            });
+
+            // Reset form
+            form.reset();
+            setSelectedCategory(null);
+            setSelectedSubCategory(null);
+            setSelectedSuperSub(null);
+            setSubCategories([]);
+            setSuperSubCategories([]);
+            setPredefinedAmounts([1100, 2100, 5100, 11000]);
+          } catch (error) {
+            console.error("Error saving donation:", error);
+            toast({
+              title: "Donation Record Error",
+              description: "Payment was successful but we encountered an issue recording your donation. Please contact support.",
+              variant: "destructive",
+            });
+          }
+        },
+        prefill: {
+          name: formData.firstName,
+          email: formData.email,
+          contact: formData.phoneNumber || '',
+        },
+        theme: {
+          color: '#0F172A',
+        },
+        modal: {
+          ondismiss: function() {
+            toast({
+              title: "Payment Cancelled",
+              description: "You cancelled the payment process.",
+              variant: "default",
+            });
+          }
+        }
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.error("Payment error:", error);
+      toast({
+        title: "Payment Failed",
+        description: "There was an error processing your payment. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   // Update subCategories when main category changes
   useEffect(() => {
@@ -118,47 +203,42 @@ const DonationForm = () => {
   }, [form.watch("donationCategory")]);
 
   // Update superSubCategories when subcategory changes
-useEffect(() => {
-  const subCategoryId = form.getValues().subCategory;
-  if (subCategoryId && selectedCategory) {
-    const subCategory = selectedCategory.subCategories?.find(sub => sub.id === subCategoryId);
-    if (subCategory) {
-      setSelectedSubCategory(subCategory);
+  useEffect(() => {
+    const subCategoryId = form.getValues().subCategory;
+    if (subCategoryId && selectedCategory) {
+      const subCategory = selectedCategory.subCategories?.find(sub => sub.id === subCategoryId);
+      if (subCategory) {
+        setSelectedSubCategory(subCategory);
 
-      // Reset super subcategory-related fields
-      form.setValue("superSubCategory", "");
-      setSelectedSuperSub(null);
+        // Reset super subcategory-related fields
+        form.setValue("superSubCategory", "");
+        setSelectedSuperSub(null);
 
-      if (subCategory.superSubCategories?.length) {
-        // ✅ Case: Has super subcategories
-        setSuperSubCategories(subCategory.superSubCategories);
-        setPredefinedAmounts([]); // Clear amounts at subcategory level
-      } else {
-        // ✅ Case: No super subcategories, use subcategory amounts
-        setSuperSubCategories([]);
-        setPredefinedAmounts(subCategory.amounts ?? []);
+        if (subCategory.superSubCategories?.length) {
+          setSuperSubCategories(subCategory.superSubCategories);
+          setPredefinedAmounts([]);
+        } else {
+          setSuperSubCategories([]);
+          setPredefinedAmounts(subCategory.amounts ?? []);
+        }
+
+        // Clear custom amount field
+        form.setValue("customAmount", "");
       }
-
-      // Clear custom amount field
-      form.setValue("customAmount", "");
+    } else {
+      setSuperSubCategories([]);
+      setPredefinedAmounts([]);
     }
-  } else {
-    setSuperSubCategories([]);
-    setPredefinedAmounts([]);
-  }
-}, [form.watch("subCategory"), selectedCategory]);
-
-
+  }, [form.watch("subCategory"), selectedCategory]);
 
   // Update predefined amounts when super subcategory changes
-    useEffect(() => {
+  useEffect(() => {
     const superSubId = form.getValues().superSubCategory;
     if (superSubId && selectedSubCategory) {
       const superSub = selectedSubCategory.superSubCategories?.find(ss => ss.id === superSubId);
       if (superSub) {
         setSelectedSuperSub(superSub);
-        setPredefinedAmounts(superSub.amounts ?? []); // ✅ safe fallback
-        // Reset custom amount when super subcategory changes
+        setPredefinedAmounts(superSub.amounts ?? []);
         form.setValue("customAmount", "");
       }
     }
@@ -168,74 +248,33 @@ useEffect(() => {
     form.setValue("customAmount", amount);
   };
 
- const onSubmit = async (data: FormValues) => {
-  setIsSubmitting(true);
+  const onSubmit = async (data: FormValues) => {
+    setIsSubmitting(true);
 
-  const amount = parseInt(data.customAmount || "0");
-  if (!amount || amount < 1) {
-    toast({
-      title: "Invalid Amount",
-      description: "Please enter a valid donation amount.",
-      variant: "destructive",
-    });
-    setIsSubmitting(false);
-    return;
-  }
+    const amount = parseInt(data.customAmount || "0");
+    if (!amount || amount < 1) {
+      toast({
+        title: "Invalid Amount",
+        description: "Please enter a valid donation amount.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
-  try {
-    // 1. Prepare Razorpay options
-    const options = {
-      key: "YOUR_RAZORPAY_KEY_ID", // 🔑 Replace with your Razorpay key
-      amount: amount * 100, // Razorpay accepts amount in paise
-      currency: "INR",
-      name: "Your Organization",
-      description: "Donation Payment",
-      image: "/logo.png", // Optional logo
-      handler: async function (response: any) {
-        // 2. On successful payment, call your backend
-        const donationPayload = {
-          ...data,
-          razorpay_payment_id: response.razorpay_payment_id,
-          amount,
-        };
-
-        await apiRequest("POST", "/api/donations", donationPayload);
-
-        toast({
-          title: "Donation Submitted",
-          description: "Thank you for your generous contribution!",
-        });
-
-        form.reset();
-        setSelectedCategory(null);
-        setSelectedSubCategory(null);
-        setSelectedSuperSub(null);
-        setSubCategories([]);
-        setSuperSubCategories([]);
-        setPredefinedAmounts([1100, 2100, 5100, 11000]);
-      },
-      prefill: {
-        name: data.firstName,
-        email: data.email,
-        contact: data.phoneNumber || "",
-      },
-      theme: {
-        color: "#0F172A",
-      },
-    };
-
-    const razorpay = new (window as any).Razorpay(options);
-    razorpay.open();
-  } catch (error) {
-    toast({
-      title: "Submission Failed",
-      description: "There was an error processing your donation. Please try again.",
-      variant: "destructive",
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+    try {
+      await handlePayment(amount, data);
+    } catch (error) {
+      console.error("Donation submission error:", error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error processing your donation. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section id="contact-section" className="py-20 bg-gradient-to-b from-[#f8f5f2] to-white">
@@ -346,7 +385,6 @@ useEffect(() => {
                         </FormItem>
                       )}
                     />
-
                 </motion.div>
 
                 <div className="space-y-4">
@@ -439,7 +477,7 @@ useEffect(() => {
                     />
                   )}
 
-                   {selectedSuperSub && (
+                  {selectedSuperSub && (
                     <div className="bg-white p-4 rounded-lg mb-4">
                       <h4 className="font-medium text-primary mb-2">{selectedSuperSub.title}</h4>
                       <p className="text-neutral-dark text-sm">{selectedSuperSub.description}</p>
@@ -491,6 +529,7 @@ useEffect(() => {
 
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}>
                   <h3 className="text-xl md:text-2xl font-bold text-primary mt-6 mb-6">💳 Payment Information</h3>
+                  
                   <FormField
                     control={form.control}
                     name="paymentMethod"
@@ -510,7 +549,7 @@ useEffect(() => {
                                 Credit/Debit Card
                               </label>
                             </div>
-                            
+
                             <div className="flex items-center p-3 bg-white rounded-lg border border-neutral-medium cursor-pointer hover:border-primary transition-all">
                               <RadioGroupItem value="paypal" id="paypal" className="mr-3" />
                               <label htmlFor="paypal" className="flex items-center cursor-pointer">
@@ -518,7 +557,7 @@ useEffect(() => {
                                 PayPal
                               </label>
                             </div>
-                            
+
                             <div className="flex items-center p-3 bg-white rounded-lg border border-neutral-medium cursor-pointer hover:border-primary transition-all">
                               <RadioGroupItem value="bank_transfer" id="bank_transfer" className="mr-3" />
                               <label htmlFor="bank_transfer" className="flex items-center cursor-pointer">
@@ -526,7 +565,7 @@ useEffect(() => {
                                 Bank Transfer
                               </label>
                             </div>
-                            
+
                             <div className="flex items-center p-3 bg-white rounded-lg border border-neutral-medium cursor-pointer hover:border-primary transition-all">
                               <RadioGroupItem value="upi" id="upi" className="mr-3" />
                               <label htmlFor="upi" className="flex items-center cursor-pointer">
@@ -541,8 +580,6 @@ useEffect(() => {
                     )}
                   />
                 </motion.div>
-
-                {/* Payment Method RadioGroup */}
 
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }}>
                   <h3 className="text-xl md:text-2xl font-bold text-primary mt-6 mb-6">📝 Additional Info</h3>
@@ -566,7 +603,7 @@ useEffect(() => {
 
                   <p>For more details, see our <a href="/home/terms-and-conditions" className="text-primary underline hover:text-primary-dark">Terms & Conditions</a>.</p>
 
-                  {/* <FormField
+                  <FormField
                     control={form.control}
                     name="receiptNeeded"
                     render={({ field }) => (
@@ -578,14 +615,12 @@ useEffect(() => {
                           />
                         </FormControl>
                         <div className="space-y-1 leading-none">
-                          <FormLabel>Please send me a receipt</FormLabel>
+                          <FormLabel>I would like to receive Mahaprasad</FormLabel>
                         </div>
                       </FormItem>
                     )}
-                  /> */}
+                  />
                 </motion.div>
-
-                {/* Message and Receipt checkbox */}
 
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}

@@ -8,34 +8,42 @@ const Mahamantra: React.FC = () => {
         <h1 className="text-4xl font-bold text-yellow-800 mb-4">
           Śrīmad-Bhāgavatam (Bhāgavata Purāṇa) 6.2.14
         </h1>
-        <p className="text-lg max-w-2xl mx-auto">
-        sāṅketyaṁ pārihāsyaṁ vā<br />
+        <p className="text-lg max-w-2xl mx-auto font-bold">
+        sāṅketyaṁ pārihāsyaṁ vā
         stobhaṁ helanam eva vā<br />
-        vaikuṇṭha-nāma-grahaṇam<br />
+        vaikuṇṭha-nāma-grahaṇam
         aśeṣāgha-haraṁ viduḥ<br />
-        </p>
-      </section>
-
-      {/* Mantra Text Section */}
-      <section className="py-12 px-6 max-w-4xl mx-auto">
-        <div className="bg-purple-50 p-6 rounded-lg shadow-md text-center">
-          <p className=" leading-relaxed">
+        </p><br />
+        <p className=" leading-relaxed text-justify">
             One who chants the holy name of the Lord is immediately freed from the reactions of unlimited sins, even if he chants indirectly [to indicate something else], jokingly, for musical entertainment, or even neglectfully. This is accepted by all the learned scholars of the scriptures.
 
             Imagine how blessed we are!! Just to make fun of The Hare Krishna Movement, children on the streets in America, used to say: “Hey, see the Hare Krishnas are going!” and Prabhupada used to gladly smile at them. He protested when other devotees would try to scold these children, because of the understanding of the above mentioned verse..
 
             We cannot fathom how fortunate we are. The mercy of Lord Krishna is overflowing and never ending, especially in Kali Yuga: the age of quarrel and hypocrisy….
           </p>
-        </div>
+      </section>
+
+      {/* Mantra Text Section */}
+      <section className="py-12 px-6 max-w-4xl mx-auto">
+      <div className="flex flex-col md:flex-row gap-6 mb-10"> 
+      <div className="w-full md:w-1/2">
         <h1 className="text-4xl font-bold text-yellow-800 mb-4">
           Śrī Caitanya-caritāmṛta Ādi-līlā 17.22
         </h1>
-        <p className="mt-6 text-lg text-gray-700">
-            kali-kāle nāma-rūpe kṛṣṇa-avatāra<br />
-            nāma haite haya sarva-jagat-nistāra<br />
+        <p className="mt-6 text-lg text-gray-700 ">
+            <b>kali-kāle nāma-rūpe kṛṣṇa-avatāra<br />
+            nāma haite haya sarva-jagat-nistāra<br /></b><br />
             “In this Age of Kali, the holy name of the Lord, the Hare Kṛṣṇa mahā-mantra, is the incarnation of Lord Kṛṣṇa. Simply by chanting the holy name, one associates with the Lord directly. Anyone who does this is certainly delivered.
             What is the meaning of Hare Krishna Mahamantra? Where in the scriptures is it mentioned?
         </p>
+        </div>
+
+        <img
+            src="/mahamantra4.png"
+            alt="Mercy"
+            className="rounded-xl shadow-lg mb-10 w-full md:w-2/3 lg:w-1/2 max-h-[480px] object-cover mx-auto"
+            />
+          </div>
       </section>
 
       {/* Meaning Section */}
@@ -45,13 +53,13 @@ const Mahamantra: React.FC = () => {
             In The Kali-santaraṇa Upaniṣad,  it is said:
           </h2>
           <p className="text-lg text-gray-700 mb-4">
-            hare kṛṣṇa hare kṛṣṇa kṛṣṇa kṛṣṇa hare hare<br />
-            hare rāma hare rāma rāma rāma hare hare
+            <b>hare kṛṣṇa hare kṛṣṇa kṛṣṇa kṛṣṇa hare hare<br />
+            hare rāma hare rāma rāma rāma hare hare</b>
           </p>
           <p className="text-lg text-gray-700">
-            O Śrimatī Rādhārāṇī (the divine energy of the Lord Kṛṣṇa), O all-attractive reservoir of pleasure, Lord Śri Kṛṣṇa, please engage me in Your loving devotional service. <br />
-            iti ṣoḍaśakaṁ nāmnāṁ kali-kalmaṣa-nāśanaṁ<br />
-            nātaḥ parataropāyaḥ sarva-vedeṣu dṛśyate<br />
+            O Śrimatī Rādhārāṇī (the divine energy of the Lord Kṛṣṇa), O all-attractive reservoir of pleasure, Lord Śri Kṛṣṇa, please engage me in Your loving devotional service. <br /><br />
+            <b>iti ṣoḍaśakaṁ nāmnāṁ kali-kalmaṣa-nāśanaṁ<br />
+            nātaḥ parataropāyaḥ sarva-vedeṣu dṛśyate<br /></b><br />
             “After searching through all the Vedic literature, one cannot find a method of religion more sublime for this age than the chanting of Hare Kṛṣṇa.”
 
             Prabhupada says: "One may or may not know the value or language of chanting the Hare Krishna mantra, but if one somehow or other chants it, he will immediately be purified, just as one who takes a potent medicine will feel its effects, regardless of whether he takes it knowingly or unknowingly."

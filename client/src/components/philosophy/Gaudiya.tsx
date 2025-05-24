@@ -4,7 +4,7 @@ export default function Gaudiya() {
   return (
     <div className="bg-gray-50 text-gray-800 font-sans">
       {/* 1. Image + Heading */}
-      <section className="relative h-96 bg-cover bg-center" style={{ backgroundImage: 'url(/Gaudiya3.jpg)' }}>
+      <section className="relative h-96 bg-cover bg-center" style={{ backgroundImage: 'url(/gaudiya3.jpg)' }}>
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white text-center">The Disciplic Succession</h1>
         </div>
@@ -30,7 +30,7 @@ export default function Gaudiya() {
 <section className="bg-white py-12">
   <div className="max-w-6xl mx-auto text-center">
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+    <div className="grid grid-cols-1 md:grid-cols-6 gap-6 text-left">
       {[
         ["Krishna", "कृष्ण", "The Supreme Lord"],
         ["Brahma", "ब्रह्मा", "Creator of the universe"],
@@ -76,19 +76,20 @@ export default function Gaudiya() {
 
       {/* 4. Image with Text on the Left */}
       <section className="p-8 flex flex-col md:flex-row items-center gap-8 max-w-6xl mx-auto">
-        <div className="md:w-1/2">
-          <img className="rounded-lg w-full max-w-sm mx-auto" src="/Gaudiya1.jpg" alt="Informative Visual" />
-        </div>
-        <p className="text-lg text-justify max-w-3xl mx-auto md:w-1/2">
-          Here's an in-depth explanation or narrative that helps readers understand the subject matter more thoroughly.
-        </p>
+        {/* <div className="md:w-1/2">
+          <img className="rounded-lg w-full max-w-sm mx-auto" src="/gaudiya.jpg" alt="Informative Visual" />
+        </div> */}
+        {/* <p className="text-lg text-justify max-w-3xl mx-auto md:w-1/2">
+          
+        </p> */}
       </section>
 
       <section className="p-8 flex flex-col md:flex-row-reverse items-center gap-8 max-w-6xl mx-auto">
         <div className="md:w-1/2">
-          <img className="rounded-lg w-full max-w-sm mx-auto" src="/Gaudiya2.jpg" alt="Another Image" />
+          <img className="rounded-lg w-full max-w-sm mx-auto" src="/gaudiya2.jpg" alt="Another Image" />
         </div>
         <p className="text-lg text-justify max-w-3xl mx-auto md:w-1/2">
+        Here's an in-depth explanation or narrative that helps readers understand the subject matter more thoroughly.
         The name of our sampradaya — Brahma-Madhva-Gaudiya-sampradaya – suggests three distinct phases, or links in the disciplic chain. The disciplic succession begins with Lord Brahma, who first received it in his heart directly from Lord Krsna and then instructed his disciple Narada. Narada Muni in turn enlightened Srila Vyasa Dev and the second phase is marked after Vyasadev with Sripada Madhvacarya. He took his birth at Udupi in the year of A.D. 1119 and from his base in Udupi, he went on to establish what continues today as a strict system of succession. Although between Vyasadeva and Madhva there is a big gap. But it is sometimes said that Vyasadeva is still living, and Madhva was fortunate enough to meet him directly.<br />
 
 
@@ -105,7 +106,7 @@ export default function Gaudiya() {
 
       <section className="p-8 flex flex-col md:flex-row items-center gap-8 max-w-6xl mx-auto">
         <div className="md:w-1/2">
-          <img className="rounded-lg w-full max-w-sm mx-auto" src="/Gaudiya4.jpg" alt="Third Visual" />
+          <img className="rounded-lg w-full max-w-sm mx-auto" src="/gaudiya.jpg" alt="Third Visual" />
         </div>
         <p className="text-lg text-justify max-w-3xl mx-auto md:w-1/2">
         Bhaktivinode Thakur vehemently protested against the principles of the then pseudo-transcendentalists who passed in the name of Lord Chaitanya. He initiated the reformatory movement by literary contributions while he still engaged as a high Government Officer. During his householder life and serving as a Magistrate, he wrote books of various descriptions in Bengali, English, Sanskrit & etc. to present an actual picture of pure devotional activities to Lord Chaitanya. <br />
