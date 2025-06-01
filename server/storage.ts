@@ -12,18 +12,18 @@ const ensureConnection = async (retryCount = 3, retryDelay = 1000): Promise<mong
         await connectDB();
       }
       if (mongoose.connection.readyState === 1 && mongoose.connection.db) {
+        log(`MongoDB connection successful, state: ${mongoose.connection.readyState}`);
         return mongoose.connection.db;
       }
       throw new Error(
         `MongoDB connection not ready: state ${mongoose.connection.readyState}, db ${mongoose.connection.db ? "exists" : "undefined"}`
       );
     } catch (error) {
-      if (i < retryCount - 1) {
-        log(`Connection attempt ${i + 1} failed, retrying in ${retryDelay}ms: ${error instanceof Error ? error.message : "Unknown error"}`);
-        await new Promise((resolve) => setTimeout(resolve, retryDelay));
-      } else {
-        throw error;
+      log(`Connection attempt ${i + 1} failed, retrying in ${retryDelay}ms: ${error instanceof Error ? error.message : "Unknown error"}`);
+      if (i === retryCount - 1) {
+        throw new Error(`Failed to connect to MongoDB after ${retryCount} attempts: ${error instanceof Error ? error.message : "Unknown error"}`);
       }
+      await new Promise((resolve) => setTimeout(resolve, retryDelay));
     }
   }
   throw new Error("Failed to establish MongoDB connection after retries");
@@ -327,31 +327,31 @@ export class MongoStorage implements IStorage {
   }
 
   async saveFolkForm(formData: IFolkFormData): Promise<IFolkForm> {
-  try {
-    console.log("Saving Folkform to MongoDB:", formData);
-    const folkForm = new FolkForm({
-      name: formData.name,
-      phone: formData.phone,
-      whatsapp: formData.whatsapp,
-      email: formData.email,
-      gender: formData.gender,
-      course: formData.course,
-      occupation: formData.occupation,
-      qualification: formData.qualification,
-      message: formData.message,
-      academicQual1: formData.academicQual1,
-      academicQual2: formData.academicQual2,
-      dob: new Date(formData.dob),
-      location: formData.location,
-    });
-    const savedForm = await folkForm.save();
-    console.log("Folkform saved:", savedForm);
-    return savedForm;
-  } catch (error) {
-    console.error("Error saving Folkform:", error);
-    throw error;
+    try {
+      console.log("Saving Folkform to MongoDB:", formData);
+      const folkForm = new FolkForm({
+        name: formData.name,
+        phone: formData.phone,
+        whatsapp: formData.whatsapp,
+        email: formData.email,
+        gender: formData.gender,
+        course: formData.course,
+        occupation: formData.occupation,
+        qualification: formData.qualification,
+        message: formData.message,
+        academicQual1: formData.academicQual1,
+        academicQual2: formData.academicQual2,
+        dob: new Date(formData.dob),
+        location: formData.location,
+      });
+      const savedForm = await folkForm.save();
+      console.log("Folkform saved:", savedForm);
+      return savedForm;
+    } catch (error) {
+      console.error("Error saving Folkform:", error);
+      throw error;
+    }
   }
-}
 }
 
 export const storage = new MongoStorage();

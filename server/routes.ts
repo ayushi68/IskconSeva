@@ -10,7 +10,6 @@ import Contact from "../db/contact.model";
 import multer from "multer";
 import { GopalForm, CulturalForm, HeritageForm, FolkForm } from "../db/registration.model";
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -48,7 +47,36 @@ router.use((err: any, req: Request, res: Response, next: Function) => {
   next();
 });
 
+// Folkform validation schema
+const folkFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  phone: z.string().min(1, "Phone is required"),
+  whatsapp: z.string().min(1, "WhatsApp number is required"),
+  email: z.string().email("Invalid email format"),
+  gender: z.string().min(1, "Gender is required"),
+  course: z.string().min(1, "Course is required"),
+  occupation: z.string().min(1, "Occupation is required"),
+  qualification: z.string().min(1, "Qualification is required"),
+  message: z.string().optional(),
+  academicQual1: z.string().optional(),
+  academicQual2: z.string().optional(),
+  dob: z.string().refine(
+    (val) => !isNaN(new Date(val).getTime()),
+    { message: "Invalid date format for dob" }
+  ),
+  location: z.string().min(1, "Location is required"),
+});
+
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Global error handler to ensure JSON responses
+  app.use((err: any, req: Request, res: Response, next: Function) => {
+    console.error("Global error handler:", err);
+    res.status(500).json({
+      success: false,
+      error: err instanceof Error ? err.message : "Internal server error",
+    });
+  });
+
   // Contact form route
   router.post("/contact", async (req: Request, res: Response) => {
     try {
@@ -99,6 +127,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       console.error("Error saving donation:", error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          errors: error.errors.map((e) => ({
+            field: e.path.join("."),
+            message: e.message,
+          })),
+        });
+      }
       res.status(400).json({
         success: false,
         message: "Invalid donation data",
@@ -218,7 +255,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
         console.log("Saving Gopal form data to MongoDB:", formData);
         const form = new GopalForm(formData);
-        console.log("Attempting to save Gopal form...");
         await form.save();
         console.log("Gopal form saved successfully");
 
@@ -353,7 +389,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         };
 
         console.log("Saving Cultural form data to MongoDB:", formData);
-        console.log("Attempting to save Cultural form...");
         const savedForm = await storage.saveCulturalForm(formData);
         console.log("Cultural form saved successfully");
 
@@ -466,7 +501,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         };
 
         console.log("Saving Heritage form data to MongoDB:", formData);
-        console.log("Attempting to save Heritage form...");
         const savedForm = await storage.saveHeritageForm(formData);
         console.log("Heritage form saved successfully");
 
@@ -489,78 +523,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Folkform registration route
   router.post("/register", async (req: Request, res: Response) => {
-  try {
-    console.log("Folkform Request body:", req.body);
-    const {
-      name,
-      phone,
-      whatsapp,
-      email,
-      gender,
-      course,
-      occupation,
-      qualification,
-      message,
-      academicQual1,
-      academicQual2,
-      dob,
-      location,
-    } = req.body;
+    try {
+      console.log("Request URL:", req.originalUrl);
+      console.log("Request Headers:", req.headers);
+      console.log("Folkform Request body:", req.body);
 
-    // Validate required fields
-    const requiredFields = {
-      name,
-      phone,
-      whatsapp,
-      email,
-      gender,
-      course,
-      occupation,
-      qualification,
-      dob,
-      location,
-    };
-    for (const [field, value] of Object.entries(requiredFields)) {
-      if (!value) {
-        console.log(`Missing required field: ${field}`);
+      // Validate request body
+      const validatedData = folkFormSchema.parse(req.body);
+
+      console.log("Saving Folkform data to MongoDB:", validatedData);
+      console.log("Attempting to save Folkform...");
+      const savedForm = await storage.saveFolkForm(validatedData);
+      console.log("Folkform saved successfully");
+
+      res.status(201).json({ success: true, message: "Form submitted successfully", form: savedForm });
+    } catch (error: any) {
+      console.error("Error submitting Folkform:", error);
+      if (error instanceof z.ZodError) {
         return res.status(400).json({
           success: false,
-          error: `Missing required field: ${field}`,
+          errors: error.errors.map((e) => ({
+            field: e.path.join("."),
+            message: e.message,
+          })),
         });
       }
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to submit form",
+      });
     }
-
-    // Prepare form data
-    const formData = {
-      name,
-      phone,
-      whatsapp,
-      email,
-      gender,
-      course,
-      occupation,
-      qualification,
-      message,
-      academicQual1,
-      academicQual2,
-      dob,
-      location,
-    };
-
-    console.log("Saving Folkform data to MongoDB:", formData);
-    console.log("Attempting to save Folkform...");
-    const savedForm = await storage.saveFolkForm(formData);
-    console.log("Folkform saved successfully");
-
-    res.status(201).json({ success: true, message: "Form submitted successfully", form: savedForm });
-  } catch (error: any) {
-    console.error("Error submitting Folkform:", error);
-    res.status(500).json({
-      success: false,
-      error: error instanceof Error ? error.message : "Failed to submit form",
-    });
-  }
-});
+  });
 
   // Fetch categories
   router.get("/categories", async (req: Request, res: Response) => {
