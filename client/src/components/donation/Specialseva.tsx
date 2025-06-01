@@ -25,45 +25,45 @@ const Specialseva: React.FC = () => {
       title: 'Sadhu Seva',
       description: 'Support the noble sadhus...',
       contactLink: 'mailto:contact@hkmbhilai.org',
-      link: '/Special Seva/Sadhuseva',
+      link: '/Sadhuseva',
     },
     {
       title: 'Ekadashi Seva',
       description: 'Participate in the sacred...',
       contactLink: 'mailto:contact@hkmbhilai.org',
-      link: '/Special Seva/Ekadashiseva',
+      link: '/Ekadashiseva',
     },
     {
       title: 'Gyaan Daan Seva',
       description: 'Contribute to spreading...',
       contactLink: 'mailto:contact@hkmbhilai.org',
-      link: '/Special Seva/Gyaandaan',
+      link: '/Gyaandaan',
     },
     {
       title: 'Gita Daan',
       description: 'Sponsor the distribution...',
       contactLink: 'mailto:contact@hkmbhilai.org',
-      link: '/Special Seva/Gitadaan',
+      link: '/Gitadaan',
     },
     {
       title: 'Bhagavatam Daan',
       description: 'Support the dissemination...',
       contactLink: 'mailto:contact@hkmbhilai.org',
-      link: '/Special Seva/Bhagavatam',
+      link: '/Bhagavatam',
     },
     {
       title: 'Sri Narasimha Yajna Seva',
       description: 'Contribute to the sacred...',
       contactLink: 'mailto:contact@hkmbhilai.org',
-      link: '/Special Seva/SriNarasimha',
+      link: '/SriNarasimha',
     },
     {
       title: 'Maha Sudarshana Narasimha Yajna Seva',
       description: 'Support the grand...',
       contactLink: 'mailto:contact@hkmbhilai.org',
-      link: '/Special Seva/Mahanarasimha',
+      link: '/Mahanarasimha',
     },
-  ];  
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-rose-50 to-purple-100">

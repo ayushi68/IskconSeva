@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import DonationForm from './DonationForm'; // Replace with actual donation form component path
+import { motion } from 'framer-motion';
+import DonationForm from './DonationForm';
+
+// Define the type for the seva options
+interface SevaOption {
+  title: string;
+  description: string;
+  price: string;
+  bgColor: string;
+  category: string;
+}
 
 const Radharani: React.FC = () => {
   // Carousel images (replace with actual temple-related image URLs)
@@ -18,6 +28,48 @@ const Radharani: React.FC = () => {
     }, 5000);
     return () => clearInterval(interval);
   }, [images.length]);
+
+  // State for filtering seva options
+  const [selectedCategory, setSelectedCategory] = useState<string>('All Seva');
+
+  // Seva options data
+  const sevaOptions: SevaOption[] = [
+    { title: "Radharani's Kitchen - one day Fruit Seva", description: "Offer fruits for one day", price: '', bgColor: 'bg-rose-400', category: 'One Day' },
+    { title: "Radharani's Kitchen - one day Dry Fruit Seva", description: "Offer dry fruits for one day", price: '', bgColor: 'bg-rose-400', category: 'One Day' },
+    { title: "Radharani's Kitchen - one day Milk Seva", description: "Offer milk for one day", price: '', bgColor: 'bg-rose-400', category: 'One Day' },
+    { title: "Radharani's Kitchen - one day Ghee Seva", description: "Offer ghee for one day", price: '', bgColor: 'bg-rose-400', category: 'One Day' },
+    { title: "Radharani's Kitchen - one day Vegetable Seva", description: "Offer vegetables for one day", price: '', bgColor: 'bg-rose-400', category: 'One Day' },
+    { title: "Radharani's Kitchen - one day Grocery Seva", description: "Offer groceries for one day", price: '', bgColor: 'bg-rose-400', category: 'One Day' },
+    { title: "Radharani's Kitchen - one day Anna Seva", description: "Offer grains for one day", price: '', bgColor: 'bg-rose-400', category: 'One Day' },
+    { title: "Radharani's Kitchen - one time Fruit Seva", description: "Offer fruits for a single occasion", price: '', bgColor: 'bg-rose-400', category: 'One Time' },
+    { title: "Radharani's Kitchen - one time Dry Fruit Seva", description: "Offer dry fruits for a single occasion", price: '', bgColor: 'bg-rose-400', category: 'One Time' },
+    { title: "Radharani's Kitchen - one time Milk Seva", description: "Offer milk for a single occasion", price: '', bgColor: 'bg-rose-400', category: 'One Time' },
+    { title: "Radharani's Kitchen - one time Ghee Seva", description: "Offer ghee for a single occasion", price: '', bgColor: 'bg-rose-400', category: 'One Time' },
+    { title: "Radharani's Kitchen - one time Vegetable Seva", description: "Offer vegetables for a single occasion", price: '', bgColor: 'bg-rose-400', category: 'One Time' },
+    { title: "Radharani's Kitchen - one time Grocery Seva", description: "Offer groceries for a single occasion", price: '', bgColor: 'bg-rose-400', category: 'One Time' },
+    { title: "Radharani's Kitchen - one time Anna Seva", description: "Offer grains for a single occasion", price: '', bgColor: 'bg-rose-400', category: 'One Time' },
+    { title: "Radharani's Kitchen - one week Fruit Seva", description: "Offer fruits for one week", price: '', bgColor: 'bg-rose-400', category: 'One Week' },
+    { title: "Radharani's Kitchen - one week Dry Fruit Seva", description: "Offer dry fruits for one week", price: '', bgColor: 'bg-rose-400', category: 'One Week' },
+    { title: "Radharani's Kitchen - one week Milk Seva", description: "Offer milk for one week", price: '', bgColor: 'bg-rose-400', category: 'One Week' },
+    { title: "Radharani's Kitchen - one week Ghee Seva", description: "Offer ghee for one week", price: '', bgColor: 'bg-rose-400', category: 'One Week' },
+    { title: "Radharani's Kitchen - one week Vegetable Seva", description: "Offer vegetables for one week", price: '', bgColor: 'bg-rose-400', category: 'One Week' },
+    { title: "Radharani's Kitchen - one week Grocery Seva", description: "Offer groceries for one week", price: '', bgColor: 'bg-rose-400', category: 'One Week' },
+    { title: "Radharani's Kitchen - one week Anna Seva", description: "Offer grains for one week", price: '', bgColor: 'bg-rose-400', category: 'One Week' },
+    { title: "Radharani's Kitchen - All Sevas for one day", description: "Sponsor all offerings for one day", price: '', bgColor: 'bg-rose-400', category: 'All Sevas' },
+  ];
+
+  // Filter seva options for the tabbed section (exclude "All Sevas")
+  const filteredSevaOptions = selectedCategory === 'All Seva'
+    ? sevaOptions.filter((option) => option.category !== 'All Sevas')
+    : sevaOptions.filter((option) => option.category === selectedCategory);
+
+  // Extract the "All Sevas" option for the separate section
+  const allSevasOption = sevaOptions.find((option) => option.category === 'All Sevas');
+
+  // Function to scroll to the donation form
+  const scrollToDonationForm = () => {
+    document.getElementById('donation-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-rose-100">
@@ -96,6 +148,84 @@ const Radharani: React.FC = () => {
         </p>
       </section>
 
+      {/* Radharani's Kitchen Seva Section */}
+      <section className="py-16 px-4 md:px-16 lg:px-32 bg-white shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
+        <h2 className="text-3xl font-bold text-rose-800 mb-4 text-center">
+          Radharani's Kitchen Seva
+        </h2>
+        <p className="text-lg text-gray-600 mb-8 text-center">
+          Contribute to the divine kitchen by offering various items for Krishna's meals
+        </p>
+        {/* Tabs for filtering */}
+        <div className="flex justify-center space-x-4 mb-8 flex-wrap gap-2">
+          {['All Seva', 'One Day', 'One Time', 'One Week'].map((category) => (
+            <button
+              key={category}
+              className={`px-4 py-2 rounded-full font-semibold transition-colors ${
+                selectedCategory === category
+                  ? 'bg-rose-600 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+        {/* Grid of Seva Options */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {filteredSevaOptions.map((option, index) => (
+            <motion.div
+              key={index}
+              className={`${option.bgColor} p-6 rounded-xl shadow-lg text-white transform transition-all duration-300 hover:scale-105`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <h4 className="text-xl font-bold mb-2">{option.title}</h4>
+              <p className="text-sm mb-4">{option.description}</p>
+              <p className="text-lg font-semibold">{option.price}</p>
+              <button
+                className="mt-4 bg-rose-600 text-white py-2 px-4 rounded-full font-semibold hover:bg-rose-700 transition duration-300"
+                onClick={scrollToDonationForm}
+              >
+                Sponsor Now
+              </button>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* All Sevas Section */}
+      <section className="py-16 px-4 md:px-16 lg:px-32 bg-gradient-to-r from-rose-50 to-amber-100 shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
+        <h2 className="text-3xl font-bold text-rose-800 mb-4 text-center">
+          All Sevas for One Day
+        </h2>
+        <p className="text-lg text-gray-600 mb-8 text-center">
+          Sponsor all offerings for a full day to please Krishna with a complete feast
+        </p>
+        {allSevasOption && (
+          <motion.div
+            className="max-w-md mx-auto bg-rose-400 p-6 rounded-xl shadow-lg text-white transform transition-all duration-300 hover:scale-105"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h4 className="text-xl font-bold mb-2">{allSevasOption.title}</h4>
+            <p className="text-sm mb-4">{allSevasOption.description}</p>
+            <p className="text-lg font-semibold">{allSevasOption.price}</p>
+            <button
+              className="mt-4 bg-rose-600 text-white py-2 px-4 rounded-full font-semibold hover:bg-rose-700 transition duration-300"
+              onClick={scrollToDonationForm}
+            >
+              Sponsor Now
+            </button>
+          </motion.div>
+        )}
+      </section>
+
       {/* Donation Call-to-Action Section */}
       <section className="py-16 px-4 md:px-16 lg:px-32 bg-white shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
         <h2 className="text-3xl font-bold text-rose-800 mb-6 text-center">
@@ -117,17 +247,23 @@ const Radharani: React.FC = () => {
             +91 9755098615
           </a>
         </p>
-        <button className="mt-6 px-6 py-3 bg-rose-600 text-white font-semibold rounded-lg shadow-md hover:bg-rose-700 transform transition-transform hover:scale-105">
+        <button 
+          className="mt-6 px-6 py-3 bg-rose-600 text-white font-semibold rounded-lg shadow-md hover:bg-rose-700 transform transition-transform hover:scale-105"
+          onClick={scrollToDonationForm}
+        >
           Donate Now
         </button>
       </section>
 
       {/* Donation Form Section */}
-      <section className="py-16 px-4 md:px-16 lg:px-32 bg-gradient-to-r from-amber-50 to-rose-100 shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
+      <section 
+        id="donation-form"
+        className="py-16 px-4 md:px-16 lg:px-32 bg-gradient-to-r from-amber-50 to-rose-100 shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl"
+      >
         <h2 className="text-3xl font-bold text-rose-800 mb-6 text-center">
           Support Radharani’s Kitchen
         </h2>
-        <DonationForm />
+        <DonationForm preselectedCategoryId="Radharani's-Kitchen-Seva"/>
       </section>
     </div>
   );

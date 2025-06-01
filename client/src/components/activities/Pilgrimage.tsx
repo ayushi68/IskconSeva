@@ -242,7 +242,7 @@ const Pilgrimage: React.FC = () => {
         </section>
 
         {/* Contact Form */}
-        <section className="mb-12 text-center bg-blue-200 p-8 rounded-lg">
+        {/* <section className="mb-12 text-center bg-blue-200 p-8 rounded-lg">
           <h2 className="text-3xl font-semibold text-blue-700 mb-6">Contact Us</h2>
           <form className="max-w-lg mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -268,7 +268,7 @@ const Pilgrimage: React.FC = () => {
           <p className="text-lg mt-4">
             For more queries or help in booking the tickets, please call us: <a href="tel:+919755098618" className="text-blue-600 hover:underline">+91-97550 98618</a>
           </p>
-        </section>
+        </section> */}
       </main>
 
       {/* Footer */}

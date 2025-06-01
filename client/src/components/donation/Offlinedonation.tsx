@@ -135,7 +135,7 @@ const Offlinedonation: React.FC = () => {
         <h2 className="text-3xl font-bold text-teal-800 mb-6 text-center">
           Offer Your Donation
         </h2>
-        <DonationForm />
+        <DonationForm preselectedCategoryId="Offline-Donation"/>
       </section>
     </div>
   );

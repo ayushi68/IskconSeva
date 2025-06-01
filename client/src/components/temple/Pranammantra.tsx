@@ -194,12 +194,12 @@ const Pranammantra: React.FC = () => {
             +91 9755098615
           </a>.
         </p>
-        <a
+        {/* <a
           href="mailto:contact@hkmbhilai.org"
           className="mt-6 inline-block px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transform transition-transform hover:scale-105"
         >
           Connect with Us
-        </a>
+        </a> */}
       </section>
     </div>
   );

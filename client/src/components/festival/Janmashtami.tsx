@@ -1,136 +1,409 @@
-import React from 'react';
-import DonationForm from '../donation/DonationForm'; // Adjust path as needed
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import DonationForm from '../donation/DonationForm';
+import { Link } from "wouter";
 
-const Janmashtami = () => {
+interface DonationFormProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+  festivalName?: string;
+}
+
+interface Slide {
+  title: string;
+  subtitle: string;
+  description: string;
+  bgGradient: string;
+}
+
+interface GalleryImage {
+  src: string;
+  alt: string;
+}
+
+interface SevaOption {
+  title: string;
+  description: string;
+  price: string;
+  bgColor: string;
+}
+
+const Janmashtami: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const slides: Slide[] = [
+    {
+      title: "Sri Krishna Janmashtami",
+      subtitle: "Birth of Lord Krishna",
+      description: "Celebrate the divine appearance of Lord Krishna, the Supreme Personality of Godhead, with devotion and joy.",
+      bgGradient: "from-yellow-400 to-orange-500",
+    },
+    {
+      title: "Join the Festivities",
+      subtitle: "Abhisheka & Bhoga Offering",
+      description: "Participate in the grand maha abhisheka and offer over 500 bhoga items to Lord Krishna.",
+      bgGradient: "from-orange-500 to-yellow-400",
+    },
+    {
+      title: "Support the Celebration",
+      subtitle: "Seek Krishna’s Blessings",
+      description: "Your contribution helps spread the glories of Lord Krishna and His divine pastimes.",
+      bgGradient: "from-yellow-400 to-orange-500",
+    },
+  ];
+
+  const galleryImages: GalleryImage[] = [
+    {
+      src: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+      alt: "Maha Abhisheka Ceremony",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1521747116042-5a7c2a0537bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+      alt: "Bhoga Offering",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+      alt: "Cultural Program",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+      alt: "Nandotsav Celebration",
+    },
+  ];
+
+  const sevaOptions: SevaOption[] = [
+    {
+      title: "Maha Abhisheka Sponsorship Seva",
+      description: "Sponsor the grand Sri Sri RadhaKrishna Maha Abhisheka ceremony during Janmashtami",
+      price: "",
+      bgColor: "bg-yellow-400",
+    },
+    {
+      title: "Bhoga Offering Sponsorship Seva",
+      description: "Support the offering of over 500 bhoga items to Lord Krishna on this auspicious day",
+      price: "",
+      bgColor: "bg-yellow-400",
+    },
+    {
+      title: "Cultural Program Sponsorship Seva",
+      description: "Sponsor the cultural programs during Nandotsav, celebrating Krishna’s divine pastimes",
+      price: "",
+      bgColor: "bg-yellow-400",
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev: number) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const scrollToDonationForm = () => {
+    document.getElementById('donation-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div className="bg-gradient-to-br from-yellow-50 via-white to-orange-50 min-h-screen p-4 md:p-8 font-sans">
-      <div className="max-w-7xl mx-auto space-y-12">
-        {/* Hero Section with Slogan */}
-        <div className="relative text-center py-12 bg-gradient-to-r from-green-700 to-yellow-600 rounded-3xl shadow-2xl transform transition-all duration-500 hover:scale-[1.01]">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg tracking-tight">
-            Sri Krishna Janmashtami
-          </h1>
-          <p className="text-lg md:text-2xl text-yellow-100 mt-4 font-semibold animate-fade-in">
-            Rejoice in the Divine Appearance of Lord Krishna, the Supreme Personality of Godhead!
-          </p>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-3xl" />
-        </div>
-
-        {/* Image and Festival Details Section */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Image with Fixed onError Handler */}
-          <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:scale-105 hover:-rotate-2 group">
-            <img
-              src="/images/gaurapurnima.jpg"
-              alt="Gita Jayanti Celebration"
-              className="w-full h-80 md:h-96 object-cover rounded-3xl transition-transform duration-700 group-hover:scale-110"
-              onError={(e) => ((e.target as HTMLImageElement).src = 'https://via.placeholder.com/600x400?text=Gita+Jayanti')}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-              <p className="text-white font-semibold text-lg p-6">Join the Divine Festivities!</p>
-            </div>
-          </div>
-
-          {/* Festival Details */}
-          <div className="bg-yellow-100/80 border-4 border-yellow-500 backdrop-blur-lg rounded-3xl p-6 shadow-xl transform hover:-rotate-1 transition-all duration-300">
-            <h2 className="text-3xl font-extrabold text-green-900 mb-6 underline underline-offset-8 decoration-green-600">
-              Festival Highlights
-            </h2>
-            <div className="space-y-6 text-gray-800 text-base leading-relaxed">
-              <div className="bg-white/50 p-4 rounded-lg shadow-md">
-                <p className="font-bold text-green-700 text-lg">Celebration Details</p>
-                <p className="mt-1">Date: 6th September 2023</p>
-                <p className="font-semibold mt-2">Venues:</p>
-                <p>
-                  <strong>Raipur:</strong> Hukam’s Lalit Mahal, Naya Raipur Interchange, Serikhedi.<br />
-                  <strong>Bhilai:</strong> Hukam’s Lalit Mahal, Naya Raipur Interchange, Serikhedi.<br />
-                  Celebrations start at 7:30 PM, culminating with Sri Sri RadhaKrishna Maha Abhishek & Maha Arati.
-                </p>
+    <>
+      <style>
+        {`
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+          }
+          .animation-delay-200 {
+            animation-delay: 200ms;
+          }
+          .animation-delay-400 {
+            animation-delay: 400ms;
+          }
+          .animation-delay-600 {
+            animation-delay: 600ms;
+          }
+          .animation-delay-800 {
+            animation-delay: 800ms;
+          }
+          .animation-delay-1000 {
+            animation-delay: 1000ms;
+          }
+          .animation-delay-1200 {
+            animation-delay: 1200ms;
+          }
+          .animation-delay-1400 {
+            animation-delay: 1400ms;
+          }
+          .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+          }
+          .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+          }
+          .modal button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            color: black;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+          }
+        `}
+      </style>
+      <div className="min-h-screen font-sans bg-[url('https://www.transparenttextures.com/patterns/cream-pixels.png')] bg-orange-50">
+        <div className="max-w-6xl mx-auto space-y-8 p-6">
+          {/* Carousel Header Section */}
+          <div className="relative h-80 rounded-xl overflow-hidden shadow-2xl">
+            {slides.map((slide: Slide, index: number) => (
+              <div
+                key={index}
+                className={`absolute inset-0 flex flex-col items-center justify-center text-center transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-r ${slide.bgGradient} opacity-90`}></div>
+                <div className="relative z-10 px-6">
+                  <h1 className="text-5xl font-extrabold text-white drop-shadow-lg animate-fadeIn">{slide.title}</h1>
+                  <p className="text-xl text-white mt-2 drop-shadow-md animate-fadeIn">{slide.subtitle}</p>
+                  <p className="text-sm text-white mt-1 drop-shadow-md animate-fadeIn">{slide.description}</p>
+                  <div className="flex justify-center space-x-4 mt-4 animate-fadeIn">
+                    <Link to="/donate">
+                      <Button className="bg-white text-orange-700 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-orange-100 transition duration-300">
+                        Donate
+                      </Button>
+                    </Link>
+                    <Button className="bg-white text-orange-700 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-orange-100 transition duration-300">
+                      Register
+                    </Button>
+                    <Button
+                      onClick={scrollToDonationForm}
+                      className="bg-white text-orange-700 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-orange-100 transition duration-300"
+                    >
+                      Support Janmashtami
+                    </Button>
+                  </div>
+                </div>
               </div>
-              <div className="bg-white/50 p-4 rounded-lg shadow-md">
-                <p className="font-bold text-green-700 text-lg">Festivities</p>
-                <p>
-                  Devotees fast until midnight, engage in singing Krishna’s glories, and participate in a grand abhisheka ceremony. Over 500 bhoga items are offered, followed by a maha-arati and a sumptuous feast. The next day, Nandotsav continues with cultural programs and a grand feast.
-                </p>
+            ))}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              {slides.map((_: Slide, index: number) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-3 h-3 rounded-full ${index === currentSlide ? 'bg-white' : 'bg-gray-300'} transition duration-300`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Main Content Section */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Left Column: About Janmashtami and Festival Schedule */}
+            <div className="md:col-span-2 space-y-6">
+              {/* About Janmashtami Card */}
+              <Card className="bg-white p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn">
+                <CardContent className="p-0">
+                  <div className="flex items-center mb-4">
+                    <span className="text-3xl mr-2">☀️</span>
+                    <h2 className="text-xl font-bold text-orange-800">About Janmashtami</h2>
+                  </div>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    Sri Krishna Janmashtami celebrates the divine appearance of Lord Krishna, the Supreme Personality of Godhead, who descended to protect devotees and reestablish dharma. Devotees fast until midnight, offer bhoga, and participate in abhisheka and kirtans, followed by Nandotsav celebrations.
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Festival Schedule Card */}
+              <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-200">
+                <CardContent className="p-0">
+                  <div className="flex items-center mb-4">
+                    <span className="text-3xl mr-2">🎉</span>
+                    <h2 className="text-xl font-bold text-orange-800">Festival Schedule</h2>
+                  </div>
+                  <div className="space-y-3 text-gray-800 text-sm leading-relaxed">
+                    <p><span className="font-bold">Date:</span> 28th August 2025</p>
+                    <p><span className="font-bold">Venue Raipur:</span> Hukam’s Lalit Mahal, Naya Raipur Interchange, Serikhedi</p>
+                    <p><span className="font-bold">Venue Bhilai:</span> HKM Bhilai Temple, Bhilai</p>
+                    <p><span className="font-bold">Time:</span> Celebrations start at 7:30 PM, with Sri Sri RadhaKrishna Maha Abhisheka & Maha Arati</p>
+                    <p><span className="font-bold">Activities:</span> Fasting until midnight, over 500 bhoga offerings, maha-arati, Nandotsav with cultural programs</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Right Column: Support and Date Card */}
+            <div className="space-y-6">
+              {/* Support Janmashtami Card */}
+              <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-400">
+                <CardContent className="p-0">
+                  <h2 className="text-xl font-bold text-orange-800 mb-4">Support Janmashtami</h2>
+                  <div className="space-y-3">
+                    <Button className="w-full bg-orange-400 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-orange-500 transition duration-300">
+                      Donate Online
+                    </Button>
+                    <Button className="w-full bg-orange-400 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-orange-500 transition duration-300">
+                      Become Volunteer
+                    </Button>
+                    <Button className="w-full bg-orange-400 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-orange-500 transition duration-300">
+                      Sponsor Event
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Festival Date Card */}
+              <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 text-center transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-600">
+                <CardContent className="p-0">
+                  <p className="text-lg font-bold text-gray-800">Festival Date: 28th August 2025</p>
+                  <p className="text-sm text-gray-600 mt-2">Thursday</p>
+                </CardContent>
+              </Card>
+
+              {/* Contact Info Card */}
+              <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-800">
+                <CardContent className="p-0">
+                  <h2 className="text-xl font-bold text-orange-800 mb-4">Get Involved</h2>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    📞 +91-1234567890<br />
+                    ✉️ info@janmashtami.org<br />
+                    🌐 www.janmashtami.org
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Festival Highlights Section */}
+          <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-1000">
+            <CardContent className="p-0">
+              <h2 className="text-xl font-bold text-orange-800 mb-4">Festival Highlights</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-700">
+                <div>
+                  <p className="font-bold">Maha Abhisheka</p>
+                  <p>Grand bathing of Radha Krishna</p>
+                </div>
+                <div>
+                  <p className="font-bold">Bhoga Offering</p>
+                  <p>Over 500 items offered</p>
+                </div>
+                <div>
+                  <p className="font-bold">Nandotsav</p>
+                  <p>Cultural programs and feast</p>
+                </div>
+                <div>
+                  <p className="font-bold">Maha Arati</p>
+                  <p>Midnight ceremonial worship</p>
+                </div>
               </div>
-            </div>
-            <div className="text-center mt-8">
-              <button className="bg-gradient-to-r from-green-600 to-green-800 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-110">
-                JOIN THE CELEBRATION
-              </button>
-            </div>
-          </div>
-        </div>
+            </CardContent>
+          </Card>
 
-        {/* About Section with Separated Slogans */}
-        <div className="bg-white/90 p-8 rounded-3xl shadow-2xl transform transition-all duration-300 hover:scale-[1.02]">
-          <h2 className="text-3xl font-bold text-green-800 text-center mb-8">The Glory of Sri Krishna Janmashtami</h2>
-          <div className="space-y-8 text-gray-700 text-base leading-relaxed">
-            <p className="italic text-lg text-center text-green-600 font-semibold bg-yellow-50 p-4 rounded-lg">
-            Do you know? Who is most beautiful, most intelligent, most famous, the wealthiest, the strongest and the most renounced? Famous people like film stars, sport stars, industrialists, scientists and politicians can attract millions of fans for few years but they all appear, disappear and forgotten with the passing time like shooting stars. God is one, who is the oldest and yet possesses all six opulences in full FOREVER. The Supreme Lord is called by many names like ‘Krishna’, ‘Christ’ and ‘Allah’. The Greek word ‘krstos’ comes from Sanksrit word ‘Krsta’ or ‘Krsna’ meaning ‘all attractive’. So when we address God as “Christ”, “Krsta” or “Krishna” we indicate the same all-attractive Supreme God.
-            Krishna, in his manifest pastimes, exhibited six opulences or “attractive qualities” in full: beauty, knowledge, fame, wealth, strength, and humility. No other incarnation of Godhead exhibited these qualities to the same degree, and therefore Krishna is worshipped throughout India as “The Supreme Personality of Godhead.
-            </p>
-            <p className="bg-yellow-100 p-6 rounded-lg font-semibold text-center text-green-700">
-              īśvaraḥ paramaḥ kṛṣṇaḥ sac-cid-ānanda-vigrahaḥ<br />
-              anādir ādir govindaḥ sarva-kāraṇa-kāraṇam<br />
-              <span className="text-sm text-gray-600">
-              Krishna, who is known as Govinda, is the Supreme Godhead. He has an eternal blissful spiritual body. He is the origin of all. He has no other origin and He is the prime cause of all causes.
-              </span>
-            </p>
-            <p>
-            Lord Krishna who is the most beautiful, strong, wealthiest, famous, intelligent and renounced person wanted to protect his pure devotees. During the birth of Lord Krishna, the whole atmosphere became filled with prosperity and joy. The trees were laden with fruits and flowers. The rivers were overflowing with water, and the lakes were beautifully decorated with lotus flowers. The birds in the forest began to sing with sweet voices, and the peacocks began to dance. The wind blew very pleasantly, carrying the aroma of different flowers. All the people’s minds became filled with peace and joy. The denizens of the heavenly planets began to sing, offer prayers and dance on the auspicious occasion. The heavenly residents being pleased also began to shower flowers. At the seashore there was the sound of mild waves, and above the sea there were clouds in the sky which began to thunder very pleasingly. Amidst such a wonderful atmosphere, Lord Krishna in order to protect his devotees took birth as the eighth child of Devaki and Vasudeva, bringing boundless joy to both of them.
-            The Lord’s appearance is different from the birth of common man. He descends by His causeless mercy to protect the pious and vanquish the unrighteous. Sri Krsna is not conditioned by the laws of nature, as we are, because physical nature is one of His multifarious energies.
-            The significance of celebrating Sri Krsna Janmashtami every year is to try to know Him as He is and thus to be released from the conditioned state of life. To know Him means to get complete freedom from the chain of birth and death.
-            To this end, although he is unborn and eternal, the supreme lord appears in this world on the auspicious eighth day of the dark fortnight in the month of Bhadrapada, during the auspicious Rohini nakshatra, when all the stars were in auspicious constellations, a sweet scent permeated the atmosphere and the entire universe sanctified in the welcome of the Shyamsundar.
-            However, due to his compassionate nature the Supreme Lord in his original form with all of his potencies and partial manifestations descends to this material world once in a day of Brahma to annihilate the miscreants, deliver the devotees and reestablish the principles of religion.
-            </p>
-            <p className="bg-yellow-100 p-6 rounded-lg font-semibold text-center text-green-700">
-              paritrāṇāya sādhūnāṁ vināśāya ca duṣkṛtām<br />
-              dharma-saṁsthāpanārthāya sambhavāmi yuge yuge<br />
-              <span className="text-sm text-gray-600">
-                To deliver the pious, annihilate the miscreants, and reestablish dharma, I appear millennium after millennium. – Bhagavad Gita 4.8
-              </span>
-            </p>
-            <p className="bg-yellow-100 p-6 rounded-lg font-semibold text-center text-green-700">
-            janma karma ca me divyam
-            evaṁ yo vetti tattvataḥ<br />
-            tyaktvā dehaṁ punar janma
-            naiti mām eti so ’rjuna<br />
-              <span className="text-sm text-gray-600">
-              One who knows the transcendental nature of My appearance and activities does not, upon leaving the body, take birth again in this material world, but attains My eternal abode, O Arjuna. –
-              Bhagavad-gita 4.9
-              </span>
-              What the devotee actually offers the Lord is not needed by the Lord, for He is self-sufficient.
-              If the devotee offers something to the Lord, it acts for his own interest.
-              Because whatever a devotee offers the Lord comes back in a quantity a million times greater than what was offered.
-            </p>
-            <p>
-            One does not become a loser by giving to the Lord; one becomes a gainer by millions of times.
-            “By observing Sri Krishna Janmashtami one becomes free from the sinful reactions committed in seven lives. One gets good children, good health, and great wealth…. One will not have to fear enemies and will get sufficient rainfall and never have to suffer from drought. One will not have to fear natural calamities, hellish conditions, snakes, disease, or the attacks of rogues and thieves”.
-            </p>
-            <strong>
-            Hari-bhakti-vilasa
-            (Texts 283-284, 289-292)
-            </strong>
-            <p className="bg-yellow-100 p-6 rounded-lg font-semibold text-center text-green-700">
-            True observance of Sri Krsna Janmashtami will solve the problems and crises in our civilization. Because of human shortcomings, we cannot solve our problems by ordinary plans. Human frailties always accompany the best endeavor of a conditioned soul. However the solutions are given by the Lord when He descends, as He did when He spoke Bhagavad-Gita and Shrimad-Bhagavatam, and for chanting the holy names of God. Participation in this programme will help one revive the lost consciousness of one’s eternal relationship with the supreme lord. When this takes place, one becomes pure in heart and thus experiences peace and happiness.
-            This glorious day is therefore celebrated by all the Vaishnavas with great enthusiasm as it is the day when the lord of their lives purified this earth by his appearance, in a most attractive form of a bluish baby as soft as butter tinged with musk. Keeping the same spirit, this festival is celebrated in HKM, Bhilai with great pomp and show.
-            </p>
-          </div>
-        </div>
+          {/* Seva Options Section */}
+          <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-1200">
+            <CardContent className="p-0">
+              <h2 className="text-xl font-bold text-orange-800 mb-4">Janmashtami Seva Options</h2>
+              <p className="text-gray-600 mb-8 text-center">
+                Choose a seva to support the Janmashtami celebrations and receive Krishna’s divine blessings
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {sevaOptions.map((option, index) => (
+                  <motion.div
+                    key={index}
+                    className={`${option.bgColor} p-6 rounded-xl shadow-lg text-gray-800 transform transition-all duration-300 hover:scale-105`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <h4 className="text-lg font-bold mb-2">{option.title}</h4>
+                    <p className="text-sm mb-4">{option.description}</p>
+                    <p className="text-md font-semibold">{option.price}</p>
+                    <Button
+                      className="mt-4 bg-orange-400 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-orange-500 transition duration-300"
+                      onClick={scrollToDonationForm}
+                    >
+                      Sponsor Now
+                    </Button>
+                  </motion.div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
 
-        {/* Donation Form Section */}
-        <div className="bg-gradient-to-r from-yellow-200 to-orange-200 p-8 rounded-3xl shadow-2xl text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-green-800 mb-6">
-            Support the Divine Celebration
-          </h2>
-          <p className="text-gray-700 mb-6 italic">
-            “Whatever a devotee offers the Lord comes back in a quantity a million times greater.” – Join us in this sacred festival!
-          </p>
-          <DonationForm />
+          {/* Photo Gallery Section */}
+          <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-1200">
+            <CardContent className="p-0">
+              <h2 className="text-xl font-bold text-orange-800 mb-4">Photo Gallery</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {galleryImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="relative overflow-hidden rounded-lg shadow-md cursor-pointer transform transition-all duration-300 hover:scale-105"
+                    onClick={() => setSelectedImage(image.src)}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="w-full h-40 object-cover rounded-lg"
+                      onError={(e) => {
+                        if (e.target instanceof HTMLImageElement) {
+                          e.target.src = 'https://via.placeholder.com/600x400?text=Janmashtami';
+                        }
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <p className="text-white text-sm font-semibold">{image.alt}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Donation Form Section */}
+          <Card id="donation-form" className="bg-yellow-50 p-8 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-1400">
+            <CardContent className="p-0">
+              <h2 className="text-xl font-bold text-center text-orange-800 mb-6">
+                Support the Festival – Make a Donation
+              </h2>
+              <DonationForm preselectedCategoryId="sri-krishna-janmashtami"/>
+            </CardContent>
+          </Card>
+
+          {/* Image Modal */}
+          {selectedImage && (
+            <div className="modal" onClick={() => setSelectedImage(null)}>
+              <img src={selectedImage} alt="Full-size image" />
+              <button onClick={() => setSelectedImage(null)}>✕</button>
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

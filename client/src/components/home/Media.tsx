@@ -14,25 +14,25 @@ const projects: Project[] = [
     title: "Photo Gallery",
     category: "Daily Darshan | Festivals | Events",
     image: "/annadana.jpg",
-    link: "/media/Photo",
+    link: "/Photo",
   },
   {
     title: "Video Gallery",
     category: "Video",
     image: "/download.jpg",
-    link: "/media/Video",
+    link: "/Video",
   },
   {
     title: "Audio Gallery",
     category: "Audio",
     image: "/vigraha.jpg",
-    link: "/media/Audio",
+    link: "/Audio",
   },
   {
     title: "Media Downloads",
     category: "Calendar | Newsletter | Wallpaper",
     image: "/gaushala.jpg",
-    link: "/media/downloads",
+    link: "/MediaDownloads",
   },
 ];
 

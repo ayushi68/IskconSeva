@@ -60,14 +60,11 @@ export default function Hero() {
             Join hands with us to make a difference. Your contributions help us build temples, serve communities, and spread Krishna Consciousness worldwide.
           </p>
           <div className="flex justify-center space-x-4">
-            <Button
+            <Link to="/donation">
+              <Button
               className="bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-secondary text-white px-8 py-4 text-lg font-bold rounded-full shadow-lg transition duration-300 transform hover:scale-105 flex items-center"
             >
               Explore Sevas 
-            </Button>
-            <Link to="/donation">
-            <Button className="bg-white text-primary px-8 py-4 text-lg font-bold rounded-full shadow-lg transition duration-300 transform hover:scale-105 flex items-center">
-              Donate Now
             </Button>
             </Link>
           </div>

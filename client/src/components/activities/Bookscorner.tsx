@@ -50,7 +50,7 @@ const BooksCorner: React.FC = () => {
         </section>
 
         {/* Contact Form */}
-        <section id="contact-form" className="bg-white p-6 rounded-lg shadow-md">
+        {/* <section id="contact-form" className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold text-blue-600 mb-4">Contact Us</h2>
           <h3 className="text-lg font-medium text-gray-800 mb-6">Get in Touch</h3>
           <div className="space-y-4">
@@ -84,13 +84,13 @@ const BooksCorner: React.FC = () => {
               SEND MESSAGE
             </button>
           </div>
-        </section>
+        </section> */}
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-4 text-center">
+      {/* <footer className="bg-gray-800 text-white py-4 text-center">
         <p>© 2025 Books Corner. All rights reserved.</p>
-      </footer>
+      </footer> */}
     </div>
   );
 };

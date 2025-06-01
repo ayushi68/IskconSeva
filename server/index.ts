@@ -1,27 +1,37 @@
-import express, { type Request, Response, NextFunction } from "express";
+import express, { type Request, Response, NextFunction, Express } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import dotenv from 'dotenv';
-import cors from 'cors'; // Import CORS
-import { connectDB } from "./storage"; // Import MongoDB connection (if using storage.ts)
+import dotenv from "dotenv";
+import cors from "cors";
+import { connectDB } from "./storage";
 
+// Load environment variables
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const app = express();
+const app: Express = express();
+
+// Configure CORS
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 // Middleware
-app.use(cors()); // Enable CORS for cross-origin requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, "../public")));
 
-app.use((req, res, next) => {
+// Request logging middleware
+app.use((req: Request, res: Response, next: NextFunction) => {
   const start = Date.now();
   const path = req.path;
   let capturedJsonResponse: Record<string, any> | undefined = undefined;
@@ -51,36 +61,49 @@ app.use((req, res, next) => {
   next();
 });
 
+// Global error handling middleware
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  const status = err.status || err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  log(`Error: ${status} - ${message}`);
+  res.status(status).json({ message });
+});
+
+// Initialize server and connect to MongoDB
 (async () => {
-  // Connect to MongoDB before starting the server (if using storage.ts)
-  await connectDB(); // This function should be defined in storage.ts
+  try {
+    // Connect to MongoDB
+    await connectDB();
+    log("Successfully connected to MongoDB");
 
-  const server = await registerRoutes(app);
+    // Register routes
+    const server = await registerRoutes(app);
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+    // Set server timeout to 30 seconds
+    server.setTimeout(30000);
 
-    res.status(status).json({ message });
-  });
+    // Set up Vite for development or serve static files for production
+    if (app.get("env") === "development") {
+      await setupVite(app, server);
+      log("Vite development server setup complete");
+    } else {
+      serveStatic(app);
+      log("Serving static files for production");
+    }
 
-  // Importantly, only set up Vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
+    // Start server
+    const port = 5000;
+    server.listen(
+      {
+        port,
+        host: "0.0.0.0",
+      },
+      () => {
+        log(`Server running on http://0.0.0.0:${port}`);
+      }
+    );
+  } catch (error) {
+    log(`Failed to start server: ${error instanceof Error ? error.message : "Unknown error"}`);
+    process.exit(1);
   }
-
-  // ALWAYS serve the app on port 5000
-  // This serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-  }, () => {
-    log(`serving on port ${port}`);
-  });
 })();

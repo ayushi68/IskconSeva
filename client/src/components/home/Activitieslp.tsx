@@ -4,76 +4,77 @@ const services = [
   {
     title: "Annadana Seva ",
     img: "/Annadana.jpg",
-    description: "We provide comprehensive outsourcing solutions tailored to your business needs."
+    description: "We provide comprehensive outsourcing solutions tailored to your business needs.",
+    link: "/Annadana"
   },
   {
     title: "Gaushala Seva",
     img: "/gaushala.jpg",
-    description: "Bespoke software development designed to solve your unique business challenges."
+    description: "Bespoke software development designed to solve your unique business challenges.",
+    link: "/Gaushala"
   },
   {
     title: "Youth's Corner(FOLK)",
     img: "/download.jpg",
-    description: "Innovative product design services from concept to final implementation."
+    description: "Innovative product design services from concept to final implementation.",
+    link: "/Youthcorner"
   },
   {
     title: "Kid's Corner",
     img: "/festivalpuja.jpg",
-    description: "Innovative product design services from concept to final implementation."
+    description: "Innovative product design services from concept to final implementation.",
+    link: "/Kidscorner"
   },
   {
     title: "Family's Corner",
     img: "/nityaseva.jpg",
-    description: "Innovative product design services from concept to final implementation."
+    description: "Innovative product design services from concept to final implementation.",
+    link: "/Familycorner"
   },
   {
     title: "Book Distribution",
     img: "/vigraha.jpg",
-    description: "Innovative product design services from concept to final implementation."
+    description: "Innovative product design services from concept to final implementation.",
+    link: "/Bookscorner"
   },
   {
     title: "Harinam Mantapa",
     img: "/youthseva.jpg",
-    description: "Innovative product design services from concept to final implementation."
+    description: "Innovative product design services from concept to final implementation.",
+    link: "/Harinam"
   },
   {
     title: "Gifts ",
     img: "/specialpuja.jpg",
-    description: "Innovative product design services from concept to final implementation."
+    description: "Innovative product design services from concept to final implementation.",
+    link: "/Gifts"
   },
   {
     title: "Catering Services",
     img: "/hq720.jpg",
-    description: "Innovative product design services from concept to final implementation."
+    description: "Innovative product design services from concept to final implementation.",
+    link: "/Catering"
   },
   {
     title: "Akshaya Patra",
     img: "/rajbhogseva.jpg",
-    description: "Innovative product design services from concept to final implementation."
+    description: "Innovative product design services from concept to final implementation.",
+    link: "/Akshaypatra"
   },
-  // {
-  //   title: "Book a ceremony (Samskaras and Ceremonies)",
-  //   img: "/hkm-logo.jpg",
-  //   description: "Innovative product design services from concept to final implementation."
-  // },
-  // {
-  //   title: "Open Lawn/Banquet Hall",
-  //   img: "/radharaniseva.jpg",
-  //   description: "Innovative product design services from concept to final implementation."
-  // },
-  // {
-  //   title: "Guest House",
-  //   img: "/generaldonation.jpg",
-  //   description: "Innovative product design services from concept to final implementation."
-  // },
   {
     title: "Pilgrimage Tours",
     img: "/download.jpg",
-    description: "Innovative product design services from concept to final implementation."
+    description: "Innovative product design services from concept to final implementation.",
+    link: "/Pilgrimage"
   },
 ];
 
 const Activitieslp: React.FC = () => {
+  // Function to handle navigation
+  const navigateToService = (link: string) => {
+    window.location.href = link; // Traditional page navigation
+  };
+
   return (
     <section className="bg-gray-100 py-20 px-4 lg:px-24">
       {/* Full-width heading background with increased height */}
@@ -110,7 +111,10 @@ const Activitieslp: React.FC = () => {
                 >
                   <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
                   <p className="text-gray-300">{service.description}</p>
-                  <button className="mt-4 px-4 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors border border-white/20">
+                  <button 
+                    onClick={() => navigateToService(service.link)}
+                    className="mt-4 px-4 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors border border-white/20"
+                  >
                     Learn More
                   </button>
                 </div>

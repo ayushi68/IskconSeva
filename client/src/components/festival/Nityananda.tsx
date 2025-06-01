@@ -1,104 +1,411 @@
-import React from 'react';
-import DonationForm from '../donation/DonationForm'; // Adjust this path if needed
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import DonationForm from '../donation/DonationForm';
+import { Link } from "wouter";
 
-const Nityananda = () => {
+interface DonationFormProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+  festivalName?: string;
+}
+
+interface Slide {
+  title: string;
+  subtitle: string;
+  description: string;
+  bgGradient: string;
+}
+
+interface GalleryImage {
+  src: string;
+  alt: string;
+}
+
+interface SevaOption {
+  title: string;
+  description: string;
+  price: string;
+  bgColor: string;
+}
+
+const Nityananda: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const slides: Slide[] = [
+    {
+      title: "Nityananda Trayodashi",
+      subtitle: "Appearance Day of Lord Nityananda",
+      description: "Celebrate the divine mercy of Lord Nityananda Prabhu, the eternal associate of Sri Chaitanya Mahaprabhu.",
+      bgGradient: "from-yellow-400 to-orange-500",
+    },
+    {
+      title: "Join the Celebration",
+      subtitle: "Ecstatic Kirtan & Abhisheka",
+      description: "Participate in the grand abhisheka and lively kirtan to honor Lord Nityananda’s appearance day.",
+      bgGradient: "from-orange-500 to-yellow-400",
+    },
+    {
+      title: "Support the Festival",
+      subtitle: "Seek Nitai’s Mercy",
+      description: "Your contribution helps spread the glories of Lord Nityananda and the Sankirtana Movement.",
+      bgGradient: "from-yellow-400 to-orange-500",
+    },
+  ];
+
+  const galleryImages: GalleryImage[] = [
+    {
+      src: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+      alt: "Nitai Gauranga Abhisheka",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1521747116042-5a7c2a0537bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+      alt: "Chappan Bhog Offering",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+      alt: "Kirtan Celebration",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+      alt: "Shayana Pallakki Utsava",
+    },
+  ];
+
+  const sevaOptions: SevaOption[] = [
+    {
+      title: "Abhisheka Sponsorship Seva",
+      description: "Sponsor the grand abhisheka for Sri Sri Nitai Gauranga with panchamrita and 108 kalasha snana",
+      price: "",
+      bgColor: "bg-yellow-400",
+    },
+    {
+      title: "Chappan Bhog Sponsorship Seva",
+      description: "Support the offering of a feast with 56 items (chappan bhog) for the Lord’s pleasure",
+      price: "",
+      bgColor: "bg-yellow-400",
+    },
+    {
+      title: "Kirtan Sponsorship Seva",
+      description: "Sponsor the lively kirtan in honor of Lord Nityananda during the festival",
+      price: "",
+      bgColor: "bg-yellow-400",
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev: number) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const scrollToDonationForm = () => {
+    document.getElementById('donation-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div className="bg-gradient-to-br from-yellow-50 via-white to-yellow-100 min-h-screen p-6 font-sans">
-      <div className="max-w-7xl mx-auto space-y-10">
-        {/* Image and Schedule Section */}
-        <div className="grid md:grid-cols-2 gap-10">
-          {/* Image with 3D tilt effect and TypeScript fix */}
-          <div className="bg-white rounded-xl shadow-xl transform transition-transform duration-300 hover:scale-105 hover:rotate-1">
-            <img
-              src="/images/nityanandatrayodashi.jpg"
-              alt="Nityananda Trayodashi Celebration"
-              className="w-full h-full rounded-xl object-cover"
-              onError={(e) => ((e.target as HTMLImageElement).src = 'https://via.placeholder.com/600x400?text=Nityananda+Trayodashi')}
-            />
+    <>
+      <style>
+        {`
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+          }
+          .animation-delay-200 {
+            animation-delay: 200ms;
+          }
+          .animation-delay-400 {
+            animation-delay: 400ms;
+          }
+          .animation-delay-600 {
+            animation-delay: 600ms;
+          }
+          .animation-delay-800 {
+            animation-delay: 800ms;
+          }
+          .animation-delay-1000 {
+            animation-delay: 1000ms;
+          }
+          .animation-delay-1200 {
+            animation-delay: 1200ms;
+          }
+          .animation-delay-1400 {
+            animation-delay: 1400ms;
+          }
+          .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+          }
+          .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+          }
+          .modal button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            color: black;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+          }
+        `}
+ adultes
+      </style>
+      <div className="min-h-screen font-sans bg-[url('https://www.transparenttextures.com/patterns/cream-pixels.png')] bg-orange-50">
+        <div className="max-w-6xl mx-auto space-y-8 p-6">
+          {/* Carousel Header Section */}
+          <div className="relative h-80 rounded-xl overflow-hidden shadow-2xl">
+            {slides.map((slide: Slide, index: number) => (
+              <div
+                key={index}
+                className={`absolute inset-0 flex flex-col items-center justify-center text-center transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-r ${slide.bgGradient} opacity-90`}></div>
+                <div className="relative z-10 px-6">
+                  <h1 className="text-5xl font-extrabold text-white drop-shadow-lg animate-fadeIn">{slide.title}</h1>
+                  <p className="text-xl text-white mt-2 drop-shadow-md animate-fadeIn">{slide.subtitle}</p>
+                  <p className="text-sm text-white mt-1 drop-shadow-md animate-fadeIn">{slide.description}</p>
+                  <div className="flex justify-center space-x-4 mt-4 animate-fadeIn">
+                    <Link to="/donate">
+                      <Button className="bg-white text-orange-700 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-orange-100 transition duration-300">
+                        Donate
+                      </Button>
+                    </Link>
+                    <Button className="bg-white text-orange-700 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-orange-100 transition duration-300">
+                      Register
+                    </Button>
+                    <Button
+                      onClick={scrollToDonationForm}
+                      className="bg-white text-orange-700 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-orange-100 transition duration-300"
+                    >
+                      Support Nityananda Trayodashi
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              {slides.map((_: Slide, index: number) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-3 h-3 rounded-full ${index === currentSlide ? 'bg-white' : 'bg-gray-300'} transition duration-300`}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* Festival Schedule Card */}
-          <div className="bg-yellow-300/60 border-2 border-yellow-400 backdrop-blur-md rounded-xl p-6 shadow-2xl transform hover:rotate-[-1deg] transition-transform duration-300">
-            <h2 className="text-2xl font-extrabold text-green-800 mb-4 underline underline-offset-4">
-              Nityananda Trayodashi Festival Schedule
-            </h2>
+          {/* Main Content Section */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Left Column: About Nityananda Trayodashi and Festival Schedule */}
+            <div className="md:col-span-2 space-y-6">
+              {/* About Nityananda Trayodashi Card */}
+              <Card className="bg-white p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn">
+                <CardContent className="p-0">
+                  <div className="flex items-center mb-4">
+                    <span className="text-3xl mr-2">☀️</span>
+                    <h2 className="text-xl font-bold text-orange-800">About Nityananda Trayodashi</h2>
+                  </div>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    Sri Nityananda Trayodashi celebrates the appearance of Lord Nityananda Prabhu, the eternal associate of Sri Chaitanya Mahaprabhu. As Lord Balarama in Krishna’s pastimes, Nityananda Prabhu spread the Sankirtana Movement, assisting Chaitanya Mahaprabhu in distributing the holy name across Bengal. His mercy is essential for attaining love of Krishna, making this festival vital for Gaudiya Vaishnavas.
+                  </p>
+                </CardContent>
+              </Card>
 
-            <div className="space-y-3 text-gray-800 text-sm leading-relaxed">
-              <div>
-                <p className="font-bold text-green-700">AT RAIPUR:</p>
-                <p>Trayodashi Tithi, Magha Month (February-March 2025)</p>
-              </div>
-              <div>
-                <p className="font-bold">VENUE:</p>
-                <p>
-                  Hukam’s Lalit Mahal Naya Raipur Interchange, Serikhedi, Raipur. <br />
-                  Devotees fast until noon, followed by a grand abhisheka for Sri Sri Nitai Gauranga at 7:30 PM, concluding with Shayana Arati and Shayana Pallakki Utsava.
-                </p>
-              </div>
-              <div className="pt-2">
-                <p className="font-bold text-green-700">AT BHILAI:</p>
-                <p>Trayodashi Tithi, Magha Month (February-March 2025)</p>
-              </div>
-              <div>
-                <p className="font-bold">VENUE:</p>
-                <p>
-                  Hukam’s Lalit Mahal Naya Raipur Interchange, Serikhedi, Raipur. <br />
-                  Celebrations include a maha-abhisheka with panchamrita and 108 kalasha snana, followed by a feast of 56 items (chappan bhog).
-                </p>
-              </div>
+              {/* Festival Schedule Card */}
+              <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-200">
+                <CardContent className="p-0">
+                  <div className="flex items-center mb-4">
+                    <span className="text-3xl mr-2">🎉</span>
+                    <h2 className="text-xl font-bold text-orange-800">Festival Schedule</h2>
+                  </div>
+                  <div className="space-y-3 text-gray-800 text-sm leading-relaxed">
+                    <p><span className="font-bold">At Raipur:</span> 18th February 2026</p>
+                    <p><span className="font-bold">Venue:</span> Hukam’s Lalit Mahal, Naya Raipur Interchange, Serikhedi, Raipur</p>
+                    <p><span className="font-bold">Activities:</span> Fasting until noon, grand abhisheka at 7:30 PM, Shayana Arati, and Shayana Pallakki Utsava</p>
+                    <p><span className="font-bold">At Bhilai:</span> 18th February 2026</p>
+                    <p><span className="font-bold">Venue:</span> HKM Bhilai Temple, Bhilai</p>
+                    <p><span className="font-bold">Activities:</span> Maha-abhisheka with panchamrita and 108 kalasha snana, chappan bhog feast</p>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
-            <div className="text-center mt-6">
-              <button className="bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold py-2 px-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
-                REGISTER
-              </button>
+            {/* Right Column: Support and Date Card */}
+            <div className="space-y-6">
+              {/* Support Nityananda Trayodashi Card */}
+              <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-400">
+                <CardContent className="p-0">
+                  <h2 className="text-xl font-bold text-orange-800 mb-4">Support Nityananda Trayodashi</h2>
+                  <div className="space-y-3">
+                    <Button className="w-full bg-orange-400 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-orange-500 transition duration-300">
+                      Donate Online
+                    </Button>
+                    <Button className="w-full bg-orange-400 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-orange-500 transition duration-300">
+                      Become Volunteer
+                    </Button>
+                    <Button className="w-full bg-orange-400 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-orange-500 transition duration-300">
+                      Sponsor Event
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Festival Date Card */}
+              <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 text-center transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-600">
+                <CardContent className="p-0">
+                  <p className="text-lg font-bold text-gray-800">Festival Date: 18th February 2026</p>
+                  <p className="text-sm text-gray-600 mt-2">Wednesday – Trayodashi Tithi, Magha Month</p>
+                </CardContent>
+              </Card>
+
+              {/* Contact Info Card */}
+              <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-800">
+                <CardContent className="p-0">
+                  <h2 className="text-xl font-bold text-orange-800 mb-4">Get Involved</h2>
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    📞 +91-1234567890<br />
+                    ✉️ info@nityanandatrayodashi.org<br />
+                    🌐 www.nityanandatrayodashi.org
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
-        </div>
 
-        {/* About Section */}
-        <div className="bg-white p-8 rounded-xl shadow-xl transform transition duration-300 hover:scale-[1.02]">
-          <div className="text-gray-700 text-sm space-y-4 leading-relaxed">
-            <p>
-              Sri Nityananda Trayodashi is the auspicious appearance day of Sri Nityananda Prabhu. The Supreme Lord Sri Krishna appeared in Navadvipa as Sri Chaitanya Mahaprabhu to establish the Sankirtana Movement (the Yuga Dharma for this age of quarrel and hypocrisy). To help the Supreme Lord in His mission, Lord Balarama appeared as Nityananda Prabhu. He assisted Sri Chaitanya Mahaprabhu by spreading the holy name of the Lord throughout Bengal.
-            </p>
-            <p className="italic font-semibold bg-yellow-100 p-4 rounded-lg text-center">
-              Nitai-pada-kamala, koti-chandra susitala – <br />
-              “The lotus feet of Lord Nityananda are cooling like a million moons.”
-            </p>
-            <p>
-              One should take the shelter of the lotus feet of Lord Nityananda Prabhu, for He is the original spiritual master. It is by the mercy of Nitai that we can obtain love of Krishna. On Trayodashi tithi of the auspicious Magha maas (February-March), just after Vasant Panchami, when the earth is covered in beautiful and fragrant flowers blooming everywhere, the moon of Nityananda ray arose from the womb of Devi Padmavati in the most sanctified village of Ekachakra, giving unlimited bliss to Hadai Pandit, Lord Nityananda’s father, and all the other Vaishnavas. Lord Nityananda appeared about twenty years before the appearance of Chaitanya Mahaprabhu. Nityananda-trayodasi is an important celebration for Gaudiya Vaishnavas, as without the mercy of Nitai, one cannot get the mercy of Nimai.
-            </p>
-            <p>
-              Lord Nityananda performed his inconceivably enchanting and amazing pastimes first in Ekachakra, after which he travelled to various places of pilgrimage and then joined Sri Chaitanya Mahaprabhu in Shridham Mayapur. Together, the two brothers drowned the entire universe in the loud and ecstatic chanting of the Hare Krishna Mahamantra.
-            </p>
-            <p>
-              Lord Nityananda is the eternal associate of Chaitanya Mahaprabhu, the Supreme Personality of Godhead. Chaitanya Mahaprabhu cannot be approached or understood without the mercy of Nityananda Prabhu, who is the cardinal guru of all the universes and serves as an intermediary between Mahaprabhu and His Devotees. He is the Lord’s active principle in both creation and lila. He is the second body of the Lord, manifesting as Balaram to Shri Krishna, Lakshman to Shri Ram, and Nityananda Prabhu to Chaitanya Mahaprabhu. All other forms and expansions of the Lord emanate from this second body. Nityananda Prabhu is thus the source of Sankarshan, all the Vishu’s, and Ananta Shesha.
-            </p>
-            <p className="italic font-semibold bg-yellow-100 p-4 rounded-lg text-center">
-              “Lord Nityananda is even more merciful than the munificent Lord Gaurahari, and the two lotus feet of his, which are as cooling as millions of moons, are the only shelter for the aspiring devotees of Lord Gaurahari in this age of Kali.”
-            </p>
-            <p>
-              Lord Nityananda, who was Balarama in Krishna’s pastimes, accompanied Lord Chaitanya in spreading the holy names to save the most fallen souls. Having the whitish complexion like Lord Balarama, His garments resemble a cluster of blue lotus flowers, and His effulgence surpasses the grandeur of a rising moon at sunset. He has a deep melodious voice, constantly singing the glories of Sri Krishna, and carries a red stick with benedictions for the devotees, but feared by the demoniac. He has the carefree mood of a wild avadhuta, so absorbed is He in the love of Godhead, and no one knows what He will do next.
-            </p>
-            <p>
-              The Supreme Personality of Godhead, Krishna, is the fountainhead of all incarnations. Lord Nityananda Prabhu is His second body. They are both one and the same identity, differing only in form. Nityananda Prabhu is the first bodily expansion of Krishna and assists in Lord Krishna’s transcendental pastimes. He assumes five other forms to serve Lord Krishna, executing the orders of Lord Krishna in the work of creation, and in the form of Lord Sesa, He serves Sri Krishna in various ways. No one can approach Krishna without first getting the mercy of Nityananda Prabhu.
-            </p>
-            <p>
-              On this day, devotees fast until noon, being immersed in the pastimes of Nityananda and pray to Lord Nityananda for spiritual strength. A grand abhisheka is performed to Sri Sri Nitai Gauranga. The Deities are bathed with scented water and given a sandal oil massage. After the massage, the Deities are bathed with panchamrita (milk, curd, sweetened water, ghee, and honey) and panchagavya. The Deities are then bathed with exotic fruit juices and water mixed with herbal extracts. The sarvaushadhi snana is followed by 108 kalasha snana and concludes with pushpa-vrishti (showering of fragrant flowers on the Deities). The Deities are offered a feast of 56 items (chappan bhog). After performing abhishek for the Gaura Nitai Deities, Shayana Arati and Shayana Pallakki Utsava conclude the festival. A lively kirtan and sumptuous feast are offered in Nityananda’s honor, for the Lord’s pleasure.
-            </p>
-          </div>
-        </div>
+          {/* Festival Highlights Section */}
+          <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-1000">
+            <CardContent className="p-0">
+              <h2 className="text-xl font-bold text-orange-800 mb-4">Festival Highlights</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-700">
+                <div>
+                  <p className="font-bold">Grand Abhisheka</p>
+                  <p>Panchamrita and 108 kalasha snana</p>
+                </div>
+                <div>
+                  <p className="font-bold">Chappan Bhog</p>
+                  <p>Feast of 56 items offered to the Lord</p>
+                </div>
+                <div>
+                  <p className="font-bold">Lively Kirtan</p>
+                  <p>Chanting in honor of Lord Nityananda</p>
+                </div>
+                <div>
+                  <p className="font-bold">Shayana Utsava</p>
+                  <p>Concluding with Shayana Arati and Pallakki</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-        {/* Donation Form */}
-        <div className="bg-yellow-50 p-8 rounded-xl shadow-xl">
-          <h2 className="text-xl font-bold text-center text-green-700 mb-6">
-            Support the Festival – Make a Donation
-          </h2>
-          <DonationForm />
+          {/* Seva Options Section */}
+          <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-1200">
+            <CardContent className="p-0">
+              <h2 className="text-xl font-bold text-orange-800 mb-4">Nityananda Trayodashi Seva Options</h2>
+              <p className="text-gray-600 mb-8 text-center">
+                Choose a seva to support the Nityananda Trayodashi celebrations and seek the mercy of Lord Nityananda
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {sevaOptions.map((option, index) => (
+                  <motion.div
+                    key={index}
+                    className={`${option.bgColor} p-6 rounded-xl shadow-lg text-gray-800 transform transition-all duration-300 hover:scale-105`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <h4 className="text-lg font-bold mb-2">{option.title}</h4>
+                    <p className="text-sm mb-4">{option.description}</p>
+                    <p className="text-md font-semibold">{option.price}</p>
+                    <Button
+                      className="mt-4 bg-orange-400 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-orange-500 transition duration-300"
+                      onClick={scrollToDonationForm}
+                    >
+                      Sponsor Now
+                    </Button>
+                  </motion.div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Photo Gallery Section */}
+          <Card className="bg-yellow-50 p-6 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-1200">
+            <CardContent className="p-0">
+              <h2 className="text-xl font-bold text-orange-800 mb-4">Photo Gallery</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {galleryImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="relative overflow-hidden rounded-lg shadow-md cursor-pointer transform transition-all duration-300 hover:scale-105"
+                    onClick={() => setSelectedImage(image.src)}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="w-full h-40 object-cover rounded-lg"
+                      onError={(e) => {
+                        if (e.target instanceof HTMLImageElement) {
+                          e.target.src = 'https://via.placeholder.com/600x400?text=Nityananda+Trayodashi';
+                        }
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <p className="text-white text-sm font-semibold">{image.alt}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Donation Form Section */}
+          <Card id="donation-form" className="bg-yellow-50 p-8 rounded-xl shadow-lg border border-yellow-200 transform transition-all duration-500 hover:scale-[1.02] animate-fadeIn animation-delay-1400">
+            <CardContent className="p-0">
+              <h2 className="text-xl font-bold text-center text-orange-800 mb-6">
+                Support the Festival – Make a Donation
+              </h2>
+              <DonationForm />
+            </CardContent>
+          </Card>
+
+          {/* Image Modal */}
+          {selectedImage && (
+            <div className="modal" onClick={() => setSelectedImage(null)}>
+              <img src={selectedImage} alt="Full-size image" />
+              <button onClick={() => setSelectedImage(null)}>✕</button>
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

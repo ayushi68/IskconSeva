@@ -1,7 +1,37 @@
 import React from 'react';
-import DonationForm from '../donation/DonationForm'; // Importing the existing DonationForm component
+import { motion } from 'framer-motion';
+import DonationForm from '../donation/DonationForm';
+
+// Define the type for the seva options
+interface SevaOption {
+  title: string;
+  description: string;
+  price: string;
+  bgColor: string;
+}
 
 const Bhagavatam: React.FC = () => {
+  // Seva options data
+  const sevaOptions: SevaOption[] = [
+    { 
+      title: 'Srimad Bhagvatam Prachara - 18 Volume Set (English)', 
+      description: 'Sponsor the distribution of an 18-volume set of Srimad Bhagavatam in English', 
+      price: '', 
+      bgColor: 'bg-indigo-500' 
+    },
+    { 
+      title: 'Srimad Bhagvatam Prachara - 18 Volume Set (Hindi)', 
+      description: 'Sponsor the distribution of an 18-volume set of Srimad Bhagavatam in Hindi', 
+      price: '', 
+      bgColor: 'bg-indigo-500' 
+    },
+  ];
+
+  // Function to scroll to the donation form
+  const scrollToDonationForm = () => {
+    document.getElementById('donation-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 to-indigo-800 text-white font-sans">
       {/* Hero Section with 3D Effect */}
@@ -59,15 +89,47 @@ const Bhagavatam: React.FC = () => {
         </div>
       </section>
 
+      {/* Bhagavatam Seva Options Section */}
+      <section className="py-16 px-4 md:px-16">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-4xl font-semibold text-center mb-4">Bhagavatam Seva Options</h2>
+          <p className="text-lg text-center mb-8 max-w-3xl mx-auto">
+            Choose a seva to share the divine wisdom of Śrīmad-Bhāgavatam and uplift souls worldwide
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
+            {sevaOptions.map((option, index) => (
+              <motion.div
+                key={index}
+                className={`${option.bgColor} p-6 rounded-xl shadow-lg text-white transform transition-all duration-300 hover:scale-105`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <h4 className="text-xl font-bold mb-2">{option.title}</h4>
+                <p className="text-sm mb-4">{option.description}</p>
+                <p className="text-lg font-semibold">{option.price}</p>
+                <button
+                  className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-full font-semibold hover:bg-indigo-700 transition duration-300"
+                  onClick={scrollToDonationForm}
+                >
+                  Sponsor Now
+                </button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Call to Action and Donation Form */}
-      <section className="py-16 px-4 md:px-16 bg-gradient-to-b from-purple-900 to-blue-900">
+      <section id="donation-form" className="py-16 px-4 md:px-16 bg-gradient-to-b from-purple-900 to-blue-900">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl font-semibold mb-8">Gift Śrīmad-Bhāgavatam Today</h2>
           <p className="text-lg mb-8 max-w-3xl mx-auto">
             At HKM Bhilai, we are committed to sharing the divine wisdom of Śrīmad-Bhāgavatam with the world. By gifting this sacred text to your loved ones or supporting our mission through donations, you can help liberate souls and spread Krishna Consciousness. Be a part of this noble cause today!
           </p>
           <div className="transform perspective-1000 rotateX-5 hover:rotateX-0 transition-transform duration-500">
-            <DonationForm />
+            <DonationForm preselectedCategoryId="Bhagavatam-Daan"/>
           </div>
           <p className="mt-8 text-lg">
             For more details or to participate, contact us at: <br />

@@ -34,9 +34,11 @@ export default function Home() {
             fugiatum ligula aliquam qui sequi. Lorem ipsum dolor sit amet, consectetur adipiscing
             elit rutrum eleif arcu sit aspernatur nets fugit, sed quia.
           </p>
-          <button className="mt-8 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 border-2 border-blue-700">
-            OUR RECEIPES
-          </button>
+          <a href="/History" className="inline-block">
+            <button className="mt-8 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 border-2 border-blue-700">
+              OUR RECEIPES
+            </button>
+          </a>
         </div>
       </div>
     </section><br /><br /><br />
@@ -45,7 +47,7 @@ export default function Home() {
       <section className="bg-white py-16 px-4 text-center">
         {/* Clickable Banner */}
         <div className="flex justify-center mb-12">
-          <a href="/philosophy/Sprabhpada" className="w-full max-w-5xl block">
+          <a href="/Sprabhpada" className="w-full max-w-5xl block">
             <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200 hover:shadow-2xl transition-shadow duration-300">
               <img
                 src="/sp1.png"
@@ -152,9 +154,11 @@ export default function Home() {
           {/* Signature and Button */}
           <div className="mt-16 text-center">
             <img src="/images/signature.png" alt="Signature" className="mx-auto h-10 mb-6" />
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-md">
-              Read More
-            </button>
+            <a href="/Sprabhpada">
+              <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-md">
+                Read More
+              </button>
+            </a>
           </div>
         </div>
       </section><br /><br /><br />
@@ -328,27 +332,27 @@ export default function Home() {
             {
               title: "Our Vision",
               img: "/our-vision.png",
-              link: "/vision",
+              link: "/OurVision",
             },
             {
               title: "Our Objectives",
               img: "/objectives.png",
-              link: "/objectives",
+              link: "/Objectives",
             },
             {
               title: "Media",
               img: "/media.png",
-              link: "/media",
+              link: "/Media",
             },
             {
               title: "Festivals",
               img: "/festivals.png",
-              link: "/festivals",
+              link: "/Festival",
             },
             {
               title: "Activities",
               img: "/activities.png",
-              link: "/activities",
+              link: "/Activitieslp",
             },
           ].map((item, idx) => (
             <div key={idx} className="text-center group">

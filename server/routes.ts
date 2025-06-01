@@ -1,4 +1,4 @@
-import express, { type Express } from "express";
+import express, { type Express, type Request, type Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
@@ -7,23 +7,52 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import Contact from "../db/contact.model";
-import Razorpay from "razorpay"; // Import Razorpay
+import multer from "multer";
+import { GopalForm, CulturalForm, HeritageForm, FolkForm } from "../db/registration.model";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 const router = express.Router();
 
-// Initialize Razorpay with your keys
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID!,
-  key_secret: process.env.RAZORPAY_KEY_SECRET!,
+// Multer config with enhanced file validation
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ["image/jpeg", "image/png", "image/gif", "application/pdf"];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error("Invalid file type. Only JPEG, PNG, GIF, and PDF are allowed."));
+    }
+  },
+});
+
+// Multer error handling middleware
+router.use((err: any, req: Request, res: Response, next: Function) => {
+  if (err instanceof multer.MulterError) {
+    console.error("Multer error:", err);
+    return res.status(400).json({
+      success: false,
+      error: `File upload error: ${err.message}`,
+    });
+  } else if (err) {
+    console.error("File filter error:", err);
+    return res.status(400).json({
+      success: false,
+      error: err.message,
+    });
+  }
+  next();
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  router.post("/api/contact", async (req, res) => {
+  // Contact form route
+  router.post("/contact", async (req: Request, res: Response) => {
     try {
       const { name, mobile, email, dob } = req.body;
-      console.log("Received contact data:", req.body);
 
       const newContact = new Contact({
         name,
@@ -32,10 +61,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         dob: new Date(dob),
       });
 
-      console.log("Saving contact:", newContact);
       await newContact.save();
-      console.log("Contact saved successfully");
-
       res.status(200).json({ message: "Contact saved successfully" });
     } catch (err) {
       console.error("Error saving contact:", err);
@@ -43,30 +69,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Add Razorpay order creation endpoint
-  router.post("/api/create-order", async (req, res) => {
-    const { amount } = req.body;
-
-    if (!amount || isNaN(amount) || amount <= 0) {
-      return res.status(400).json({ error: "Invalid amount" });
-    }
-
-    try {
-      const order = await razorpay.orders.create({
-        amount: amount * 100, // Convert to paise (Razorpay expects amount in paise)
-        currency: "INR",
-        receipt: `receipt_${Date.now()}`,
-      });
-
-      res.json({ order });
-    } catch (error) {
-      console.error("Error creating Razorpay order:", error);
-      res.status(500).json({ error: "Failed to create order" });
-    }
-  });
-
-  // Updated donation form submission endpoint
-  router.post("/api/donations", async (req, res) => {
+  // Donation form submission
+  router.post("/donations", async (req: Request, res: Response) => {
     try {
       const donationSchema = z.object({
         firstName: z.string().min(2),
@@ -86,8 +90,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       const validatedData = donationSchema.parse(req.body);
-
-      // Save the donation using storage.saveDonation
       const savedDonation = await storage.saveDonation(validatedData);
 
       res.status(201).json({
@@ -105,115 +107,498 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Newsletter subscription endpoint
-  router.post("/api/newsletter", async (req, res) => {
-    try {
-      const newsletterSchema = z.object({
-        email: z.string().email(),
-      });
+  // Gopal registration form route
+  router.post(
+    "/gopal-form",
+    upload.fields([
+      { name: "regTxnFile", maxCount: 1 },
+      { name: "transTxnFile", maxCount: 1 },
+    ]),
+    async (req: Request, res: Response) => {
+      try {
+        console.log("Gopal Request body:", req.body);
+        console.log("Gopal Files:", req.files);
 
-      const validatedData = newsletterSchema.parse(req.body);
+        const {
+          name,
+          gender,
+          contact,
+          dob,
+          classGroup,
+          schoolName,
+          address,
+          center,
+          bloodGroup,
+          guardianName,
+          guardianOccupation,
+          guardianContact,
+          guardianEmail,
+          referralSource,
+          issues,
+          joiningDate,
+          reason,
+          regTxnId,
+          regReceiptNo,
+          transTxnId,
+          transReceiptNo,
+        } = req.body;
 
-      // In a real application, we would save this email to a subscribers list
-      // For this example, we'll just return success
+        // Validate required fields
+        const requiredFields = {
+          name,
+          gender,
+          contact,
+          dob,
+          classGroup,
+          schoolName,
+          address,
+          center,
+          bloodGroup,
+          guardianName,
+          guardianContact,
+          guardianEmail,
+          referralSource,
+          issues,
+          joiningDate,
+          reason,
+          regTxnId,
+        };
+        for (const [field, value] of Object.entries(requiredFields)) {
+          if (!value) {
+            return res.status(400).json({
+              success: false,
+              error: `Missing required field: ${field}`,
+            });
+          }
+        }
 
-      res.status(200).json({
-        success: true,
-        message: "Newsletter subscription successful",
-      });
-    } catch (error) {
-      res.status(400).json({
-        success: false,
-        message: "Invalid email address",
-        error: error instanceof Error ? error.message : "Unknown error",
-      });
+        // Safely access files
+        const files = req.files as { [fieldname: string]: Express.Multer.File[] } | undefined;
+        if (!files || !files["regTxnFile"] || files["regTxnFile"].length === 0) {
+          return res.status(400).json({
+            success: false,
+            error: "Registration transaction file is required",
+          });
+        }
+
+        // Prepare form data
+        const formData = {
+          name,
+          gender,
+          contact,
+          dob,
+          classGroup,
+          schoolName,
+          address,
+          center,
+          bloodGroup,
+          guardianName,
+          guardianOccupation,
+          guardianContact,
+          guardianEmail,
+          referralSource,
+          issues,
+          joiningDate,
+          reason,
+          regTxnId,
+          regReceiptNo,
+          transTxnId,
+          transReceiptNo,
+          regTxnFile: {
+            data: files["regTxnFile"][0].buffer,
+            contentType: files["regTxnFile"][0].mimetype,
+          },
+          transTxnFile: files["transTxnFile"]?.[0]
+            ? {
+                data: files["transTxnFile"][0].buffer,
+                contentType: files["transTxnFile"][0].mimetype,
+              }
+            : undefined,
+        };
+
+        console.log("Saving Gopal form data to MongoDB:", formData);
+        const form = new GopalForm(formData);
+        console.log("Attempting to save Gopal form...");
+        await form.save();
+        console.log("Gopal form saved successfully");
+
+        res.status(201).json({ success: true, message: "Form submitted successfully" });
+      } catch (error) {
+        console.error("Error submitting Gopal form:", error);
+        res.status(500).json({
+          success: false,
+          error: error instanceof Error ? error.message : "Failed to submit form",
+        });
+      }
     }
-  });
+  );
 
-  // API routes prefix
-  const apiPrefix = "/api";
+  // Cultural registration form route
+  router.post(
+    "/cultural-form",
+    upload.fields([
+      { name: "regTxnFile", maxCount: 1 },
+      { name: "transFeeFile", maxCount: 1 },
+    ]),
+    async (req: Request, res: Response) => {
+      try {
+        console.log("Cultural Request body:", req.body);
+        console.log("Cultural Files:", req.files);
 
-  // Get all seva categories
-  router.get(`${apiPrefix}/categories`, async (req, res) => {
+        const {
+          registrationId,
+          childName,
+          dob,
+          gender,
+          classGroup,
+          schoolName,
+          fatherName,
+          fatherPhone,
+          fatherOccupation,
+          motherName,
+          motherPhone,
+          motherOccupation,
+          address,
+          landline,
+          mobile,
+          email,
+          referralSource,
+          attendedBefore,
+          isClubMember,
+          issues,
+          module,
+          regFeeMethod,
+          regTxnId,
+          transportFeeArea,
+          transFeeAmount,
+          transTxnId,
+          transReceiptNo,
+          acceptTerms,
+        } = req.body;
+
+        // Validate required fields
+        const requiredFields = {
+          registrationId,
+          childName,
+          dob,
+          gender,
+          schoolName,
+          mobile,
+          module,
+          acceptTerms,
+        };
+        for (const [field, value] of Object.entries(requiredFields)) {
+          if (!value) {
+            console.log(`Missing required field: ${field}`);
+            return res.status(400).json({
+              success: false,
+              error: `Missing required field: ${field}`,
+            });
+          }
+        }
+
+        // Validate acceptTerms
+        if (acceptTerms !== "true") {
+          console.log("acceptTerms must be true");
+          return res.status(400).json({
+            success: false,
+            error: "You must accept the terms and conditions",
+          });
+        }
+
+        // Validate regTxnFile
+        const files = req.files as { [fieldname: string]: Express.Multer.File[] } | undefined;
+        if (!files || !files?.["regTxnFile"]?.[0]) {
+          console.log("Registration transaction file is required");
+          return res.status(400).json({
+            success: false,
+            error: "Registration transaction file is required",
+          });
+        }
+
+        // Prepare form data
+        const formData = {
+          registrationId,
+          childName,
+          dob,
+          classGroup,
+          gender,
+          schoolName,
+          fatherName,
+          fatherPhone,
+          fatherOccupation,
+          motherName,
+          motherPhone,
+          motherOccupation,
+          address,
+          landline,
+          mobile,
+          email,
+          referralSource,
+          attendedBefore,
+          isClubMember,
+          issues,
+          module,
+          regFeeMethod,
+          regTxnId,
+          regTxnFile: {
+            data: files["regTxnFile"][0].buffer,
+            contentType: files["regTxnFile"][0].mimetype,
+          },
+          transportFeeArea,
+          transFeeAmount,
+          transTxnId,
+          transReceiptNo,
+          acceptTerms: acceptTerms === "true",
+        };
+
+        console.log("Saving Cultural form data to MongoDB:", formData);
+        console.log("Attempting to save Cultural form...");
+        const savedForm = await storage.saveCulturalForm(formData);
+        console.log("Cultural form saved successfully");
+
+        res.status(201).json({ success: true, message: "Cultural form submitted successfully", form: savedForm });
+      } catch (error: any) {
+        console.error("Error submitting Cultural form:", error);
+        if (error.code === 11000) {
+          return res.status(400).json({
+            success: false,
+            error: `Registration ID '${req.body.registrationId}' is already in use`,
+          });
+        }
+        res.status(500).json({
+          success: false,
+          error: error instanceof Error ? error.message : "Failed to submit form",
+        });
+      }
+    }
+  );
+
+  // Heritage registration form route
+  router.post(
+    "/heritage-form",
+    upload.fields([{ name: "photo", maxCount: 1 }]),
+    async (req: Request, res: Response) => {
+      try {
+        console.log("Heritage Request body:", req.body);
+        console.log("Heritage Files:", req.files);
+
+        const {
+          registrationId,
+          name,
+          gender,
+          dateOfBirth,
+          class: classGroup,
+          schoolName,
+          bloodGroup,
+          address,
+          contactNumber,
+          email,
+          guardianName,
+          guardianContactNumber,
+          guardianEmail,
+          howHeard,
+          issues,
+          dateOfJoining,
+          reasonForJoining,
+          registrationReceiptNumber,
+          regTxnId,
+        } = req.body;
+
+        // Validate required fields
+        const requiredFields = {
+          registrationId,
+          name,
+          gender,
+          dateOfBirth,
+          classGroup,
+          schoolName,
+          bloodGroup,
+          address,
+          contactNumber,
+          email,
+          guardianName,
+          guardianContactNumber,
+          guardianEmail,
+          howHeard,
+          issues,
+          dateOfJoining,
+          regTxnId,
+        };
+        for (const [field, value] of Object.entries(requiredFields)) {
+          if (!value) {
+            console.log(`Missing required field: ${field}`);
+            return res.status(400).json({
+              success: false,
+              error: `Missing required field: ${field}`,
+            });
+          }
+        }
+
+        // Prepare form data
+        const files = req.files as { [fieldname: string]: Express.Multer.File[] } | undefined;
+        const formData = {
+          registrationId,
+          name,
+          gender,
+          dob: dateOfBirth,
+          classGroup,
+          schoolName,
+          bloodGroup,
+          address,
+          contactNumber,
+          email,
+          guardianName,
+          guardianContactNumber,
+          guardianEmail,
+          referralSource: howHeard,
+          issues,
+          joiningDate: dateOfJoining,
+          reasonForJoining,
+          registrationReceiptNumber,
+          regTxnId,
+          photo: files?.["photo"]?.[0]
+            ? {
+                data: files["photo"][0].buffer,
+                contentType: files["photo"][0].mimetype,
+              }
+            : undefined,
+        };
+
+        console.log("Saving Heritage form data to MongoDB:", formData);
+        console.log("Attempting to save Heritage form...");
+        const savedForm = await storage.saveHeritageForm(formData);
+        console.log("Heritage form saved successfully");
+
+        res.status(201).json({ success: true, message: "Heritage form submitted successfully", form: savedForm });
+      } catch (error: any) {
+        console.error("Error submitting Heritage form:", error);
+        if (error.code === 11000) {
+          return res.status(400).json({
+            success: false,
+            error: `Registration ID '${req.body.registrationId}' is already in use`,
+          });
+        }
+        res.status(500).json({
+          success: false,
+          error: error instanceof Error ? error.message : "Failed to submit form",
+        });
+      }
+    }
+  );
+
+  // Folkform registration route
+  router.post("/register", async (req: Request, res: Response) => {
+  try {
+    console.log("Folkform Request body:", req.body);
+    const {
+      name,
+      phone,
+      whatsapp,
+      email,
+      gender,
+      course,
+      occupation,
+      qualification,
+      message,
+      academicQual1,
+      academicQual2,
+      dob,
+      location,
+    } = req.body;
+
+    // Validate required fields
+    const requiredFields = {
+      name,
+      phone,
+      whatsapp,
+      email,
+      gender,
+      course,
+      occupation,
+      qualification,
+      dob,
+      location,
+    };
+    for (const [field, value] of Object.entries(requiredFields)) {
+      if (!value) {
+        console.log(`Missing required field: ${field}`);
+        return res.status(400).json({
+          success: false,
+          error: `Missing required field: ${field}`,
+        });
+      }
+    }
+
+    // Prepare form data
+    const formData = {
+      name,
+      phone,
+      whatsapp,
+      email,
+      gender,
+      course,
+      occupation,
+      qualification,
+      message,
+      academicQual1,
+      academicQual2,
+      dob,
+      location,
+    };
+
+    console.log("Saving Folkform data to MongoDB:", formData);
+    console.log("Attempting to save Folkform...");
+    const savedForm = await storage.saveFolkForm(formData);
+    console.log("Folkform saved successfully");
+
+    res.status(201).json({ success: true, message: "Form submitted successfully", form: savedForm });
+  } catch (error: any) {
+    console.error("Error submitting Folkform:", error);
+    res.status(500).json({
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to submit form",
+    });
+  }
+});
+
+  // Fetch categories
+  router.get("/categories", async (req: Request, res: Response) => {
     try {
       const categories = await storage.getAllSevaCategories();
-      return res.status(200).json(categories);
+      res.status(200).json(categories);
     } catch (error) {
       console.error("Error fetching categories:", error);
-      return res.status(500).json({ error: "Failed to fetch categories" });
+      res.status(500).json({ error: "Failed to fetch categories" });
     }
   });
 
-  // Get a single category by slug
-  router.get(`${apiPrefix}/categories/:slug`, async (req, res) => {
-    try {
-      const { slug } = req.params;
-      const category = await storage.getSevaCategoryBySlug(slug);
-
-      if (!category) {
-        return res.status(404).json({ error: "Category not found" });
-      }
-
-      const sevaOptions = await storage.getSevaOptionsByCategory(category.id);
-
-      return res.status(200).json({
-        ...category,
-        sevaOptions,
-      });
-    } catch (error) {
-      console.error("Error fetching category:", error);
-      return res.status(500).json({ error: "Failed to fetch category" });
-    }
-  });
-
-  // Get a specific seva option by id
-  router.get(`${apiPrefix}/seva-options/:id`, async (req, res) => {
-    try {
-      const id = parseInt(req.params.id, 10);
-
-      if (isNaN(id)) {
-        return res.status(400).json({ error: "Invalid ID format" });
-      }
-
-      const sevaOption = await storage.getSevaOptionById(String(id));
-
-      if (!sevaOption) {
-        return res.status(404).json({ error: "Seva option not found" });
-      }
-
-      return res.status(200).json(sevaOption);
-    } catch (error) {
-      console.error("Error fetching seva option:", error);
-      return res.status(500).json({ error: "Failed to fetch seva option" });
-    }
-  });
-
-  // Get recent donations
-  router.get(`${apiPrefix}/recent-donations`, async (req, res) => {
+  // Recent donations
+  router.get("/recent-donations", async (req: Request, res: Response) => {
     try {
       const limit = req.query.limit ? parseInt(req.query.limit as string, 10) : 10;
       const recentDonations = await storage.getRecentDonations(limit);
-      return res.status(200).json(recentDonations);
+      res.status(200).json(recentDonations);
     } catch (error) {
       console.error("Error fetching recent donations:", error);
-      return res.status(500).json({ error: "Failed to fetch recent donations" });
+      res.status(500).json({ error: "Failed to fetch recent donations" });
     }
   });
 
-  // Get testimonials
-  router.get(`${apiPrefix}/testimonials`, async (req, res) => {
+  // Testimonials fetch
+  router.get("/testimonials", async (req: Request, res: Response) => {
     try {
       const limit = req.query.limit ? parseInt(req.query.limit as string, 10) : 5;
       const testimonials = await storage.getApprovedTestimonials(limit);
-      return res.status(200).json(testimonials);
+      res.status(200).json(testimonials);
     } catch (error) {
       console.error("Error fetching testimonials:", error);
-      return res.status(500).json({ error: "Failed to fetch testimonials" });
+      res.status(500).json({ error: "Failed to fetch testimonials" });
     }
   });
 
-  // Add this new route at the end of registerRoutes function
-  router.get("/api/public-images", (req, res) => {
+  // Public image access
+  router.get("/public-images", (req: Request, res: Response) => {
     const publicDir = path.resolve(__dirname, "../public");
 
     fs.readdir(publicDir, (err, files) => {
@@ -231,19 +616,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
-  // Submit testimonial
-  router.post(`${apiPrefix}/testimonials`, async (req, res) => {
+  // Testimonial submission
+  router.post("/testimonials", async (req: Request, res: Response) => {
     try {
       const testimonialData = schema.testimonialInsertSchema.parse({
         donorId: req.body.donorId,
         testimonialText: req.body.testimonialText,
         rating: req.body.rating,
-        isApproved: false, // All testimonials start unapproved
+        isApproved: false,
       });
 
       const testimonial = await storage.createTestimonial(testimonialData);
-
-      return res.status(201).json({
+      res.status(201).json({
         success: true,
         testimonialId: testimonial.id,
         message: "Thank you for your testimonial. It will be reviewed shortly.",
@@ -253,12 +637,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ errors: error.errors });
       }
       console.error("Error submitting testimonial:", error);
-      return res.status(500).json({ error: "Failed to submit testimonial" });
+      res.status(500).json({ error: "Failed to submit testimonial" });
     }
   });
 
-  // Apply the router to the app
-  app.use("/", router);
+  // Attach router to app with /api prefix
+  app.use("/api", router);
 
   const httpServer = createServer(app);
   return httpServer;

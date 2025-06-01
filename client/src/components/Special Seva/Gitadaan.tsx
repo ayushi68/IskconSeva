@@ -1,7 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import DonationForm from '../donation/DonationForm';
 
+// Define the type for the seva options
+interface SevaOption {
+  title: string;
+  description: string;
+  price: string;
+  bgColor: string;
+  category: string;
+}
+
 const GitaDaan: React.FC = () => {
+  // State for filtering seva options
+  const [selectedCategory, setSelectedCategory] = useState<string>('All Seva');
+
+  // Seva options data
+  const sevaOptions: SevaOption[] = [
+    { 
+      title: 'Bhagavad Gita Prachara - Hindi', 
+      description: 'Sponsor the distribution of Bhagavad Gita in Hindi (1, 11, 21, 51, or 108 books)', 
+      price: '', 
+      bgColor: 'bg-blue-400', 
+      category: 'Bhagavad Gita Prachara' 
+    },
+    { 
+      title: 'Bhagavad Gita Prachara - English', 
+      description: 'Sponsor the distribution of Bhagavad Gita in English (1, 11, 21, 51, or 108 books)', 
+      price: '', 
+      bgColor: 'bg-blue-400', 
+      category: 'Bhagavad Gita Prachara' 
+    },
+    { 
+      title: 'Gita Daan - 32 Books', 
+      description: 'Sponsor the distribution of 32 Bhagavad Gita books to spread Krishna’s wisdom', 
+      price: '', 
+      bgColor: 'bg-blue-400', 
+      category: 'Gita Daan' 
+    },
+    { 
+      title: 'Gita Daan - 64 Books', 
+      description: 'Sponsor the distribution of 64 Bhagavad Gita books to uplift more souls', 
+      price: '', 
+      bgColor: 'bg-blue-400', 
+      category: 'Gita Daan' 
+    },
+    { 
+      title: 'Gita Daan - 96 Books', 
+      description: 'Sponsor the distribution of 96 Bhagavad Gita books for a greater impact', 
+      price: '', 
+      bgColor: 'bg-blue-400', 
+      category: 'Gita Daan' 
+    },
+    { 
+      title: 'Gita Daan - 160 Books', 
+      description: 'Sponsor the distribution of 160 Bhagavad Gita books to transform lives globally', 
+      price: '', 
+      bgColor: 'bg-blue-400', 
+      category: 'Gita Daan' 
+    },
+  ];
+
+  // Filter seva options based on the selected category
+  const filteredSevaOptions = selectedCategory === 'All Seva'
+    ? sevaOptions
+    : sevaOptions.filter((option) => option.category === selectedCategory);
+
+  // Function to scroll to the donation form
+  const scrollToDonationForm = () => {
+    document.getElementById('donation-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-yellow-100">
       {/* Header */}
@@ -52,7 +121,7 @@ const GitaDaan: React.FC = () => {
             </div>
           </div>
         </div>
-        </section>
+      </section>
 
       {/* Why Donate */}
       <section className="py-16 bg-gradient-to-br from-blue-200 to-yellow-200">
@@ -78,11 +147,62 @@ const GitaDaan: React.FC = () => {
         </div>
       </section>
 
-      {/* Donation Form */}
+      {/* Gita Daan Options Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-blue-600 mb-4">
+            Gita Daan Options
+          </h2>
+          <p className="text-lg text-gray-600 mb-8 text-center">
+            Choose a seva to spread the wisdom of the Bhagavad Gita and uplift souls
+          </p>
+          {/* Tabs for filtering */}
+          <div className="flex justify-center space-x-4 mb-8 flex-wrap gap-2">
+            {['All Seva', 'Bhagavad Gita Prachara', 'Gita Daan'].map((category) => (
+              <button
+                key={category}
+                className={`px-4 py-2 rounded-full font-semibold transition-colors ${
+                  selectedCategory === category
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+          {/* Grid of Seva Options */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {filteredSevaOptions.map((option, index) => (
+              <motion.div
+                key={index}
+                className={`${option.bgColor} p-6 rounded-xl shadow-lg text-white transform transition-all duration-300 hover:scale-105`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <h4 className="text-xl font-bold mb-2">{option.title}</h4>
+                <p className="text-sm mb-4">{option.description}</p>
+                <p className="text-lg font-semibold">{option.price}</p>
+                <button
+                  className="mt-4 bg-blue-600 text-white py-2 px-4 rounded-full font-semibold hover:bg-blue-700 transition duration-300"
+                  onClick={scrollToDonationForm}
+                >
+                  Sponsor Now
+                </button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Donation Form */}
+      <section id="donation-form" className="py-16">
+        <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-blue-600 mb-8">Join Gita Daan Today</h2>
-          <DonationForm />
+          <DonationForm preselectedCategoryId="Gita-Daan"/>
         </div>
       </section>
 

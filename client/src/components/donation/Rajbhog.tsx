@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import DonationForm from './DonationForm'; // Replace with actual donation form component path
+import { motion } from 'framer-motion';
+import DonationForm from './DonationForm';
+
+// Define the type for the seva options
+interface SevaOption {
+  title: string;
+  description: string;
+  price: string;
+  bgColor: string;
+}
 
 const Rajbhog: React.FC = () => {
   // Carousel images (replace with actual temple-related image URLs)
@@ -18,6 +27,17 @@ const Rajbhog: React.FC = () => {
     }, 5000);
     return () => clearInterval(interval);
   }, [images.length]);
+
+  // Seva options data
+  const sevaOptions: SevaOption[] = [
+    { title: 'Raj Bhoga Seva at 12:00 PM', description: 'Offer a special Raj Bhoga meal to the deity at 12:00 PM', price: '', bgColor: 'bg-orange-400' },
+    { title: 'Raj Bhoga Arati Seva at 12:00 PM', description: 'Participate in the Raj Bhoga Arati ceremony at 12:00 PM', price: '', bgColor: 'bg-orange-400' },
+  ];
+
+  // Function to scroll to the donation form
+  const scrollToDonationForm = () => {
+    document.getElementById('donation-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-yellow-50 to-orange-100">
@@ -146,6 +166,38 @@ const Rajbhog: React.FC = () => {
         </p>
       </section>
 
+      {/* Rajbhog Seva Options Section */}
+      <section className="py-16 px-4 md:px-16 lg:px-32 bg-white shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
+        <h2 className="text-3xl font-bold text-orange-800 mb-4 text-center">
+          Rajbhog Seva Options
+        </h2>
+        <p className="text-lg text-gray-600 mb-8 text-center">
+          Participate in the sacred Rajbhog Seva by offering a meal or joining the Arati ceremony
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          {sevaOptions.map((option, index) => (
+            <motion.div
+              key={index}
+              className={`${option.bgColor} p-6 rounded-xl shadow-lg text-white transform transition-all duration-300 hover:scale-105`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <h4 className="text-xl font-bold mb-2">{option.title}</h4>
+              <p className="text-sm mb-4">{option.description}</p>
+              <p className="text-lg font-semibold">{option.price}</p>
+              <button
+                className="mt-4 bg-orange-600 text-white py-2 px-4 rounded-full font-semibold hover:bg-orange-700 transition duration-300"
+                onClick={scrollToDonationForm}
+              >
+                Sponsor Now
+              </button>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Call to Support Section */}
       <section className="py-16 px-4 md:px-16 lg:px-32 bg-white shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
         <h2 className="text-3xl font-bold text-orange-800 mb-6 text-center">
@@ -173,17 +225,23 @@ const Rajbhog: React.FC = () => {
             ISKCON Mumbai
           </a>, or contact the temple office.
         </p>
-        <button className="mt-6 px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg shadow-md hover:bg-orange-700 transform transition-transform hover:scale-105">
+        <button 
+          className="mt-6 px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg shadow-md hover:bg-orange-700 transform transition-transform hover:scale-105"
+          onClick={scrollToDonationForm}
+        >
           Donate Now
         </button>
       </section>
 
       {/* Donation Form Section */}
-      <section className="py-16 px-4 md:px-16 lg:px-32 bg-gradient-to-r from-orange-50 to-yellow-100 shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
+      <section 
+        id="donation-form"
+        className="py-16 px-4 md:px-16 lg:px-32 bg-gradient-to-r from-orange-50 to-yellow-100 shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl"
+      >
         <h2 className="text-3xl font-bold text-orange-800 mb-6 text-center">
           Contribute to Rajbhog Seva
         </h2>
-        <DonationForm />
+        <DonationForm preselectedCategoryId="Rajbhog-Seva" />
       </section>
     </div>
   );

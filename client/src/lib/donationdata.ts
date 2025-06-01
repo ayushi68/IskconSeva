@@ -32,7 +32,7 @@ export interface DonationCategory {
 
 export const donationCategories: DonationCategory[] = [
   {
-    id: "Annadana Seva",
+    id: "annadana-seva",
     title: "Annadana seva",
     subtitle: "",
     description: "",
@@ -40,11 +40,11 @@ export const donationCategories: DonationCategory[] = [
     icon: "food",
     subCategories: [
       {
-        id: "Khichdi Distribution Seva one day",
-        title: "Khichdi Distribution Seva one day",
-        description: "Make a contribution towards tasty Khichdi prasadam served in donnas to all devotees visiting the temple",
+        id: "Khichdi Distribution Seva",
+        title: "Khichdi Distribution Seva",
+        description: "Make a contribution towards tasty Khichdi prasadam served in donnas to all devotees visiting the temple.",
         image: "/images/supplies.jpg",
-        amounts: [501,1100,2100,5100,10000,15000],
+        amounts: [501,1100,2100,5100,10000],
         customAmountAllowed: true
       },
       {
@@ -76,93 +76,21 @@ export const donationCategories: DonationCategory[] = [
         title: "Feast Prasadam Seva for Festival",
         description: "Contribute towards distributing free prasadam to devotees on this occasion.",
         image: "/images/scholarships.jpg",
-        amounts:[11000,21000,31000],
+        amounts:[2500,5000,11000,21000],
         customAmountAllowed: true
       },
       {
-        id: "Feed 100 prasadam meals",
-        title: "Feed 100 prasadam meals",
-        description: "Contribution towards delicious prasadam served in plates to all devotees visiting the temple by sponsoring 100 prasadam plates.",
-        image: "/images/scholarships.jpg",
-        amounts:[1100,2100,3100],
-        customAmountAllowed: true
-      },
-      {
-        id: "Feed 200 prasadam meals",
-        title: "Feed 200 prasadam meals",
-        description: "Contribute for a great cause by helping the section of society by feeding upto 200 people.",
-        image: "/images/scholarships.jpg",
-        amounts:[2100,3100,5100],
-        customAmountAllowed: true
-      },
-      {
-        id: "Feed 300 Prasadam Meals",
-        title: "Feed 300 prasadam meals",
-        description: "Contribute for a great cause by helping the section of society by feeding upto 300 people.",
-        image: "/images/scholarships.jpg",
-        amounts:[3100,5100,7100],
-        customAmountAllowed: true
-      },
-      {
-        id: "Feed 500 Prasadam Meals",
-        title: "Feed 500 prasadam meals",
-        description: "Contribute for a great cause by helping the section of society by feeding upto 500 people.",
-        image: "/images/scholarships.jpg",
-        amounts:[5100,7100,11000],
-        customAmountAllowed: true
-      },
-      {
-        id: "Feed 1000 Prasadam Meals",
-        title: "Feed 1000 prasadam meals",
-        description: "Contribute for a great cause by helping the section of society by feeding upto 1000 people.",
-        image: "/images/scholarships.jpg",
-        amounts:[11000,22000,33000],
-        customAmountAllowed: true
-      },
-      {
-        id: "Feed 3000 Prasadam Meals",
-        title: "Feed 3000 Prasadam Meals",
-        description: "Contribution for delicious prasadam served in plates to all devotees visiting the temple by sponsoring 3000 delicious prasadam plates.",
-        image: "/images/scholarships.jpg",
-        amounts:[25000,50000,75000],
-        customAmountAllowed: true
-      },
-      {
-        id: "Feed more than 3000 Prasadam Meals",
-        title: "Feed more than 3000 Prasadam Meals",
-        description: "Celebrate by Serving all devotees visiting the temple for major Festival Celebrations consitiuting upto 3000 prasadam plates and recieve the blessings of lord in form of Special Mahaprasadam and Spiritual gifts.",
-        image: "/images/scholarships.jpg",
-        amounts:[51000,100000,151000],
-        customAmountAllowed: true
-      },
-      {
-        id: "Annadana served on my special Day",
-        title: "Annadana served on my special Day",
+        id: "Annadana served on my special Day ",
+        title: "Annadana served on my special Day ",
         description: "Celebrate your favourite day (Birthdays, marriage annivarsary or any auspicious day with making a offering for Anndana for the Devotees).",
         image: "/images/scholarships.jpg",
-        amounts:[11000,21000,31000],
-        customAmountAllowed: true
-      },
-      {
-        id: "Major Festival Prasada Seva(one time slot)",
-        title: "Major Festival Prasada Seva(one time slot)",
-        description: "Contribute for one time prasadam seva on occasion of Major festivals and recieve the blessings of lord in form of Special Mahaprasadam and Spiritual gifts",
-        image: "/images/scholarships.jpg",
-        amounts:[2500,5000,7500,10000],
-        customAmountAllowed: true
-      },
-      {
-        id: "Major Festival Prasada Seva(Full day)",
-        title: "Major Festival Prasada Seva(Full day)",
-        description: "Render the Service to their Lordships and for their Devotees by sponsoring a grand feast on occassion of Major festivals and recieve the blessings of lord in form of Special Mahaprasadam and Spiritual gifts",
-        image: "/images/scholarships.jpg",
-        amounts:[11000,31000,51000,100000,200000],
+        amounts:[2500,5000,11000,21000],
         customAmountAllowed: true
       },
     ]
   },
   {
-    id: "Gaushala Seva",
+    id: "Gaushala-Seva",
     title: "Gaushala seva",
     subtitle: "",
     description: "",
@@ -170,43 +98,11 @@ export const donationCategories: DonationCategory[] = [
     icon: "animal",
     subCategories: [
       {
-        id: "Gau Seva(One day feed per cow)",
-        title: "Gau Seva(One day feed per cow)",
+        id: "Gau Seva",
+        title: "Gau Seva",
         description: "Contribute towards feeding a cow for one day",
         image: "/images/supplies.jpg",
-        amounts: [1100],
-        customAmountAllowed: true
-      },
-      {
-        id: "Gau Seva(One month feed per cow)",
-        title: "Gau Seva(One month feed per cow)",
-        description: "Contribute towards feeding a cow for one month",
-        image: "/images/scholarships.jpg",
-        amounts:[31000],
-        customAmountAllowed: true
-      },
-      {
-        id: "One day grass for one cow",
-        title: "One day grass for one cow",
-        description: "Contribute towards feeding grass to the cow for one day",
-        image: "/images/scholarships.jpg",
-        amounts:[500,1100,2500,3500],
-        customAmountAllowed: true
-      },
-      {
-        id: "Gau Daan",
-        title: "Gau Daan",
-        description: "Donate towards the taking care of cow.",
-        image: "/images/scholarships.jpg",
-        amounts:[11000,25000,51000],
-        customAmountAllowed: true
-      },
-      {
-        id: "Gau Puja",
-        title: "Gau Puja",
-        description: "Donate towards worshipping the cows.",
-        image: "/images/scholarships.jpg",
-        amounts:[500,1100,2500,3500],
+        amounts: [750,1500,2500,5000,10000],
         customAmountAllowed: true
       },
       {
@@ -214,161 +110,25 @@ export const donationCategories: DonationCategory[] = [
         title: "Gau Poshan Seva(medical expenses)",
         description: "Contribute towards medical expenses of cows",
         image: "/images/scholarships.jpg",
-        amounts:[500,1500,3500,5100],
-        customAmountAllowed: true
-      },
-      {
-        id: "Gau Seva(Two months feed per cow)",
-        title: "Gau Seva(Two months feed per cow)",
-        description: "Contribute towards feeding a cow for two months",
-        image: "/images/scholarships.jpg",
-        amounts:[1000120001,30001],
-        customAmountAllowed: true
-      },
-      {
-        id: "Gau Seva(Three months feed per cow)",
-        title: "Gau Seva(Three months feed per cow)",
-        description: "Contribute towards feeding a cow for three months",
-        image: "/images/scholarships.jpg",
-        amounts:[15001,30001,45001],
-        customAmountAllowed: true
-      },
-      {
-        id: "Gau Seva(Six month feed per cow)",
-        title: "Gau Seva(Six month feed per cow)",
-        description: "Contribute towards feeding a cow for six months",
-        image: "/images/scholarships.jpg",
-        amounts:[30001,60001,90001],
-        customAmountAllowed: true
-      },
-      {
-        id: "Gau Seva(One year feed per cow)",
-        title: "Gau Seva(One year feed per cow)",
-        description: "Contribute towards feeding a cow for one year",
-        image: "/images/scholarships.jpg",
-        amounts:[60001,120001,180001],
+        amounts:[1500,3500,5100,10000],
         customAmountAllowed: true
       },
       {
         id: "Green grass for all cows for a day",
         title: "Green grass for all cows for a day",
-        description: "Contribute for Feeding the Goshala Cows with a trolley of Green Grass",
+        description: "Contribute for feeding the Cows with a trolley of Green Grass",
         image: "/images/scholarships.jpg",
-        amounts:[1101,2201,3301],
+        amounts:[1101,2101,5101,7101,10101],
         customAmountAllowed: true
       },
       {
-        id: "One month Green grass for all cows",
-        title: "One month Green grass for all cows",
-        description: "Contribute towards feeding grass to all cows for one month",
+        id: "Gau Puja",
+        title: "Gau Puja",
+        description: "Donate towards worshipping the cows.",
         image: "/images/scholarships.jpg",
-        amounts:[33000,66000,100001],
+        amounts:[501,1100,2100],
         customAmountAllowed: true
-      },
-      {
-        id: "Fooder for all cows for a day",
-        title: "Fooder for all cows for a day",
-        description: "Contribute for Feeding the herd with 2 trolley of Green Grass",
-        image: "/images/scholarships.jpg",
-        amounts:[4001,8001,12001],
-        customAmountAllowed: true
-      },
-      {
-        id: "First Aid Kit:",
-        title: "First Aid Kit:/cow",
-        description: "Donate towards arranging first aid medical kits for curing minimal health issues of Goshala Herds!",
-        image: "/images/scholarships.jpg",
-        amounts:[300],
-        customAmountAllowed: true
-      },
-      {
-        id: "Gynaecological Kit:",
-        title: "Gynaecological Kit:",
-        description: "Donate towards equipments and Vetenary facilities and facilities for calf of mother Cow!",
-        image: "/images/scholarships.jpg",
-        amounts:[2000],
-        customAmountAllowed: true
-      },
-      {
-        id: "OPD Kit:",
-        title: "OPD Kit:",
-        description: "Donation towards opd kits containing (oxygen supplying equipments, general fever and weakness treatment medicines).",
-        image: "/images/scholarships.jpg",
-        amounts:[1500],
-        customAmountAllowed: true
-      },
-      {
-        id: "Routine Check-up Fees:",
-        title: "Routine Check-up Fees:",
-        description: "Contribute for monthly chekup of cows by Veternary professionals and related medicinal facilities.",
-        image: "/images/scholarships.jpg",
-        amounts:[1500],
-        customAmountAllowed: true
-      },
-      {
-        id: "Yearly Treatment Cost:",
-        title: "Yearly Treatment Cost:",
-        description: "Contribute for monthly chekup by Veternary professionals and related medicinal facilities.",
-        image: "/images/scholarships.jpg",
-        amounts:[180000],
-        customAmountAllowed: true
-      },
-      {
-        id: "Routine Check-up Fees:",
-        title: "Routine Check-up Fees:",
-        description: "Contribute for monthly general chekup of cows by Veternary professionals for without medicines",
-        image: "/images/scholarships.jpg",
-        amounts:[1500],
-        customAmountAllowed: true
-      },
-      {
-        id: "Disease/InjuryTreatment Cost:",
-        title: "Disease/InjuryTreatment Cost:",
-        description: "Contribute to help equipping a mother cow with all the facilities she needs to overcome any infections or injuries",
-        image: "/images/scholarships.jpg",
-        amounts:[15000],
-        customAmountAllowed: true
-      },
-      {
-        id: "Jaggery 40 kg",
-        title: "Jaggery 40 kg",
-        description: "Contriute for feedind the herd with full of nutritious fooder containing jaggery",
-        image: "/images/scholarships.jpg",
-        amounts:[3201],
-        customAmountAllowed: true
-      },
-      {
-        id: "Feed 5 cows per day",
-        title: "Feed 5 cows per day",
-        description: "Contribution towards feeding a group containing 5 cows with dry cake seeds.",
-        image: "/images/scholarships.jpg",
-        amounts:[2501],
-        customAmountAllowed: true
-      },
-      {
-        id: "Adopt a cow for a year",
-        title: "Adopt a cow for a year",
-        description: "Donate towards nuturing and taking care of a mother cow who fullfills all our daily needs selflessly!",
-        image: "/images/scholarships.jpg",
-        amounts:[25000,50001,75000],
-        customAmountAllowed: true
-      },
-      {
-        id: "Adopt 1 Calf for Its Lifetime",
-        title: "Adopt 1 Calf for Its Lifetime",
-        description: "Chance to have special mercy of the lord and mother cow by adopting a Calf and taking care for its nurturing for entire lifetime.",
-        image: "/images/scholarships.jpg",
-        amounts:[360001],
-        customAmountAllowed: true
-      },
-      {
-        id: "Adopt 1 Cow for Its Lifetime",
-        title: "Adopt 1 Cow for Its Lifetime",
-        description: "Grab the best of their lordhips and mother cow's blessing unto you and your family by adopting a mother cow.",
-        image: "/images/scholarships.jpg",
-        amounts:[360001],
-        customAmountAllowed: true
-      },
+      }
     ]
   },
   {
@@ -380,7 +140,7 @@ export const donationCategories: DonationCategory[] = [
     icon: "food",
   },
   {
-    id: "Sri Vigraha Seva",
+    id: "Sri-Vigraha-Seva",
     title: "Sri Vigraha Seva",
     subtitle: "",
     description: "Sri Vigraha Seva - Deity Worship",
@@ -582,7 +342,7 @@ export const donationCategories: DonationCategory[] = [
     ]
   },
   {
-    id: "Radharani's Kitchen Seva",
+    id: "Radharani's-Kitchen-Seva",
     title: "Radharani's Kitchen Seva",
     subtitle: "",
     description: "",
@@ -768,7 +528,7 @@ export const donationCategories: DonationCategory[] = [
     ]
   },
   {
-    id: "Rajbhog Seva",
+    id: "Rajbhog-Seva",
     title: "Rajbhog Seva",
     subtitle: "",
     description: "",
@@ -794,7 +554,7 @@ export const donationCategories: DonationCategory[] = [
     ]
   },
   {
-    id: "General Donation",
+    id: "General-Donation",
     title: "General Donation",
     subtitle: "",
     description: "",
@@ -803,7 +563,7 @@ export const donationCategories: DonationCategory[] = [
     amount:[101,1101,2101,5101,11001]
   },
   {
-    id: "Offline Donation",
+    id: "Offline-Donation",
     title: "Offline Donation",
     subtitle: "",
     description: "",
@@ -811,7 +571,7 @@ export const donationCategories: DonationCategory[] = [
     icon: "food",
   },
   {
-    id: "Become a Life Patron",
+    id: "Become-a-Life-Patron",
     title: "Become a Life Patron",
     subtitle: "",
     description: "",
@@ -861,375 +621,319 @@ export const donationCategories: DonationCategory[] = [
     ]
   },
   {
-    id: " Special Seva",
+        id: "Sadhu-Seva",
+        title: "Sadhu Seva",
+        subtitle: "",
+        description: "",
+        image: "/images/supplies.jpg",
+        icon: "food",
+        subCategories: [
+          {
+            id: "Vaishnav Bhoj Seva for one time (either Break fast or Lunch or Dinner)",
+            title: "Vaishnav Bhoj Seva for one time (either Break fast or Lunch or Dinner)",
+            description: "Take privilege of serving and recieving the mercy of Sadhus by sponsoring a Vaishnava bhoj (contains Normal Meal ,Daal, Chawal + 1 Vegie)",
+            image: "/images/scholarships.jpg",
+            amounts: [1500,3501,5100],
+            customAmountAllowed: true
+          },
+          {
+            id: "Dwadashi Vaishnav Bhoj Seva",
+            title: "Dwadashi Vaishnav Bhoj Seva",
+            description: "Take privilege of serving and recieving the mercy of Sadhus by sponsoring a Vaishnava bhoj (Paneer Meal + Special Sweets + Snacks)",
+            image: "/images/scholarships.jpg",
+            amounts: [1500,3501,5100],
+            customAmountAllowed: true
+          },
+          {
+            id: "Vaishnav Bhoj Seva one time (either Break fast or Lunch or Dinner) for a week seva",
+            title: "Vaishnav Bhoj Seva one time (either Break fast or Lunch or Dinner) for a week seva",
+            description: "Take privilege of serving and recieving the mercy of Sadhus by sponsoring a Vaishnava bhoj (contains Normal Meal ,Daal, Chawal + 1 Vegie)",
+            image: "/images/scholarships.jpg",
+            amounts: [21001],
+            customAmountAllowed: true
+          },
+          {
+            id: "Vaishnav Preeti Bhoj Seva (either Break fast or Lunch or Dinner) a day seva",
+            title: "Vaishnav Preeti Bhoj Seva (either Break fast or Lunch or Dinner) a day seva",
+            description: "Take privilege of serving and recieving the mercy of Sadhus by sponsoring a Vaishnava bhoj (Normal Meal + 1 Sweet + 2 special Subji)",
+            image: "/images/scholarships.jpg",  
+            amounts: [12501],
+            customAmountAllowed: true
+          },
+          {
+            id: "Vaishnav Bhoj Seva one time",
+            title: "Vaishnav Bhoj Seva one time",
+            description: "Take privilege of serving and recieving the mercy of Sadhus by sponsoring a Vaishnava bhoj (contains Normal Meal ,Daal, Chawal + 1 Vegie)",
+            image: "/images/scholarships.jpg",
+            amounts: [5001],
+            customAmountAllowed: true
+          }
+        ]
+  },
+  {
+  id: "Ekadashi-Seva",
+  title: "Ekadashi Seva",
+  subtitle: "",
+  description: "",
+  image: "/images/supplies.jpg",
+  icon: "food",
+  subCategories: [
+    {
+      id: "Ekadashi-Deity-Abhishek-Seva",
+      title: "Ekadashi Deity Abhishek Seva",
+      description: "Sponsor the sacred abhishek ceremony for the deities on Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [1100, 2100, 3101, 5101],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Puja-Archana-Seva",
+      title: "Ekadashi Puja Archana Seva",
+      description: "Sponsor the puja archana ceremony for the deities on Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [1100, 2100],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Arati-Seva",
+      title: "Ekadashi Arati Seva",
+      description: "Sponsor the arati ceremony for the deities on Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [501, 1100],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Deity-Tulasi-Garland-Seva",
+      title: "Ekadashi Deity Tulasi Garland Seva",
+      description: "Sponsor Tulasi garlands for the deities on Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [1100, 2100],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Deity-Tulasi-Archana-Seva",
+      title: "Ekadashi Deity Tulasi Archana Seva",
+      description: "Sponsor Tulasi archana for the deities on Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [501, 1100, 2100],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Chandan-Seva",
+      title: "Ekadashi Chandan Seva",
+      description: "Sponsor chandan (sandalwood) seva for the deities on Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [501, 1100],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Charnamrita-Seva",
+      title: "Ekadashi Charnamrita Seva",
+      description: "Sponsor charnamrita seva for the deities on Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [501, 1100],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Sri-Vigraha-Seva",
+      title: "Ekadashi Sri Vigraha Seva",
+      description: "Sponsor Sri Vigraha seva on Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [1500, 3000, 5000, 10000],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Deity-Fruit-Bhog-Seva",
+      title: "Ekadashi Deity Fruit Bhog Seva (Full Day)",
+      description: "Sponsor fruit offerings for the deities throughout Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [1100, 2100, 3101],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Deity-Rajbhog-Seva",
+      title: "Ekadashi Deity Rajbhog Seva",
+      description: "Sponsor the special Rajbhog offering for the deities on Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [1501, 2100, 3500],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Full-Day-Deity-Bhog-Seva",
+      title: "Ekadashi Full Day Deity Bhog Seva",
+      description: "Sponsor all bhoga offerings for the deities throughout Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [2100, 3100, 5100, 10000],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Prasadam-Distribution-Seva",
+      title: "Ekadashi Prasadam Distribution Seva",
+      description: "Sponsor prasadam distribution to devotees on Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [501, 1500, 3500, 5001, 10000],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Gau-Seva",
+      title: "Ekadashi Gau Seva",
+      description: "Sponsor service to cows on the auspicious day of Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [1100, 2100, 3100, 5100],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Gita-Daan-Seva",
+      title: "Ekadashi Gita Daan Seva",
+      description: "Sponsor distribution of Bhagavad Gitas on Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [1100, 2100, 3100, 5101],
+      customAmountAllowed: true
+    },
+    {
+      id: "Ekadashi-Vaishnav-Bhoj-Seva",
+      title: "Ekadashi Vaishnav Bhoj Seva",
+      description: "Sponsor meals for Vaishnavas on the auspicious day of Ekadashi",
+      image: "/images/scholarships.jpg",
+      amounts: [1500, 3500, 5500],
+      customAmountAllowed: true
+    }
+  ]
+},
+{
+  id: "Gyaan-Daan-Seva",
+  title: "Gyaan Daan Seva",
+  subtitle: "",
+  description: "",
+  image: "/images/books.jpg",
+  icon: "book",
+  subCategories: [
+    {
+      id: "Bhagavad-Gita-Prachara-English",
+      title: "Bhagavad Gita Prachara - English",
+      description: "Sponsor distribution of English Bhagavad Gitas (1,5,11,21,51 copies)",
+      image: "/images/scholarships.jpg",
+      amounts: [550, 2750, 6050, 11550, 28050],
+      customAmountAllowed: true
+    },
+    {
+      id: "Bhagavad-Gita-Prachara-Hindi",
+      title: "Bhagavad Gita Prachara - Hindi",
+      description: "Sponsor distribution of Hindi Bhagavad Gitas (1,5,11,21,51 copies)",
+      image: "/images/scholarships.jpg",
+      amounts: [400, 2000, 4400, 8400, 20400],
+      customAmountAllowed: true
+    },
+    {
+      id: "Medium-Book-Set-Distribution-Seva",
+      title: "Medium Book Set Distribution Seva",
+      description: "Sponsor distribution of medium book sets",
+      image: "/images/scholarships.jpg",
+      amounts: [1101, 2101, 3101, 5101],
+      customAmountAllowed: true
+    },
+    {
+      id: "Small-Book-Set-Distribution-Seva",
+      title: "Small Book Set Distribution Seva",
+      description: "Sponsor distribution of small book sets",
+      image: "/images/scholarships.jpg",
+      amounts: [501, 1001, 2101, 5101],
+      customAmountAllowed: true
+    },
+    {
+      id: "Krishna-Book-Prachara-English",
+      title: "Krishna Book Prachara - English",
+      description: "Sponsor distribution of English Krishna Books (1,5,11,21,51 copies)",
+      image: "/images/scholarships.jpg",
+      amounts: [550, 2750, 6050, 11550, 28050],
+      customAmountAllowed: true
+    },
+    {
+      id: "Krishna-Book-Prachara-Hindi",
+      title: "Krishna Book Prachara - Hindi",
+      description: "Sponsor distribution of Hindi Krishna Books (1,5,11,21,51 copies)",
+      image: "/images/scholarships.jpg",
+      amounts: [500, 2500, 5500, 10500, 25500],
+      customAmountAllowed: true
+    },
+    {
+      id: "Srimad-Bhagvatam-Prachara-English",
+      title: "Srimad Bhagvatam Prachara - 18 volume set (English)",
+      description: "Sponsor distribution of complete English Srimad Bhagavatam sets",
+      image: "/images/scholarships.jpg",
+      amounts: [10000, 20000, 30000],
+      customAmountAllowed: true
+    },
+    {
+      id: "Srimad-Bhagvatam-Prachara-Hindi",
+      title: "Srimad Bhagvatam Prachara - 18 volume set (Hindi)",
+      description: "Sponsor distribution of complete Hindi Srimad Bhagavatam sets",
+      image: "/images/scholarships.jpg",
+      amounts: [8500, 17000, 25500],
+      customAmountAllowed: true
+    }
+  ]
+},
+{
+  id: "Gita-Daan",
+  title: "Gita Daan",
+  subtitle: "",
+  description: "Sponsor the distribution of Bhagavad Gita scriptures to spread divine knowledge",
+  image: "/images/gita.jpg",
+  icon: "book",
+  subCategories: [
+    {
+      id: "Bhagavad-Gita-Prachara-English",
+      title: "Bhagavad Gita Prachara - English",
+      description: "Sponsor distribution of English Bhagavad Gitas (1,5,11,21,51 copies)",
+      image: "/images/english-gita.jpg",
+      amounts: [550, 2750, 6050, 11550, 28050],
+      customAmountAllowed: true,
+    },
+    {
+      id: "Bhagavad-Gita-Prachara-Hindi",
+      title: "Bhagavad Gita Prachara - Hindi",
+      description: "Sponsor distribution of Hindi Bhagavad Gitas (1,5,11,21,51 copies)",
+      image: "/images/hindi-gita.jpg",
+      amounts: [400, 2000, 4400, 8400, 20400],
+      customAmountAllowed: true
+    }
+  ]
+},
+{
+  id: "Bhagavatam-Daan",
+  title: "Bhagavatam Daan",
+  subtitle: "",
+  description: "Sponsor the distribution of Srimad Bhagavatam sets to spread the divine wisdom of this sacred scripture",
+  image: "/images/bhagavatam.jpg",
+  icon: "scripture",
+  subCategories: [
+    {
+      id: "Srimad-Bhagavatam-English-Set",
+      title: "Srimad Bhagavatam - 18 Volume Set (English)",
+      description: "Contribute towards disseminating the complete English Srimad Bhagavatam sets containing the spotless Purana for the ultimate benefit of all people",
+      image: "/images/bhagavatam-english.jpg",
+      amounts: [10000, 20000, 30000],
+      customAmountAllowed: false,
+    },
+    {
+      id: "Srimad-Bhagavatam-Hindi-Set",
+      title: "Srimad Bhagavatam - 18 Volume Set (Hindi)",
+      description: "Contribute towards disseminating the complete Hindi Srimad Bhagavatam sets containing the Amalam Puranam for the enlightenment of society",
+      image: "/images/bhagavatam-hindi.jpg",
+      amounts: [8500, 17000, 25500],
+      customAmountAllowed: false,
+    }
+  ]
+},
+  {
+    id: " Special-Seva",
     title: " Special Seva",
     subtitle: "",
     description: "Sri Vigraha Seva - Deity Worship",
     image: "/annadana.jpg",
     icon: "food",
     subCategories: [
-      {
-        id: "Sadhu Seva",
-        title: "Sadhu Seva",
-        description: "",
-        image: "/images/supplies.jpg",
-        superSubCategories: [
-          {
-            id: "Vaishnav Bhoj Seva for one time (either Break fast or Lunch or Dinner)",
-            title: "Vaishnav Bhoj Seva for one time (either Break fast or Lunch or Dinner)",
-            description: "Take privilege of serving and recieving the mercy of Sadhus by sponsoring a Vaishnava bhoj (contains Normal Meal ,Daal, Chawal + 1 Vegie)",
-            amounts: [1500,3501,5100],
-            customAmountAllowed: false
-          },
-          {
-            id: "Dwadashi Vaishnav Bhoj Seva",
-            title: "Dwadashi Vaishnav Bhoj Seva",
-            description: "Take privilege of serving and recieving the mercy of Sadhus by sponsoring a Vaishnava bhoj (Paneer Meal + Special Sweets + Snacks)",
-            amounts: [1500,3501,5100],
-            customAmountAllowed: false
-          },
-          {
-            id: "Vaishnav Bhoj Seva one time (either Break fast or Lunch or Dinner) for a week seva",
-            title: "Vaishnav Bhoj Seva one time (either Break fast or Lunch or Dinner) for a week seva",
-            description: "Take privilege of serving and recieving the mercy of Sadhus by sponsoring a Vaishnava bhoj (contains Normal Meal ,Daal, Chawal + 1 Vegie)",
-            amounts: [21001],
-            customAmountAllowed: false
-          },
-          {
-            id: "Vaishnav Preeti Bhoj Seva (either Break fast or Lunch or Dinner) a day seva",
-            title: "Vaishnav Preeti Bhoj Seva (either Break fast or Lunch or Dinner) a day seva",
-            description: "Take privilege of serving and recieving the mercy of Sadhus by sponsoring a Vaishnava bhoj (Normal Meal + 1 Sweet + 2 special Subji)",
-            amounts: [12501],
-            customAmountAllowed: false
-          },
-          {
-            id: "Vaishnav Bhoj Seva one time",
-            title: "Vaishnav Bhoj Seva one time",
-            description: "Take privilege of serving and recieving the mercy of Sadhus by sponsoring a Vaishnava bhoj (contains Normal Meal ,Daal, Chawal + 1 Vegie)",
-            amounts: [5001],
-            customAmountAllowed: false
-          },
-        ]
-      },
-      {
-        id: "Ekadashi Seva",
-        title: "Ekadashi Seva",
-        description: "",
-        image: "/images/supplies.jpg",
-        superSubCategories: [
-          {
-            id: "Ekadashi DeIty Abhishek Seva",
-            title: "Ekadashi DeIty Abhishek Seva",
-            description: "",
-            amounts: [1100,2100,3101],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Puja Archana Seva",
-            title: "Ekadashi Puja Archana Seva",
-            description: "",
-            amounts: [1100,2100],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Arati Seva",
-            title: "Ekadashi Arati Seva",
-            description: "",
-            amounts: [501,1100],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Deity Tulasi Garland Seva",
-            title: "Ekadashi Deity Tulasi Garland Seva",
-            description: "",
-            amounts: [1100,2100],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Deity Tulasi Archana Seva",
-            title: "Ekadashi Deity Tulasi Archana Seva",
-            description: "",
-            amounts: [501,1100],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Chandan Seva",
-            title: "Ekadashi Chandan Seva",
-            description: "",
-            amounts: [501,1100],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Charnamrita Seva",
-            title: "Ekadashi Charnamrita Seva",
-            description: "",
-            amounts: [501],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Sri Vigraha Seva",
-            title: "Ekadashi Sri Vigraha Seva",
-            description: "",
-            amounts: [1500,3000,5000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Deity Fruit Bhog Seva(Full Day)",
-            title: "Ekadashi Deity Fruit Bhog Seva(Full Day)",
-            description: "",
-            amounts: [1100,2100,3101],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Deity Rajbhog Seva",
-            title: "Ekadashi Deity Rajbhog Seva",
-            description: "",
-            amounts: [1501,2100,3500],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Full Day Deity Bhog Seva",
-            title: "Ekadashi Full Day Deity Bhog Seva",
-            description: "",
-            amounts: [2100,3100,5100],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Gita Daan Seva",
-            title: "Ekadashi Gita Daan Seva",
-            description: "",
-            amounts: [1100,2100,3100,5101],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Vaishnav Bhoj Seva",
-            title: "Ekadashi Vaishnav Bhoj Seva",
-            description: "",
-            amounts: [1500,3500,5500],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Prasadam Distribution Seva",
-            title: "Ekadashi Prasadam Distribution Seva",
-            description: "",
-            amounts: [501,1500,3500,5001],
-            customAmountAllowed: false
-          },
-          {
-            id: "Ekadashi Gau Seva",
-            title: "Ekadashi Gau Seva",
-            description: "",
-            amounts: [1100,2100,3100,5100],
-            customAmountAllowed: false
-          }
-        ]
-      },
-      {
-        id: "Gyaan Daan Seva",
-        title: "Gyaan Daan Seva",
-        description: "",
-        image: "/images/supplies.jpg",
-        superSubCategories: [
-          {
-            id: "Srimad Bhagvatam Prachara - 18 volume set(English)",
-            title: "Srimad Bhagvatam Prachara - 18 volume set(English)",
-            description: "Contribute towards disseminating the knowledge contained in the Amalam Puranam, Srimad Bhagavatam and other Sastras for the ultimate benefit of all people.",
-            amounts: [10000,20000,30000,50000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Srimad Bhagvatam Prachara - 18 volume set(Hindi)",
-            title: "Srimad Bhagvatam Prachara - 18 volume set(Hindi)",
-            description: "Contribute towards disseminating the knowledge contained in the Amalam Puranam, Srimad Bhagavatam and other Sastras for the ultimate benefit of all people.",
-            amounts: [8500,17000,25500,51000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Bhagavad Gita Prachara - English (1,11,21,51,108 nos)",
-            title: "Bhagavad Gita Prachara - English (1,11,21,51,108 nos)",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people.",
-            amounts: [450,4950,9450,22950,48600],
-            customAmountAllowed: false
-          },
-          {
-            id: "Bhagavad Gita Prachara - English",
-            title: "Bhagavad Gita Prachara - English",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people.",
-            amounts: [8400],
-            customAmountAllowed: false
-          },
-          {
-            id: "Bhagavad Gita Prachara - English(51 nos)",
-            title: "Bhagavad Gita Prachara - English(51 nos)",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people",
-            amounts: [20501],
-            customAmountAllowed: false
-          },
-          {
-            id: "Bhagavad Gita Prachara - English(108 nos)",
-            title: "Bhagavad Gita Prachara - English(108 nos)",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people.",
-            amounts: [43501],
-            customAmountAllowed: false
-          },
-          {
-            id: "Bhagavad Gita Prachara - Hindi (1,11,21,51,108 nos)",
-            title: "Bhagavad Gita Prachara - Hindi (1,11,21,51,108 nos)",
-            description: "Bhagavad Gita Prachara - Hindi (1,11,21,51,108 nos)",
-            amounts: [380,4180,7980,19980,41040],
-            customAmountAllowed: false
-          },
-          {
-            id: "Bhagavad Gita Prachara - Hindi(21 nos)",
-            title: "Bhagavad Gita Prachara - Hindi(21 nos)",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people.",
-            amounts: [7350],
-            customAmountAllowed: false
-          },
-          {
-            id: "Bhagavad Gita Prachara - Hindi(51 nos)",
-            title: "Bhagavad Gita Prachara - Hindi(51 nos)",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people",
-            amounts: [380,4180,7980,19980,41040],
-            customAmountAllowed: false
-          },
-          {
-            id: "Bhagavad Gita Prachara - Hindi(108 nos)",
-            title: "Bhagavad Gita Prachara - Hindi(108 nos)",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people.",
-            amounts: [37800],
-            customAmountAllowed: false
-          },
-          {
-            id: "Medium Book Set Distribution Seva (11 books per box)",
-            title: "Medium Book Set Distribution Seva (11 books per box)",
-            description: "Contribute towards disseminating the Vedic Knowledge contained in the Holy Scriptures like Bhagavad-gita and other Sastras for the ultimate benefit of all people.",
-            amounts: [1101,2101,3101],
-            customAmountAllowed: false
-          },
-          {
-            id: "Small Book Set Distribution Seva (11 books per box)",
-            title: "Small Book Set Distribution Seva (11 books per box)",
-            description: "Contribute towards disseminating the Vedic Knowledge contained in the Holy Scriptures like Bhagavad-gita and other Sastras for the ultimate benefit of all people",
-            amounts: [501,1001,2101],
-            customAmountAllowed: false
-          },
-          {
-            id: "Bhagavad Gita Prachara - English (21 books in a box)",
-            title: "Bhagavad Gita Prachara - English (21 books in a box)",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita for the ultimate benefit of all people.",
-            amounts: [8500],
-            customAmountAllowed: false
-          },
-          {
-            id: "Bhagavad Gita Prachara - Hindi (21 books in a box)",
-            title: "Bhagavad Gita Prachara - Hindi (21 books in a box)",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita for the ultimate benefit of all people.",
-            amounts: [4100],
-            customAmountAllowed: false
-          },
-          {
-            id: "Krishna Book Prachara - English (21 books in a box)",
-            title: "Krishna Book Prachara - English (21 books in a box)",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita for the ultimate benefit of all people.",
-            amounts: [10500],
-            customAmountAllowed: false
-          },
-          {
-            id: "Krishna Book Prachara - Hindi (21 books in a box)",
-            title: "Krishna Book Prachara - Hindi (21 books in a box)",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita for the ultimate benefit of all people.",
-            amounts: [9450],
-            customAmountAllowed: false
-          },
-          {
-            id: "Srimad Bhagavatam Prachara 18 volume set - English",
-            title: "Srimad Bhagavatam Prachara 18 volume set - English",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita for the ultimate benefit of all people.",
-            amounts: [10000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Srimad Bhagavatam Prachara 18 volume set - Hindi",
-            title: "Srimad Bhagavatam Prachara 18 volume set - Hindi",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita for the ultimate benefit of all people.",
-            amounts: [8500],
-            customAmountAllowed: false
-          }
-        ]
-      },
-      {
-        id: "Gita Daan",
-        title: "Gita Daan",
-        description: "",
-        image: "/images/supplies.jpg",
-        superSubCategories: [
-          {
-            id: "Bhagavad Gita Prachara - Hindi (1,11,21,51,108 nos)",
-            title: "Bhagavad Gita Prachara - Hindi (1,11,21,51,108 nos)",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people",
-            amounts: [380,4180,7980,19980,41040],
-            customAmountAllowed: false
-          },
-          {
-            id: "Bhagavad Gita Prachara - English (1,11,21,51,108 nos)",
-            title: "Bhagavad Gita Prachara - English (1,11,21,51,108 nos)",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people",
-            amounts: [450,4950,9450,22950,],
-            customAmountAllowed: false
-          },
-          {
-            id: "Gita Daan - 32 Books",
-            title: "Gita Daan - 32 Book",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people.",
-            amounts: [6720],
-            customAmountAllowed: false
-          },
-          {
-            id: "Gita Daan - 64 Books",
-            title: "Gita Daan - 64 Book",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people",
-            amounts: [13440],
-            customAmountAllowed: false
-          },
-          {
-            id: "Gita Daan - 96 Books",
-            title: "Gita Daan - 96 Book",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people.",
-            amounts: [20160],
-            customAmountAllowed: false
-          },
-          {
-            id: "Gita Daan - 160 Books",
-            title: "Gita Daan - 160 Book",
-            description: "Contribute towards disseminating the knowledge contained in the Bhagavad-gita and other Sastras for the ultimate benefit of all people.",
-            amounts: [33600],
-            customAmountAllowed: false
-          },
-        ]
-      },
-      {
-        id: "Bhagavatam Daan",
-        title: "Bhagavatam Daan",
-        description: "",
-        image: "/images/supplies.jpg",
-        superSubCategories: [
-            {
-                id: "Srimad Bhagvatam Prachara - 18 volume set(English)",
-                title: "Srimad Bhagvatam Prachara - 18 volume set(English)",
-                description: "Contribute towards disseminating the knowledge contained in the Amalam Puranam, Srimad Bhagavatam and other Sastras for the ultimate benefit of all people.",
-                amounts: [10000,20000,30000,50000],
-                customAmountAllowed: false
-            },
-            {
-                id: "Srimad Bhagvatam Prachara - 18 volume set(Hindi)",
-                title: "Srimad Bhagvatam Prachara - 18 volume set(Hindi)",
-                description: "Contribute towards disseminating the knowledge contained in the Amalam Puranam, Srimad Bhagavatam and other Sastras for the ultimate benefit of all people.",
-                amounts: [8500,17000,25500,51000],
-                customAmountAllowed: false
-            }
-        ]
-      },
       {
         id: "Sri Narasimha Yajna Seva ",
         title: "Sri Narasimha Yajna Seva ",
@@ -1245,7 +949,7 @@ export const donationCategories: DonationCategory[] = [
     ]
   },
   {
-    id: " Youth Empowerment Seva",
+    id: " Youth-Empowerment-Seva",
     title: " Youth Empowerment Seva",
     subtitle: "",
     description: "",
@@ -1319,144 +1023,784 @@ export const donationCategories: DonationCategory[] = [
     ]
   },
   {
-    id: " Special Puja",
+    id: " Special-Puja",
     title: " Special Puja",
     subtitle: "",
     description: "",
     image: "/annadana.jpg",
     icon: "food",
   },
-  {
-    id: " Festival Seva",
-    title: " Festival Seva",
-    subtitle: "",
-    description: "",
-    image: "/annadana.jpg",
-    icon: "food",
-    subCategories: [
-      {
-        id: "Sri Gaura Purnima",
-        title: "Sri Gaura Purnima",
-        description: "",
-        image: "/images/supplies.jpg",
-        superSubCategories: [
-          {
-            id: "Poshak Seva",
-            title: "Poshak Seva",
-            description: "Of Their Lordships is adorned with gorgeous, new outfits and jewellery on the occasion of His appearance. Here is an opportunity to sponsor Vastra-Abharana Seva for Their Lordships.",
-            amounts: [2500,5000,10000,15000,25000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Abharan Seva",
-            title: "Abharan Seva",
-            description: "Of Their Lordships is adorned with gorgeous, new outfits and jewellery on the occasion of His appearance. Here is an opportunity to sponsor Vastra-Abharana Seva for Their Lordships",
-            amounts: [2500,5000,10000,15000,25000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Maha Abhisheka Seva",
-            title: "Maha Abhisheka Seva",
-            description: "A grand abhishekam is performed for Sri Sri Nitai Gauranga. Accompanied by the chanting of Vedic mantras the Lord is bathed with various auspicious items. Sponsor these various items for the pleasure of the Lord.",
-            amounts: [3500,5001,11000,21000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Pushpalankara Seva",
-            title: "Pushpalankara Seva",
-            description: "Donate towards decorating the temple hall & Altar with varities of flowers.Sponsor colourful and fragrant flowers to the lotus feet of Lord Chaitanya Mahaprabhu for this special Pushpalankara seva.",
-            amounts: [1100,2100,5100],
-            customAmountAllowed: false
-          },
-          {
-            id: "Deity Garlands Seva",
-            title: "Deity Garlands Seva",
-            description: "Donate towards decorating the Deities of Sri Sri Gaura Nitai, Sri Sri Radha Krishnachnadra with beautiful flower garlands.",
-            amounts: [1500,3000,5000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Vishesha Naivedya Seva",
-            title: "Vishesha Naivedya Seva",
-            description: "Contribute towards the special naivedya offering made to Lord Chaitanya Mahaprabhu on this day.",
-            amounts: [1100,2500,3500,5000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Chappan Bhog Seva",
-            title: "Chappan Bhog Seva",
-            description: "Contribute towards the Chappan Bhog offering made to Lord Chaitanya Mahaprabhu on this day",
-            amounts: [1500,2500,3500,5000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Phal Seva",
-            title: "Phal Seva",
-            description: "Donate towards Abhishekam of Their Lordships Sri Sri Nitai Gauranga with fruits",
-            amounts: [501,1000,1500,2000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Tulasi Daan Seva",
-            title: "Tulasi Daan Seva",
-            description: "Donate towards Deity Worship with Tulasi",
-            amounts: [251,501,1001,2000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Annadana Seva",
-            title: "Annadana Seva",
-            description: "Sponsor the distribution of prasadam during this auspicious day in the name of your family or loved ones.",
-            amounts: [501,1100,2100,5100,10000,15000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Gau Seva",
-            title: "Gau Seva",
-            description: "Donate towards maintainence of cow",
-            amounts: [750,1500,3000,5000,10000,15000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Other Amount",
-            title: "Other Amount",
-            description: "Any amount of donation towards the festival is welcomed",
-            amounts: [],
-            customAmountAllowed: false
-          },
-        ]
-      },
-      {
-        id: "Sri Rama Navami",
-        title: "Sri Rama Navami",
-        description: "",
-        image: "/images/supplies.jpg",
-        superSubCategories: [
-          {
-            id: "Vishesha Alankara Seva",
-            title: "Vishesha Alankara Seva",
-            description: "Of Their Lordships is adorned with gorgeous, new outfits and jewellery on the occasion of His appearance. Here is an opportunity to sponsor Vastra-Abharana Seva for Their Lordships.",
-            amounts: [2500,5000,10000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Rama Taraka Yagna Seva",
-            title: "Rama Taraka Yagna Seva",
-            description: "Donate towards Yagna of Sri Sri Sita Rama Laxman Hanuman",
-            amounts: [3500,5000,10000],
-            customAmountAllowed: false
-          },
-          {
-            id: "Pushpalankara Seva",
-            title: "Pushpalankara Seva",
-            description: "Donate towards decorating the temple hall & Altar with varities of flowers.",
-            amounts: [1100,2100,5100],
-            customAmountAllowed: false
-          },
-        ]
+{
+  id: "sri-gaura-purnima",
+  title: "Sri Gaura Purnima",
+  subtitle: "",
+  description: "Celebrate the divine appearance of Lord Chaitanya Mahaprabhu with special services and offerings",
+  image: "/festivals/gaura-purnima.jpg",
+  icon: "festival",
+  subCategories: [
+    {
+      id: "poshak-seva",
+      title: "Poshak Seva",
+      description: "Contribute towards the divine attire of the deities",
+      image: "/images/seva.jpg",
+      amounts: [2500, 5000, 10000, 15000, 25000],
+      customAmountAllowed: true
+    },
+    {
+      id: "abharan-seva",
+      title: "Abharan Seva",
+      description: "Offer ornaments for the deities",
+      image: "/images/seva.jpg",
+      amounts: [2500, 5000, 10000, 15000, 25000],
+      customAmountAllowed : true
+    },
+    {
+      id: "maha-abhisheka-seva",
+      title: "Maha Abhisheka Seva",
+      description: "Participate in the grand ceremonial bathing of the deities",
+      image: "/images/seva.jpg",
+      amounts: [3500, 5001, 11000, 21000],
+      customAmountAllowed: true
+    },
+    {
+      id: "pushpalankara-seva",
+      title: "Pushpalankara Seva",
+      description: "Offer floral decorations for the deities",
+      image: "/images/seva.jpg",
+      amounts: [1100, 2100, 5100],
+      customAmountAllowed: true
+    },
+    {
+      id: "deity-garlands-seva",
+      title: "Deity Garlands Seva",
+      description: "Offer beautiful garlands for the deities",
+      image: "/images/seva.jpg",
+      amounts: [1500, 3000, 5000],
+      customAmountAllowed: true
+    },
+    {
+      id: "vishesha-naivedya-seva",
+      title: "Vishesha Naivedya Seva",
+      description: "Sponsor special food offerings for the deities",
+      image: "/images/seva.jpg",
+      amounts: [1100, 2500, 3500, 5000],
+      customAmountAllowed: true
+    },
+    {
+      id: "chappan-bhog-seva",
+      title: "Chappan Bhog Seva",
+      description: "Sponsor the 56-item special offering",
+      image: "/images/seva.jpg",
+      amounts: [1500, 2500, 3500, 5000],
+      customAmountAllowed: true
+    },
+    {
+      id: "phal-seva",
+      title: "Phal Seva",
+      description: "Offer fruits to the deities",
+      image: "/images/seva.jpg",
+      amounts: [501, 1000, 1500, 2000],
+      customAmountAllowed: true
+    },
+    {
+      id: "tulasi-daan-seva",
+      title: "Tulasi Daan Seva",
+      description: "Contribute to Tulasi Devi worship",
+      image: "/images/seva.jpg",
+      amounts: [251, 501, 1001, 2000],
+      customAmountAllowed: true
+    },
+    {
+      id: "annadana-seva",
+      title: "Annadana Seva",
+      description: "Sponsor food distribution to devotees",
+      image: "/images/seva.jpg",
+      amounts: [501, 1100, 2100, 5100, 10000, 15000],
+      customAmountAllowed: true
+    },
+    {
+      id: "gau-seva",
+      title: "Gau Seva",
+      description: "Contribute to cow protection and maintenance",
+      image: "/images/seva.jpg",
+      amounts: [750, 1500, 3000, 5000, 10000, 15000],
+      customAmountAllowed: true
+    },
+    {
+      id: "other-amount",
+      title: "Other Amount",
+      description: "Custom donation amount",
+      image: "/images/seva.jpg",
+      amounts: [],
+      customAmountAllowed: true
     }
-    ]
-  }
+  ]
+},
+    {
+      id: "sri-rama-navami",
+      title: "Sri Rama Navami",
+      subtitle: "",
+      description: "Celebrate the divine appearance of Lord Rama with special services and offerings",
+      image: "/festivals/rama-navami.jpg",
+      icon: "festival",
+      subCategories: [
+        {
+          id: "vishesha-alankara-seva",
+          title: "Vishesha Alankara Seva",
+          description: "Sponsor special decorations for Lord Rama",
+          image: "/images/seva.jpg",
+          amounts: [2500, 5000, 10000],
+          customAmountAllowed: true
+        },
+        {
+          id: "rama-taraka-yagna-seva",
+          title: "Rama Taraka Yagna Seva",
+          description: "Contribute to the sacred fire ceremony",
+          image: "/images/seva.jpg",
+          amounts: [3500, 5000, 10000],
+          customAmountAllowed: true
+        },
+        {
+          id: "pushpalankara-seva",
+          title: "Pushpalankara Seva",
+          description: "Offer floral decorations for the deities",
+          image: "/images/seva.jpg",
+          amounts: [1100, 2100, 5100],
+          customAmountAllowed: true
+        },
+        {
+          id: "deity-garlands-seva",
+          title: "Deity Garlands Seva",
+          description: "Sponsor beautiful garlands for Lord Rama",
+          image: "/images/seva.jpg",
+          amounts: [1500, 3000, 5000],
+          customAmountAllowed: true
+        },
+        {
+          id: "vishesha-naivedya-seva",
+          title: "Vishesha Naivedya Seva",
+          description: "Sponsor special food offerings",
+          image: "/images/seva.jpg",
+          amounts: [1100, 2500, 3500, 5000],
+          customAmountAllowed: true
+        },
+        {
+          id: "phal-seva",
+          title: "Phal Seva",
+          description: "Offer fruits to the deities",
+          image: "/images/seva.jpg",
+          amounts: [501, 1000, 1500, 2000],
+          customAmountAllowed: true
+        },
+        {
+          id: "tulasi-daan-seva",
+          title: "Tulasi Daan Seva",
+          description: "Contribute to Tulasi Devi worship",
+          image: "/images/seva.jpg",
+          amounts: [251, 501, 1001, 2000],
+          customAmountAllowed: true
+        },
+        {
+          id: "annadana-seva",
+          title: "Annadana Seva",
+          description: "Sponsor food distribution to devotees",
+          image: "/images/seva.jpg",
+          amounts: [501, 1100, 2100, 5100, 10000, 15000],
+          customAmountAllowed: true
+        },
+        {
+          id: "gau-seva",
+          title: "Gau Seva",
+          description: "Contribute to cow protection",
+          image: "/images/seva.jpg",
+          amounts: [750, 1500, 3000, 5000, 10000, 15000],
+          customAmountAllowed: true
+        },
+        {
+          id: "other-amount",
+          title: "Other Amount",
+          description: "Custom donation amount",
+          image: "/images/seva.jpg",
+          amounts: [],
+          customAmountAllowed: true
+        }
+      ]
+    },
+    {
+  id: "sri-narasimha-jayanti",
+  title: "Sri Narasimha Jayanti",
+  subtitle: "",
+  description: "Celebrate the appearance day of Lord Narasimha with special services and offerings",
+  image: "/festivals/narasimha-jayanti.jpg",
+  icon: "festival",
+  subCategories: [
+    {
+      id: "vishesha-alankara-seva",
+      title: "Vishesha Alankara Seva",
+      description: "Sponsor special decorations for Lord Narasimha",
+      image: "/images/seva.jpg",
+      amounts: [2500, 5000, 10000],
+      customAmountAllowed: true
+    },
+    {
+      id: "narasimha-yagna-seva",
+      title: "Narasimha Yagna Seva",
+      description: "Contribute to the sacred fire ceremony for Lord Narasimha",
+      image: "/images/seva.jpg",
+      amounts: [3500, 5000, 10000],
+      customAmountAllowed: true
+    },
+    {
+      id: "maha-abhisheka-seva",
+      title: "Maha Abhisheka Seva",
+      description: "Sponsor the grand ceremonial bathing of Lord Narasimha",
+      image: "/images/seva.jpg",
+      amounts: [3500, 5001, 11000, 21000],
+      customAmountAllowed: true
+    },
+    {
+      id: "pushpalankara-seva",
+      title: "Pushpalankara Seva",
+      description: "Offer floral decorations for the deities",
+      image: "/images/seva.jpg",
+      amounts: [1100, 2100, 5100],
+      customAmountAllowed: true
+    },
+    {
+      id: "deity-garlands-seva",
+      title: "Deity Garlands Seva",
+      description: "Sponsor beautiful garlands for Lord Narasimha",
+      image: "/images/seva.jpg",
+      amounts: [1500, 3000, 5000],
+      customAmountAllowed: true
+    },
+    {
+      id: "vishesha-naivedya-seva",
+      title: "Vishesha Naivedya Seva",
+      description: "Sponsor special food offerings for the Lord",
+      image: "/images/seva.jpg",
+      amounts: [1100, 2500, 3500, 5000],
+      customAmountAllowed: true
+    },
+    {
+      id: "phal-seva",
+      title: "Phal Seva",
+      description: "Offer fruits to the deities",
+      image: "/images/seva.jpg",
+      amounts: [501, 1000, 1500, 2000],
+      customAmountAllowed: true
+    },
+    {
+      id: "tulasi-daan-seva",
+      title: "Tulasi Daan Seva",
+      description: "Contribute to Tulasi Devi worship",
+      image: "/images/seva.jpg",
+      amounts: [251, 501, 1001, 2000],
+      customAmountAllowed: true
+    },
+    {
+      id: "annadana-seva",
+      title: "Annadana Seva",
+      description: "Sponsor food distribution to devotees",
+      image: "/images/seva.jpg",
+      amounts: [501, 1100, 2100, 5100, 10000, 15000],
+      customAmountAllowed: true
+    },
+    {
+      id: "gau-seva",
+      title: "Gau Seva",
+      description: "Contribute to cow protection and maintenance",
+      image: "/images/seva.jpg",
+      amounts: [750, 1500, 3000, 5000, 10000, 15000],
+      customAmountAllowed: true
+    },
+    {
+      id: "other-amount",
+      title: "Other Amount",
+      description: "Make a custom donation amount",
+      image: "/images/seva.jpg",
+      amounts: [],
+      customAmountAllowed: true
+    }
+  ]
+},
+{
+  id: "panihati-chida-dahi-mahotsava",
+  title: "Panihati Chida-Dahi Mahotsava",
+  subtitle: "",
+  description: "Celebrate the famous festival of chida-dahi (flattened rice and yogurt) offering with special services",
+  image: "/festivals/panihati.jpg",
+  icon: "festival",
+  subCategories: [
+    {
+      id: "vishesha-alankara-seva",
+      title: "Vishesha Alankara Seva",
+      description: "Sponsor special decorations for the festival",
+      image: "/images/seva.jpg",
+      amounts: [2500, 5000, 10000],
+      customAmountAllowed: true
+    },
+    {
+      id: "nauka-vihar-seva",
+      title: "Nauka Vihar Seva",
+      description: "Contribute to the boat festival celebrations",
+      image: "/images/seva.jpg",
+      amounts: [1100, 2100, 5100, 10000, 15000],
+      customAmountAllowed: true
+    },
+    {
+      id: "pushpalankara-seva",
+      title: "Pushpalankara Seva",
+      description: "Offer floral decorations for the deities",
+      image: "/images/seva.jpg",
+      amounts: [501, 1100, 2100, 5100],
+      customAmountAllowed: true
+    },
+    {
+      id: "deity-garlands-seva",
+      title: "Deity Garlands Seva",
+      description: "Sponsor beautiful garlands for the deities",
+      image: "/images/seva.jpg",
+      amounts: [1500, 3000, 5000],
+      customAmountAllowed: true
+    },
+    {
+      id: "chida-dahi-bhog-seva",
+      title: "Chida-dahi Bhog Seva",
+      description: "Sponsor the special chida-dahi offering",
+      image: "/images/seva.jpg",
+      amounts: [1100, 2500, 3500, 5000],
+      customAmountAllowed: true
+    },
+    {
+      id: "phal-seva",
+      title: "Phal Seva",
+      description: "Offer fruits to the deities",
+      image: "/images/seva.jpg",
+      amounts: [501, 1000, 1500, 2000],
+      customAmountAllowed: true
+    },
+    {
+      id: "tulasi-daan-seva",
+      title: "Tulasi Daan Seva",
+      description: "Contribute to Tulasi Devi worship",
+      image: "/images/seva.jpg",
+      amounts: [251, 501, 1001, 2000],
+      customAmountAllowed: true
+    },
+    {
+      id: "annadana-seva",
+      title: "Annadana Seva",
+      description: "Sponsor food distribution to devotees",
+      image: "/images/seva.jpg",
+      amounts: [501, 1100, 2100, 5100, 10000, 15000],
+      customAmountAllowed: true
+    },
+    {
+      id: "gau-seva",
+      title: "Gau Seva",
+      description: "Contribute to cow protection and maintenance",
+      image: "/images/seva.jpg",
+      amounts: [750, 1500, 3000, 5000, 10000, 15000],
+      customAmountAllowed: true
+    },
+    {
+      id: "other-amount",
+      title: "Other Amount",
+      description: "Make a custom donation amount",
+      image: "/images/seva.jpg",
+      amounts: [],
+      customAmountAllowed: true
+    }
+  ]
+},
+{
+  id: "jhulan-utsava",
+  title: "Jhulan Utsava",
+  subtitle: "",
+  description: "Celebrate the divine swing festival of Radha and Krishna with special offerings",
+  image: "/festivals/jhulan.jpg",
+  icon: "festival",
+  subCategories: [
+    {
+      id: "vishesha-alankara-seva",
+      title: "Vishesha Alankara Seva",
+      description: "Sponsor special decorations for the swing festival",
+      image: "/images/seva.jpg",
+      amounts: [1500, 2500, 5000],
+      customAmountAllowed: true
+    },
+    {
+      id: "jhulan-decorations-seva",
+      title: "Jhulan Decorations Seva",
+      description: "Contribute to the beautiful swing decorations",
+      image: "/images/seva.jpg",
+      amounts: [1100, 2100, 5100, 10000],
+      customAmountAllowed: true
+    },
+    {
+      id: "deity-garlands-seva",
+      title: "Deity Garlands Seva",
+      description: "Sponsor flower garlands for Radha-Krishna",
+      image: "/images/seva.jpg",
+      amounts: [1500, 3000, 5000],
+      customAmountAllowed: true
+    },
+    {
+      id: "pushpalankara-seva",
+      title: "Pushpalankara Seva",
+      description: "Offer floral decorations for the deities",
+      image: "/images/seva.jpg",
+      amounts: [501, 1100, 2100, 5100],
+      customAmountAllowed: true
+    },
+    {
+      id: "phal-seva",
+      title: "Phal Seva",
+      description: "Offer fruits to Radha and Krishna",
+      image: "/images/seva.jpg",
+      amounts: [501, 1000, 1500, 2000],
+      customAmountAllowed: true
+    },
+    {
+      id: "annadana-seva",
+      title: "Annadana Seva",
+      description: "Sponsor food distribution during the festival",
+      image: "/images/seva.jpg",
+      amounts: [501, 1100, 2100, 5100, 10000, 15000],
+      customAmountAllowed: true
+    },
+    {
+      id: "gau-seva",
+      title: "Gau Seva",
+      description: "Contribute to cow protection during the festivities",
+      image: "/images/seva.jpg",
+      amounts: [750, 1500, 3000, 5000, 10000, 15000],
+      customAmountAllowed: true
+    },
+    {
+      id: "other-amount",
+      title: "Other Amount",
+      description: "Make a custom donation for Jhulan Utsava",
+      image: "/images/seva.jpg",
+      amounts: [],
+      customAmountAllowed: true
+    }
+  ]
+},
+    {
+      id: "sri-krishna-janmashtami",
+      title: "Sri Krishna Janmashtami",
+      subtitle: "",
+      description: "Celebrate the divine appearance of Lord Krishna with special services and offerings",
+      image: "/festivals/janmashtami.jpg",
+      icon: "festival",
+      subCategories: [
+        // ABHISHEKAM SEVA
+        {
+          id: "abhishek-yajaman",
+          title: "Abhishek Yajaman (Kalasha Abhishek Seva)",
+          description: "Sponsor the main abhishek ceremony",
+          image: "/images/abhishekam.jpg",
+          amounts: [25001],
+          customAmountAllowed: false,
+        },
+        {
+          id: "maha-abhishek-morning",
+          title: "Maha Abhishek Seva (Morning @5.30am)",
+          description: "Sponsor morning abhishek ceremony",
+          image: "/images/abhishekam.jpg",
+          amounts: [5001],
+          customAmountAllowed: false,
+        },
+        {
+          id: "maha-abhishek-midnight",
+          title: "Maha Abhishek Seva (Mid-night @10.30pm)",
+          description: "Sponsor midnight abhishek ceremony",
+          image: "/images/abhishekam.jpg",
+          amounts: [11001],
+          customAmountAllowed: false,
+        },
+        {
+          id: "prabhupada-abhishek",
+          title: "Śrīla Prabhupāda Abhishek Seva",
+          description: "Sponsor abhishek for Srila Prabhupada's deity",
+          image: "/images/abhishekam.jpg",
+          amounts: [3501],
+          customAmountAllowed: false,
+        },
+
+        // FLOWER DECORATION SEVA
+        {
+          id: "phool-bangla-seva",
+          title: "Phool Bangla Seva",
+          description: "Sponsor flower palace decoration (10 slots)",
+          image: "/images/flower-decoration.jpg",
+          amounts: [21001],
+          customAmountAllowed: false,
+        },
+        {
+          id: "pushpa-sringar-seva",
+          title: "Pushpa Sringar Seva",
+          description: "Sponsor flower decorations (8 slots)",
+          image: "/images/flower-decoration.jpg",
+          amounts: [7551],
+          customAmountAllowed: false,
+        },
+        {
+          id: "pushpa-abhishek-seva",
+          title: "Pushpa Abhishek Seva",
+          description: "Sponsor flower abhishek (10 slots)",
+          image: "/images/flower-decoration.jpg",
+          amounts: [5001],
+          customAmountAllowed: false,
+        },
+        {
+          id: "deity-garland-seva",
+          title: "Deity Garland Seva",
+          description: "Sponsor deity garlands (5 slots)",
+          image: "/images/flower-decoration.jpg",
+          amounts: [5001],
+          customAmountAllowed: false,
+        },
+        {
+          id: "pallaki-decoration-seva",
+          title: "Pallaki Decoration Seva",
+          description: "Sponsor palanquin decorations (4 slots)",
+          image: "/images/flower-decoration.jpg",
+          amounts: [2551],
+          customAmountAllowed: false,
+        },
+        {
+          id: "jhulan-decoration-seva",
+          title: "Jhulan Decoration Seva",
+          description: "Sponsor swing decorations (4 slots)",
+          image: "/images/flower-decoration.jpg",
+          amounts: [2101],
+          customAmountAllowed: false,
+        },
+
+        // SRI VIGRAHA SEVA
+        {
+          id: "poshak-seva-all-deities",
+          title: "Poshak Seva for all Deities",
+          description: "Sponsor clothing for all deities (3 slots)",
+          image: "/images/vigraha-seva.jpg",
+          amounts: [35001],
+          customAmountAllowed: false
+        },
+        {
+          id: "poshak-seva-radha-krishna",
+          title: "Poshak Seva for Radha Krishna",
+          description: "Sponsor clothing for Radha-Krishna (2 slots)",
+          image: "/images/vigraha-seva.jpg",
+          amounts: [25001],
+          customAmountAllowed: false
+        },
+        {
+          id: "abharan-seva-all-deities",
+          title: "Abharan Seva for all Deities",
+          description: "Sponsor ornaments for all deities (3 slots)",
+          image: "/images/vigraha-seva.jpg",
+          amounts: [35001],
+          customAmountAllowed: false
+        },
+        {
+          id: "abharan-seva-radha-krishna",
+          title: "Abharan Seva for Radha Krishna",
+          description: "Sponsor ornaments for Radha-Krishna (2 slots)",
+          image: "/images/vigraha-seva.jpg",
+          amounts: [25001],
+          customAmountAllowed: false
+        },
+        {
+          id: "chappan-bhog-seva",
+          title: "Chappan Bhog Seva",
+          description: "Sponsor 56-item special offering (10 slots)",
+          image: "/images/naivedyam.jpg",
+          amounts: [21001],
+          customAmountAllowed: false
+        },
+        {
+          id: "naivaidyam-seva",
+          title: "Naivaidyam Seva",
+          description: "Sponsor food offerings (10 slots)",
+          image: "/images/naivedyam.jpg",
+          amounts: [11001],
+          customAmountAllowed: false  
+        },
+        {
+          id: "makhan-mishri-seva",
+          title: "Makhan Mishri Seva",
+          description: "Offer butter and sweets to Krishna",
+          image: "/images/naivedyam.jpg",
+          amounts: [101, 201, 501, 1008, 1501, 2501, 5001],
+          customAmountAllowed: true
+        },
+        {
+          id: "tulasi-archana-seva",
+          title: "Tulasi Archana Seva",
+          description: "Sponsor Tulasi Devi worship",
+          image: "/images/tulasi.jpg",
+          amounts: [501],
+          customAmountAllowed: false
+        },
+
+        // ANNADANA SEVA
+        {
+          id: "anukalpa-feast-seva",
+          title: "Anukalpa Feast Distribution Seva",
+          description: "Sponsor feast distribution (10 slots)",
+          image: "/images/annadana.jpg",
+          amounts: [21001],
+          customAmountAllowed: false
+        },
+        {
+          id: "janmashtami-annadana-halwa",
+          title: "Janmashtami Annadana (Halwa Distribution)",
+          description: "Sponsor halwa distribution",
+          image: "/images/annadana.jpg",
+          amounts: [15001],
+          customAmountAllowed: false
+        },
+
+        // OTHER SEVA
+        {
+          id: "cultural-mandap-seva",
+          title: "Janmashtami Cultural Mandap Seva",
+          description: "Sponsor cultural program stage (3 slots)",
+          image: "/images/cultural.jpg",
+          amounts: [150001],
+          customAmountAllowed: false,
+        },
+        {
+          id: "krishna-kala-seva",
+          title: "Krishna Kala Seva",
+          description: "Sponsor art and cultural programs (5 slots)",
+          image: "/images/cultural.jpg",
+          amounts: [51001],
+          customAmountAllowed: false
+        },
+        {
+          id: "gau-seva",
+          title: "Gau Seva",
+          description: "Contribute to cow protection",
+          image: "/images/gau-seva.jpg",
+          amounts: [101, 201, 501, 1008, 1501, 2501, 5001],
+          customAmountAllowed: true
+        },
+        {
+          id: "other-amount",
+          title: "Other Amount",
+          description: "Make a custom donation",
+          image: "/images/donation.jpg",
+          amounts: [],
+          customAmountAllowed: true
+        }
+      ]
+    },
+    {
+      id: "govardhana-puja",
+      title: "Govardhana Puja",
+      subtitle:"",
+      description: "Celebrate the divine appearance of Lord Chaitanya Mahaprabhu with special services and offerings",
+      image: "/festivals/gaura-purnima.jpg",
+      icon: "festival",
+      subCategories: [
+        {
+          id: "annakuta-seva",
+          title: "Govardhan Annakuta Seva",
+          description: "",
+          image: "/images/seva.jpg",
+          amounts: [1500, 2500, 3500, 5000, 7500, 10000],
+          customAmountAllowed: true
+        },
+        {
+          id: "gau-puja-seva",
+          title: "Gau Puja & Gau Seva",
+          description: "",
+          image: "/images/seva.jpg",
+          amounts: [750, 1500, 3000, 5000, 10000, 15000],
+          customAmountAllowed: true
+        }
+      ]
+    },
+    {
+      id: "gita-jayanti",
+      title: "Gita Jayanti",
+      subtitle:"",
+      description: "Celebrate the divine appearance of Lord Chaitanya Mahaprabhu with special services and offerings",
+      image: "/festivals/gaura-purnima.jpg",
+      icon: "festival",
+      subCategories: [
+        {
+          id: "gita-daan-108",
+          title: "Gita Daan (108 books)",
+          description: "",
+          image: "/images/seva.jpg",
+          amounts: [21501],
+          customAmountAllowed: false
+        },
+        {
+          id: "book-distribution",
+          title: "Support Śrīla Prabhupāda's Book Distribution",
+          description: "",
+          image: "/images/seva.jpg",
+          amounts: [10001],
+          customAmountAllowed: false
+        }
+      ]
+    },
+    {
+      id: "deepotsava",
+      title: "Deepotsava",
+      subtitle:"",
+      description: "Celebrate the festival of lights with special services and offerings",
+      image: "/festivals/deepotsava.jpg",
+      icon: "festival",
+      subCategories: [
+        {
+          id: "deep-daan-seva",
+          title: "Deep Daan Seva",
+          description: "",
+          image: "/images/seva.jpg",
+          amounts: [501, 1001, 1501, 2501, 5001, 10000],
+          customAmountAllowed: true
+    },
+    {
+      id: "gau-seva",
+      title: "Gau Seva",
+      description: "",
+      image: "/images/seva.jpg",
+      amounts: [501, 1001, 2001, 5001, 10001],
+      customAmountAllowed: true
+    },
+    {
+      id: "annadana-seva",
+      title: "Annadana Seva",
+      description: "",
+      image: "/images/seva.jpg",
+      amounts: [501, 1101, 2101, 5101, 10001],
+      customAmountAllowed: true
+    },
+    {
+      id: "shringar-seva",
+      title: "Shringar Seva",
+      description: "",
+      image: "/images/seva.jpg",
+      amounts: [1500, 3100, 5100, 10000],
+      customAmountAllowed: true
+    },
+    {
+      id: "vishesha-naivedya-seva",
+      title: "Vishesha Naivedya Seva",
+      description: "",
+      image: "/images/seva.jpg",
+      amounts: [1100, 2500, 3500, 5100, 10000],
+      customAmountAllowed: true
+    }
+  ]
+}
 ];
 
 export interface Testimonial {

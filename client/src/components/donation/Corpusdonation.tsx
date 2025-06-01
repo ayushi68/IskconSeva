@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import DonationForm from './DonationForm'; // Replace with actual donation form component path
+import { motion } from 'framer-motion';
+import DonationForm from './DonationForm';
+
+// Define the type for the membership options
+interface MembershipOption {
+  title: string;
+  description: string;
+  price: string;
+  bgColor: string;
+}
 
 const Corpusdonation: React.FC = () => {
   // Carousel images (replace with actual temple-related image URLs)
@@ -18,6 +27,45 @@ const Corpusdonation: React.FC = () => {
     }, 5000);
     return () => clearInterval(interval);
   }, [images.length]);
+
+  // Membership options data
+  const membershipOptions: MembershipOption[] = [
+    { 
+      title: 'Life Membership Programme (Sevak)', 
+      description: 'Join as a Sevak to support the temple’s mission with a foundational contribution', 
+      price: '', 
+      bgColor: 'bg-indigo-400' 
+    },
+    { 
+      title: 'Life Membership Programme (Dharma Karta)', 
+      description: 'Become a Dharma Karta to deepen your commitment to Krishna Consciousness', 
+      price: '', 
+      bgColor: 'bg-indigo-400' 
+    },
+    { 
+      title: 'Life Membership Programme (Dharmadhikari)', 
+      description: 'As a Dharmadhikari, take a leadership role in supporting temple activities', 
+      price: '', 
+      bgColor: 'bg-indigo-400' 
+    },
+    { 
+      title: 'Life Membership Programme (Maha Dharmadhikari)', 
+      description: 'Join as a Maha Dharmadhikari to make a significant impact on the temple’s mission', 
+      price: '', 
+      bgColor: 'bg-indigo-400' 
+    },
+    { 
+      title: 'Life Membership Programme (Mukhya Dharmadhikari)', 
+      description: 'Become a Mukhya Dharmadhikari, a key patron ensuring the temple’s legacy', 
+      price: '', 
+      bgColor: 'bg-indigo-400' 
+    },
+  ];
+
+  // Function to scroll to the donation form
+  const scrollToDonationForm = () => {
+    document.getElementById('donation-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-indigo-100">
@@ -99,6 +147,38 @@ const Corpusdonation: React.FC = () => {
         </p>
       </section>
 
+      {/* Life Membership Options Section */}
+      <section className="py-16 px-4 md:px-16 lg:px-32 bg-white shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
+        <h2 className="text-3xl font-bold text-indigo-800 mb-4 text-center">
+          Life Membership Options
+        </h2>
+        <p className="text-lg text-gray-600 mb-8 text-center">
+          Choose a membership tier to become a Life Patron and support the temple’s sacred mission
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {membershipOptions.map((option, index) => (
+            <motion.div
+              key={index}
+              className={`${option.bgColor} p-6 rounded-xl shadow-lg text-white transform transition-all duration-300 hover:scale-105`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <h4 className="text-xl font-bold mb-2">{option.title}</h4>
+              <p className="text-sm mb-4">{option.description}</p>
+              <p className="text-lg font-semibold">{option.price}</p>
+              <button
+                className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-full font-semibold hover:bg-indigo-700 transition duration-300"
+                onClick={scrollToDonationForm}
+              >
+                Join Now
+              </button>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Call to Action Section */}
       <section className="py-16 px-4 md:px-16 lg:px-32 bg-white shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
         <h2 className="text-3xl font-bold text-indigo-800 mb-6 text-center">
@@ -127,17 +207,23 @@ const Corpusdonation: React.FC = () => {
             +91 9755098615
           </a>.
         </p>
-        <button className="mt-6 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transform transition-transform hover:scale-105">
+        <button 
+          className="mt-6 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transform transition-transform hover:scale-105"
+          onClick={scrollToDonationForm}
+        >
           Become a Life Patron
         </button>
       </section>
 
       {/* Donation Form Section */}
-      <section className="py-16 px-4 md:px-16 lg:px-32 bg-gradient-to-r from-purple-50 to-indigo-100 shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
+      <section 
+        id="donation-form"
+        className="py-16 px-4 md:px-16 lg:px-32 bg-gradient-to-r from-purple-50 to-indigo-100 shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl"
+      >
         <h2 className="text-3xl font-bold text-indigo-800 mb-6 text-center">
           Contribute to Corpus Donation Seva
         </h2>
-        <DonationForm />
+        <DonationForm preselectedCategoryId="Become-a-Life-Patron"/>
       </section>
     </div>
   );

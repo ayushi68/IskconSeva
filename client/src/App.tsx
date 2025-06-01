@@ -89,6 +89,14 @@ import Harinam from "./components/activities/Harinam";
 import KidsCorner from "./components/activities/Kidscorner";
 import Pilgrimage from "./components/activities/Pilgrimage";
 import Youthcorner from "./components/activities/Youthcorner";
+import LoginRegister from "./pages/Login";
+import Folkform from "./components/activities/Folkform";
+import GopalSakha from "./components/activities/GopalSakha";
+import CulturalFest from "./components/activities/CulturalFest";
+import HeritageFest from "./components/activities/HeritageFest";
+import CulturalForm from "./components/activities/CulturalForm";
+import GopalsakhaForm from "./components/activities/GopalsakhaForm";
+import HeritageForm from "./components/activities/HeritageForm";
 
 function Router() {
   return (
@@ -104,79 +112,93 @@ function Router() {
       <Route path="/upcoming-events" component={UpcomingEvents} /> {/* Added UpcomingEvents route */}
       <Route path="/all-events" component={EventsPage} /> {/* Added EventsPage route */}
       <Route path="/about-iskcon" component={Introduction} />
-      <Route path="/philosophy/Gaudiya" component={Gaudiya} />
-      <Route path="/philosophy/Sprabhpada" component={Sprabhpada} />
-      <Route path="/philosophy/nityanand" component={Nityanand} />
-      <Route path="/philosophy/Chaitanya" component={Chaitanya} />
-      <Route path="/philosophy/Divinecouple" component={DivineCouple} />
+      <Route path="/Gaudiya" component={Gaudiya} />
+      <Route path="/Sprabhpada" component={Sprabhpada} />
+      <Route path="/nityanand" component={Nityanand} />
+      <Route path="/Chaitanya" component={Chaitanya} />
+      <Route path="/Divinecouple" component={DivineCouple} />
       <Route path="/donation" component={Donation} />
       <Route path="/FeaturedDonations" component={FeaturedDonations} />
-      <Route path="/donation-form" component={DonationForm} />
-      <Route path="/donation/Annadana" component={Annadana} />
-      <Route path="/donation/Gaushala" component={Gaushala} />
-      <Route path="/donation/Nityaseva" component={Nityaseva} />
-      <Route path="/donation/Radharani" component={Radharani} />
-      <Route path="/donation/Rajbhog" component={Rajbhog} />
-      <Route path="/donation/Generaldonation" component={Generaldonation} />
-      <Route path="/donation/Offlinedonation" component={Offlinedonation} />
-      <Route path="/donation/Corpusdonation" component={Corpusdonation} />
-      <Route path="/donation/Vigrahaseva" component={Vigrahaseva} />
-      <Route path="/donation/Youthempowerment" component={Youthempowerment} />
-      <Route path="/donation/Specialseva" component={Specialseva} />
-      <Route path="/temple/Pranammantra" component={Pranammantra} />
-      <Route path="/donation/Volunteer" component={Volunteer} />
-      <Route path="/philosophy/Bhagavadgita" component={Bhagavadgita} />
-      <Route path="/philosophy/Bhaktiyoga" component={Bhaktiyoga} />
+      <Route path="/gaura-purnima" component={GauraPurnima} />
+      <Route path="/donation-form/:categoryId">
+        {() => <DonationForm />}
+      </Route>
+      <Route path="/donation-form">
+        {() => <DonationForm />}
+      </Route>
+      <Route path="/Annadana" component={Annadana} />
+      <Route path="/Gaushala" component={Gaushala} />
+      <Route path="/Nityaseva" component={Nityaseva} />
+      <Route path="/Radharani" component={Radharani} />
+      <Route path="/Rajbhog" component={Rajbhog} />
+      <Route path="/Generaldonation" component={Generaldonation} />
+      <Route path="/Offlinedonation" component={Offlinedonation} />
+      <Route path="/Corpusdonation" component={Corpusdonation} />
+      <Route path="/Vigrahaseva" component={Vigrahaseva} />
+      <Route path="/Youthempowerment" component={Youthempowerment} />
+      <Route path="/Specialseva" component={Specialseva} />
+      <Route path="/Pranammantra" component={Pranammantra} />
+      <Route path="/Volunteer" component={Volunteer} />
+      <Route path="/Bhagavadgita" component={Bhagavadgita} />
+      <Route path="/Bhaktiyoga" component={Bhaktiyoga} />
       <Route path="/Srilaprabhupada" component={Srilaprabhupada} />
-      <Route path="/philosophy/Krishna" component={Krishna} />
-      <Route path="/philosophy/Mahamantra" component={Mahamantra} />
+      <Route path="/Krishna" component={Krishna} />
+      <Route path="/Mahamantra" component={Mahamantra} />
       <Route path="/Activitieslp" component={Activities} />
       <Route path="/Bloglp" component={Blog} />
       <Route path="/Festival" component={Festivals} />
       <Route path="/Media" component={Media} />
       <Route path="/AboutUs" component={AboutUs} />
       <Route path="/IAmNew" component={IAmNew} />
-      <Route path={"/media/Photo"} component={Photo} />
-      <Route path={"/media/video"} component={Video} />
-      <Route path={"/media/Audio"} component={Audio} />
-      <Route path={"/about/OurVision"} component={OurVision} />
-      <Route path={"/about/Objectives"} component={Objectives} />
-      <Route path={"/about/CenterList"} component={CenterList} />
-      <Route path={"/about/History"} component={History} />
-      <Route path={"/temple/Tsbhilai"} component={TempleScheduleB} />
-      <Route path={"/temple/Tsraipur"} component={TempleScheduleR} />
-      <Route path={"/festival/Janmashtami"} component={Janmashtami} />
-      <Route path={"/Special Seva/Bhagavatam"} component={Bhagavatam} />
-      <Route path={"/Special Seva/Ekadashiseva"} component={Ekadashiseva} />
-      <Route path={"/Special Seva/GitaDaan"} component={GitaDaan} />
-      <Route path={"/Special Seva/Gyaandaan"} component={Gyaandaan} />
-      <Route path={"/Special Seva/Mahanarasimha"} component={MahaSudarshanaNarasimhaYajnaSeva} />
-      <Route path={"/Special Seva/Sadhuseva"} component={Sadhuseva} />
-      <Route path={"/Special Seva/SriNarasimha"} component={Narasimhayajna} />
-      <Route path={"/festival/Gaurapurnima"} component={GauraPurnima} />
-      <Route path={"/festival/Akhandaharinaam"} component={Akhandaharinaam} />
-      <Route path={"/festival/Deepotsava"} component={Deepotsava} />
-      <Route path={"/festival/GitaJayanti"} component={GitaJayanti} />
-      <Route path={"/festival/Govardhanpuja"} component={Govardhanpuja} />
-      <Route path={"/festival/JhulanYatra"} component={JhulanYatra} />
-      <Route path={"/festival/NarasimhaChaturdashi"} component={NarasimhaChaturdashi} />
-      <Route path={"/festival/Nityananda"} component={Nityananda} />
-      <Route path={"/festival/Panihati"} component={Panihati} />
-      <Route path={"/festival/Purushottam"} component={Purushottam} />
-      <Route path={"/festival/Radhashtami"} component={Radhashtami} />
-      <Route path={"/festival/Ramnavami"} component={Ramnavami} />
-      <Route path={"/festival/Vaikuntha"} component={Vaikuntha} />
-      <Route path={"/festival/Vyasapuja"} component={Vyasapuja} />
-      <Route path="/activities/Akshaypatra" component={Akshaypatra} />
-      <Route path="/activities/BookCeremony" component={BookCeremony} />
-      <Route path="/activities/Bookscorner" component={BooksCorner} />
-      <Route path="/activities/Catering" component={Catering} />
-      <Route path="/activities/Familycorner" component={FamilyCorner} />
-      <Route path="/activities/Gifts" component={Gifts} />
-      <Route path="/activities/Harinam" component={Harinam} />
-      <Route path="/activities/Kidscorner" component={KidsCorner} />
-      <Route path="/activities/Pilgrimage" component={Pilgrimage} />
-      <Route path="/activities/Youthcorner" component={Youthcorner} />
+      <Route path={"/Photo"} component={Photo} />
+      <Route path={"/video"} component={Video} />
+      <Route path={"/Audio"} component={Audio} />
+      <Route path={"/OurVision"} component={OurVision} />
+      <Route path={"/Objectives"} component={Objectives} />
+      <Route path={"/CenterList"} component={CenterList} />
+      <Route path={"/History"} component={History} />
+      <Route path={"/Tsbhilai"} component={TempleScheduleB} />
+      <Route path={"/Tsraipur"} component={TempleScheduleR} />
+      <Route path={"/Janmashtami"} component={Janmashtami} />
+      <Route path={"/Bhagavatam"} component={Bhagavatam} />
+      <Route path={"/Ekadashiseva"} component={Ekadashiseva} />
+      <Route path={"/GitaDaan"} component={GitaDaan} />
+      <Route path={"/Gyaandaan"} component={Gyaandaan} />
+      <Route path={"/Mahanarasimha"} component={MahaSudarshanaNarasimhaYajnaSeva} />
+      <Route path={"/Sadhuseva"} component={Sadhuseva} />
+      <Route path={"/SriNarasimha"} component={Narasimhayajna} />
+      <Route path={"/Gaurapurnima"} component={GauraPurnima} />
+      <Route path={"/Akhandaharinaam"} component={Akhandaharinaam} />
+      <Route path={"/Deepotsava"} component={Deepotsava} />
+      <Route path={"/GitaJayanti"} component={GitaJayanti} />
+      <Route path={"/Govardhanpuja"} component={Govardhanpuja} />
+      <Route path={"/JhulanYatra"} component={JhulanYatra} />
+      <Route path={"/NarasimhaChaturdashi"} component={NarasimhaChaturdashi} />
+      <Route path={"/Nityananda"} component={Nityananda} />
+      <Route path={"/Panihati"} component={Panihati} />
+      <Route path={"/Purushottam"} component={Purushottam} />
+      <Route path={"/Radhashtami"} component={Radhashtami} />
+      <Route path={"/Ramnavami"} component={Ramnavami} />
+      <Route path={"/Vaikuntha"} component={Vaikuntha} />
+      <Route path={"/Vyasapuja"} component={Vyasapuja} />
+      <Route path={"/Akshaypatra"} component={Akshaypatra} />
+      <Route path={"/BookCeremony"} component={BookCeremony} />
+      <Route path={"/Bookscorner"} component={BooksCorner} />
+      <Route path={"/Catering"} component={Catering} />
+      <Route path={"/Familycorner"} component={FamilyCorner} />
+      <Route path={"/Gifts"} component={Gifts} />
+      <Route path={"/Harinam"} component={Harinam} />
+      <Route path={"/Kidscorner"} component={KidsCorner} />
+      <Route path={"/Pilgrimage"} component={Pilgrimage} />
+      <Route path={"/Youthcorner"} component={Youthcorner} />
+      <Route path={"/Login"} component={LoginRegister} />
+      <Route path={"/Folkform"} component={Folkform} />
+      <Route path={"/GopalSakha"} component={GopalSakha} />
+      <Route path={"/CulturalFest"} component={CulturalFest} />
+      <Route path={"/CulturalForm"} component={CulturalForm} />
+      <Route path={"/HeritageFest"} component={HeritageFest} />
+      <Route path={"/GopalsakhaForm"} component={GopalsakhaForm} />
+      <Route path={"/HeritageForm"} component={HeritageForm} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -133,7 +133,7 @@ const Generaldonation: React.FC = () => {
         <h2 className="text-3xl font-bold text-indigo-800 mb-6 text-center">
           Make Your Contribution
         </h2>
-        <DonationForm />
+        <DonationForm preselectedCategoryId="General-Donation"/>
       </section>
     </div>
   );

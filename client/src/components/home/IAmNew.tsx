@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 const faqData = [
   {
@@ -20,40 +20,44 @@ The Katha Upanishad relates that within the body, higher than the senses and the
 ];
 
 export default function IAmNew() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const toggleAnswer = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+  const handleQuestionClick = (index: number) => {
+    setSelectedIndex(index);
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 mt-8">
-      <h1 className="text-3xl font-bold text-center text-green-700 mb-8">Frequently Asked Questions</h1>
-      {faqData.map((item, index) => (
-        <div
-          key={index}
-          className="bg-gradient-to-br from-green-50 to-white border border-green-300 rounded-2xl shadow-lg mb-6 overflow-hidden transition-all duration-300 hover:shadow-xl"
-        >
-          <button
-            onClick={() => toggleAnswer(index)}
-            className="w-full flex justify-between items-center p-5 text-left text-lg font-semibold text-green-800 focus:outline-none"
-          >
-            {item.question}
-            {openIndex === index ? (
-              <ChevronUp className="h-5 w-5 text-green-600" />
-            ) : (
-              <ChevronDown className="h-5 w-5 text-green-600" />
-            )}
-          </button>
-          <div
-            className={`px-6 pb-5 text-gray-700 whitespace-pre-line text-justify transition-all duration-500 ease-in-out ${
-              openIndex === index ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"
-            }`}
-          >
-            {item.answer}
+    <div className="max-w-6xl mx-auto p-6 mt-8 flex flex-col md:flex-row gap-6">
+      <h1 className="text-3xl font-bold text-center text-green-700 mb-8 md:hidden">Frequently Asked Questions</h1>
+      <div className="w-full md:w-1/3 bg-gradient-to-br from-green-50 to-white border border-green-300 rounded-2xl shadow-lg p-6">
+        <h2 className="text-2xl font-semibold text-green-800 mb-4 hidden md:block">Questions</h2>
+        <ul className="space-y-3">
+          {faqData.map((item, index) => (
+            <li key={index}>
+              <button
+                onClick={() => handleQuestionClick(index)}
+                className={`w-full flex justify-between items-center p-3 text-left text-lg font-medium text-green-800 rounded-lg transition-all duration-200 hover:bg-green-100 focus:outline-none ${
+                  selectedIndex === index ? "bg-green-200" : ""
+                }`}
+              >
+                {item.question}
+                <ChevronRight className="h-5 w-5 text-green-600" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="w-full md:w-2/3 bg-gradient-to-br from-green-50 to-white border border-green-300 rounded-2xl shadow-lg p-6">
+        <h2 className="text-2xl font-semibold text-green-800 mb-4 hidden md:block">Answer</h2>
+        {selectedIndex !== null ? (
+          <div className="text-gray-700 whitespace-pre-line text-justify">
+            <h3 className="text-xl font-semibold text-green-800 mb-3">{faqData[selectedIndex].question}</h3>
+            <p>{faqData[selectedIndex].answer}</p>
           </div>
-        </div>
-      ))}
+        ) : (
+          <p className="text-gray-600 italic">Select a question from the sidebar to view the answer.</p>
+        )}
+      </div>
     </div>
   );
 }
