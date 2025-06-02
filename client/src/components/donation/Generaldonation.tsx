@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DonationForm from './DonationForm'; // Replace with actual donation form component path
+import Donor from './Donar'; // Replace with actual donor component path
+import { motion } from 'framer-motion';
 
 const Generaldonation: React.FC = () => {
   // Carousel images (replace with actual temple-related image URLs)
@@ -126,6 +128,17 @@ const Generaldonation: React.FC = () => {
         >
           Donate Now
         </a>
+      </section>
+
+      <section className="py-20 px-4 md:px-16 lg:px-32 bg-[linear-gradient(135deg,#fef3c7_0%,#f97316_100%)]">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <Donor />
+        </motion.div>
       </section>
 
       {/* Donation Form Section */}

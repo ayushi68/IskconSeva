@@ -29,10 +29,22 @@ const projects: Project[] = [
     link: "/Audio",
   },
   {
-    title: "Media Downloads",
-    category: "Calendar | Newsletter | Wallpaper",
-    image: "/gaushala.jpg",
-    link: "/MediaDownloads",
+    title: "Newsletter",
+    category: "Newsletter",
+    image: "/vigraha.jpg",
+    link: "/Newsletter",
+  },
+  {
+    title: "Desktop Wallpaper",
+    category: "Desktop Wallpaper",
+    image: "/vigraha.jpg",
+    link: "/Desktopwallpaper",
+  },
+  {
+    title: "Mobile Wallpaper",
+    category: "Mobile Wallpaper",
+    image: "/vigraha.jpg",
+    link: "/Mobilewallpaper",
   },
 ];
 
@@ -55,7 +67,7 @@ const Media = () => {
 
       {/* Projects Grid */}
       <div className="container mx-auto px-6 pb-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <Card
               key={index}

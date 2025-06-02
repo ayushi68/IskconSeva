@@ -97,6 +97,9 @@ import HeritageFest from "./components/activities/HeritageFest";
 import CulturalForm from "./components/activities/CulturalForm";
 import GopalsakhaForm from "./components/activities/GopalsakhaForm";
 import HeritageForm from "./components/activities/HeritageForm";
+import Newsletter from "./components/media/Newsletter";
+import Desktopwallpaper from "./components/media/Desktopwallpaper";
+import MobileWallpaper from "./components/media/Mobilewallpaper";
 
 function Router() {
   return (
@@ -199,6 +202,9 @@ function Router() {
       <Route path={"/HeritageFest"} component={HeritageFest} />
       <Route path={"/GopalsakhaForm"} component={GopalsakhaForm} />
       <Route path={"/HeritageForm"} component={HeritageForm} />
+      <Route path={"/Newsletter"} component={Newsletter} />
+      <Route path={"/Desktopwallpaper"} component={Desktopwallpaper} />
+      <Route path={"/Mobilewallpaper"} component={MobileWallpaper} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -377,10 +377,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
           module,
           regFeeMethod,
           regTxnId,
-          regTxnFile: {
-            data: files["regTxnFile"][0].buffer,
-            contentType: files["regTxnFile"][0].mimetype,
-          },
           transportFeeArea,
           transFeeAmount,
           transTxnId,
@@ -570,7 +566,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   router.get("/recent-donations", async (req: Request, res: Response) => {
     try {
       const limit = req.query.limit ? parseInt(req.query.limit as string, 10) : 10;
-      const recentDonations = await storage.getRecentDonations(limit);
+      const category = req.query.category as string | undefined;
+      const recentDonations = await storage.getRecentDonations(limit, category);
       res.status(200).json(recentDonations);
     } catch (error) {
       console.error("Error fetching recent donations:", error);

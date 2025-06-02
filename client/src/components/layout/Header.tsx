@@ -193,15 +193,9 @@ const navLinks: NavLink[] = [
             { label: "Photo Gallery", href: "/Photo" },
             { label: "Video Gallery", href: "/Video" },
             { label: "Audio Gallery", href: "/Audio" },
-            {
-              label: "Media Downloads",
-              href: "#",
-              subLinks: [
-                { label: "Quarterly Newsletter", href: "/media/downloads/wallpapers" },
-                { label: "Mobile Wallpaper May Month-English", href: "/media/downloads/pdfs" },
-                { label: "Desktop Wallpaper May Month-Hindi ", href: "/media/downloads/mp3s" }
-              ]
-            }
+            { label: "Quarterly Newsletter", href: "/Newsletter" },
+            { label: "Mobile Wallpaper", href: "/Mobilewallpaper" },
+            { label: "Desktop Wallpaper", href: "/Desktopwallpaper" },
           ]
         }
       ]

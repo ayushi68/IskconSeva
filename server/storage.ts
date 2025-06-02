@@ -101,7 +101,7 @@ export interface IStorage {
   getSevaOptionById(id: string): Promise<any>;
   createDonor(donor: any): Promise<any>;
   createDonation(donation: any): Promise<any>;
-  getRecentDonations(limit?: number): Promise<any[]>;
+  getRecentDonations(limit?: number, category?: string): Promise<any[]>;
   getApprovedTestimonials(limit?: number): Promise<any[]>;
   createTestimonial(testimonial: any): Promise<any>;
   saveGopalForm(formData: any): Promise<any>;
@@ -248,14 +248,19 @@ export class MongoStorage implements IStorage {
     }
   }
 
-  async getRecentDonations(limit = 10) {
+  async getRecentDonations(limit: number = 10, category?: string): Promise<any[]> {
     try {
       const db = await ensureConnection();
+      const query: any = { showPublicly: true };
+      if (category) {
+        query.donationCategory = category;
+      }
       return await db
         .collection("donations")
-        .find({ showPublicly: true })
+        .find(query)
         .sort({ createdAt: -1 })
         .limit(limit)
+        .project({ _id: 1, firstName: 1, amount: 1, createdAt: 1 })
         .toArray();
     } catch (error) {
       console.error("Error fetching recent donations:", error);
@@ -263,7 +268,7 @@ export class MongoStorage implements IStorage {
     }
   }
 
-  async getApprovedTestimonials(limit = 5) {
+  async getApprovedTestimonials(limit: number = 5): Promise<any[]> {
     try {
       const db = await ensureConnection();
       return await db

@@ -40,14 +40,61 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
     (sub) => sub.id === selectedSubCategoryId
   );
 
-  const superSubCategories: SuperSubCategory[] = selectedSubCategory?.superSubCategories || [];
+  const superSubCategories: SuperSubCategory[] = selectedSubCategory?.superSubCategories ?? [];
 
   const selectedSuperSubCategory: SuperSubCategory | undefined = superSubCategories.find(
     (superSub) => superSub.id === selectedSuperSubCategoryId
   );
 
-  const amountsToShow = selectedSuperSubCategory?.amounts || selectedSubCategory?.amounts || [];
+  const rawAmounts = selectedSuperSubCategory?.amounts || selectedSubCategory?.amounts || [];
+  const amountsToShow: number[] = rawAmounts.length > 0 ? rawAmounts.map((amount) =>
+    typeof amount === "string" ? parseInt(amount, 10) : amount
+  ) : [1000, 2000, 5000]; // Fallback amounts if none are defined
   const customAmountAllowed = selectedSuperSubCategory?.customAmountAllowed ?? selectedSubCategory?.customAmountAllowed ?? true;
+
+  // Debugging logs for categories and amounts
+  useEffect(() => {
+    console.log("Donation Categories:", donationCategories);
+    console.log("Selected Category:", selectedCategory);
+    console.log("Sub Categories:", subCategories);
+    console.log("Selected Sub Category:", selectedSubCategory);
+    console.log("Super Sub Categories:", superSubCategories);
+    console.log("Selected Super Sub Category:", selectedSuperSubCategory);
+    console.log("amountsToShow:", amountsToShow);
+    console.log("customAmountAllowed:", customAmountAllowed);
+  }, [
+    selectedCategory,
+    subCategories,
+    selectedSubCategory,
+    superSubCategories,
+    selectedSuperSubCategory,
+    amountsToShow,
+    customAmountAllowed,
+  ]);
+
+  useEffect(() => {
+    console.log("State Update:", {
+      selectedCategoryId,
+      selectedSubCategoryId,
+      selectedSuperSubCategoryId,
+      amountsToShow,
+      customAmountAllowed,
+      selectedAmount,
+      customAmount,
+    });
+  }, [
+    selectedCategoryId,
+    selectedSubCategoryId,
+    selectedSuperSubCategoryId,
+    amountsToShow,
+    customAmountAllowed,
+    selectedAmount,
+    customAmount,
+  ]);
+
+  useEffect(() => {
+    console.log("isLoading state:", isLoading);
+  }, [isLoading]);
 
   useEffect(() => {
     if (selectedCategoryId && subCategories.length > 0) {
@@ -56,9 +103,12 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
       setSelectedSubCategoryId("");
     }
     setSelectedSuperSubCategoryId("");
-    setSelectedAmount(null);
-    setCustomAmount("");
-  }, [selectedCategoryId, subCategories]);
+    // Only reset amounts if the current selectedAmount is not in the new amountsToShow
+    if (selectedAmount !== null && !amountsToShow.includes(selectedAmount)) {
+      setSelectedAmount(null);
+      setCustomAmount("");
+    }
+  }, [selectedCategoryId, subCategories, amountsToShow, selectedAmount]);
 
   useEffect(() => {
     if (selectedSubCategoryId && superSubCategories.length > 0) {
@@ -66,17 +116,45 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
     } else {
       setSelectedSuperSubCategoryId("");
     }
-    setSelectedAmount(null);
-    setCustomAmount("");
-  }, [selectedSubCategoryId, superSubCategories]);
+    // Only reset amounts if the current selectedAmount is not in the new amountsToShow
+    if (selectedAmount !== null && !amountsToShow.includes(selectedAmount)) {
+      setSelectedAmount(null);
+      setCustomAmount("");
+    }
+  }, [selectedSubCategoryId, superSubCategories, amountsToShow, selectedAmount]);
+
+  const handleAmountClick = (amount: number) => {
+    console.log("handleAmountClick called with amount:", amount);
+    setSelectedAmount(amount);
+    setCustomAmount(amount.toString());
+  };
+
+  const handleCustomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    console.log("Custom amount input event triggered. Value:", value);
+    console.log("Input element:", e.target);
+    if (value === "" || (Number(value) > 0 && !isNaN(Number(value)))) {
+      console.log("Updating customAmount to:", value);
+      setCustomAmount(value);
+      console.log("Clearing selectedAmount");
+      setSelectedAmount(null);
+    } else {
+      console.log("Invalid custom amount input. No state update.");
+    }
+  };
 
   const handlePayment = async () => {
+    console.log("handlePayment started", { selectedAmount, customAmount });
     const amountToPay = selectedAmount || parseInt(customAmount);
-    if (!amountToPay || !donorName || !donorDob || !donorEmail || !donorPhone) {
-      setPaymentStatus("Please fill in all required personal information and select an amount.");
+    console.log("Amount to pay:", amountToPay);
+    if (!amountToPay || isNaN(amountToPay) || amountToPay <= 0) {
+      setPaymentStatus("Please select or enter a valid donation amount.");
       return;
     }
-
+    if (!donorName || !donorDob || !donorEmail || !donorPhone) {
+      setPaymentStatus("Please fill in all required personal information.");
+      return;
+    }
     if (receiveMahaprasad && (!address || !city || !pincode || !state)) {
       setPaymentStatus("Please fill in all address fields for Mahaprasad delivery.");
       return;
@@ -84,6 +162,7 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
 
     setIsLoading(true);
     setPaymentStatus("");
+    console.log("Initiating Razorpay payment");
 
     const options = {
       key: "rzp_test_1DP5mmL5tltz8K",
@@ -95,7 +174,6 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
       }`,
       handler: async function (response: any) {
         try {
-          // Prepare data for the backend
           const donationData = {
             donorName,
             donorDob,
@@ -117,7 +195,6 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
             state: receiveMahaprasad ? state : undefined,
           };
 
-          // Send donation data to the backend
           const apiResponse = await fetch("/api/donations", {
             method: "POST",
             headers: {
@@ -130,7 +207,6 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
 
           if (apiResponse.ok) {
             setPaymentStatus(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
-            // Reset form
             setDonorName("");
             setDonorDob("");
             setDonorEmail("");
@@ -151,6 +227,7 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
           setPaymentStatus(`Error saving donation: ${error instanceof Error ? error.message : "Unknown error"}`);
         } finally {
           setIsLoading(false);
+          console.log("Payment processing completed");
         }
       },
       prefill: {
@@ -176,6 +253,7 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
         ondismiss: () => {
           setIsLoading(false);
           setPaymentStatus("Payment cancelled.");
+          console.log("Payment modal dismissed");
         },
       },
     };
@@ -185,20 +263,38 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
       razorpay.on("payment.failed", function (response: any) {
         setPaymentStatus(`Payment failed: ${response.error.description}`);
         setIsLoading(false);
+        console.log("Payment failed:", response.error);
       });
       razorpay.open();
+      console.log("Razorpay modal opened");
     } catch (error) {
       setPaymentStatus("Error initializing payment. Please try again.");
       setIsLoading(false);
+      console.error("Razorpay initialization error:", error);
     }
   };
 
+  if (!donationCategories || donationCategories.length === 0 || !selectedCategoryId) {
+    return (
+      <div className="container mx-auto px-4 sm:px-6 py-16 bg-gradient-to-b from-amber-50 to-gray-100 min-h-screen">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-12 text-gray-800 tracking-wide">
+          Donation Form Unavailable
+        </h2>
+        <p className="text-red-500 text-center">
+          {selectedCategoryId
+            ? "No donation categories available. Please contact support."
+            : "No preselected category provided. Please provide a category to proceed."}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 sm:px-6 py-16 bg-gradient-to-b from-amber-50 to-gray-100 min-h-screen">
-      <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-12 text-gray-800 tracking-wide animate-fade-in">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-12 text-gray-800 tracking-wide">
         Make a Meaningful Donation
       </h2>
-      <div className="max-w-2xl mx-auto bg-white p-8 sm:p-10 rounded-3xl shadow-2xl border border-gray-100 animate-slide-up">
+      <div className="max-w-2xl mx-auto bg-white p-8 sm:p-10 rounded-3xl shadow-2xl border border-gray-100">
         {/* Personal Information */}
         <div className="mb-10">
           <h3 className="text-2xl font-bold text-gray-800 mb-5 border-l-4 border-teal-600 pl-4 flex items-center">
@@ -268,27 +364,16 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
             <svg className="w-6 h-6 mr-2 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2s2-.9 2-2v-4c0-1.1-.9-2-2-2zM12 4a8 8 0 00-8 8h2a6 6 0 0112 0h2a8 8 0 00-8-8z"></path>
             </svg>
-            Select Donation Category
+            Donation Category
           </h3>
           <div className="space-y-5">
             <div>
               <label className="block text-gray-600 font-semibold mb-2 text-sm uppercase tracking-wide">
                 Donation Category
               </label>
-              <select
-                value={selectedCategoryId}
-                onChange={(e) => setSelectedCategoryId(e.target.value)}
-                className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300 bg-gray-50 text-gray-700 shadow-sm hover:border-teal-300"
-                disabled={!!preselectedCategoryId || !!categoryIdFromUrl}
-                required
-              >
-                <option value="">Select a category</option>
-                {donationCategories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.title}
-                  </option>
-                ))}
-              </select>
+              <p className="text-gray-700 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                {selectedCategory?.title || "No category selected"}
+              </p>
             </div>
 
             {subCategories.length > 0 ? (
@@ -298,7 +383,10 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
                 </label>
                 <select
                   value={selectedSubCategoryId}
-                  onChange={(e) => setSelectedSubCategoryId(e.target.value)}
+                  onChange={(e) => {
+                    console.log("Subcategory changed to:", e.target.value);
+                    setSelectedSubCategoryId(e.target.value);
+                  }}
                   className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300 bg-gray-50 text-gray-700 shadow-sm hover:border-teal-300"
                 >
                   <option value="">Select a subcategory</option>
@@ -324,7 +412,10 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
                 </label>
                 <select
                   value={selectedSuperSubCategoryId}
-                  onChange={(e) => setSelectedSuperSubCategoryId(e.target.value)}
+                  onChange={(e) => {
+                    console.log("Super Subcategory changed to:", e.target.value);
+                    setSelectedSuperSubCategoryId(e.target.value);
+                  }}
                   className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300 bg-gray-50 text-gray-700 shadow-sm hover:border-teal-300"
                 >
                   <option value="">Select a super subcategory</option>
@@ -337,41 +428,60 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
               </div>
             )}
 
-            {(selectedSuperSubCategory || selectedSubCategory) && amountsToShow.length > 0 && (
+            {/* Amount Section */}
+            {selectedCategoryId && (
               <div>
-                <label className="block text-gray-600 font-semibold mb-2 text-sm uppercase tracking-wide">
-                  Amount (INR)
-                </label>
-                <div className="flex flex-wrap gap-4 mb-4">
-                  {amountsToShow.map((amount) => (
-                    <button
-                      key={amount}
-                      onClick={() => {
-                        setSelectedAmount(amount);
-                        setCustomAmount("");
-                      }}
-                      className={`px-5 py-2 rounded-xl border transition duration-300 transform hover:scale-105 ${
-                        selectedAmount === amount
-                          ? "bg-teal-600 text-white border-teal-600 shadow-md"
-                          : "bg-gray-100 text-gray-700 border-gray-200 hover:bg-teal-50 hover:border-teal-300"
-                      }`}
-                    >
-                      ₹{amount.toLocaleString("en-IN")}
-                    </button>
-                  ))}
-                </div>
-                {customAmountAllowed && (
-                  <input
-                    type="number"
-                    placeholder="Or enter a custom amount"
-                    value={customAmount}
-                    onChange={(e) => {
-                      setCustomAmount(e.target.value);
-                      setSelectedAmount(null);
-                    }}
-                    min="1"
-                    className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300 bg-gray-50 text-gray-700 shadow-sm hover:border-teal-300"
-                  />
+                {/* {console.log("Rendering amount section because selectedCategoryId =", selectedCategoryId)} */}
+                {(selectedSubCategory || selectedSuperSubCategory) ? (
+                  <>
+                    <label className="block text-gray-600 font-semibold mb-2 text-sm uppercase tracking-wide">
+                      Amount (INR)
+                    </label>
+                    {amountsToShow.length > 0 ? (
+                      <div className="flex flex-wrap gap-4 mb-4" onClick={() => console.log("Parent div of buttons clicked")}>
+                        {amountsToShow.map((amount, index) => (
+                          <button
+                            key={index}
+                            onClick={(e) => {
+                              console.log("Button element clicked:", e.currentTarget);
+                              console.log("Button clicked for amount:", amount);
+                              console.log("isLoading at click:", isLoading);
+                              handleAmountClick(amount);
+                            }}
+                            onMouseDown={() => console.log("Mouse down on amount button:", amount)}
+                            className={`px-5 py-2 rounded-xl border transition duration-300 pointer-events-auto z-10 ${
+                              selectedAmount === amount
+                                ? "bg-teal-600 text-white border-teal-600 shadow-md"
+                                : "bg-gray-100 text-gray-700 border-gray-200 hover:bg-teal-50 hover:border-teal-300"
+                            } cursor-pointer`}
+                          >
+                            ₹{amount.toLocaleString("en-IN")}
+                          </button>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-gray-500 text-sm italic mb-4">
+                        No preset amounts available for this selection.
+                      </p>
+                    )}
+                    {customAmountAllowed && (
+                      <input
+                        type="number"
+                        placeholder="Enter a donation amount"
+                        value={customAmount}
+                        onChange={handleCustomAmountChange}
+                        onFocus={() => console.log("Custom amount input focused")}
+                        onBlur={() => console.log("Custom amount input blurred")}
+                        min="1"
+                        step="1"
+                        className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300 bg-gray-50 text-gray-700 shadow-sm hover:border-teal-300 pointer-events-auto z-10 cursor-text"
+                      />
+                    )}
+                  </>
+                ) : (
+                  <p className="text-gray-500 text-sm italic mb-4">
+                    Please select a subcategory to view donation amounts.
+                  </p>
                 )}
               </div>
             )}
@@ -409,7 +519,7 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
                   value="upi"
                   checked={paymentMethod === "upi"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
-                  className="mr-3 h-5 w-5 text-teal-600 focus:ring-teal-500 border-gray-300 transition duration-200"
+                  className="mr-3 h-5 w-5 text-teal-600 focus:ring-teal-500 border-gray-300 transition duration-300"
                 />
                 <span className="text-gray-700 font-medium">UPI</span>
               </label>
@@ -467,7 +577,7 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
 
         {/* Address Fields (Conditional) */}
         {receiveMahaprasad && (
-          <div className="mb-10 space-y-5 animate-fade-in-smooth">
+          <div className="mb-10 space-y-5">
             <h3 className="text-2xl font-bold text-gray-800 mb-5 border-l-4 border-teal-600 pl-4 flex items-center">
               <svg className="w-6 h-6 mr-2 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
@@ -548,40 +658,9 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
         {/* Complete Donation Button */}
         <button
           onClick={handlePayment}
-          disabled={isLoading}
-          className={`w-full py-4 rounded-xl font-semibold text-white transition duration-300 flex items-center justify-center shadow-lg transform hover:scale-105 ${
-            isLoading
-              ? "bg-teal-400 cursor-not-allowed"
-              : "bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-500 hover:to-teal-600"
-          }`}
+          className="w-full py-4 rounded-xl font-semibold text-white transition duration-300 flex items-center justify-center shadow-lg bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-500 hover:to-teal-600"
         >
-          {isLoading ? (
-            <>
-              <svg
-                className="animate-spin h-5 w-5 mr-2 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8v8H4z"
-                />
-              </svg>
-              Processing...
-            </>
-          ) : (
-            "Complete Donation"
-          )}
+          Complete Donation
         </button>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import DonationForm from './DonationForm';
+import Donar from './Donar';
 
 // Define the type for the membership options
 interface MembershipOption {
@@ -213,6 +214,17 @@ const Corpusdonation: React.FC = () => {
         >
           Become a Life Patron
         </button>
+      </section>
+
+      <section className="py-20 px-4 md:px-16 lg:px-32 bg-[linear-gradient(135deg,#fef3c7_0%,#f97316_100%)]">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <Donar />
+        </motion.div>
       </section>
 
       {/* Donation Form Section */}

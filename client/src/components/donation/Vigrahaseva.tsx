@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import DonationForm from './DonationForm';
+import Donor from './Donar';
 
 // Define the type for the seva options
 interface SevaOption {
@@ -285,6 +286,17 @@ const Vigrahaseva: React.FC = () => {
             </motion.div>
           ))}
         </div>
+      </section>
+
+      <section className="py-20 px-4 md:px-16 lg:px-32 bg-[linear-gradient(135deg,#fef3c7_0%,#f97316_100%)]">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <Donor />
+        </motion.div>
       </section>
 
       {/* Call to Support Section */}
