@@ -316,7 +316,7 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
                 required
               />
             </div>
-            <div>
+            <div className="mb-6">
               <label className="block text-gray-600 font-semibold mb-2 text-sm uppercase tracking-wide">
                 Date of Birth
               </label>
@@ -325,9 +325,18 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
                 value={donorDob}
                 onChange={(e) => setDonorDob(e.target.value)}
                 max="2025-06-01"
-                className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300 bg-gray-50 text-gray-700 shadow-sm hover:border-teal-300"
+                className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-300 bg-gray-50 text-gray-700 shadow-sm hover:border-yellow-300"
                 required
               />
+              <div className="mt-2 px-3 py-2 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                <p className="text-sm text-yellow-700 flex items-start">
+                  <svg className="w-4 h-4 mr-2 mt-0.5 text-yellow-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                    <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                  </svg>
+                  <span>By providing your date of birth, Sankalp and Acharya will perform special puja and prayers for your spiritual benefit on your Birthday/Anniversary.</span>
+                </p>
+              </div>
             </div>
             <div>
               <label className="block text-gray-600 font-semibold mb-2 text-sm uppercase tracking-wide">
@@ -557,6 +566,7 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
               rows={4}
               placeholder="Share a message or special request with us"
             />
+            <p>By continuing you are agreeing to <a href="/terms-and-services" className="text-teal-600">our terms and conditions</a> and <a href="/privacy-policy" className="text-teal-600">our privacy policy</a>.</p>
           </div>
         </div>
 
