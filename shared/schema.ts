@@ -1,7 +1,7 @@
 import { pgTable, text, serial, integer, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
-import Donation, { type IDonation } from "../db/donation.model";
+import Donation, { type IDonation } from "../db/Donation.model";
 import { Schema, model } from "mongoose";
 
 // Drizzle ORM schema for PostgreSQL users table

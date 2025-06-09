@@ -28,7 +28,7 @@ const BhaktiYoga: React.FC = () => {
             </div>
             <div>
               <img
-                src="/by1.jpg"
+                src="/philosophy/by1.jpg"
                 alt="Practicing Bhakti Yoga"
                 className="rounded-lg shadow-lg"
               />
@@ -44,7 +44,7 @@ const BhaktiYoga: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="order-2 md:order-1">
               <img
-                src="/by2.jpg"
+                src="/philosophy/by2.jpg"
                 alt="Bhakti"
                 className="rounded-lg shadow-lg"
               />
@@ -78,7 +78,7 @@ const BhaktiYoga: React.FC = () => {
             </div>
             <div>
               <img
-                src="/by3.jpg"
+                src="/philosophy/by3.jpg"
                 alt="Yoga"
                 className="rounded-lg shadow-lg"
               />
@@ -95,22 +95,22 @@ const BhaktiYoga: React.FC = () => {
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <img
-                src="/by4.jpg"
+                src="/philosophy/by4.jpg"
                 alt="Chanting"
                 className="w-full h-48 object-cover rounded-lg shadow-md"
             />
             <img
-                src="/by5.jpg"
+                src="/philosophy/by5.jpg"
                 alt="Kirtan"
                 className="w-full h-48 object-cover rounded-lg shadow-md"
             />
             <img
-                src="/by6.png"
+                src="/philosophy/by6.png"
                 alt="Puja"
                 className="w-full h-48 object-cover rounded-lg shadow-md"
             />
             <img
-                src="/by8.png"
+                src="/philosophy/by8.png"
                 alt="Meditation"
                 className="w-full h-48 object-cover rounded-lg shadow-md"
             />

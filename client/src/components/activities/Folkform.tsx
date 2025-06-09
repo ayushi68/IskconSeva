@@ -178,9 +178,9 @@ const Folkform: React.FC = () => {
                 required
               >
                 <option value="" disabled>Course*</option>
-                <option value="course1">Course 1</option>
-                <option value="course2">Course 2</option>
-                <option value="course3">Course 3</option>
+                <option value="course1">Vedic Science</option>
+                <option value="course2">Folk Residency</option>
+                <option value="course3">Folk Yatra</option>
               </select>
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
                 ▼

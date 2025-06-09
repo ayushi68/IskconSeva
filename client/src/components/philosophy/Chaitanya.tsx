@@ -27,7 +27,7 @@ const Chaitanya = () => {
         {/* Verse and Image Row */}
         <div className="flex flex-col md:flex-row gap-6 mb-10">
           <img
-            src="/cp1.jpg"
+            src="/philosophy/cp1.jpg"
             alt="Sri Nityananda Prabhu"
             className="w-full md:w-1/2 rounded-lg shadow"
           />
@@ -75,7 +75,7 @@ const Chaitanya = () => {
 
         {/* 📸 Image */}
         <img
-          src="/cp2.jpg"
+          src="/philosophy/cp2.jpg"
           alt="Nityananda Prabhu"
           className="rounded-xl shadow-lg mb-10 w-full max-h-[480px] object-cover"
         />
@@ -93,7 +93,7 @@ const Chaitanya = () => {
         </div>
 
         <img
-            src="/cp29.bmp"
+            src="/philosophy/cp29.bmp"
             alt="Early Life"
             className="rounded-xl shadow-lg w-full md:w-1/2 max-h-[480px] object-cover"
         />
@@ -102,7 +102,7 @@ const Chaitanya = () => {
         <div className="flex flex-col md:flex-row gap-6 mb-10">
         {/* Left: Image */}
         <img
-            src="/cp3.jpg"
+            src="/philosophy/cp3.jpg"
             alt="Early Life"
             className="rounded-xl shadow-lg w-full md:w-1/2 max-h-[480px] object-cover"
         />
@@ -140,7 +140,7 @@ const Chaitanya = () => {
 
         {/* Right: Image */}
         <img
-            src="/cp26.jpg"
+            src="/philosophy/cp26.jpg"
             alt="Early Life"
             className="rounded-xl shadow-lg w-full md:w-1/2 max-h-[480px] object-cover"
         />
@@ -153,7 +153,7 @@ const Chaitanya = () => {
         <div className="flex flex-col md:flex-row gap-6 mb-10">
         {/* Left: Image */}
         <img
-            src="/cp17.bmp"
+            src="/philosophy/cp17.bmp"
             alt="Early Life"
             className="rounded-xl shadow-lg w-full md:w-1/2 max-h-[480px] object-cover"
         />
@@ -173,7 +173,7 @@ const Chaitanya = () => {
         <p className="text-lg text-gray-700 mb-10 leading-relaxed">The Lord’s loving pastimes with many of his devotees, his instructions, passing away of Haridas Thakur etc fill the Antya Lila and at the end after hinting about the disappearance of the Lord, the author says: The pastimes of Śrī Caitanya Mahāprabhu are like the unlimited sky. How, then, can an ordinary living being describe them all?<br /></p>
 
         <img
-          src="/cp6.jpg"
+          src="/philosophy/cp6.jpg"
           alt="Mercy"
           className="rounded-xl shadow-lg mb-10 w-full max-h-[480px] object-cover"
         />

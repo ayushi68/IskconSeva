@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { log } from "./vite";
 import { type User, type InsertUser } from "@shared/schema";
 import { GopalForm, CulturalForm, HeritageForm, FolkForm, type IFolkForm } from "../db/registration.model";
-import Donation, { type IDonation } from "../db/donation.model";
+import Donation, { type IDonation } from "../db/Donation.model";
 
 // Ensure connection is ready before operations
 const ensureConnection = async (retryCount = 3, retryDelay = 1000): Promise<mongoose.mongo.Db> => {
@@ -79,6 +79,8 @@ export async function saveContactForm(data: {
   mobile: string;
   email: string;
   dob: string;
+  message: string;
+  temple: string;
 }) {
   try {
     const db = await ensureConnection();

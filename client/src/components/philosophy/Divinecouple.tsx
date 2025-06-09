@@ -6,7 +6,7 @@ const DivineCouple = () => {
       {/* Hero Section */}
       <div className="relative w-full h-[500px] overflow-hidden">
         <img
-          src="/dc4.jpg"
+          src="/philosophy/dc4.jpg"
           alt="Divine Couple - Radha Krishna"
           className="w-full h-full object-cover brightness-90 transform scale-100 hover:scale-105 transition-transform duration-1000 ease-in-out"
         />
@@ -34,17 +34,17 @@ const DivineCouple = () => {
       {/* Divine Images Gallery */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl px-6 pb-10 animate-fade-in">
         <img
-            src="/dc15.jpg"
+            src="/philosophy/dc15.jpg"
             alt="Radha Krishna Pastime"
             className="w-full h-72 object-cover rounded-3xl shadow-xl hover:scale-105 transition duration-700"
         />
         <img
-            src="/dc18.bmp"
+            src="/philosophy/dc18.bmp"
             alt="Radha Krishna Divine"
             className="w-full h-72 object-cover rounded-3xl shadow-xl hover:scale-105 transition duration-700"
         />
         <img
-            src="/dc9.bmp"
+            src="/philosophy/dc9.bmp"
             alt="Divine Love"
             className="w-full h-72 object-cover rounded-3xl shadow-xl hover:scale-105 transition duration-700"
         />

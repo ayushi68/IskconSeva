@@ -67,15 +67,12 @@ interface ICulturalForm extends Document {
   registrationId: string;
   childName: string;
   dob: string;
-  classGroup?: string;
   gender: string;
+  classGroup?: string;
   schoolName: string;
-  fatherName?: string;
-  fatherPhone?: string;
-  fatherOccupation?: string;
-  motherName?: string;
-  motherPhone?: string;
-  motherOccupation?: string;
+  GuardianName?: string;
+  GuardianPhone?: string;
+  GuardianOccupation?: string;
   address?: string;
   landline?: string;
   mobile: string;
@@ -86,13 +83,7 @@ interface ICulturalForm extends Document {
   issues?: string;
   module: string;
   regFeeMethod?: string;
-  regTxnId?: string;
-  regTxnFile?: { data: Buffer; contentType: string };
   transportFeeArea?: string;
-  transFeeAmount?: string;
-  transTxnId?: string;
-  transFeeFile?: { data: Buffer; contentType: string };
-  transReceiptNo?: string;
   acceptTerms: boolean;
 }
 
@@ -101,38 +92,23 @@ const CulturalFormSchema: Schema = new Schema(
     registrationId: { type: String, required: [true, "Registration ID is required"], unique: true },
     childName: { type: String, required: [true, "Child's name is required"] },
     dob: { type: String, required: [true, "Date of birth is required"] },
-    classGroup: { type: String },
     gender: { type: String, required: [true, "Gender is required"] },
+    classGroup: { type: String },
     schoolName: { type: String, required: [true, "School name is required"] },
-    fatherName: { type: String },
-    fatherPhone: { type: String },
-    fatherOccupation: { type: String },
-    motherName: { type: String },
-    motherPhone: { type: String },
-    motherOccupation: { type: String },
+    GuardianName: { type: String },
+    GuardianPhone: { type: String },
+    GuardianOccupation: { type: String },
     address: { type: String },
     landline: { type: String },
     mobile: { type: String, required: [true, "Mobile number is required"] },
-    email: { type: String, email: true },
+    email: { type: String, match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email format"] },
     referralSource: { type: String },
     attendedBefore: { type: String },
     isClubMember: { type: String },
     issues: { type: String },
     module: { type: String, required: [true, "Module is required"] },
     regFeeMethod: { type: String },
-    regTxnId: { type: String },
-    regTxnFile: {
-      data: { type: Buffer },
-      contentType: { type: String },
-    },
     transportFeeArea: { type: String },
-    transFeeAmount: { type: String },
-    transTxnId: { type: String },
-    transFeeFile: {
-      data: { type: Buffer },
-      contentType: { type: String },
-    },
-    transReceiptNo: { type: String },
     acceptTerms: { type: Boolean, required: [true, "You must accept the terms and conditions"] },
   },
   { timestamps: true, collection: "culturalforms" }
@@ -144,21 +120,15 @@ interface IHeritageForm extends Document {
   name: string;
   gender: string;
   dob: string;
-  classGroup: string;
+  category: string;
   schoolName: string;
-  bloodGroup: string;
+  customSchoolName?: string;
   address: string;
   contactNumber: string;
   email: string;
   guardianName: string;
   guardianContactNumber: string;
-  guardianEmail: string;
-  referralSource: string;
-  issues: string;
-  joiningDate: string;
-  reasonForJoining?: string;
-  registrationReceiptNumber?: string;
-  photo?: { data: Buffer; contentType: string };
+  activities: string[];
   regTxnId: string;
 }
 
@@ -168,24 +138,15 @@ const HeritageFormSchema: Schema = new Schema(
     name: { type: String, required: [true, "Name is required"] },
     gender: { type: String, required: [true, "Gender is required"] },
     dob: { type: String, required: [true, "Date of birth is required"] },
-    classGroup: { type: String, required: [true, "Class group is required"] },
+    category: { type: String, required: [true, "Category is required"] },
     schoolName: { type: String, required: [true, "School name is required"] },
-    bloodGroup: { type: String, required: [true, "Blood group is required"] },
+    customSchoolName: { type: String },
     address: { type: String, required: [true, "Address is required"] },
     contactNumber: { type: String, required: [true, "Contact number is required"] },
-    email: { type: String, required: [true, "Email is required"], email: true },
+    email: { type: String, required: [true, "Email is required"], match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email format"] },
     guardianName: { type: String, required: [true, "Guardian name is required"] },
     guardianContactNumber: { type: String, required: [true, "Guardian contact number is required"] },
-    guardianEmail: { type: String, required: [true, "Guardian email is required"], email: true },
-    referralSource: { type: String, required: [true, "Referral source is required"] },
-    issues: { type: String, required: [true, "Issues field is required"] },
-    joiningDate: { type: String, required: [true, "Joining date is required"] },
-    reasonForJoining: { type: String },
-    registrationReceiptNumber: { type: String },
-    photo: {
-      data: { type: Buffer },
-      contentType: { type: String },
-    },
+    activities: { type: [String], required: [true, "At least one activity is required"] },
     regTxnId: { type: String, required: [true, "Registration transaction ID is required"] },
   },
   { timestamps: true, collection: "heritageforms" }

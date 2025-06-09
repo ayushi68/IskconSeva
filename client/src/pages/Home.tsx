@@ -1,9 +1,52 @@
-import Hero from "@/components/home/Hero";
 import { Helmet } from "react-helmet";
 import UpcomingEvents from "../components/UpcomingEvents";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import React, { useState } from 'react';
 
+interface WisdomItem {
+  image: string;
+  label: string;
+  path: string;
+}
 
 export default function Home() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const images = [
+    '/home/Aboutus/1.jpg',
+    '/home/Aboutus/2.jpg',
+    '/home/Aboutus/3.jpg',
+    '/home/Aboutus/4.jpg',
+    '/home/Aboutus/5.jpg',
+  ];
+
+  const openModal = (image: string) => {
+    setSelectedImage(image);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
+
+    const items: WisdomItem[] = [
+    {
+      image: '/home/KIDS CORNER.jpg',
+      label: 'KIDS CORNER',
+      path: '/Kidscorner',
+    },
+    {
+      image: '/home/YOUTH CORNER.jpg',
+      label: 'YOUTH CORNER',
+      path: '/Youthcorner',
+    },
+    {
+      image: '/home/FAMILY CORNER.png',
+      label: 'FAMILY CORNER',
+      path: '/Familycorner',
+    },
+  ];
+
   return (
     <>
       <Helmet>
@@ -12,199 +55,341 @@ export default function Home() {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
       </Helmet>
       
-      
-      <Hero /> <br /><br /><br />
+      <section
+        className="relative overflow-hidden bg-black bg-cover bg-center py-16 md:py-24 transition-opacity duration-1000"
+        style={{
+          backgroundImage: `url(${"/home/hkm_01.png"})`, // Replace with your hero background image
+        }}
+      >
+        
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="max-w-4xl mx-auto text-center text-black">
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-extrabold mb-8 drop-shadow-xl">
+            Support Our Mission
+          </h1>
+          <p className="text-lg md:text-xl mb-6 leading-relaxed">
+            Join hands with us to make a difference. Your contributions help us build temples, serve communities, and spread Krishna Consciousness worldwide.
+          </p>
+          <div className="flex justify-center space-x-4">
+            <Link to="/donation">
+              <Button
+              className="bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-secondary text-white px-8 py-4 text-lg font-bold rounded-full shadow-lg transition duration-300 transform hover:scale-105 flex items-center"
+            >
+              Explore Sevas 
+            </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <section className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-100 to-white py-16">
-      <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center">
+      <section className="relative bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-100 to-white py-20">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-12">
         {/* Left Images */}
-        <div className="grid grid-cols-4 gap-0 w-full lg:w-1/2 overflow-hidden">
-          <img src="/images/img1.jpg" alt="img1" className="h-full w-full object-cover" />
-          <img src="/images/img2.jpg" alt="img2" className="h-full w-full object-cover" />
-          <img src="/images/img3.jpg" alt="img3" className="h-full w-full object-cover" />
-          <img src="/images/img4.jpg" alt="img4" className="h-full w-full object-cover" />
+        <div className="w-full lg:w-1/2">
+          <div className="grid grid-cols-5 gap-0">
+            {images.map((img, index) => (
+              <div
+                key={index}
+                className="relative overflow-hidden group cursor-pointer"
+                onClick={() => openModal(img)}
+              >
+                <img
+                  src={img}
+                  alt={`Image ${index + 1}`}
+                  className="w-full h-48 sm:h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300" />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Right Content */}
-        <div className="mt-10 lg:mt-0 lg:ml-12 text-center lg:text-left w-full lg:w-1/2">
-          <h2 className="text-4xl font-light italic text-blue-500">Discover</h2>
-          <h3 className="text-4xl font-bold text-gray-900 mt-2">OUR STORY</h3>
-          <p className="text-gray-600 mt-6 leading-relaxed">
+        <div className="w-full lg:w-1/2 text-center lg:text-left animate-[fade-in-up_0.8s_ease-out]">
+          <h2 className="text-4xl font-light italic text-blue-500 tracking-wide">Discover</h2>
+          <h3 className="text-5xl font-bold text-gray-900 mt-2">OUR STORY</h3>
+          <p className="text-gray-600 mt-6 text-lg leading-relaxed max-w-md mx-auto lg:mx-0">
             Curabitur quas nets lacus ets nulat iaculis loremis etis nislle varius vitae seditum
             fugiatum ligula aliquam qui sequi. Lorem ipsum dolor sit amet, consectetur adipiscing
             elit rutrum eleif arcu sit aspernatur nets fugit, sed quia.
           </p>
           <a href="/History" className="inline-block">
-            <button className="mt-8 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 border-2 border-blue-700">
-              OUR RECEIPES
+            <button className="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full border-2 border-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+              OUR RECIPES
             </button>
           </a>
         </div>
       </div>
-    </section><br /><br /><br />
+
+      {/* Modal for Image Popout */}
+      {selectedImage && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 animate-[fade-in_0.3s_ease-out]" onClick={closeModal}>
+          <div className="relative max-w-4xl w-full p-4">
+            <img
+              src={selectedImage}
+              alt="Selected Image"
+              className="w-full h-auto max-h-[80vh] object-contain rounded-xl"
+            />
+            <button
+              className="absolute top-4 right-4 text-white bg-gray-800 rounded-full p-2 hover:bg-gray-900 transition"
+              onClick={closeModal}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+    </section>
 
 
-      <section className="bg-white py-16 px-4 text-center">
-        {/* Clickable Banner */}
-        <div className="flex justify-center mb-12">
-          <a href="/Sprabhpada" className="w-full max-w-5xl block">
-            <div className="bg-white rounded-xl shadow-lg p-4 border border-gray-200 hover:shadow-2xl transition-shadow duration-300">
-              <img
-                src="/sp1.png"
-                alt="Srila Prabhupada"
-                className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-300"
-              />
+      <section className="relative py-24 px-6 bg-gradient-to-b from-amber-50 via-white to-amber-50 overflow-hidden">
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 bg-[url('/home/prabhupadabg.png')] bg-no-repeat bg-cover bg-center opacity-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-100/30 via-transparent to-orange-100/30" />
+
+        {/* Define Principles */}
+        {(() => {
+          interface Principle {
+            title: string;
+            description: string;
+            image: string;
+            highlight?: boolean;
+          }
+
+        const principles: Principle[] = [
+          {
+            title: "BOOKS ARE THE BASIS",
+            description: "The study and distribution of the Vedic literatures, presented by Srila Prabhuada, help to expand our spiritual knowledge, peace and well-being.",
+            image: "/home/Srilaprabhupada/Books are the Basis logo.png",
+          },
+          {
+            title: "PURITY IS THE FORCE",
+            description: "Clean living and coming together as a community in our spiritual practice has a profound effect on our consciousness and the world.",
+            image: "/home/Srilaprabhupada/PURITY IS THE FORCE logo.png",
+            highlight: true,
+          },
+          {
+            title: "PREACHING IS THE ESSENCE",
+            description: "Sharing is caring. Spiritual knowledge is the one wealth that actually grows as we give it away.",
+            image: "/home/Srilaprabhupada/PREACHING IS THE ESSENCE logo.png",
+          },
+          {
+            title: "UTILITY IS THE PRINCIPLE",
+            description: "Yukta-vairagya - combination of connecting and renouncing. Use things around you in service to Bhagavan, but become detached at the same time.",
+            image: "/home/Srilaprabhupada/Utility is Principle logo.png",
+          },
+        ];
+
+        return (
+          <>
+            {/* Banner */}
+            <div className="flex justify-center mb-16 relative z-10">
+              <a href="/Sprabhpada" className="w-full max-w-5xl block group">
+                <div className="rounded-3xl overflow-hidden shadow-2xl border border-orange-100 transform transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-3xl">
+                  <img
+                    src="/home/Srilaprabhupada/SP Cover Photo.jpg"
+                    alt="Srila Prabhupada"
+                    className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                  />
+                </div>
+              </a>
             </div>
-          </a>
-        </div>
 
-        {/* Heading */}
-        <h2 className="text-4xl font-serif text-gray-800 mb-2">FOUNDER-ACARYA</h2>
-        <h3 className="text-lg md:text-xl text-[#6b4c32] mb-10 font-serif">
-          HIS DIVINE GRACE A.C. BHAKTIVEDANTA SWAMI SRILA PRABHUPADA
-        </h3>
+            {/* Heading */}
+            <div className="text-center mb-12 relative z-10 animate-[fade-in-up_0.8s_ease-out]">
+              <h2 className="text-5xl md:text-6xl font-serif text-gray-800 mb-4 tracking-tight">FOUNDER-ACARYA</h2>
+              <h3 className="text-xl md:text-3xl text-orange-700 font-serif tracking-wide">
+                HIS DIVINE GRACE A.C. BHAKTIVEDANTA SWAMI SRILA PRABHUPADA
+              </h3>
+            </div>
 
-        {/* Images Row */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-10">
-          <img
-            src="/images/founder1.jpg"
-            alt="Founder 1"
-            className="w-[280px] h-[300px] object-cover rounded-md shadow-md"
-          />
-          <img
-            src="/images/founder2.jpg"
-            alt="Founder 2"
-            className="w-[280px] h-[300px] object-cover rounded-md shadow-md"
-          />
-          <img
-            src="/images/founder3.jpg"
-            alt="Founder 3"
-            className="w-[280px] h-[300px] object-cover rounded-md shadow-md"
-          />
-        </div>
+            {/* Images Row */}
+            <div className="flex flex-col md:flex-row justify-center items-center gap-8 mb-16 relative z-10">
+              {[
+                '/home/Srilaprabhupada/1.jpg',
+                '/home/Srilaprabhupada/2(Only Saviour  Srila Prabhupada).jpg',
+                '/home/Srilaprabhupada/3.jpg'
+              ].map((img, i) => (
+                <img
+                  key={i}
+                  src={img}
+                  alt={`Founder ${i + 1}`}
+                  className="w-[280px] h-[320px] object-cover rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-[1.05] hover:shadow-3xl"
+                />
+              ))}
+            </div>
 
-        {/* Description */}
-        <div className="max-w-3xl mx-auto text-sm text-gray-700 leading-relaxed mb-12">
-          <p className="mb-4">
-            ISKCON was founded in 1966 in New York by His Divine Grace A.C. Bhaktivedanta Swami Prabhupada,
-            affectionately known as Srila Prabhupada by his followers. With great effort and determination,
-            at the age of 69 (when most people are retired), he journeyed from Kolkata to New York by cargo
-            ship hoping to help the people of the Western world to reconnect with their spiritual essence.
-            He sought to pass on the ancient teachings of bhakti-yoga and demonstrated how to practically
-            apply this knowledge to live a happy and fulfilling life.
-          </p>
-          <p>
-            Srila Prabhupada has unlocked the secrets and sacred spiritual knowledge in the Vedic tradition
-            and made them accessible to everyone. His “Bhagavad-Gita As It Is” is the largest selling edition
-            of the Bhagavad-Gita in the Western world and translated in over 76 languages.
-          </p>
-        </div>
+            {/* Description */}
+            <div className="max-w-4xl mx-auto text-base text-gray-700 leading-relaxed mb-16 relative z-10 animate-[fade-in-up_1s_ease-out] text-justify">
+              <p className="mb-6">
+                A.C. Bhaktivedanta Swami Prabhupada, affectionately known as <b>Srila Prabhupada</b>, was born Abhay Charan De in Calcutta, India, on September 1st, 1896. He is primarily known as the <b>founder-acharya of the International Society for Krishna Consciousness (ISKCON)</b>.
+              </p>
+              <p>
+                His <b>life's mission was to spread Lord Chaitanya's message and Krishna consciousness throughout the entire world</b>, a direct instruction he received from his spiritual master, Srila Bhaktisiddhanta Saraswati Thakur Prabhupada. His guiding motto was: <b>"Preaching is the essence, purity is the force, books are the basis, and utility is the principal"</b>
+              </p>
+            </div>
 
-        {/* Four Principle Cards */}
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid sm:grid-cols-2 gap-10">
-            {[
-              {
-                title: "BOOKS ARE THE BASIS",
-                description:
-                  "The study and distribution of the Vedic literatures, presented by Srila Prabhupada, help to expand our spiritual knowledge, peace and well-being.",
-                image: "/images/icons/book.png",
-              },
-              {
-                title: "PURITY IS THE FORCE",
-                description:
-                  "Clean living and coming together as a community in our spiritual practice has a profound effect on our consciousness and the world.",
-                image: "/images/icons/diamond.png",
-                highlight: true,
-              },
-              {
-                title: "PREACHING IS THE ESSENCE",
-                description:
-                  "Sharing is caring. Spiritual knowledge is the one wealth that actually grows as we give it away.",
-                image: "/images/icons/sharing.png",
-              },
-              {
-                title: "UTILITY IS THE PRINCIPLE",
-                description:
-                  "Sharing is caring. Spiritual knowledge is the one wealth that actually grows as we give it away.",
-                image: "/images/icons/utility.png",
-              },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className={`relative bg-white rounded-xl shadow-md p-6 flex space-x-6 min-h-[220px] transform transition-all duration-300 hover:shadow-xl hover:scale-[1.03] ${
-                  item.highlight
-                    ? "border border-green-400 hover:border-green-500"
-                    : "border border-transparent hover:border-gray-300"
-                }`}
-              >
-                {/* Icon */}
-                <div className="w-28 h-28 flex-shrink-0">
-                  <img src={item.image} alt={item.title} className="w-full h-full object-contain" />
-                </div>
-                {/* Content */}
-                <div className="flex-1 text-left">
-                  <h3 className="text-orange-500 font-bold text-xl mb-2">{item.title}</h3>
-                  <p className="text-gray-600 text-sm">{item.description}</p>
-                </div>
+            {/* Four Principle Cards */}
+            <div className="max-w-6xl mx-auto px-4 relative z-10">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                {principles.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className={`relative bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 ${
+                      item.highlight
+                        ? "border-2 border-orange-400 hover:border-orange-500"
+                        : "border border-gray-200"
+                    }`}
+                  >
+                    <div className="w-16 h-16 mb-4">
+                      <img src={item.image} alt={item.title} className="w-full h-full object-contain" />
+                    </div>
+                    <h3 className="text-orange-600 font-bold text-xl mb-3">{item.title}</h3>
+                    <p className="text-gray-600 text-sm">{item.description}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div><br/><br/>
 
-          {/* Signature and Button */}
-          <div className="mt-16 text-center">
-            <img src="/images/signature.png" alt="Signature" className="mx-auto h-10 mb-6" />
-            <a href="/Sprabhpada">
-              <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-md">
-                Read More
-              </button>
-            </a>
-          </div>
-        </div>
-      </section><br /><br /><br />
+            <div className="max-w-4xl mx-auto text-base text-gray-700 leading-relaxed mb-16 relative z-10 animate-[fade-in-up_1s_ease-out] text-justify">
+              <p className="mb-6">
+                Srila Prabhupada is remembered for his <b>profound humility, unwavering faith, dedication, and compassion</b>, serving as a pure representative of the Brahma Madhwa Gaudiya Sampradaya. He consistently acted in a way pleasing to the Lord, even risking his own safety and comfort for the service of mankind and all living entities.
+              </p>
+              <p>
+                Srila Prabhupada departed from this world on November 14th, 1977, in Vrindavan, surrounded by disciples chanting the Holy Name. He continued translating Srimad Bhagavatam until his last breath. Despite his immense success, he remained meek and humble, attributing all credit to his spiritual master for arranging everything. His life itself is considered a living example of the Vedanta Sutras, embodying pure devotion and selfless service to the Lord. He left a wealth of practical guidance, transforming countless lives and spreading the teachings of the Brahma Madhwa Gaudiya Sampradaya globally. His impact is so profound that many devotees feel that without him, they would not have been able to understand the spiritual path.
+              </p>
+            </div>
+
+            {/* Signature and Button */}
+            <div className="mt-16 text-center relative z-10">
+              <img src="/images/signature.png" alt="Signature" className="mx-auto h-12 mb-8 opacity-90" />
+              <a href="/Sprabhpada">
+                <button className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+                  KNOW MORE ABOUT HIS JOURNEY
+                </button>
+              </a>
+            </div>
+          </>
+        );
+      })()}
+    </section>
+
 
       {/* ✅ wisdom section inserted here */}
       <section className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-100 to-white py-16">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">EXPLORE ANCIENT SPIRITUAL WISDOM</h2>
-          <p className="text-gray-600 max-w-3xl mx-auto mb-12">
-            We offer a variety of opportunities for those interested in the timeless wisdom of the ancient Vedic texts.
-            If you’re looking for answers, are intellectually inquisitive, or just interested, find out more.
-          </p>
+              <div className="max-w-7xl mx-auto px-6 text-center">
+        {/* Heading and Description */}
+        <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-4 animate-[fade-in-up_0.8s_ease-out]">
+          EXPLORE ANCIENT SPIRITUAL WISDOM
+        </h2>
+        <p className="text-gray-600 text-lg max-w-3xl mx-auto mb-12 leading-relaxed animate-[fade-in-up_1s_ease-out]">
+          Dive into the timeless wisdom of the ancient Vedic texts. Whether seeking answers, intellectual curiosity, or spiritual growth, our programs offer something for everyone.
+        </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              {
-                image: "/images/spiritual/kids.jpg",
-                label: "INVITING KIDS",
-              },
-              {
-                image: "/images/spiritual/youth.jpg",
-                label: "INVITING YOUTHS",
-              },
-              {
-                image: "/images/spiritual/families.jpg",
-                label: "INVITING FAMILIES",
-              },
-            ].map((item, idx) => (
-              <div key={idx} className="flex flex-col items-center">
-                {/* Image Box */}
-                <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 w-full">
-                  <img src={item.image} alt={item.label} className="w-full h-64 object-cover" />
-                </div>
-
-                {/* Button Below Box */}
-                <button className="mt-6 inline-flex items-center justify-center px-6 py-2 border-2 border-green-600 text-green-600 rounded-lg font-semibold hover:bg-green-100 transition-all duration-300">
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {item.label}
-                </button>
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {items.map((item, idx) => (
+            <Link
+              key={idx}
+              to={item.path}
+              className="group flex flex-col items-center transform transition-all duration-300 hover:-translate-y-2"
+            >
+              {/* Image Card */}
+              <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden w-full hover:shadow-2xl transition-all duration-300">
+                <img
+                  src={item.image}
+                  alt={item.label}
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-            ))}
+
+              {/* Button */}
+              <div className="mt-6 inline-flex items-center justify-center px-8 py-3 bg-blue-600 text-white rounded-full font-semibold group-hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg">
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {item.label}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+      </section>
+
+    <section className="relative py-20 bg-white overflow-hidden">
+      {/* Decorative Background */}
+      <div className="absolute inset-0 bg-[url('/images/festivals/pattern.png')] bg-repeat bg-[length:150px_150px] opacity-10 pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Images Row */}
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-0 mb-12 relative z-10">
+          <div className="relative w-full lg:w-1/2 group overflow-hidden">
+            <img
+              src="/home/festival_1.jpg"
+              alt="Festival Main"
+              className="w-full h-[300px] object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </div>
+          <div className="relative w-full lg:w-1/2 group overflow-hidden">
+            <img
+              src="/home/festival_2.jpg"
+              alt="Festival Second"
+              className="w-full h-[300px] object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
         </div>
-      </section><br /><br /><br />
+
+        {/* Content */}
+        <div className="relative z-10 text-center mx-auto bg-white/80 rounded-2xl shadow-lg p-8 md:p-12 mb-8 animate-[fade-in-up_0.8s_ease-out] border border-blue-100">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-blue-700 mb-6 tracking-tight drop-shadow">
+            CELEBRATE SACRED FESTIVALS
+          </h2>
+          <p className="text-gray-700 text-lg md:text-xl leading-relaxed mx-auto mb-8 font-light">
+            Observe many festivals that keep both public and devotees spiritually enlivened.<br />
+            <span className="block my-4 font-semibold text-blue-800">
+              Temple means festivals, and festivals mean chanting and distribution of Prasadam.
+            </span>
+            <span className="block italic text-base text-blue-900 my-4">
+              “Utsava means ‘pleasure.’ Whenever some function takes place to express happiness, it is called utsava. Utsava, the expression of complete happiness, is always present, uninterrupted in the Vaikuṇṭhalokas, the abode of the Lord, who is worshipable even by demigods like Brahmā.”
+            </span>
+            <span className="block text-sm text-gray-500 mb-2">
+              (Śrīmad Bhāgavatam 3.19.31 Purport)
+            </span>
+            The spiritual discourses, myriad of colorful altar decorations, flower garlands, multi-course food feasts, elaborate offerings of Arati and Grand Abhishek, melodious Kīrtans, Pallaki Utsava, etc., bring transcendental joy that nothing in this world can match.<br /><br />
+            <span className="block font-medium text-blue-700 mt-4">
+              Prabhupada says: “Taking part in these festivals means a step forward for our self-realization. Even if you don’t understand what the festival is about, simply by taking part in chanting, dancing, and eating prasādam, your life will gradually progress in spiritual advancement.”
+            </span>
+          </p>
+          <Link to="/festival" className="inline-block">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center mx-auto">
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              Explore Festivals
+            </button>
+          </Link>
+        </div>
+      </div>
+    </section>
 
       {/* ✅ Donation component inserted here */}
       <section className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-100 to-white py-16">
@@ -215,15 +400,14 @@ export default function Home() {
               SPONSORSHIPS & DONATIONS
             </h2>
             <p className="text-lg text-gray-700 mb-8 max-w-xl mx-auto lg:mx-0 px-4 lg:px-0">
-              All spiritual activities at Hare Krishna Movement : Bhilai-Raipur are funded by the
-              donations and sponsorships received from our well-wishers. See how you can contribute!
+              All spiritual activities at Hare Krishna Movement : Bhilai-Raipur are funded by the donations and sponsorships received from our well-wishers. See how you can contribute!
             </p>
             <div className="pt-4">
               <a
                 href="/donate"
-                className="inline-block bg-green-600 text-white px-8 py-3 font-semibold rounded-md hover:bg-green-700 transition-transform transform hover:scale-105 shadow-lg"
+                className="inline-block bg-blue-600 text-white px-8 py-3 font-semibold rounded-md hover:bg-green-700 transition-transform transform hover:scale-105 shadow-lg"
               >
-                DONATE NOW
+                OFFER SEVA
               </a>
             </div>
           </div>
@@ -234,19 +418,16 @@ export default function Home() {
               {/* Main featured image - largest and at the back */}
               <div className="absolute top-0 left-0 w-3/4 h-3/4 rounded-lg overflow-hidden shadow-2xl group z-10">
                 <img
-                  src="/path-to-image/main-featured.jpg"
+                  src="/home/donation/3.jpg"
                   alt="Main donation"
                   className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                 />
-                {/* <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                  <span className="text-white text-xl font-bold bg-black/60 px-4 py-2 rounded-full">Donate Now</span>
-                </div> */}
               </div>
               
               {/* Secondary image 1 - overlapping top right */}
               <div className="absolute top-10 right-10 w-1/2 h-1/2 rounded-lg overflow-hidden shadow-xl group z-20">
                 <img
-                  src="/path-to-image/secondary-1.jpg"
+                  src="/home/donation/4.jpg"
                   alt="Community"
                   className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                 />
@@ -255,7 +436,7 @@ export default function Home() {
               {/* Secondary image 2 - overlapping bottom left */}
               <div className="absolute bottom-10 left-10 w-1/2 h-1/2 rounded-lg overflow-hidden shadow-xl group z-20">
                 <img
-                  src="/path-to-image/secondary-2.jpg"
+                  src="/home/donation/10.jpg"
                   alt="Volunteers"
                   className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                 />
@@ -264,7 +445,7 @@ export default function Home() {
               {/* Small accent image 1 - top left corner */}
               <div className="absolute top-0 left-0 w-1/4 h-1/4 rounded-lg overflow-hidden shadow-lg group z-30 rotate-6">
                 <img
-                  src="/path-to-image/tertiary-1.jpg"
+                  src="/home/donation/8 (2).jpg"
                   alt="Event"
                   className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                 />
@@ -273,7 +454,7 @@ export default function Home() {
               {/* Small accent image 2 - bottom right corner */}
               <div className="absolute bottom-0 right-0 w-1/4 h-1/4 rounded-lg overflow-hidden shadow-lg group z-30 -rotate-6">
                 <img
-                  src="/path-to-image/tertiary-2.jpg"
+                  src="/home/donation/1.jpg"
                   alt="Celebration"
                   className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                 />
@@ -317,7 +498,7 @@ export default function Home() {
             )}
           </div>
         </div> */}
-      </section><br /><br />
+      </section>
 
       {/* Existing UpcomingEvents component */}
       <UpcomingEvents />
@@ -343,11 +524,6 @@ export default function Home() {
               title: "Media",
               img: "/media.png",
               link: "/Media",
-            },
-            {
-              title: "Festivals",
-              img: "/festivals.png",
-              link: "/Festival",
             },
             {
               title: "Activities",

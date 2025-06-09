@@ -42,21 +42,12 @@ const Annadana: React.FC = () => {
 
   // Seva options data based on the image
   const sevaOptions: SevaOption[] = [
-    { title: 'Daily Khichdi Seva', description: 'Nutritious prasadam for one day', price: '₹551', bgColor: 'bg-orange-400', category: 'Daily' },
+    { title: ' Khichdi Seva', description: 'Nutritious prasadam for one day', price: '₹551', bgColor: 'bg-orange-400', category: 'Daily' },
     { title: 'Sunday Feast Morning', description: 'Special morning prasadam seva', price: '₹1,108', bgColor: 'bg-blue-500', category: 'Weekly' },
     { title: 'Sunday Feast Evening', description: 'Special evening prasadam seva', price: '₹1,108', bgColor: 'bg-blue-500', category: 'Weekly' },
     { title: 'Sunday Full Day Seva', description: 'Complete prasadam seva for a Sunday', price: '₹2,216', bgColor: 'bg-blue-500', category: 'Weekly' },
-    { title: 'Festival Prasadam Seva', description: 'Special celebration prasadam', price: '₹2,108', bgColor: 'bg-purple-500', category: 'Festival' },
-    { title: 'Major Festival One Slot', description: 'One time major festival seva', price: '₹11,108', bgColor: 'bg-purple-500', category: 'Festival' },
-    { title: 'Major Festival Full Day', description: 'Complete major festival seva', price: '₹21,108', bgColor: 'bg-purple-500', category: 'Festival' },
-    { title: 'Feed 100 Souls', description: 'Prasadam for 100 devotees', price: '₹5,551', bgColor: 'bg-green-500', category: 'Special' },
-    { title: 'Feed 200 Souls', description: 'Prasadam for 200 devotees', price: '₹11,108', bgColor: 'bg-green-500', category: 'Special' },
-    { title: 'Feed 300 Souls', description: 'Prasadam for 300 devotees', price: '₹16,651', bgColor: 'bg-green-500', category: 'Special' },
-    { title: 'Feed 500 Souls', description: 'Prasadam for 500 devotees', price: '₹27,751', bgColor: 'bg-green-500', category: 'Special' },
-    { title: 'Feed 1000 Souls', description: 'Prasadam for 1000 devotees', price: '₹55,551', bgColor: 'bg-green-500', category: 'Special' },
-    { title: 'Feed 5000 Souls', description: 'Prasadam for 5000 devotees', price: '₹166,651', bgColor: 'bg-green-500', category: 'Special' },
-    { title: 'Custom', description: 'Feed guru souls – choose your generous contribution', price: '', bgColor: 'bg-green-500', category: 'Custom' },
-    { title: 'Special Day Celebration Seva', description: 'Celebrate a special anniversary seva', price: '', bgColor: 'bg-red-500', category: 'Special' },
+    { title: 'Feast Prasadam Seva for Festival', description: 'Special celebration prasadam', price: '₹2,108', bgColor: 'bg-purple-500', category: 'Festival' },
+    { title: 'Annadana Serve on my special day', description: 'One time major festival seva', price: '₹11,108', bgColor: 'bg-purple-500', category: 'Festival' },
   ];
 
   // Filter seva options based on the selected category
@@ -100,7 +91,7 @@ const Annadana: React.FC = () => {
             whileTap={{ scale: 0.95 }}
             onClick={() => document.getElementById('donation-form')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            Donate Now
+            Offer Seva
           </motion.button>
         </motion.div>
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
@@ -181,7 +172,7 @@ const Annadana: React.FC = () => {
         </p>
         {/* Tabs for filtering */}
         <div className="flex justify-center space-x-4 mb-8 flex-wrap gap-2">
-          {['All Seva', 'Daily', 'Weekly', 'Festival', 'Monthly', 'Special'].map((category) => (
+          {['All Seva', 'Daily', 'Weekly', 'Festival'].map((category) => (
             <button
               key={category}
               className={`px-4 py-2 rounded-full font-semibold transition-colors ${
@@ -327,7 +318,7 @@ const Annadana: React.FC = () => {
             viewport={{ once: true }}
           >
             <h3 className="text-2xl font-['Playfair_Display'] font-bold text-amber-800 mb-6 text-center">
-              Donate to Annadana Seva
+              Offer Seva to Annadana Seva
             </h3>
             <DonationForm preselectedCategoryId="annadana-seva"/>
           </motion.div>
@@ -335,7 +326,7 @@ const Annadana: React.FC = () => {
       </div>
 
       {/* Video Section */}
-      <section className="py-20 px-4 md:px-16 lg:px-32 bg-white">
+      {/* <section className="py-20 px-4 md:px-16 lg:px-32 bg-white">
         <h3 className="text-3xl md:text-4xl font-['Playfair_Display'] font-bold text-amber-800 mb-8 text-center">
           Experience Annadana Seva
         </h3>
@@ -359,7 +350,7 @@ const Annadana: React.FC = () => {
             Watch how your contributions make a difference in our community.
           </p>
         </motion.div>
-      </section>
+      </section> */}
 
       {/* Floating Action Button */}
       <motion.div

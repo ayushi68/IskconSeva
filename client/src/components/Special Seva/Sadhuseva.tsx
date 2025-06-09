@@ -45,6 +45,13 @@ const Sadhuseva: React.FC = () => {
       bgColor: 'bg-orange-400', 
       category: 'One Week' 
     },
+    { 
+      title: 'Vaishnav Bhoj Seva (One Time)', 
+      description: 'Sponsor a meal (Breakfast, Lunch, or Dinner) for sadhus on a single occasion', 
+      price: '', 
+      bgColor: 'bg-orange-400', 
+      category: 'One Time' 
+    },
   ];
 
   // Filter seva options based on the selected category

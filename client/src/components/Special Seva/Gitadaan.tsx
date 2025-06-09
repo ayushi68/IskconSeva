@@ -31,34 +31,6 @@ const GitaDaan: React.FC = () => {
       bgColor: 'bg-blue-400', 
       category: 'Bhagavad Gita Prachara' 
     },
-    { 
-      title: 'Gita Daan - 32 Books', 
-      description: 'Sponsor the distribution of 32 Bhagavad Gita books to spread Krishna’s wisdom', 
-      price: '', 
-      bgColor: 'bg-blue-400', 
-      category: 'Gita Daan' 
-    },
-    { 
-      title: 'Gita Daan - 64 Books', 
-      description: 'Sponsor the distribution of 64 Bhagavad Gita books to uplift more souls', 
-      price: '', 
-      bgColor: 'bg-blue-400', 
-      category: 'Gita Daan' 
-    },
-    { 
-      title: 'Gita Daan - 96 Books', 
-      description: 'Sponsor the distribution of 96 Bhagavad Gita books for a greater impact', 
-      price: '', 
-      bgColor: 'bg-blue-400', 
-      category: 'Gita Daan' 
-    },
-    { 
-      title: 'Gita Daan - 160 Books', 
-      description: 'Sponsor the distribution of 160 Bhagavad Gita books to transform lives globally', 
-      price: '', 
-      bgColor: 'bg-blue-400', 
-      category: 'Gita Daan' 
-    },
   ];
 
   // Filter seva options based on the selected category

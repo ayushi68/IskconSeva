@@ -21,7 +21,7 @@ const Krishna: React.FC = () => {
         </h2>
         <div className="flex flex-col md:flex-row items-center gap-8">
           <img
-            src="/k1.png"
+            src="/philosophy/k1.png"
             alt="Lord Krishna"
             className="w-full md:w-1/2 h-64 object-cover rounded-lg shadow-md"
           />
@@ -298,7 +298,7 @@ const Krishna: React.FC = () => {
           Krishna in Images
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {['/k2.png', '/k3.png', '/k4.png', '/k5.png','/k6.jpg','/k7.jpg','/k8.png','/k9.png','/k10.png'].map((img, index) => (
+          {['/philosophy/k2.png', '/philosophy/k3.png', '/philosophy/k4.png', '/philosophy/k5.png','/philosophy/k6.jpg','/philosophy/k7.jpg','/philosophy/k8.png','/philosophy/k9.png','/philosophy/k10.png'].map((img, index) => (
             <img
                 key={index}
                 src={img}  // <--- Use img directly, no need to prepend anything

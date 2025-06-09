@@ -39,7 +39,7 @@ const Mahamantra: React.FC = () => {
         </div>
 
         <img
-            src="/mahamantra4.png"
+            src="/philosophy/mahamantra4.png"
             alt="Mercy"
             className="rounded-xl shadow-lg mb-10 w-full md:w-2/3 lg:w-1/2 max-h-[480px] object-cover mx-auto"
             />
@@ -163,10 +163,10 @@ const Mahamantra: React.FC = () => {
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            '/maha1.png',
-            '/maha2.png',
-            '/maha3.png',
-            '/maha4.png',
+            '/philosophy/maha1.png',
+            '/philosophy/maha2.png',
+            '/philosophy/maha3.png',
+            '/philosophy/maha4.png',
           ].map((img, index) => (
             <img
               key={index}

@@ -263,7 +263,7 @@ const Radharani: React.FC = () => {
           className="mt-6 px-6 py-3 bg-rose-600 text-white font-semibold rounded-lg shadow-md hover:bg-rose-700 transform transition-transform hover:scale-105"
           onClick={scrollToDonationForm}
         >
-          Donate Now
+          Offer Seva
         </button>
       </section>
 

@@ -5,7 +5,7 @@ const caseStudies = [
     title: "Gaudiya Sampradaya",
     description:
       "The divine spiritual lineage originating from Lord Krishna through Brahma, Narada, Vyasa, and Sri Chaitanya Mahaprabhu, preserving pure bhakti yoga.",
-    images: ["/annadana.jpg", "/annadana.jpg"],
+    images: [ "/PHILOSOPHY SECTION/Gaudiya Sampradaya Chronology/Guruparampara.png" ,"/PHILOSOPHY SECTION/Gaudiya Sampradaya Chronology/4 Sampraday.jpg"],
     tag: "Lineage",
     background: "bg-[#7B9EFF]",
     link: "./philosophy/Gaudiya",
@@ -14,7 +14,7 @@ const caseStudies = [
     title: "Srila Prabhupada",
     description:
       "Founder-Acharya of ISKCON who brought Krishna consciousness to the West, translating over 80 volumes of Vedic scriptures.",
-    images: ["/annadana.jpg", "/annadana.jpg"],
+    images: ["/PHILOSOPHY SECTION/Srila Prabhupada/SP-FullAltar.jpg", "/PHILOSOPHY SECTION/Srila Prabhupada/images (1).jpg"],
     tag: "Founder",
     background: "bg-[#D4FCE5]",
     link: "./philosophy/Sprabhpada",
@@ -23,7 +23,7 @@ const caseStudies = [
     title: "Nityananda Prabhu",
     description:
       "The incarnation of Lord Balarama who appeared with Chaitanya Mahaprabhu to spread the sankirtan movement of congregational chanting.",
-    images: ["/annadana.jpg", "/annadana.jpg"],
+    images: ["/PHILOSOPHY SECTION/Nityananda Prabhu/lord-caitanyas-sankirtan-party.jpg", "/PHILOSOPHY SECTION/Nityananda Prabhu/The Liberation of Jagai and Madhai.jpg"],
     tag: "Avatar",
     background: "bg-[#FFB2B2]",
     link: "./philosophy/nityanand",
@@ -32,7 +32,7 @@ const caseStudies = [
     title: "Chaitanya Mahaprabhu",
     description:
       "The golden avatar of Krishna who appeared in Mayapur to teach love of God through sankirtan and the Hare Krishna maha-mantra.",
-    images: ["/annadana.jpg", "/annadana.jpg"],
+    images: ["/PHILOSOPHY SECTION/Chaitanya Mahaprabhu/The Sankirtana Of Lord Chaitanya And His Associates.bmp", "/PHILOSOPHY SECTION/Chaitanya Mahaprabhu/Krishna, Radha-Krishna, and Chaitanya.bmp"],
     tag: "Avatar",
     background: "bg-[#FFD966]",
     link: "./philosophy/Chaitanya",
@@ -41,7 +41,7 @@ const caseStudies = [
     title: "Divine Couple",
     description:
       "Radha and Krishna, the original feminine and masculine aspects of Godhead, whose loving pastimes exemplify pure devotion.",
-    images: ["/annadana.jpg", "/annadana.jpg"],
+    images: ["/PHILOSOPHY SECTION/Divine Couple (Radhakrishna)/Radha And Krishna And The Eight Chief Gopis.bmp", "/PHILOSOPHY SECTION/Divine Couple (Radhakrishna)/Radha And Krishna On A Swing.bmp"],
     tag: "Deities",
     background: "bg-[#B19CD9]",
     link: "./philosophy/Divinecouple",
@@ -50,7 +50,7 @@ const caseStudies = [
     title: "Bhagavad Gītā",
     description:
       "Krishna's timeless spiritual instructions to Arjuna, containing the essence of Vedic knowledge and paths of yoga.",
-    images: ["/annadana.jpg", "/annadana.jpg"],
+    images: ["/PHILOSOPHY SECTION/Bhagavad Gītā/Gita Sandesh  (15).jpg", "/PHILOSOPHY SECTION/Bhagavad Gītā/Bhagvad Gita1.png"],
     tag: "Scripture",
     background: "bg-[#FF9E7D]",
     link: "./philosophy/Bhagavadgita",
@@ -59,7 +59,7 @@ const caseStudies = [
     title: "Practicing Bhakti Yoga",
     description:
       "The science of devotional service through nine primary methods including hearing, chanting, and remembering the Supreme.",
-    images: ["/annadana.jpg", "/annadana.jpg"],
+    images: ["/PHILOSOPHY SECTION/Practicing Bhakti Yoga/Practicing Bhakti Yoga 4.jpeg", "/PHILOSOPHY SECTION/Practicing Bhakti Yoga/Bhakti Yoga4.png"],
     tag: "Practice",
     background: "bg-[#A8E6CF]",
     link: "./philosophy/Bhaktiyoga",
@@ -68,7 +68,7 @@ const caseStudies = [
     title: "Practice Krishna Consciousness",
     description:
       "Awakening our natural state through daily spiritual practices, following four regulative principles and chanting Hare Krishna.",
-    images: ["/annadana.jpg", "/annadana.jpg"],
+    images: ["/PHILOSOPHY SECTION/Practise Krishna Consciousness/practice_krishna_consciousness 3.jpg", "/PHILOSOPHY SECTION/Practise Krishna Consciousness/practice_krishna_consciousness 2.jpg"],
     tag: "Lifestyle",
     background: "bg-[#FFAAA5]",
     link: "./philosophy/Krishna",
@@ -77,7 +77,7 @@ const caseStudies = [
     title: "Chanting Hare Krishna Maha-mantra",
     description:
       "The supreme vibration for Kali-yuga: Hare Krishna, Hare Krishna, Krishna Krishna, Hare Hare / Hare Rama, Hare Rama, Rama Rama, Hare Hare.",
-    images: ["/annadana.jpg", "/annadana.jpg"],
+    images: ["/PHILOSOPHY SECTION/Chanting Hare Krishna Maha-mantra/Chanting Hare Krsna 4.png", "/PHILOSOPHY SECTION/Chanting Hare Krishna Maha-mantra/Chanting Hare Krsna 2.png"],
     tag: "Mantra",
     background: "bg-[#DCE2C8]",
     link: "./philosophy/Mahamantra",

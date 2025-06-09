@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const TempleScheduleR: React.FC = () => {
+  const [openProgram, setOpenProgram] = useState<number | null>(null);
+
+  const toggleProgram = (index: number) => {
+    setOpenProgram(openProgram === index ? null : index);
+  };
+
   const morningProgramme = [
     {
       time: '4:30 AM – 4:50 AM',
@@ -120,50 +126,158 @@ const TempleScheduleR: React.FC = () => {
     { time: '7:20 AM', event: 'Guru Puja' },
     { time: '7:45 AM', event: 'Srimad Bhagavatam Class' },
     { time: 'Weekdays 12:00 PM – 3:00 PM', event: 'Restaurant & Gift Shop' },
-    { time: 'Tuesdays 7:00 PM', event: 'Bhakti School' },
-    { time: 'Sunday 4:30 PM', event: 'Bhajans & Kirtans' },
-    { time: 'Sunday 6:30 PM', event: 'Sunday Feast Lecture' },
-    { time: 'Sunday 7:30 PM', event: 'Sunday Feast Served' },
-    { time: 'Sunday 4:00 PM – 8:00 PM', event: 'Govinda’s Gifts Open' },
+    { time: 'Sundays 9:00 AM – 11:00 AM', event: 'Gopal Sakha Classes (Sunday School for Children)' },
+    { time: 'Sundays 4:30 PM – 6:30 PM', event: 'FOLK Classes (Youth Empowerment)' },
+    { time: 'Sundays 4:30 PM – 6:30 PM', event: 'Srimad Bhagavad Gita Study' },
+    { time: 'Sundays 4:30 PM', event: 'Bhajans & Kirtans' },
+    { time: 'Sundays 6:30 PM', event: 'Sunday Feast Lecture' },
+    { time: 'Sundays 7:30 PM', event: 'Sunday Feast Served' },
+    { time: 'Sundays 4:00 PM – 8:00 PM', event: 'Govinda’s Gifts Open' },
+  ];
+
+  const sundayPrograms = [
+    {
+      title: 'Gopal Sakha Classes',
+      time: 'Sundays, 9:00 AM – 11:00 AM',
+      description: [
+        'Every Sunday, classes are conducted for children aged 3 to 15 to bring them together with the objective of associating them with the rich wisdom of our great Acharyas and scriptures, imparting the right values and giving spiritual direction. The expert team of Gopal Sakha mentors nurtures and guides the children in advancing in Krishna consciousness through activities like Bhagavad Gita chanting, yoga, mantra meditation, and Vedic stories.',
+      ],
+    },
+    {
+      title: 'Culture Camps',
+      time: 'During Summer Vacation',
+      description: [
+        'Conducted during summer, these camps promote art, culture, and spirituality among children. Students learn the principles of the Bhagavad Gita and other scriptures through fun activities aimed at instilling moral values. Activities include Bhagavad Gita classes, Vedic stories, mantra meditation, yoga, drama, creative art, and educational trips. At the end of the camp, children perform various art forms for the pleasure of Their Lordships.',
+      ],
+    },
+    {
+      title: 'FOLK Classes (Friends of Lord Krishna)',
+      time: 'Sundays, 4:30 PM – 6:30 PM',
+      description: [
+        'Vedic wisdom is imparted to youth through seminars and classes by experienced faculties. This program connects to current world realities, addressing day-to-day challenges and their solutions. Topics include stress management, improving concentration, overcoming bad habits, and excelling in life. Every FOLK program is an enjoyable experience, helping participants discover their real selves and lead happy, peaceful lives.',
+      ],
+    },
+    {
+      title: 'Srimad Bhagavad Gita – A Systematic Study',
+      time: 'Sundays, 4:30 PM – 6:30 PM',
+      description: [
+        'Srila Prabhupada translated and commented on over eighty volumes of the Vedas’ most important sacred texts, including the Bhagavad Gita and Srimad Bhagavatam. This course presents the Gita’s knowledge in a scientific, systematic, and easy-to-understand manner. Attendees can apply these teachings in daily life to lead a life full of bliss, harmoniously blending the subject matter of the Bhagavad Gita with spiritual disciplines to actualize potential and improve innate strength.',
+      ],
+    },
+    {
+      title: 'Sunday Love Feast',
+      time: 'Sundays, 7:00 AM – 9:30 AM & 7:00 PM – 9:30 PM',
+      description: [
+        'Initiated by Srila Prabhupada in 1966, the Sunday Love Feast is a weekly festival celebrated in all Hare Krishna temples worldwide. It includes kirtan (musical mantra meditation), chanting, spiritual discourse on the Srimad Bhagavatam and Bhagavad Gita, dancing, and a free vegetarian feast. Open to all, this culturally rich experience provides a taste of Bhakti yoga – the yoga of love, welcoming both congregants and newcomers to feed their souls.',
+      ],
+    },
+    {
+      title: 'Nagar Sankirtana',
+      time: 'Sundays, Evening',
+      description: [
+        'Scriptures state that the holy name is the only means to achieve the highest spiritual perfection in this age. Regular Nagar Sankirtanas are conducted on Sundays in the evening, where devotees gather to sing the Hare Krishna Maha-mantra ecstatically. The sublime Harinam and vibrations created by kartal and mridanga attract people, unknowingly benefiting them spiritually.',
+      ],
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 font-sans">
-      {/* Slogan Section */}
-      <section className="bg-indigo-600 text-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-4">Welcome to Sri Sri Radha Krishnachandra Mandir</h1>
-          <blockquote className="text-lg italic">
-            “Temple means people should come, people should learn the science of God. Temple means spiritual educational shelter. People should come and learn what is spiritual life, what is God, what is my relationship with God.”
-            <span className="block mt-2 font-semibold">— Srila Prabhupada</span>
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-saffron-50 font-[Poppins]">
+      {/* Navigation Bar */}
+      {/* <nav className="sticky top-0 bg-indigo-800 text-white shadow-lg z-50">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold">ISKCON Raipur</h1>
+          <div className="space-x-4">
+            <a href="#sunday-programs" className="hover:text-yellow-300 transition-colors">Sunday Programs</a>
+            <a href="#morning-programme" className="hover:text-yellow-300 transition-colors">Morning</a>
+            <a href="#evening-programme" className="hover:text-yellow-300 transition-colors">Evening</a>
+            <a href="#darshan-times" className="hover:text-yellow-300 transition-colors">Darshan</a>
+            <a href="#services-classes" className="hover:text-yellow-300 transition-colors">Services</a>
+          </div>
+        </div>
+      </nav> */}
+
+      {/* Header Section */}
+      <section className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white py-16 relative overflow-hidden">
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <h1 className="text-5xl font-extrabold mb-6 tracking-tight drop-shadow-md">
+            ISKCON Raipur: Sri Sri Radha Krishnachandra Mandir
+          </h1>
+          <p className="text-xl mb-6 max-w-2xl mx-auto leading-relaxed">
+            Guided by Srila Prabhupada, ISKCON Raipur promotes Bhakti yoga to revive our eternal connection with Lord Krishna, blending spiritual practices with daily life for a blissful existence.
+          </p>
+          <blockquote className="text-lg italic max-w-3xl mx-auto">
+            “Temple means spiritual educational shelter where people learn the science of God and their relationship with Him.”
+            <span className="block mt-3 font-semibold text-yellow-200">— Srila Prabhupada</span>
           </blockquote>
+          <a
+            href="#sunday-programs"
+            className="mt-6 inline-block bg-yellow-400 text-indigo-800 font-semibold py-3 px-6 rounded-full hover:bg-yellow-300 transition-colors"
+          >
+            Join Our Sunday Love Feast
+          </a>
+        </div>
+        <div className="absolute inset-0 bg-[url('https://source.unsplash.com/random/1200x400?lotus')] opacity-15 bg-cover bg-center"></div>
+      </section>
+
+      {/* Sunday Programs Section */}
+      <section id="sunday-programs" className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold text-indigo-700 mb-6 text-center">Sunday Programs</h2>
+        <p className="text-gray-700 mb-8 text-center max-w-3xl mx-auto">
+          ISKCON Raipur’s vibrant Sunday programs nurture spiritual growth through classes, cultural activities, and devotional practices, fostering Vedic wisdom and Krishna consciousness.
+        </p>
+        <div className="space-y-4">
+          {sundayPrograms.map((program, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300"
+            >
+              <button
+                className="w-full text-left bg-gradient-to-r from-indigo-100 to-blue-100 p-6 flex justify-between items-center"
+                onClick={() => toggleProgram(index)}
+              >
+                <div>
+                  <h3 className="text-xl font-semibold text-indigo-700">{program.title}</h3>
+                  <p className="text-gray-600 font-medium">{program.time}</p>
+                </div>
+                <span className="text-indigo-700">{openProgram === index ? '−' : '+'}</span>
+              </button>
+              {openProgram === index && (
+                <div className="p-6 bg-white animate-fade-in">
+                  {program.description.map((desc, i) => (
+                    <p key={i} className="text-gray-600 leading-relaxed mb-2">{desc}</p>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Morning Programme Introduction */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Morning Programme</h2>
-        <p className="text-gray-600 mb-4">
-          There are several services throughout the day at Sri Sri Radha Krishnachandra Mandir to which everyone is welcome to attend. Aside from these times, it is open daily from 4:30 AM - 8:30 PM for pilgrims and guests.
+      <section id="morning-programme" className="container mx-auto px-6 py-12 bg-white rounded-xl shadow-md">
+        <h2 className="text-3xl font-bold text-indigo-700 mb-6 text-center">Morning Programme</h2>
+        <p className="text-gray-700 mb-4 max-w-3xl mx-auto text-center">
+          Join us for daily services at ISKCON Raipur, open to all. The temple welcomes pilgrims from 4:30 AM to 8:30 PM.
         </p>
-        <p className="text-gray-600 mb-4">
-          The scriptures recommend that spiritual activities performed in the auspicious time of brahma-muhurta (one and a half hours before sunrise) have greater effect. Srila Prabhupada mandated that devotees should wake up early in the morning at 3:30 AM and prepare themselves for rendering devotional service. This mandate is strictly followed by all the devotees who practice the principles of Krishna consciousness.
+        <p className="text-gray-700 mb-4 max-w-3xl mx-auto text-center">
+          Spiritual activities during brahma-muhurta (one and a half hours before sunrise) are especially potent, as per Srila Prabhupada’s mandate for devotees to rise at 3:30 AM.
         </p>
-        <p className="text-gray-600">
-          Come experience the peace and joy of starting your day with devotion.
-        </p>
+        <p className="text-gray-700 text-center">Begin your day with devotion and tranquility.</p>
       </section>
 
       {/* Morning Programme Schedule */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Morning Programme Schedule</h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <section className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold text-indigo-700 mb-6 text-center">Morning Programme Schedule</h2>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {morningProgramme.map((item, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-medium text-indigo-600">{item.event}</h3>
-              <p className="text-gray-600 font-medium">{item.time}</p>
+            <div
+              key={index}
+              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-400 animate-fade-in"
+            >
+              <h3 className="text-xl font-semibold text-indigo-700 mb-2">{item.event}</h3>
+              <p className="text-gray-600 font-medium mb-3">{item.time}</p>
               {item.description.map((desc, i) => (
-                <p key={i} className="text-gray-600 mt-2">{desc}</p>
+                <p key={i} className="text-gray-600 leading-relaxed mb-2">{desc}</p>
               ))}
             </div>
           ))}
@@ -171,23 +285,26 @@ const TempleScheduleR: React.FC = () => {
       </section>
 
       {/* Evening Programme Introduction */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Evening Programme</h2>
-        <p className="text-gray-600">
-          As the sun begins to set, the temple atmosphere becomes calm and spiritually vibrant. The evening programme offers a wonderful opportunity to wind down the day in the divine presence of the Lord.
+      <section id="evening-programme" className="container mx-auto px-6 py-12 bg-white rounded-xl shadow-md">
+        <h2 className="text-3xl font-bold text-indigo-700 mb-6 text-center">Evening Programme</h2>
+        <p className="text-gray-700 max-w-3xl mx-auto text-center">
+          As evening falls, the temple becomes a serene haven, offering a divine setting to end your day with Lord Krishna’s presence.
         </p>
       </section>
 
       {/* Evening Programme Schedule */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Evening Programme Schedule</h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <section className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold text-indigo-700 mb-6 text-center">Evening Programme Schedule</h2>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {eveningProgramme.map((item, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-medium text-indigo-600">{item.event}</h3>
-              <p className="text-gray-600 font-medium">{item.time}</p>
+            <div
+              key={index}
+              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-400 animate-fade-in"
+            >
+              <h3 className="text-xl font-semibold text-indigo-700 mb-2">{item.event}</h3>
+              <p className="text-gray-600 font-medium mb-3">{item.time}</p>
               {item.description.map((desc, i) => (
-                <p key={i} className="text-gray-600 mt-2">{desc}</p>
+                <p key={i} className="text-gray-600 leading-relaxed mb-2">{desc}</p>
               ))}
             </div>
           ))}
@@ -195,14 +312,18 @@ const TempleScheduleR: React.FC = () => {
       </section>
 
       {/* Darshan Times */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Darshan Times</h2>
-        <p className="text-gray-600 mb-4">Temple Altar is open to see the Deities</p>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <ul className="space-y-2">
+      <section id="darshan-times" className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold text-indigo-700 mb-6 text-center">Darshan Times</h2>
+        <p className="text-gray-700 mb-6 text-center">Temple Altar is open to see the Deities</p>
+        <div className="bg-white p-8 rounded-xl shadow-lg">
+          <ul className="space-y-4">
             {darshanTimes.map((item, index) => (
-              <li key={index} className="text-gray-600">
-                <span className="font-medium">{item.time}:</span> {item.event}
+              <li
+                key={index}
+                className="text-gray-700 flex items-center space-x-2 hover:text-indigo-700 transition-colors duration-200"
+              >
+                <span className="font-medium text-indigo-700">{item.time}:</span>
+                <span>{item.event}</span>
               </li>
             ))}
           </ul>
@@ -210,13 +331,17 @@ const TempleScheduleR: React.FC = () => {
       </section>
 
       {/* Services and Classes */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Services and Classes</h2>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <ul className="space-y-2">
+      <section id="services-classes" className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold text-indigo-700 mb-6 text-center">Services and Classes</h2>
+        <div className="bg-white p-8 rounded-xl shadow-lg">
+          <ul className="space-y-4">
             {servicesAndClasses.map((item, index) => (
-              <li key={index} className="text-gray-600">
-                <span className="font-medium">{item.time}:</span> {item.event}
+              <li
+                key={index}
+                className="text-gray-700 flex items-center space-x-2 hover:text-indigo-700 transition-colors duration-200"
+              >
+                <span className="font-medium text-indigo-700">{item.time}:</span>
+                <span>{item.event}</span>
               </li>
             ))}
           </ul>
@@ -224,15 +349,13 @@ const TempleScheduleR: React.FC = () => {
       </section>
 
       {/* Temple Hours */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Temple Hours</h2>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <p className="text-gray-600">4:30 AM – 12:30 PM</p>
-          <p className="text-gray-600">4:30 PM – 8:30 PM</p>
+      <section className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold text-indigo-700 mb-6 text-center">Temple Hours</h2>
+        <div className="bg-white p-8 rounded-xl shadow-lg text-center">
+          <p className="text-gray-700 mb-2">4:30 AM – 12:30 PM</p>
+          <p className="text-gray-700">4:30 PM – 8:30 PM</p>
         </div>
       </section>
-
-      
     </div>
   );
 };

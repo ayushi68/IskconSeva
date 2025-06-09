@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 
 const Volunteer: React.FC = () => {
   // Carousel images (replace with actual temple/volunteer-related image URLs)
-  const images = [
+  const images: string[] = [
     'https://via.placeholder.com/1200x500?text=Volunteer+1',
     'https://via.placeholder.com/1200x500?text=Volunteer+2',
     'https://via.placeholder.com/1200x500?text=Volunteer+3',
   ];
 
-  const [currentImage, setCurrentImage] = useState(0);
+  const [currentImage, setCurrentImage] = useState<number>(0);
 
   // Auto-scroll carousel every 5 seconds
   useEffect(() => {
@@ -19,38 +19,93 @@ const Volunteer: React.FC = () => {
   }, [images.length]);
 
   // State for volunteer form
-  const [formData, setFormData] = useState({
-    name: '',
+  const [formData, setFormData] = useState<{
+    fullName: string;
+    email: string;
+    contact: string;
+    dob: string;
+    days: { [key: string]: boolean };
+    time: string;
+  }>({
+    fullName: '',
     email: '',
-    phone: '',
-    availability: '',
-    role: '',
-    message: '',
+    contact: '',
+    dob: '',
+    days: {
+      Monday: false,
+      Tuesday: false,
+      Wednesday: false,
+      Thursday: false,
+      Friday: false,
+      Saturday: false,
+      Sunday: false,
+    },
+    time: '',
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { name, value } = e.target;
+const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+) => {
+  const { name, value, type } = e.target;
+  if (type === 'checkbox') {
+    // Type assertion to HTMLInputElement for checkbox
+    const checked = (e.target as HTMLInputElement).checked;
+    setFormData((prev) => ({
+      ...prev,
+      days: { ...prev.days, [name]: checked },
+    }));
+  } else {
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  }
+};
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // For demo purposes, log the form data to console
-    console.log('Volunteer Form Data:', formData);
-    alert('Thank you for your interest! We will contact you soon.');
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      availability: '',
-      role: '',
-      message: '',
-    });
+  const handleSubmit = async () => {
+    // Prepare data for API submission
+    const submissionData = {
+      fullName: formData.fullName,
+      email: formData.email,
+      contact: formData.contact,
+      dob: formData.dob,
+      days: Object.keys(formData.days).filter((day) => formData.days[day]),
+      time: formData.time,
+    };
+
+    try {
+      // Mock API endpoint (replace with actual API endpoint)
+      const response = await fetch('https://api.example.com/volunteer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData),
+      });
+
+      if (response.ok) {
+        alert('Thank you for your application! We will contact you soon.');
+        // Reset form
+        setFormData({
+          fullName: '',
+          email: '',
+          contact: '',
+          dob: '',
+          days: {
+            Monday: false,
+            Tuesday: false,
+            Wednesday: false,
+            Thursday: false,
+            Friday: false,
+            Saturday: false,
+            Sunday: false,
+          },
+          time: '',
+        });
+      } else {
+        alert('There was an error submitting your application. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('There was an error submitting your application. Please try again.');
+    }
   };
 
   return (
@@ -69,7 +124,7 @@ const Volunteer: React.FC = () => {
         ))}
         <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
           <h1 className="text-5xl font-bold text-white drop-shadow-lg transform transition-transform hover:scale-105">
-            Volunteer: Serve Krishna with Love
+            BE PART OF THE COMMUNITY!
           </h1>
         </div>
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
@@ -85,272 +140,206 @@ const Volunteer: React.FC = () => {
         </div>
       </section>
 
-      {/* Introduction Section */}
+      {/* Sanskrit Verse Section */}
       <section className="py-16 px-4 md:px-16 lg:px-32 bg-white shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
         <h2 className="text-4xl font-bold text-amber-800 mb-6 text-center">
-          Join Us as a Volunteer at HKM Bhilai
+          स्वल्पमप्यस्य धर्मस्य त्रायते महतो भयात्
         </h2>
-        <p className="text-lg text-gray-600 leading-relaxed">
-          Volunteering at HKM Bhilai is a divine opportunity to serve Lord Krishna
-          and His devotees, immersing yourself in the bliss of Krishna
-          Consciousness. Inspired by Srila Prabhupada’s teachings, our volunteers
-          play a vital role in sustaining temple activities, spreading Vedic
-          wisdom, and fostering a community of devotion and love.
+        <p className="text-lg text-gray-600 leading-relaxed text-center">
+          Svalpam apy asya dharmasya trāyate mahato bhayāt<br />
+          <span className="text-sm">— Bhagavad-gita 2.40</span>
         </p>
         <p className="text-lg text-gray-600 leading-relaxed mt-4">
-          Whether you’re assisting in deity worship, participating in sankirtan,
-          or helping with youth programs, every act of service brings you closer to
-          Krishna. Join us in this sacred seva and experience the joy of giving
-          selflessly.
+          Devotional service is so pure and perfect that once having begun, one is forcibly dragged to ultimate success. The temple means to give a chance to everyone, even to the child, to advance one step in Krishna Consciousness. One step a day means in 60-70 years one can easily reach the Supreme Personality of Godhead, the ultimate goal of life.
         </p>
       </section>
 
-      {/* Volunteer Opportunities Section */}
+      {/* Main Goal Section */}
       <section className="py-16 px-4 md:px-16 lg:px-32 bg-gradient-to-r from-amber-50 to-orange-100 shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
         <h2 className="text-3xl font-bold text-amber-800 mb-6 text-center">
-          Volunteer Opportunities
+          DEVOTIONAL SERVICE TO THE LORD IS THE ULTIMATE GOAL OF LIFE
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-white rounded-lg shadow-lg p-6 transform transition-transform hover:-translate-y-2 hover:shadow-2xl">
-            <h3 className="text-xl font-semibold text-amber-700 mb-3">
-              Deity Worship Support
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Assist in the sacred practice of Vigraha Seva by helping with deity
-              decoration, preparing offerings, or maintaining the altar’s
-              cleanliness.
-            </p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-6 transform transition-transform hover:-translate-y-2 hover:shadow-2xl">
-            <h3 className="text-xl font-semibold text-amber-700 mb-3">
-              Sankirtan and Outreach
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Join our sankirtan teams to chant the Holy Names and distribute
-              Srila Prabhupada’s books, spreading Krishna Consciousness in the
-              community.
-            </p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-6 transform transition-transform hover:-translate-y-2 hover:shadow-2xl">
-            <h3 className="text-xl font-semibold text-amber-700 mb-3">
-              Youth Empowerment Programs
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Support our youth initiatives by mentoring young devotees, organizing
-              camps, or facilitating character development workshops.
-            </p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-6 transform transition-transform hover:-translate-y-2 hover:shadow-2xl">
-            <h3 className="text-xl font-semibold text-amber-700 mb-3">
-              Festival and Event Assistance
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Help organize and manage temple festivals, ensuring a blissful
-              experience for all devotees through decorations, prasadam
-              distribution, and more.
-            </p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-6 transform transition-transform hover:-translate-y-2 hover:shadow-2xl">
-            <h3 className="text-xl font-semibold text-amber-700 mb-3">
-              Kitchen Seva
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Participate in preparing bhoga for Their Lordships, cooking with
-              love and devotion to offer sanctified prasadam to Krishna and the
-              devotees.
-            </p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-6 transform transition-transform hover:-translate-y-2 hover:shadow-2xl">
-            <h3 className="text-xl font-semibold text-amber-700 mb-3">
-              Educational Support
-            </h3>
-            <p className="text-gray-600 text-sm">
-              Assist in managing our spiritual library, conducting Gyaan Daan
-              sessions, or supporting educational trips for youth to pilgrimage
-              sites.
-            </p>
+        <p className="text-lg text-gray-600 leading-relaxed">
+          In every chapter of Bhagavad-gita, Lord Krishna stresses that devotional service unto the Supreme Personality of Godhead is the ultimate goal of life (BG 18.65). Even the processes of yoga, austerity, sacrifice, or charity are meant to culminate in devotional service to the Lord. The temple means to give a chance to everyone, even to the child, to advance one step in Krishna Consciousness. One step a day means in 60-70 years one can easily reach the Supreme Personality of Godhead, the ultimate goal of life.
+        </p>
+        <p className="text-lg text-gray-600 leading-relaxed mt-4">
+          Fortunately, we can do Seva (Pure Devotional Service) at HKM Bhilai, which gives us a chance to purify our hearts and minds, develop love for Krishna, and ultimately attain the ultimate goal of life.
+        </p>
+        <p className="text-lg text-gray-600 leading-relaxed mt-4">
+          Our only aim is to develop Krishna Consciousness based on practical activity, whatever little strength you have got, whatever little education you have got, whatever little knowledge you have got. Srimad Bhagavatam Lectures, Mayapur, March 1, 1977.
+        </p>
+      </section>
+
+      {/* Seva Diagram Section */}
+      <section className="py-16 px-4 md:px-16 lg:px-32 bg-white shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
+        <h2 className="text-3xl font-bold text-amber-800 mb-6 text-center">
+          Should I learn something new to do Seva?
+        </h2>
+        <div className="flex justify-center my-8">
+          <div className="text-center">
+            <div className="relative w-64 h-64 mx-auto">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-32 h-32 bg-amber-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                  SEVA
+                </div>
+              </div>
+              <div className="absolute top-0 left-0 w-24 h-24 bg-orange-200 rounded-full flex items-center justify-center text-center p-2">
+                <span className="text-sm text-gray-700">Without any expectation</span>
+              </div>
+              <div className="absolute top-0 right-0 w-24 h-24 bg-orange-200 rounded-full flex items-center justify-center text-center p-2">
+                <span className="text-sm text-gray-700">Hearty</span>
+              </div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-orange-200 rounded-full flex items-center justify-center text-center p-2">
+                <span className="text-sm text-gray-700">With pure intention</span>
+              </div>
+              <div className="absolute bottom-0 right-0 w-24 h-24 bg-orange-200 rounded-full flex items-center justify-center text-center p-2">
+                <span className="text-sm text-gray-700">Done always without any lapses</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Benefits of Volunteering Section */}
-      <section className="py-16 px-4 md:px-16 lg:px-32 bg-white shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
+      {/* How Can I Do Seva Section */}
+      <section className="py-16 px-4 md:px-16 lg:px-32 bg-gradient-to-r from-amber-50 to-orange-100 shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
         <h2 className="text-3xl font-bold text-amber-800 mb-6 text-center">
-          Benefits of Volunteering
+          HOW CAN I DO SEVA?
         </h2>
         <p className="text-lg text-gray-600 leading-relaxed">
-          Volunteering at HKM Bhilai is not just an act of service—it’s a
-          transformative journey that brings you closer to Krishna. Here are some
-          of the spiritual and personal benefits:
+          <span className="font-semibold">Bhakti (Bhagavatam 1.2.6):</span> Sa vai puṁsāṁ paro dharmo yato bhaktir adhokṣaje ahaituky apratihatā yayātmā suprasīdati – the duty of every living being is to perform welfare activities for the benefit of others with his life, wealth, intelligence, and words. This is the mission of HKM Bhilai. We want to do Seva to the Lord, to the devotees, to the society, to the nation, and to the world at large by engaging our spiritual devotional service without any motivation, rendering such service as the only occupational business of all living entities.
         </p>
-        <ul className="list-disc list-inside text-lg text-gray-600 space-y-2 mt-4">
-          <li>
-            Spiritual Growth: Deepen your Krishna Consciousness through direct
-            seva, purifying your heart and mind.
-          </li>
-          <li>
-            Sadhu Sanga: Associate with like-minded devotees, fostering a sense of
-            community and spiritual support.
-          </li>
-          <li>
-            Divine Blessings: Earn the mercy of Their Lordships, Sri Sri
-            Nitai-Gauranga, through selfless service.
-          </li>
-          <li>
-            Skill Development: Gain practical skills in event management, teaching,
-            cooking, and more, all offered in Krishna’s service.
-          </li>
-          <li>
-            Inner Peace: Experience the transcendental bliss of serving Krishna,
-            transcending material anxieties.
-          </li>
-        </ul>
-        <blockquote className="text-lg text-gray-600 italic border-l-4 border-amber-500 pl-4 mt-4">
-          “Work done as a sacrifice for Viṣṇu has to be performed; otherwise work
-          causes bondage in this material world.”<br />
-          <span className="text-sm">— Bhagavad-gita 3.9</span>
-        </blockquote>
+        <p className="text-lg text-gray-600 leading-relaxed mt-4">
+          Devotional Service to the Lord is the Prime Necessity of all living entities. The temple means to give a chance to everyone, even to the child, to advance one step in Krishna Consciousness. One step a day means in 60-70 years one can easily reach the Supreme Personality of Godhead, the ultimate goal of life.
+        </p>
+        <p className="text-lg text-gray-600 leading-relaxed mt-4">
+          Srila Suta Goswami is presenting the prime necessity of devotional service to the Lord, which is the only occupational business of all living entities. Devotional service is so pure and perfect that once having begun, one is forcibly dragged to ultimate success.
+        </p>
       </section>
 
       {/* Volunteer Form Section */}
       <section className="py-16 px-4 md:px-16 lg:px-32 bg-gradient-to-r from-amber-50 to-orange-100 shadow-xl rounded-lg mx-4 my-8 transform transition-transform hover:-translate-y-1 hover:shadow-2xl">
         <h2 className="text-3xl font-bold text-amber-800 mb-6 text-center">
-          Volunteer Registration Form
+          VOLUNTEER FOR DEVOTIONAL SERVICE – NOT A JOB, IT IS A PRIVILEGE – SRILA PRABHUPADA<br />
+          How can you take part?
         </h2>
         <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-          <div>
-            <div className="space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Full Name
+          <div className="space-y-6">
+            <div>
+              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
+                placeholder="Enter your full name"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
+                placeholder="Enter your email address"
+              />
+            </div>
+            <div>
+              <label htmlFor="contact" className="block text-sm font-medium text-gray-700">
+                Contact
+              </label>
+              <input
+                type="tel"
+                id="contact"
+                name="contact"
+                value={formData.contact}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
+                placeholder="Enter your contact number"
+              />
+            </div>
+            <div>
+              <label htmlFor="dob" className="block text-sm font-medium text-gray-700">
+                Date of Birth
+              </label>
+              <input
+                type="date"
+                id="dob"
+                name="dob"
+                value={formData.dob}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Days Available
+              </label>
+              <div className="grid grid-cols-2 gap-2 mt-2">
+                {Object.keys(formData.days).map((day) => (
+                  <label key={day} className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      name={day}
+                      checked={formData.days[day]}
+                      onChange={handleChange}
+                      className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
+                    />
+                    <span className="text-sm text-gray-600">{day}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Preferred Time
+              </label>
+              <div className="flex space-x-4 mt-2">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="time"
+                    value="Morning"
+                    checked={formData.time === 'Morning'}
+                    onChange={handleChange}
+                    className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300"
+                    required
+                  />
+                  <span className="text-sm text-gray-600">Morning</span>
                 </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-                  placeholder="Enter your full name"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email Address
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="time"
+                    value="Evening"
+                    checked={formData.time === 'Evening'}
+                    onChange={handleChange}
+                    className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300"
+                    required
+                  />
+                  <span className="text-sm text-gray-600">Evening</span>
                 </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-                  placeholder="Enter your email address"
-                />
               </div>
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-                  placeholder="Enter your phone number"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="availability"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Availability
-                </label>
-                <input
-                  type="text"
-                  id="availability"
-                  name="availability"
-                  value={formData.availability}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-                  placeholder="E.g., Weekends, Evenings, Specific days"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="role"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Preferred Volunteer Role
-                </label>
-                <select
-                  id="role"
-                  name="role"
-                  value={formData.role}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-                >
-                  <option value="">Select a role</option>
-                  <option value="Deity Worship Support">
-                    Deity Worship Support
-                  </option>
-                  <option value="Sankirtan and Outreach">
-                    Sankirtan and Outreach
-                  </option>
-                  <option value="Youth Empowerment Programs">
-                    Youth Empowerment Programs
-                  </option>
-                  <option value="Festival and Event Assistance">
-                    Festival and Event Assistance
-                  </option>
-                  <option value="Kitchen Seva">Kitchen Seva</option>
-                  <option value="Educational Support">Educational Support</option>
-                  <option value="Other">Other (Specify in Message)</option>
-                </select>
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Additional Message (Optional)
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={4}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-                  placeholder="Share any additional details or preferences"
-                />
-              </div>
-              <div className="text-center">
-                <button
-                  type="submit"
-                  onClick={handleSubmit}
-                  className="px-6 py-3 bg-amber-600 text-white font-semibold rounded-lg shadow-md hover:bg-amber-700 transform transition-transform hover:scale-105"
-                >
-                  Submit Application
-                </button>
-              </div>
+            </div>
+            <div className="text-center">
+              <button
+                onClick={handleSubmit}
+                className="px-6 py-3 bg-amber-600 text-white font-semibold rounded-lg shadow-md hover:bg-amber-700 transform transition-transform hover:scale-105"
+              >
+                Submit Application
+              </button>
             </div>
           </div>
         </div>
@@ -362,10 +351,7 @@ const Volunteer: React.FC = () => {
           Become a Volunteer Today
         </h2>
         <p className="text-lg text-gray-600 leading-relaxed">
-          Your time and dedication can make a profound impact on the lives of
-          devotees and the mission of HKM Bhilai. Whether you can offer a few
-          hours a week or join us for special events, every moment spent in
-          Krishna’s service brings eternal rewards.
+          Your time and dedication can make a profound impact on the lives of devotees and the mission of HKM Bhilai. Whether you can offer a few hours a week or join us for special events, every moment spent in Krishna’s service brings eternal rewards.
         </p>
         <p className="text-lg text-gray-600 leading-relaxed mt-4">
           To volunteer or learn more, please contact us at{' '}

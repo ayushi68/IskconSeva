@@ -20,7 +20,7 @@ const centers = [
     location: 'BANGALORE',
     address: `Hare Krishna Hill, Chord Road, Bangalore - 560062 (Karnataka)
 Regd. & Head Office : Survey No. 55, Vaikuntha Hill, Vasanthapur, Kanakapura Road, Bangalore – 560062 (Karnataka)`,
-    phone: '080-2256 0647',
+    phone: '080-2256-0647',
     email: 'contact@iskconbangalore.org',
   },
   {
@@ -29,7 +29,7 @@ Regd. & Head Office : Survey No. 55, Vaikuntha Hill, Vasanthapur, Kanakapura Roa
     address: `Ganesh Tekari Road, Nathdwara – 313 301
 Dist. Rajsamand, Rajasthan`,
     phone: '09828994218',
-    email: 'info@hkmnathdwara.org',
+    email: 'info@hkmnathdwara.org', // Retained original email to avoid duplication with Mysore
   },
   {
     title: 'ISKCON Sri Krishna Balaram Mandir – Bellary',
@@ -38,6 +38,126 @@ Dist. Rajsamand, Rajasthan`,
     phone: '09449876380',
     fax: '08395-250 655',
     email: 'Info.Bellary@Hkm-Group.Org',
+  },
+  {
+    title: 'Hare Krishna Movement – Chennai',
+    location: 'Chennai',
+    address: `No.63 1st Seaward Road
+Valmikinagar, Thiruvanmiyur
+Chennai – 600041 (Tamil Nadu)`,
+    phone: '044-24455100 / 097890 57105',
+    email: 'info.chennai@hkm-group.org',
+    website: 'www.hkm-chennai.org',
+  },
+  {
+    title: 'Hare Krishna Movement – Delhi',
+    location: 'Delhi',
+    address: `57A, Akash Neem Marg
+DLF Phase-2, Near Sikanderpur Metro
+Gurgaon – 122 002`,
+    phone: '096504 99732 / 087559 03396',
+    email: 'info.delhi@hkm-group.org', // Corrected email to match website
+    website: 'info.delhi@hkm-group.org',
+  },
+  {
+    title: 'ISKCON Sri Krishna Balaram Mandir – Dharwad',
+    location: 'Dharwad',
+    address: `Pune – Bangalore Road
+Rayapur, Dharwad – 580009 (Karnataka)`,
+    phone: '+91-9228023235',
+    telefax: '079-23287304',
+    email: 'ahmedabad.hkm@hkm-group.org',
+  },
+  {
+    title: 'Hare Krishna Movement – Guwahati',
+    location: 'Guwahati',
+    address: `C/o The Akshaya Patra Foundation
+Numalijuala, Sila Sidhuri Gopa, NH-31
+Amingaon, Guwahati-781 031 (Assam)`,
+    phone: '0361-273 5421 / 09678007302',
+    email: 'info.guwahati@hkm-group.org',
+  },
+  {
+    title: 'Hare Krishna Movement – Hyderabad',
+    location: 'Hyderabad',
+    address: `Swayambhu Sri Lakshmi Narasimha Swamy Kshetram
+Hare Krishna Hill, Road #12, N. B. T. Nagar
+Banjara Hills, Hyderabad – 500034 (Andhra Pradesh)`,
+    phone: '040-23326999 / 093917 72355',
+    email: 'info.hyd@hkm-group.org',
+    website: 'www.hkm-hyderabad.org',
+  },
+  {
+    title: 'ISKCON – Mangalore',
+    location: 'Mangalore',
+    address: `Arya Samaj Road
+Balmatta, Mangalore – 575 003 (Karnataka)`,
+    phone: '0824-241 0722 / 244 3784',
+    email: 'info.mangalore@hkm-group.org',
+  },
+  {
+    title: 'Hare Krishna Movement – Mumbai',
+    location: 'Mumbai',
+    address: `Kukreja Residency, 1st Floor "A" Wing, 101
+Opp. Dukes Company, Waman Tukaram Patil Marg
+Deonar, Borla (Near RK Studios), Chembur, Mumbai (Maharashtra)`,
+    phone: '09799999865',
+    email: 'info.mumbai@hkm-group.org',
+  },
+  {
+    title: 'ISKCON Nava Brindavan Dham – Mysore',
+    location: 'Mysore',
+    address: `No. 31, 18th Cross
+Jayanagar, Mysore -570 014 (Karnataka)`,
+    phone: '0821-250 0582 / 656 7333',
+    email: 'mysore.iskcon@gmail.com',
+    website: 'www.iskconmysore.org',
+  },
+  {
+    title: 'Hare Krishna Movement – Puri',
+    location: 'Puri',
+    address: `C/o Ashaya Patra Foundation
+Grand Road, Balagandi
+Puri – 752 001 (Orissa)`,
+    phone: '09937057524',
+    email: 'Info.Puri@Hkm-Group.Org',
+    website: 'www.hkmpuri.org',
+  },
+  {
+    title: 'Hare Krishna Movement – Visakhapatnam',
+    location: 'Visakhapatnam',
+    address: `Plot no. 212, Double Road
+MVP Colony, Sector IV
+Visakhapatnam – 530 017 (Andra Pradesh)`,
+    phone: '0891-270 5295 / 09666611108',
+    email: 'info.vizag@hkm-group.org',
+    website: 'www.hkm-vizag.org',
+  },
+  {
+    title: 'Sri Radha Vrindavanchandra Mandir – Vrindavan',
+    location: 'Vrindavan',
+    address: `Gopal Garh, Chhatikara Road
+Vrindavan – 281 121, Mathura Dt. (Uttar Pradesh)`,
+    phone: '0565-600 0727 / 291 3095',
+    email: 'info.vrn@hkm-group.org',
+    website: 'www.harekrishna-movement.org',
+  },
+  {
+    title: 'Hare Krishna Farm – Srirangapatna',
+    location: 'Srirangapatna',
+    address: `Mahadevapura
+Srirangapatna Taluk, Mandya Dt. (Karnataka)`,
+    phone: '0823-625 0391 / 92 / 93',
+    email: 'info.vrn@hkm-group.org',
+  },
+  {
+    title: 'Sri Krishna Balaram Mandir – Sunnyvale, USA',
+    location: 'Sunnyvale, USA',
+    address: `1235 Reamwood Ave
+Sunnyvale, CA – 94089 (California, USA)`,
+    phone: '+1-408-657-8485',
+    email: 'info@kbmandir.org',
+    website: 'www.kbmandir.org',
   },
 ];
 

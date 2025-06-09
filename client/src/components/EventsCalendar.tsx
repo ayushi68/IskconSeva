@@ -219,10 +219,16 @@ const EventsCalendar = () => {
         {activeView === "Subscribe" && (
           <div className="text-center py-12 text-gray-600">
             <h2 className="text-xl font-semibold mb-4">Subscribe to Event Updates</h2>
-            <p className="mb-4">Coming soon: Stay informed about upcoming ISKCON events.</p>
-            <button className="bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800">
-              Notify Me
-            </button>
+            <p className="mb-4">Click below to add all ISKCON events to your Google Calendar.</p>
+            <a
+              href="https://www.google.com/calendar/render?action=TEMPLATE&text=ISKCON+Event+Name&dates=20250608T123000Z/20250608T140000Z&details=Description+goes+here&location=Temple+Name&sf=true&output=xml"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800">
+                Subscribe via Google Calendar
+              </button>
+            </a>
           </div>
         )}
 

@@ -118,7 +118,7 @@ const Nityaseva: React.FC = () => {
           To make a donation, please contact us at <a href="mailto:contact@hkmbhilai.org" className="text-indigo-600 hover:underline">contact@hkmbhilai.org</a> or visit our temple office. You can also contribute online through <a href="https://hkmbhilai.org/donate" className="text-indigo-600 hover:underline">our website</a>.
         </p>
         <button className="mt-6 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transform transition-transform hover:scale-105">
-          Donate Now
+          Offer Seva
         </button>
       </section>
 

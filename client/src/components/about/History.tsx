@@ -35,10 +35,10 @@ const History: React.FC = () => {
         The movement follows the principles of the Gaudiya Vaishnava spiritual tradition that dates back to Krishna Himself, the Supreme Personality of Godhead – who appeared on the earth and spoke the Bhagavad Gita over five thousand years ago. The goal of bhakti yoga is to recover our natural sense of connectedness with that one Supreme God by serving Him with love.
       </p>
 
-      <div className="grid md:grid-cols-2 gap-6 mt-8">
+      <div className="grid  gap-6 mt-8">
         <div>
           <img
-            src={"/cp1.jpg"}
+            src={"/about/History of HKM Bhilai.jpg"}
             alt="Spinach"
             className="rounded-md shadow-md w-full"
           />

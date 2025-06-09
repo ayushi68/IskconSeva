@@ -126,7 +126,7 @@ const Generaldonation: React.FC = () => {
           href="https://hkmbhilai.org/donate"
           className="mt-6 inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transform transition-transform hover:scale-105"
         >
-          Donate Now
+          Offer Seva
         </a>
       </section>
 

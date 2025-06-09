@@ -9,12 +9,9 @@ interface CulturalFormInputs {
   gender: string;
   classGroup: string;
   schoolName: string;
-  fatherName: string;
-  fatherPhone: string;
-  fatherOccupation: string;
-  motherName: string;
-  motherPhone: string;
-  motherOccupation: string;
+  GuardianName: string;
+  GuardianPhone: string;
+  GuardianOccupation: string;
   address: string;
   landline: string;
   mobile: string;
@@ -26,12 +23,7 @@ interface CulturalFormInputs {
   module: string;
   regFeeMethod: string;
   transportFeeArea: string;
-  transFeeAmount: string;
-  regReceiptNo: string;
-  transReceiptNo: string;
   acceptTerms: boolean;
-  regTxnFile: FileList;
-  transFeeFile?: FileList;
 }
 
 const generateRegistrationId = (): string => {
@@ -42,8 +34,6 @@ const generateRegistrationId = (): string => {
 };
 
 const CulturalForm: React.FC = () => {
-  const [regTxnFilePreview, setRegTxnFilePreview] = useState<string | null>(null);
-  const [transFeeFilePreview, setTransFeeFilePreview] = useState<string | null>(null);
   const [registrationPaymentStatus, setRegistrationPaymentStatus] = useState<string>('pending');
   const [transportPaymentStatus, setTransportPaymentStatus] = useState<string>('pending');
   const [regTxnId, setRegTxnId] = useState<string>('');
@@ -73,25 +63,7 @@ const CulturalForm: React.FC = () => {
     setValue('registrationId', newRegistrationId);
   }, [setValue]);
 
-  const regTxnFile = watch('regTxnFile');
-  const transFeeFile = watch('transFeeFile');
   const registrationId = watch('registrationId');
-
-  const handleFilePreview = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    setPreview: React.Dispatch<React.SetStateAction<string | null>>,
-  ) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setPreview(null);
-    }
-  };
 
   const handlePayment = (type: 'registration' | 'transport') => {
     const amount = type === 'registration' ? 400 : 300;
@@ -130,12 +102,9 @@ const CulturalForm: React.FC = () => {
         formData.append('gender', data.gender);
         formData.append('classGroup', data.classGroup || '');
         formData.append('schoolName', data.schoolName);
-        formData.append('fatherName', data.fatherName || '');
-        formData.append('fatherPhone', data.fatherPhone || '');
-        formData.append('fatherOccupation', data.fatherOccupation || '');
-        formData.append('motherName', data.motherName || '');
-        formData.append('motherPhone', data.motherPhone || '');
-        formData.append('motherOccupation', data.motherOccupation || '');
+        formData.append('GuardianName', data.GuardianName || '');
+        formData.append('GuardianPhone', data.GuardianPhone || '');
+        formData.append('GuardianOccupation', data.GuardianOccupation || '');
         formData.append('address', data.address || '');
         formData.append('landline', data.landline || '');
         formData.append('mobile', data.mobile);
@@ -148,17 +117,8 @@ const CulturalForm: React.FC = () => {
         formData.append('regFeeMethod', data.regFeeMethod || 'Cash');
         formData.append('regTxnId', regTxnId);
         formData.append('transportFeeArea', data.transportFeeArea || '');
-        formData.append('transFeeAmount', data.transFeeAmount || '');
         formData.append('transTxnId', transTxnId || '');
-        formData.append('transReceiptNo', data.transReceiptNo || '');
         formData.append('acceptTerms', data.acceptTerms.toString());
-
-        if (data.regTxnFile && data.regTxnFile.length > 0) {
-          formData.append('regTxnFile', data.regTxnFile[0]);
-        }
-        if (data.transFeeFile && data.transFeeFile.length > 0) {
-          formData.append('transFeeFile', data.transFeeFile[0]);
-        }
 
         const response = await fetch('/api/cultural-form', {
           method: 'POST',
@@ -169,8 +129,6 @@ const CulturalForm: React.FC = () => {
         if (response.ok) {
           setSubmitStatus({ success: true, message: result.message || 'Registration submitted successfully!' });
           reset();
-          setRegTxnFilePreview(null);
-          setTransFeeFilePreview(null);
           setRegistrationPaymentStatus('pending');
           setTransportPaymentStatus('pending');
           setRegTxnId('');
@@ -302,69 +260,34 @@ const CulturalForm: React.FC = () => {
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">Father's Name</label>
                 <input
-                  {...register('fatherName')}
+                  {...register('GuardianName')}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  placeholder="Enter Father's Name"
+                  placeholder="Enter Guardian's Name"
                 />
               </div>
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">Father's Phone</label>
                 <input
                   type="tel"
-                  {...register('fatherPhone', {
+                  {...register('GuardianPhone', {
                     pattern: {
                       value: /^[0-9]{10}$/,
                       message: 'Please enter a valid 10-digit phone number',
                     },
                   })}
                   className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                    errors.fatherPhone ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-orange-500'
+                    errors.GuardianPhone ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-orange-500'
                   }`}
                   placeholder="Enter Phone Number"
                 />
-                {errors.fatherPhone && (
-                  <p className="text-red-500 text-sm mt-1">{errors.fatherPhone.message}</p>
+                {errors.GuardianPhone && (
+                  <p className="text-red-500 text-sm mt-1">{errors.GuardianPhone.message}</p>
                 )}
               </div>
               <div>
-                <label className="block text-gray-700 font-semibold mb-2">Father's Occupation</label>
+                <label className="block text-gray-700 font-semibold mb-2">Guardian's Occupation</label>
                 <input
-                  {...register('fatherOccupation')}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  placeholder="Enter Occupation"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">Mother's Name</label>
-                <input
-                  {...register('motherName')}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  placeholder="Enter Mother's Name"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">Mother's Phone</label>
-                <input
-                  type="tel"
-                  {...register('motherPhone', {
-                    pattern: {
-                      value: /^[0-9]{10}$/,
-                      message: 'Please enter a valid 10-digit phone number',
-                    },
-                  })}
-                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                    errors.motherPhone ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-orange-500'
-                  }`}
-                  placeholder="Enter Phone Number"
-                />
-                {errors.motherPhone && (
-                  <p className="text-red-500 text-sm mt-1">{errors.motherPhone.message}</p>
-                )}
-              </div>
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">Mother's Occupation</label>
-                <input
-                  {...register('motherOccupation')}
+                  {...register('GuardianOccupation')}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                   placeholder="Enter Occupation"
                 />
@@ -512,21 +435,21 @@ const CulturalForm: React.FC = () => {
                   <label className="flex items-center">
                     <input
                       type="radio"
-                      value="Cash"
+                      value="UPI"
                       {...register('regFeeMethod')}
                       className="mr-2"
                       defaultChecked
                     />
-                    Cash
+                    UPI 
                   </label>
                   <label className="flex items-center">
                     <input
                       type="radio"
-                      value="Cheque"
+                      value="Bank Transfer"
                       {...register('regFeeMethod')}
                       className="mr-2"
                     />
-                    Cheque
+                    Bank Transfer
                   </label>
                 </div>
                 <button
@@ -543,38 +466,6 @@ const CulturalForm: React.FC = () => {
                     ? 'Payment Completed'
                     : 'Pay Rs 400 via Payment Gateway'}
                 </button>
-                <label className="block text-gray-700 font-semibold mt-4 mb-2">
-                  Registration Transaction File *
-                </label>
-                <input
-                  type="file"
-                  accept="image/jpeg,image/png,image/gif,application/pdf"
-                  {...register('regTxnFile', { required: 'Registration transaction file is required' })}
-                  onChange={(e) => handleFilePreview(e, setRegTxnFilePreview)}
-                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                    errors.regTxnFile ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-orange-500'
-                  }`}
-                />
-                {errors.regTxnFile && (
-                  <p className="text-red-500 text-sm mt-1">{errors.regTxnFile.message}</p>
-                )}
-                {regTxnFilePreview && (
-                  <div className="mt-4">
-                    <img
-                      src={regTxnFilePreview}
-                      alt="Registration Transaction Preview"
-                      className="max-w-xs h-auto rounded-lg shadow-md"
-                    />
-                  </div>
-                )}
-                <label className="block text-gray-700 font-semibold mt-4 mb-2">
-                  Receipt Number (Cash Payment)
-                </label>
-                <input
-                  {...register('regReceiptNo')}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  placeholder="Enter Receipt Number if paid in cash"
-                />
               </div>
               <div>
                 <label className="block text-gray-700 font-semibold mb-2">
@@ -601,41 +492,6 @@ const CulturalForm: React.FC = () => {
                   {...register('transportFeeArea')}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2"
                   placeholder="Enter Area"
-                />
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Transport Fee Amount
-                </label>
-                <input
-                  {...register('transFeeAmount')}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  placeholder="Enter Amount"
-                />
-                <label className="block text-gray-700 font-semibold mt-4 mb-2">
-                  Transportation Transaction File
-                </label>
-                <input
-                  type="file"
-                  accept="image/jpeg,image/png,image/gif,application/pdf"
-                  {...register('transFeeFile')}
-                  onChange={(e) => handleFilePreview(e, setTransFeeFilePreview)}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
-                {transFeeFilePreview && (
-                  <div className="mt-4">
-                    <img
-                      src={transFeeFilePreview}
-                      alt="Transportation Transaction Preview"
-                      className="max-w-xs h-auto rounded-lg shadow-md"
-                    />
-                  </div>
-                )}
-                <label className="block text-gray-700 font-semibold mt-4 mb-2">
-                  Receipt Number (Cash Payment)
-                </label>
-                <input
-                  {...register('transReceiptNo')}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  placeholder="Enter Receipt Number if paid in cash"
                 />
               </div>
             </div>

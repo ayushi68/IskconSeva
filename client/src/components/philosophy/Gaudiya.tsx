@@ -4,7 +4,7 @@ export default function Gaudiya() {
   return (
     <div className="bg-gray-50 text-gray-800 font-sans">
       {/* 1. Image + Heading */}
-      <section className="relative h-96 bg-cover bg-center" style={{ backgroundImage: 'url(/gaudiya3.jpg)' }}>
+      <section className="relative h-96 bg-cover bg-center" style={{ backgroundImage: 'url(/philosophy/Guruparampara.png)' }}>
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white text-center">The Disciplic Succession</h1>
         </div>
@@ -86,7 +86,7 @@ export default function Gaudiya() {
 
       <section className="p-8 flex flex-col md:flex-row-reverse items-center gap-8 max-w-6xl mx-auto">
         <div className="md:w-1/2">
-          <img className="rounded-lg w-full max-w-sm mx-auto" src="/gaudiya2.jpg" alt="Another Image" />
+          <img className="rounded-lg w-full max-w-sm mx-auto" src="/philosophy/Gaudiya2_local.jpg" alt="Another Image" />
         </div>
         <p className="text-lg text-justify max-w-3xl mx-auto md:w-1/2">
         Here's an in-depth explanation or narrative that helps readers understand the subject matter more thoroughly.
@@ -106,7 +106,7 @@ export default function Gaudiya() {
 
       <section className="p-8 flex flex-col md:flex-row items-center gap-8 max-w-6xl mx-auto">
         <div className="md:w-1/2">
-          <img className="rounded-lg w-full max-w-sm mx-auto" src="/gaudiya.jpg" alt="Third Visual" />
+          <img className="rounded-lg w-full max-w-sm mx-auto" src="/philosophy/gaudiya.jpg" alt="Third Visual" />
         </div>
         <p className="text-lg text-justify max-w-3xl mx-auto md:w-1/2">
         Bhaktivinode Thakur vehemently protested against the principles of the then pseudo-transcendentalists who passed in the name of Lord Chaitanya. He initiated the reformatory movement by literary contributions while he still engaged as a high Government Officer. During his householder life and serving as a Magistrate, he wrote books of various descriptions in Bengali, English, Sanskrit & etc. to present an actual picture of pure devotional activities to Lord Chaitanya. <br />

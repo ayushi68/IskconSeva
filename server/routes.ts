@@ -80,13 +80,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form route
   router.post("/contact", async (req: Request, res: Response) => {
     try {
-      const { name, mobile, email, dob } = req.body;
+      const { name, mobile, email, dob ,message, temple } = req.body;
 
       const newContact = new Contact({
         name,
         mobile,
         email,
         dob: new Date(dob),
+        message,
+        temple,
       });
 
       await newContact.save();
@@ -288,12 +290,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           gender,
           classGroup,
           schoolName,
-          fatherName,
-          fatherPhone,
-          fatherOccupation,
-          motherName,
-          motherPhone,
-          motherOccupation,
+          GuardianName,
+          GuardianPhone,
+          GuardianOccupation,
           address,
           landline,
           mobile,
@@ -304,11 +303,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           issues,
           module,
           regFeeMethod,
-          regTxnId,
           transportFeeArea,
-          transFeeAmount,
-          transTxnId,
-          transReceiptNo,
           acceptTerms,
         } = req.body;
 
@@ -360,12 +355,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           classGroup,
           gender,
           schoolName,
-          fatherName,
-          fatherPhone,
-          fatherOccupation,
-          motherName,
-          motherPhone,
-          motherOccupation,
+          GuardianName,
+          GuardianPhone,
+          GuardianOccupation,
           address,
           landline,
           mobile,
@@ -376,11 +368,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           issues,
           module,
           regFeeMethod,
-          regTxnId,
           transportFeeArea,
-          transFeeAmount,
-          transTxnId,
-          transReceiptNo,
           acceptTerms: acceptTerms === "true",
         };
 
@@ -406,116 +394,134 @@ export async function registerRoutes(app: Express): Promise<Server> {
   );
 
   // Heritage registration form route
-  router.post(
-    "/heritage-form",
-    upload.fields([{ name: "photo", maxCount: 1 }]),
-    async (req: Request, res: Response) => {
+router.post('/heritage-form', async (req: Request, res: Response) => {
+  try {
+    console.log('Heritage Request body:', JSON.stringify(req.body, null, 2));
+
+    const {
+      registrationId,
+      name,
+      gender,
+      dateOfBirth,
+      category,
+      schoolName,
+      customSchoolName,
+      address,
+      contactNumber,
+      email,
+      guardianName,
+      guardianContactNumber,
+      activities: activitiesString,
+      regTxnId,
+    } = req.body;
+
+    // Parse activities
+    let activities: string[];
       try {
-        console.log("Heritage Request body:", req.body);
-        console.log("Heritage Files:", req.files);
-
-        const {
-          registrationId,
-          name,
-          gender,
-          dateOfBirth,
-          class: classGroup,
-          schoolName,
-          bloodGroup,
-          address,
-          contactNumber,
-          email,
-          guardianName,
-          guardianContactNumber,
-          guardianEmail,
-          howHeard,
-          issues,
-          dateOfJoining,
-          reasonForJoining,
-          registrationReceiptNumber,
-          regTxnId,
-        } = req.body;
-
-        // Validate required fields
-        const requiredFields = {
-          registrationId,
-          name,
-          gender,
-          dateOfBirth,
-          classGroup,
-          schoolName,
-          bloodGroup,
-          address,
-          contactNumber,
-          email,
-          guardianName,
-          guardianContactNumber,
-          guardianEmail,
-          howHeard,
-          issues,
-          dateOfJoining,
-          regTxnId,
-        };
-        for (const [field, value] of Object.entries(requiredFields)) {
-          if (!value) {
-            console.log(`Missing required field: ${field}`);
-            return res.status(400).json({
-              success: false,
-              error: `Missing required field: ${field}`,
-            });
-          }
+        // If it's already a string, check if it looks like a JSON array
+        if (Array.isArray(activitiesString)) {
+          activities = activitiesString; // Direct from body if parsed
+        } else if (typeof activitiesString === 'string') {
+          activities = activitiesString.trim().startsWith('[')
+            ? JSON.parse(activitiesString) // Handle proper JSON string
+            : [activitiesString]; // Handle plain single string like "Coloring"
+        } else {
+          throw new Error('Activities must be a string or array');
         }
 
-        // Prepare form data
-        const files = req.files as { [fieldname: string]: Express.Multer.File[] } | undefined;
-        const formData = {
-          registrationId,
-          name,
-          gender,
-          dob: dateOfBirth,
-          classGroup,
-          schoolName,
-          bloodGroup,
-          address,
-          contactNumber,
-          email,
-          guardianName,
-          guardianContactNumber,
-          guardianEmail,
-          referralSource: howHeard,
-          issues,
-          joiningDate: dateOfJoining,
-          reasonForJoining,
-          registrationReceiptNumber,
-          regTxnId,
-          photo: files?.["photo"]?.[0]
-            ? {
-                data: files["photo"][0].buffer,
-                contentType: files["photo"][0].mimetype,
-              }
-            : undefined,
-        };
-
-        console.log("Saving Heritage form data to MongoDB:", formData);
-        const savedForm = await storage.saveHeritageForm(formData);
-        console.log("Heritage form saved successfully");
-
-        res.status(201).json({ success: true, message: "Heritage form submitted successfully", form: savedForm });
-      } catch (error: any) {
-        console.error("Error submitting Heritage form:", error);
-        if (error.code === 11000) {
-          return res.status(400).json({
-            success: false,
-            error: `Registration ID '${req.body.registrationId}' is already in use`,
-          });
+        if (!Array.isArray(activities)) {
+          throw new Error('Activities must be an array');
         }
-        res.status(500).json({
+      } catch (error) {
+        console.error('Error parsing activities:', error);
+        return res.status(400).json({
           success: false,
-          error: error instanceof Error ? error.message : "Failed to submit form",
+          error: 'Invalid activities format',
+        });
+      }
+
+    // Validate required fields
+    const requiredFields = {
+      registrationId,
+      name,
+      gender,
+      dateOfBirth,
+      category,
+      schoolName: schoolName || customSchoolName,
+      address,
+      contactNumber,
+      email,
+      guardianName,
+      guardianContactNumber,
+      activities,
+      regTxnId,
+    };
+
+    for (const [field, value] of Object.entries(requiredFields)) {
+      if (!value || (field === 'activities' && activities.length === 0)) {
+        console.log(`Missing or invalid required field: ${field}`);
+        return res.status(400).json({
+          success: false,
+          error: `Missing required field: ${field}`,
         });
       }
     }
-  );
+
+    // Additional validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid email format',
+      });
+    }
+    if (!/^[0-9]{10}$/.test(contactNumber) || !/^[0-9]{10}$/.test(guardianContactNumber)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Contact numbers must be 10 digits',
+      });
+    }
+
+    // Prepare form data
+    const formData = {
+      registrationId,
+      name,
+      gender,
+      dob: dateOfBirth,
+      category,
+      schoolName: schoolName || customSchoolName || '',
+      customSchoolName: customSchoolName || '',
+      address,
+      contactNumber,
+      email,
+      guardianName,
+      guardianContactNumber,
+      activities,
+      regTxnId,
+    };
+
+    console.log('Saving Heritage form data to MongoDB:', JSON.stringify(formData, null, 2));
+    const savedForm = await storage.saveHeritageForm(formData);
+    console.log('Heritage form saved successfully');
+
+    res.status(201).json({
+      success: true,
+      message: 'Heritage form submitted successfully',
+      form: savedForm,
+    });
+  } catch (error: any) {
+    console.error('Error submitting Heritage form:', error);
+    if (error.code === 11000) {
+      return res.status(400).json({
+        success: false,
+        error: `Registration ID '${req.body.registrationId}' is already in use`,
+      });
+    }
+    res.status(500).json({
+      success: false,
+      error: error instanceof Error ? error.message : 'Failed to submit form',
+    });
+  }
+});
 
   // Folkform registration route
   router.post("/register", async (req: Request, res: Response) => {

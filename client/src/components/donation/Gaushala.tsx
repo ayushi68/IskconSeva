@@ -42,30 +42,10 @@ const Gaushala: React.FC = () => {
 
   // Seva options data
   const sevaOptions: SevaOption[] = [
-    { title: 'Gau Seva (One day feed per cow)', description: 'Feed one cow for a day', price: '', bgColor: 'bg-orange-400', category: 'Daily' },
-    { title: 'One day grass for one cow', description: 'Provide grass for one cow for a day', price: '', bgColor: 'bg-orange-400', category: 'Daily' },
+    { title: 'Gau Seva', description: 'Feed one cow for a day', price: '', bgColor: 'bg-orange-400', category: 'Daily' },
+    { title: 'Gau poshan Seva(medical expenses)', description: 'Provide grass for one cow for a day', price: '', bgColor: 'bg-orange-400', category: 'Daily' },
     { title: 'Green grass for all cows for a day', description: 'Provide green grass for all cows for a day', price: '', bgColor: 'bg-orange-400', category: 'Daily' },
-    { title: 'Fooder for all cows for a day', description: 'Provide fodder for all cows for a day', price: '', bgColor: 'bg-orange-400', category: 'Daily' },
-    { title: 'Feed 5 cows per day', description: 'Feed five cows for a day', price: '', bgColor: 'bg-orange-400', category: 'Daily' },
-    { title: 'Gau Seva (One month feed per cow)', description: 'Feed one cow for a month', price: '', bgColor: 'bg-blue-500', category: 'Monthly' },
-    { title: 'Gau Seva (Two months feed per cow)', description: 'Feed one cow for two months', price: '', bgColor: 'bg-blue-500', category: 'Monthly' },
-    { title: 'Gau Seva (Three months feed per cow)', description: 'Feed one cow for three months', price: '', bgColor: 'bg-blue-500', category: 'Monthly' },
-    { title: 'Gau Seva (Six month feed per cow)', description: 'Feed one cow for six months', price: '', bgColor: 'bg-blue-500', category: 'Monthly' },
-    { title: 'One month Green grass for all cows', description: 'Provide green grass for all cows for a month', price: '', bgColor: 'bg-blue-500', category: 'Monthly' },
-    { title: 'Gau Seva (One year feed per cow)', description: 'Feed one cow for a year', price: '', bgColor: 'bg-green-500', category: 'Yearly' },
-    { title: 'Adopt a cow for a year', description: 'Support a cow’s care for a full year', price: '', bgColor: 'bg-green-500', category: 'Yearly' },
-    { title: 'Yearly Treatment Cost', description: 'Cover annual medical expenses for a cow', price: '', bgColor: 'bg-green-500', category: 'Yearly' },
-    { title: 'Gau Daan', description: 'Gift a cow to support Vedic traditions', price: '', bgColor: 'bg-purple-500', category: 'Special' },
-    { title: 'Gau Puja', description: 'Sponsor a sacred cow worship ceremony', price: '', bgColor: 'bg-purple-500', category: 'Special' },
-    { title: 'Gau Poshan Seva (medical expenses)', description: 'Support medical care for cows', price: '', bgColor: 'bg-purple-500', category: 'Special' },
-    { title: 'First Aid Kit', description: 'Provide a first aid kit for cow care', price: '', bgColor: 'bg-purple-500', category: 'Special' },
-    { title: 'Gynaecological Kit', description: 'Support cow health with a gynaecological kit', price: '', bgColor: 'bg-purple-500', category: 'Special' },
-    { title: 'OPD Kit', description: 'Provide an OPD kit for cow treatment', price: '', bgColor: 'bg-purple-500', category: 'Special' },
-    { title: 'Routine Check-up Fees', description: 'Cover the cost of a routine health check-up', price: '', bgColor: 'bg-purple-500', category: 'Special' },
-    { title: 'Disease/Injury Treatment Cost', description: 'Support treatment for a cow’s disease or injury', price: '', bgColor: 'bg-purple-500', category: 'Special' },
-    { title: 'Jaggery 40 kg', description: 'Provide 40 kg of jaggery for cow nutrition', price: '', bgColor: 'bg-purple-500', category: 'Special' },
-    { title: 'Adopt 1 Calf for Its Lifetime', description: 'Support a calf for its entire life', price: '', bgColor: 'bg-purple-500', category: 'Special' },
-    { title: 'Adopt 1 Cow for Its Lifetime', description: 'Support a cow for its entire life', price: '', bgColor: 'bg-purple-500', category: 'Special' },
+    { title: 'Gau Puja', description: 'Provide fodder for all cows for a day', price: '', bgColor: 'bg-orange-400', category: 'Daily' },
   ];
 
   // Filter seva options based on the selected category
@@ -195,7 +175,7 @@ const Gaushala: React.FC = () => {
         </p>
         {/* Tabs for filtering */}
         <div className="flex justify-center space-x-4 mb-8 flex-wrap gap-2">
-          {['All Seva', 'Daily', 'Monthly', 'Yearly', 'Special'].map((category) => (
+          {['All Seva'].map((category) => (
             <button
               key={category}
               className={`px-4 py-2 rounded-full font-semibold transition-colors ${
@@ -343,7 +323,7 @@ const Gaushala: React.FC = () => {
             viewport={{ once: true }}
           >
             <h3 className="text-2xl font-['Playfair_Display'] font-bold text-amber-800 mb-6 text-center">
-              Donate to Gau Seva
+              Gau Seva
             </h3>
             <DonationForm preselectedCategoryId="Gaushala-Seva"/>
           </motion.div>
@@ -351,7 +331,7 @@ const Gaushala: React.FC = () => {
       </div>
 
       {/* Video Section */}
-      <section className="py-20 px-4 md:px-16 lg:px-32 bg-white">
+      {/* <section className="py-20 px-4 md:px-16 lg:px-32 bg-white">
         <h3 className="text-3xl md:text-4xl font-['Playfair_Display'] font-bold text-amber-800 mb-8 text-center">
           Experience Gau Seva
         </h3>
@@ -375,7 +355,7 @@ const Gaushala: React.FC = () => {
             Watch how your contributions nurture our sacred cows and uplift our community.
           </p>
         </motion.div>
-      </section>
+      </section> */}
 
       {/* Floating Action Button */}
       <motion.div

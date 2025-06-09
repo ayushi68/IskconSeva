@@ -79,10 +79,29 @@ const FamilyCorner: React.FC = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Soulful Sunday Card */}
-          <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-orange-200">
+          <div 
+            className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-orange-200 relative overflow-hidden"
+            style={{ 
+              backgroundImage: "url('/Activity/soulful_sunday_01.png')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'overlay',
+              backgroundColor: 'rgba(255, 255, 255, 0.9)'
+            }}
+          >
             <div className="flex items-center mb-4">
-              <svg className="w-8 h-8 text-orange-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              <svg className="w-8 h-8 text-yellow-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2" fill="currentColor" className="text-yellow-300" />
+                <g stroke="currentColor" strokeWidth="2">
+                  <line x1="12" y1="1" x2="12" y2="4" />
+                  <line x1="12" y1="20" x2="12" y2="23" />
+                  <line x1="4.22" y1="4.22" x2="6.34" y2="6.34" />
+                  <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" />
+                  <line x1="1" y1="12" x2="4" y2="12" />
+                  <line x1="20" y1="12" x2="23" y2="12" />
+                  <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" />
+                  <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" />
+                </g>
               </svg>
               <h3 className="text-xl font-semibold text-orange-600">Soulful Sunday</h3>
             </div>
@@ -98,10 +117,21 @@ const FamilyCorner: React.FC = () => {
           </div>
 
           {/* Hare Krishna Satsang Card */}
-          <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-orange-200">
+          <div 
+            className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-orange-200 relative overflow-hidden"
+            style={{ 
+              backgroundImage: "url('/Activity/hare_krishna_satsang _02.jpg')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'overlay',
+              backgroundColor: 'rgba(255, 255, 255, 0.9)'
+            }}
+          >
             <div className="flex items-center mb-4">
-              <svg className="w-8 h-8 text-orange-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c1.657 0 3-1.343 3-3S13.657 2 12 2 9 3.343 9 5s1.343 3 3 3zm0 4c-2.761 0-5 2.239-5 5v2h10v-2c0-2.761-2.239-5-5-5z"></path>
+              <svg className="w-8 h-8 text-purple-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M9 18V5l12-2v13" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="6" cy="18" r="3" strokeWidth="2" stroke="currentColor" fill="currentColor" className="text-purple-300"/>
+                <circle cx="18" cy="16" r="3" strokeWidth="2" stroke="currentColor" fill="currentColor" className="text-purple-300"/>
               </svg>
               <h3 className="text-xl font-semibold text-orange-600">Hare Krishna Satsang</h3>
             </div>
@@ -117,10 +147,21 @@ const FamilyCorner: React.FC = () => {
           </div>
 
           {/* Nagar Sankirtana Card */}
-          <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-orange-200">
+          <div 
+            className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-orange-200 relative overflow-hidden"
+            style={{ 
+              backgroundImage: "url('/Activity/nagar_sankirtana_02.jpg')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'overlay',
+              backgroundColor: 'rgba(255, 255, 255, 0.9)'
+            }}
+          >
             <div className="flex items-center mb-4">
-              <svg className="w-8 h-8 text-orange-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12h.01M12 12h.01M9 12h.01M15 9h.01M12 9h.01M9 9h.01M15 15h.01M12 15h.01M9 15h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              <svg className="w-8 h-8 text-pink-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <ellipse cx="12" cy="12" rx="8" ry="5" strokeWidth="2" />
+                <path d="M4 12v5c0 2.5 3.58 4.5 8 4.5s8-2 8-4.5v-5" strokeWidth="2"/>
+                <path d="M4 12c0-2.5 3.58-4.5 8-4.5s8 2 8 4.5" strokeWidth="2"/>
               </svg>
               <h3 className="text-xl font-semibold text-orange-600">Nagar Sankirtana</h3>
             </div>
@@ -136,12 +177,23 @@ const FamilyCorner: React.FC = () => {
           </div>
 
           {/* Krishna Ashraya Program Card */}
-          <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-orange-200">
+          <div 
+            className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-orange-200 relative overflow-hidden"
+            style={{ 
+              backgroundImage: "url('/Activity/krishna_ashraya_programme_02.jpg')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'overlay',
+              backgroundColor: 'rgba(255, 255, 255, 0.9)'
+            }}
+          >
             <div className="flex items-center mb-4">
-              <svg className="w-8 h-8 text-orange-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7m-9 2v6h4v-6m-7-7l7-7 7 7"></path>
+              <svg className="w-8 h-8 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C12 2 10 7 5 7c0 0 1 5 7 5s7-5 7-5c-5 0-7-5-7-5z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 22c-4-2-7-6-7-10 0-2.5 2-4.5 4.5-4.5S14 9.5 14 12c0 4-3 8-7 10z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 22c4-2 7-6 7-10 0-2.5-2-4.5-4.5-4.5S10 9.5 10 12c0 4 3 8 7 10z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <h3 className="text-xl font-semibold text-orange-600">Krishna Ashraya Program</h3>
+            <h3 className="text-xl font-semibold text-orange-600">Krishna Ashraya Program</h3>
             </div>
             <p className="text-gray-600 mb-4">
               Spiritual guidance for families through progressive devotion levels.
@@ -155,10 +207,20 @@ const FamilyCorner: React.FC = () => {
           </div>
 
           {/* Offer a Prayer Card */}
-          <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-orange-200">
+          <div 
+            className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-orange-200 relative overflow-hidden"
+            style={{ 
+              backgroundImage: "url('/Activity/folk_class_01.jpg')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'overlay',
+              backgroundColor: 'rgba(255, 255, 255, 0.9)'
+            }}
+          >
             <div className="flex items-center mb-4">
-              <svg className="w-8 h-8 text-orange-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6 3 4 0-3.674-2.326A1.76 1.76 0 0116.24 19.24V5.882m-2.326.592l2.147 6.15M6 6h12"></path>
+              <svg className="w-8 h-8 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M12 19v-7m0 0l-2.5 2.5M12 12l2.5 2.5M7 10V7a5 5 0 0110 0v3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M7 10a5 5 0 0010 0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               <h3 className="text-xl font-semibold text-orange-600">Offer a Prayer</h3>
             </div>
@@ -174,148 +236,6 @@ const FamilyCorner: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Contact Form Section */}
-      {/* <section id="contact-form" className="max-w-6xl mx-auto p-8">
-        <h2 className="text-4xl font-bold text-center text-orange-600 mb-12 animate-fade-in">
-          Contact Us
-        </h2>
-        <div className="bg-white/90 backdrop-blur-sm p-10 rounded-2xl shadow-xl transform transition-all duration-500 hover:shadow-2xl">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">Name *</label>
-                <input
-                  {...register('name', { required: 'Name is required' })}
-                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                    errors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-orange-500'
-                  }`}
-                  placeholder="Enter your name"
-                />
-                {errors.name && (
-                  <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-                )}
-              </div>
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">Phone *</label>
-                <input
-                  {...register('phone', {
-                    required: 'Phone number is required',
-                    pattern: {
-                      value: /^[0-9]{10}$/,
-                      message: 'Please enter a valid 10-digit phone number',
-                    },
-                  })}
-                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                    errors.phone ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-orange-500'
-                  }`}
-                  placeholder="Enter your phone number"
-                />
-                {errors.phone && (
-                  <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
-                )}
-              </div>
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">Email *</label>
-                <input
-                  {...register('email', {
-                    required: 'Email is required',
-                    pattern: {
-                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: 'Please enter a valid email address',
-                    },
-                  })}
-                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                    errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-orange-500'
-                  }`}
-                  placeholder="Enter your email"
-                />
-                {errors.email && (
-                  <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-                )}
-              </div>
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">Program of Interest *</label>
-                <select
-                  {...register('program', { required: 'Please select a program' })}
-                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                    errors.program ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-orange-500'
-                  }`}
-                >
-                  <option value="">Select a program</option>
-                  <option value="Soulful Sunday">Soulful Sunday</option>
-                  <option value="Hare Krishna Satsang">Hare Krishna Satsang</option>
-                  <option value="Nagar Sankirtana">Nagar Sankirtana</option>
-                  <option value="Krishna Ashraya Program">Krishna Ashraya Program</option>
-                  <option value="Offer a Prayer">Offer a Prayer</option>
-                </select>
-                {errors.program && (
-                  <p className="text-red-500 text-sm mt-1">{errors.program.message}</p>
-                )}
-              </div>
-            </div>
-            <div>
-              <label className="block text-gray-700 font-semibold mb-2">Message *</label>
-              <textarea
-                {...register('message', { required: 'Message is required' })}
-                className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 ${
-                  errors.message ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-orange-500'
-                }`}
-                placeholder="Enter your message"
-                rows={4}
-              />
-              {errors.message && (
-                <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
-              )}
-            </div>
-            {submitStatus.message && (
-              <div
-                className={`p-4 rounded-lg flex items-center ${
-                  submitStatus.success
-                    ? 'bg-green-100 border border-green-500 text-green-700'
-                    : 'bg-red-100 border border-red-500 text-red-700'
-                }`}
-              >
-                <svg
-                  className={`w-6 h-6 mr-2 ${
-                    submitStatus.success ? 'text-green-500' : 'text-red-500'
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {submitStatus.success ? (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 13l4 4L19 7"
-                    />
-                  ) : (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  )}
-                </svg>
-                <p>{submitStatus.message}</p>
-              </div>
-            )}
-            <div className="text-center">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="bg-orange-600 text-white py-3 px-8 rounded-full btn-hover text-xl font-semibold tracking-wide disabled:bg-orange-400"
-              >
-                {isSubmitting ? 'Submitting...' : 'Send Message'}
-              </button>
-            </div>
-          </form>
-        </div>
-      </section> */}
 
       {/* Modal */}
       {modalContent && (

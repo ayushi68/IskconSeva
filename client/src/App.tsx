@@ -100,6 +100,8 @@ import HeritageForm from "./components/activities/HeritageForm";
 import Newsletter from "./components/media/Newsletter";
 import Desktopwallpaper from "./components/media/Desktopwallpaper";
 import MobileWallpaper from "./components/media/Mobilewallpaper";
+import Invocation from "./components/temple/Invocation";
+import TempleSchedule from "./components/temple/Templeschedule";
 
 function Router() {
   return (
@@ -205,7 +207,10 @@ function Router() {
       <Route path={"/Newsletter"} component={Newsletter} />
       <Route path={"/Desktopwallpaper"} component={Desktopwallpaper} />
       <Route path={"/Mobilewallpaper"} component={MobileWallpaper} />
+      <Route path={"/Invocation"} component={Invocation} />
+      <Route path={"/Templeschedule"} component={TempleSchedule} />
       <Route component={NotFound} />
+       {/* Added TuitionFeesForm route */}
     </Switch>
   );
 }

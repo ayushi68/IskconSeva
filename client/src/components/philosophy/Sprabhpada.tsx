@@ -12,19 +12,42 @@ interface MenuItem {
   description: string;
 }
 
+const quotes = [
+  {
+    text: `"Among all acharyas, certainly he who is the deliverer of all people, who appears in this world for the purpose of removing the fears of the fallen souls (dina-abhaya) is the most perfect."`,
+    source: "Prapannamrta Tarpana - 62.47",
+  },
+  {
+    text: `"He sheds light on the ultimate meaning of the philosophical conclusions spoken by Krishna, Who is the speaker of Bhagavad-gita. He also gives perfect purports to the evidences given by the rishis."`,
+    source: "Prapannamrta Tarpana - 62.48",
+  },
+  {
+    text: `"He propagates everywhere the meanings and purports of the songs of the previous acharyas."`,
+    source: "Prapannamrta Tarpana - 62.49",
+  },
+  {
+    text: `"He, the ocean of mercy, contributes great books for the welfare of the people that explain the meaning of Vedanta strictly in line with the previous vaishnava acharyas and devotees. In this way he conquers all, defeating hundreds of different kinds of inauspicious philosophies by his arguments."`,
+    source: "Prapannamrta Tarpana - 62.50-51",
+  },
+  {
+    text: `"Because of engaging in the welfare of the people of the world, that perfect and topmost mendicant is certainly the most important Founder-Acharya, (pradhana)."`,
+    source: "Prapannamrta Tarpana - 62.52-53",
+  },
+];
+
 const heroSlides: HeroSlide[] = [
   {
-    image: "/sp1.png",
+    image: "/philosophy/spcover4.avif",
     title: "CC Madhya 22.54",
     subtitle: "‘sādhu-saṅga’, ‘sādhu-saṅga’ — sarva-śāstre kaya,lava-mātra sādhu-saṅge sarva-siddhi haya",
   },
   {
-    image: "/sp2.jpg",
+    image: "/philosophy/spcover1.jpeg",
     title: "Accomplishments of Srila Prabhupada",
     subtitle: "Accomplishments of Srila Prabhupada",
   },
   {
-    image: "/sp3.jpg",
+    image: "/philosophy/spcover3.jpg",
     title: "Scholars’ Appreciation of Srila Prabhupada’s Books",
     subtitle: "Scholars’ Appreciation of Srila Prabhupada’s Books",
   },
@@ -121,7 +144,7 @@ const Sprabhupada: React.FC = () => {
         </div>
         <div className="relative">
           <img
-            src="/sp3.jpg"
+            src="/philosophy/sp1.png"
             alt="Seafood Platter"
             className="w-full rounded border border-gray-300"
           />
@@ -136,7 +159,7 @@ const Sprabhupada: React.FC = () => {
       <section
         className="relative h-[90vh] bg-fixed bg-center bg-cover flex items-center justify-center text-center"
         style={{
-          backgroundImage: "url('/sp4.jpg')",
+          backgroundImage: "url('/philosophy/spcover2.jpeg')",
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -154,7 +177,7 @@ const Sprabhupada: React.FC = () => {
       <section className="max-w-7xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 items-center">
         <div className="relative">
           <img
-            src="/sp3.jpg"
+            src="/philosophy/sp2.jpg"
             alt="Seafood Platter"
             className="w-full rounded border border-gray-300"
           />
@@ -176,7 +199,7 @@ const Sprabhupada: React.FC = () => {
       <section
         className="relative h-[90vh] bg-fixed bg-center bg-cover flex items-center justify-center text-center"
         style={{
-          backgroundImage: "url('/sp4.jpg')",
+          backgroundImage: "url('/philosophy/spcover5.jpg')",
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -194,7 +217,7 @@ const Sprabhupada: React.FC = () => {
       <section className="max-w-7xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 items-center">
         <div className="relative">
           <img
-            src="/sp3.jpg"
+            src="/philosophy/sp3.jpg"
             alt="Seafood Platter"
             className="w-full rounded border border-gray-300"
           />
@@ -264,7 +287,7 @@ const Sprabhupada: React.FC = () => {
       <section
         className="relative bg-fixed bg-center bg-cover text-white py-20 px-4"
         style={{
-          backgroundImage: "url('/sp5.jpg')",
+          backgroundImage: "url('/philosophy/spcover6.jpg')",
         }}
       >
         <div className="max-w-5xl mx-auto justify-center">
@@ -318,7 +341,7 @@ const Sprabhupada: React.FC = () => {
                 <div className="absolute -inset-1 bg-[#d4a533] rounded-lg blur opacity-75"></div>
                 <div className="relative bg-white rounded-lg overflow-hidden shadow-xl h-full">
                   <img
-                    src="/sp3.jpg"
+                    src="/philosophy/request.jpg"
                     alt="Featured Recipe"
                     className="w-full h-64 object-cover"
                   />
@@ -335,7 +358,7 @@ const Sprabhupada: React.FC = () => {
               </div>
               <div className="bg-white rounded-lg overflow-hidden shadow-md h-full transform transition-all duration-500 hover:scale-105">
                 <img
-                  src="/sp4.jpg"
+                  src="/philosophy/sp4.jpg"
                   alt="Recipe 2"
                   className="w-full h-64 object-cover"
                 />
@@ -352,7 +375,7 @@ const Sprabhupada: React.FC = () => {
               </div>
               <div className="bg-white rounded-lg overflow-hidden shadow-md h-full transform transition-all duration-500 hover:scale-105">
                 <img
-                  src="/sp5.jpg"
+                  src="/philosophy/sp5.jpg"
                   alt="Recipe 3"
                   className="w-full h-64 object-cover"
                 />
@@ -372,6 +395,50 @@ const Sprabhupada: React.FC = () => {
         </div>
       </section>
 
+      {/* Quotes Section */}
+        <div className="mb-20 mt-10">
+          <div className="text-center mb-10">
+            <div className="relative">
+              <span className="absolute inset-x-0 top-1/2 h-0.5 bg-indigo-200 transform -translate-y-1/2"></span>
+              <span className="absolute inset-x-0 top-1/2 h-1 w-12 bg-indigo-600 transform -translate-y-1/2 mx-auto"></span>
+            </div>
+            <h3 className="text-3xl font-semibold text-indigo-700 mt-6 relative z-10">
+              Quotes from Sastras
+            </h3>
+          </div>
+                    <div className="relative bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl border border-amber-100">
+            {/* Decorative Quote Icon */}
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-indigo-600 text-white rounded-full p-3 shadow-md">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M8 10h.01M12 10h.01M16 10h.01M9 16h6m-7 4h8a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <div className="space-y-6">
+              {quotes.map((quote, index) => (
+                <div key={index} className="border-l-4 border-indigo-300 pl-4">
+                  <p className="text-gray-700 italic text-lg leading-relaxed font-serif">
+                    {quote.text}
+                  </p>
+                  <p className="text-gray-600 text-sm text-right font-medium mt-2">
+                    — {quote.source}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
       {/* Section 8: Spicy Chili */}
       <section className="bg-[#f8f5f0] py-16 px-4">
         <div className="max-w-6xl mx-auto">
@@ -382,7 +449,7 @@ const Sprabhupada: React.FC = () => {
                 <span className="block text-[#d4a533]">Sections</span>
               </h2>
               <img
-                src="/sp6.jpg"
+                src="/philosophy/sp6.jpg"
                 alt="Srila Prabhupada"
                 className="w-full rounded-lg shadow-lg"
               />

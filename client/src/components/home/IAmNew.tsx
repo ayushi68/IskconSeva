@@ -178,6 +178,235 @@ const faqData = [
     "question": "Who is Krishna?",
     "answer": "In the philosophy of Bhakti Yoga, the Absolute Truth is known as a person. His name is Krishna, a Sanskrit word which means “all attractive”.\n\nKrishna is the all attractive object of your soul’s love. Every living being is seeking pleasure. The essence of pleasure is the pleasure of love. We need it. Without loving someone and being loved by someone, life is very empty and superficial. The origin of that love is the soul’s love for God and God’s love for the soul. We are attracted by someone who is beautiful, someone who is powerful, someone who is learned, someone who is famous, someone who is renounced, someone who has wealth. These are opulences that attract our heart. The name Krishna means, he possesses all opulences in full. He is the source all beauty, all strength, all knowledge, all"
   },
+  {
+    "question": "Is Lord Krishna personal or impersonal?",
+    "answer": `The impersonal brahman effulgence is one aspect of the Supreme Personality of Godhead, Lord Sri Krishna, but it is only a partial representation of the Lord and is ultimately a subordinate emanation from His personal feature. Thus if one stops at the impersonal understanding of the Absolute Truth, his or her knowledge of God remains incomplete.
+
+The Lord has two other features known as Paramatma and Bhagavan. In His Paramatma feature the Supreme Lord exists within each and every atom of His creation and also within the hearts of every living being In this way he pervades and supports the entire universe. This feature of the Lord is also a subordinate emanation from His eternal, original personal form.
+
+The word Bhagavan indicates the personal form of the Lord, which is the ultimate source of all other existences and energies, and all other aspects and manifestations of Godhead. That is why Krishna is described as the "Supreme Personality" of Godhead. This personal feature of the Lord is most sublime and therefore the Lord is known as Krishna, or He who is "all-attractive".
+
+To deny the Lord His beautiful personal feature, by which He reciprocates in loving exchange with all living beings who desire His association, is insulting because it denies the Lord all of the most attractive and appealing aspects of personal existence. With our tiny brains and limited understanding, we may not be able to comprehend how it is that the Supreme Lord can maintain His eternal, individual form and personality, while simultaneously expanding into everything else. But this poor fund of knowledge is no reason to deny the Lord's unlimited, transcendental form.
+Want to know more about Divine Couple`
+  },
+  {
+    "question": "Srimati Radharani",
+    "answer": `The Feminine Nature of God
+
+Radha descended from the spiritual realm shortly after Krishna, approximately 5,000 years ago. She took birth in the small village known as Barsana, which is about 28 miles from Mathura, the birth place of Krishna.
+
+The word Radha comes from the Sanskrit verbal root radh, which means to worship, and the word rani, which means queen. Radharani can be literally translated to mean "the queen of worship." In some texts, she is described as "the supreme goddess who is worshipable by everyone. She is the protector of all, and she is the mother of the entire universe."
+
+The answer to the question that has been on everyone's mind for millennia is, YES and NO. The question is: Is God a Man? God is not just male, and according to some Vedic scriptures, God has both masculine and feminine expansions. In the Bhagavad Gita, Krishna provides a sneak preview into these feminine traits.
+
+"Among women I am fame, fortune, fine speech, memory, intelligence, steadfastness and patience."
+
+However, in some of the more esoteric texts such as the Puranas and the Chaitanya-Caritamrita, it explains that the complete manifestation of God includes his feminine counterpart, Radha. They are inconceivably one and different, as Krishna expanded himself into two for the purpose of exchanging love. There's a beautiful description in the Chaitanya-Caritamrita which gives us a window into the connection between Radha and Krishna.
+
+"Radha is the full power, and Lord Kṛṣṇa is the possessor of full power. The two are not different, as evidenced by the revealed scriptures. They are indeed the same, just as musk and its scent are inseparable, or as fire and its heat are non-different. Thus Rādhā and Kṛiṣhṇa are one, yet they have taken two forms to enjoy the mellows of pastimes."
+
+This concept is not an easy one to grasp. If God is full and complete, why does he need to expand himself to exchange love? The next question we can ask is why does God need to do anything? God has a personality which indicates that he has preferences. Perhaps this need to expand for the purpose of exchanging love speaks of the importance love plays in the lives of all individuals.
+
+Our desire to love and be loved comes from God. For the most part, no one wants to be alone, at least not permanently. The thing everyone is chasing after is love. We all want to know that there are people out there that love us. Simultaneously, we hanker to be able to give our love to others.
+
+There is another passage in the Caitanya-Caritamrita that describes Radha's qualities and love for Krishna.
+
+"Radharani's body, mind, and words are steeped in love for Krishna … The body of Radharani is a veritable transformation of love of Godhead. Even Krishna can't understand the strength of Radha's love which overwhelms Him. Her transcendental body is complete with unparalleled spiritual qualities. Even Lord Kṛiṣhṇa Himself cannot reach the limit of the transcendental qualities of Radharani."
+
+
+These are some of Radha's prominent qualities:
+
+1. Radha is adolescent and always freshly youthful.
+
+2. Radharani is very sweet and most charming to look at.
+
+3. Radha's face is smiling and ever blissful.
+
+4. Radharani is the most exceptional singer and veena player.
+
+5. Radha's words are charming and pleasing.
+
+6. Radha is exceptionally humble.
+
+7. Radha is the embodiment of mercy and compassion.
+
+8. Radha possesses Mahabhava, the highest sentiment of love.
+
+9. Radha always keeps Krishna under Her control. Krishna submissively obeys Radha's command
+
+
+These topics of divine and spiritual love between Radha and Krishna will always remain a mystery as long as we remain on the material platform. Love on the spiritual platform is devoid of selfishness. The needs and interests on the other take precedence over one's own needs.
+
+The kind of love that comes closest to spiritual love is the love exhibited by a mother towards her child. It's full of sacrifice and is completely selfless; it is without expectation.
+
+The feeling of love is derived from the service itself. The child is limited in its capacity to reciprocate the mother's love. Even if it increases its demands, the mother keeps on giving. Most of us can only imagine a relationship where the reciprocation of love and service is completely selfless and without expectation. It's the kind of love our hearts hanker for.
+
+The path of bhakti or devotional service prepares one's heart and consciousness — by eradicating selfishness and incorporating selflessness — to understand and experience that divine love which exists between Radha and Krishna.
+
+This is a wonderful day to meditate and reflect on the beautiful selfless qualities of Radharani and pray that we can to some degree follow in her footsteps.
+
+Want to know more about Divine Couple`
+
+},
+{
+    "question": "Who is Lord Chaitanya?",
+    "answer": `Chaitanya Mahaprabhu appeared as a devotee of Krishna in Mayapur, West Bengal, India in the late fifteenth century. He introduced sankirtan, widespread congregational chanting of the Supreme Person’s names, as the most effective means by which anyone can achieve spiritual perfection. By His influence, many of India’s leading religious scholars and their followers became devotees of Krishna themselves. He is considered by disciples, scholars and followers to be the latest avatar of Krishna Himself, based on extensive evidence found in Vedic literature. ISKCON is a continuation of Chaitanya Mahaprabhu’s sankirtan movement.
+Want to know more about Lord Chaitanya`
+  },
+  {
+    "question": " Who is Lord Nityananda?",
+    "answer": `Lord Nityananda (also known as Nityananda Prabhu, Nitai, Nityananda Balarama) appeared as Lord Chaitanya’s principal associate for spreading the congregational chanting of the holy names of the Lord. He especially spread the holy name of the Lord throughout Bengal. He is considered an incarnation of Lord Balarama. Devotees of Lord Nityananda celebrate by fasting until noon, cooking a feast, and chanting the glories of Nitai.  
+Want to know more about Lord Nityananda`
+  },
+  {
+    "question": "What are the universal principles of religion?",
+    "answer": `Four principles of all religions are identified: truthfulness, compassion, austerity and cleanliness. For one practicing spiritual life, it is essential to understand the activities which destroy these principles. The Vedas explain that the following activities destroy the universal principles:
+
+Gambling destroys truthfulness. Gambling does not only refer to betting with money, but speculative, dishonest, or illicit business dealings. The increase in dishonesty, greed, anxiety and loss of equilibrium destroys the elevating quality of truthfulness.
+
+Killing animals destroys compassion. Institutionalised animal slaughter is organised violence. In the act of killing an animal, there is a conspiracy by the party of sinners, and all of the sinners are liable to be punished as murderers exactly like a party of conspirators who kill a human being. He who gives permission, he who kills the animal, he who sells the slaughtered animal, he who cooks the animal, he who administers distribution of the foodstuff, and at last he who eats such animal food are all murderers, and all of them are liable to be punished by the laws of nature. All these activities destroy compassion. No one can create a living being despite all advancement of material science, and therefore no one has the right to kill a living being by one’s independent whims.
+
+Unrestrained sex indulgence destroys austerity. Sexual indulgence causes excessive attachment to the body and bodily pleasures and thus entrenches one in the false conception the one is the body. Sexual indulgence has been excessively prompted by media and advertising, and such unrestrained sexual activity has resulted in several social, emotional and psychological problems in society.
+
+Intoxication destroys cleanliness. Intoxication, which includes cigarettes, alcohol, drugs and even caffeine, are unnatural to the body, and often lead to addiction. These habits often lead to loss of life, loss of mental health, disease, premature aging and an inability to naturally focus the mind intelligently and steadily on any task. The addictions escalate until the individual loses all reason, and leads to the miserable state of existence in which all cleanliness is destroyed.
+
+Devotees of Krishna commit to following the four regulative principles of no meat-eating, no gambling, no intoxication and no illicit sex.`
+  },
+  {
+    "question": "The peace formula",
+    "answer": `The great mistake of modern civilization is to encroach upon others’ property as though it were one's own and to thereby create an unnecessary disturbance of the laws of nature. These laws are very strong. No living entity can violate them. Only one who is Krishna conscious can easily overcome the stringency of the laws of nature and thus become happy and peaceful in the world.
+
+As a state is protected by the department of law and order, so the state of Universe, of which this earth is only an insignificant fragment, is protected by the laws of nature. This material nature is one of the different potencies of God, who is the ultimate proprietor of everything that be.
+
+This earth is, therefore, the property of God, but we, the living entities, especially the so-called civilized human beings, are claiming God's property as our own, under both an individual and collective false conception. If you want peace, you have to remove this false conception from your mind and from the world. This false claim of proprietorship by the human race on earth is partly or wholly the cause of all disturbances of peace on earth.
+
+Foolish and so-called civilized men are claiming proprietary rights on the property of God because they have now become godless. You cannot be happy and peaceful in a godless society. In the Bhagavad-gitä Lord Krishna says that He is the factual enjoyer of all activities of the living entities, that He is the Supreme Lord of all universes, and that He is the well-wishing friend of all beings. When the people of the world know this as the formula for peace, it is then and there that peace will prevail.
+
+Therefore, if you want peace at all, you will have to change your consciousness into Krishna consciousness, both individually and collectively, by the simple process of chanting the holy name of God. This is a standard and recognized process for achieving peace in the world. We therefore recommend that everyone become Krishna conscious by chanting Hare Krishna, Hare Krishna, Krishna Krishna, Hare Hare/ Hare Räma, Hare Räma, Räma Räma, Hare Hare.`
+  },
+  {
+    "question": "Active Spirituality - “The 4 regulatory principles”",
+    "answer": `Of course, any Joe can’t just come waltzing into the room, demanding “Show me Krishna!” and expect the Supreme Personality of Godhead to show up on his doorstep. You can’t just waltz into the White House and demand to see the President. They’ll throw you out on your ear.
+
+If you want to see an important person, there’s a process you’ll have to go through. If you want to see Krishna, the most important person – and if you want to directly experience spiritual reality – it’s definitely possible, but there is a process.
+
+Preliminary Preparation
+Let’s say I’m trying to see some little one-celled do-dads in my Biology class. The first thing I need to do is make sure the microscope is clean. Without clean instruments, I’ll never get an accurate result.
+
+If I’m trying to see the reality of spirituality, the first thing I need to do is make sure my instruments are clean. What are the  “instruments?” The instruments are the senses.
+
+The self peers out at the world through the senses of the body, which have become clogged and fogged by our attachments and illusions. Thus, we have trouble seeing anything as it really is. To prepare our senses for perceiving Krishna, we need to sweep out the dust of our attachments and wipe off the mist of illusion. There are four ways to do it:
+
+
+1. Meat-eating
+There will be a whole article on this later, but right now let me just say this: Meat-eating is totally unnecessary violence, not only to the animals slaughtered, but to the tons of plants needlessly stuffed into the poor animals to fatten them up, to the human beings who eat the flesh at the risk of their own health, and to the ecosystem of the entire planet earth which is forced to support this insanely decadent “agriculture.”
+
+When you get angry and violent, you can’t see straight. Meat is the end product of violence. Eating it clouds our mind and senses, impairing our ability to perceive reality.
+
+Besides that, as long as one chooses to live by unnecessarily causing pain to other living creatures, one will not be admitted into spiritual reality – where life is full of selfless compassion. So if you want to cultivate spirituality, become a vegetarian, putting aside all meat, fish, and eggs.
+
+Becoming vegetarian will change your consciousness. Try it for a few weeks and you’ll not only feel better, but you will think differently. And you will contribute to a less violent world.
+
+
+2. Intoxication
+Intoxication refers to the taking into the body of various chemicals that are not necessary for bodily maintenance and have stimulating or depressive effects on the mind and body. Under this heading the Vedic scriptures include everything from tea, coffee and tobacco, with their caffeine and nicotine, to liquor and other more powerful drugs. Countless people in this age depend on some such intoxicants for stimulation or relief from anxiety, but any objective observer will conclude that such enjoyment or relief is only transitory and therefore has no real substance.
+
+Instead, there are many detrimental results coming from such intoxicating habits. They cause dependency on material, worldly supports that are never certainly available, and this dependency can increase with the strength of the intoxicant, up to the point of addiction. These habits generally cause loss of bodily or mental health, resulting eventually in disease, premature aging, and inability to fix the mind intelligently and steadily on any subject or problem. In this way, such habits impede spiritual advancement by binding a person with material attachments and at the same time agitating the mind so that it cannot be fixed in meditation on the self and God. Beyond this, with the use of stronger and stronger intoxicants, cleanliness is gradually destroyed—witness the usual living conditions of addicts, alcoholics and drug-dependent hippies—and the mind is led into degradation and a miserable future. Of course, the stronger the intoxicant, the more pronounced the effects, but we can easily observe in these days how the use of milder intoxicants gradually leads toward dependence on stronger ones.
+
+3. Illicit Sex
+“Illicit sex” means unnatural sex. “Natural sex”  is sex intended and allowed to develop into its natural fruit, a baby. It is also natural that the baby should be raised by loving, married parents in a stable home, being carefully given the opportunity to fulfill the highest potential of human life, self-realization.
+
+In other words, illicit sex means sex outside of marriage or unrestricted sex in marriage. Animals also eat, sleep, mate and defend, so if our consciousness is too much focused on any or all of these activities, we aren’t doing much better than the animals. And human life is meant for something much greater than fulfilling the urges of the body.
+
+Can sexual control change your consciousness and life? India has a long tradition of the practice of celibacy for men before marriage (and some men for their entire lifetime) called brahmacharya, because they understand the mental, physical and spiritual benefits it offers. (Eastern medicine understands that life force – called prana, ojas, or chi, is weakened every time a man discharges semen.) Even boxers and wrestlers understand this principle as  they practice celibacy weeks before a match. In addition, many ancient cultures understood the immense benefits of controlling sexual lust.
+
+Many great men of the world, such as Gandhi, Pythagoras, and others, practiced celibacy. It is an ancient practice that has gone so out of fashion in our modern culture it is unfortunately often looked at with repulsion.
+
+Experience the many wonderful benefits of sexual control – including a calm mind and body –  by abstaining from sex for a period of time.
+
+
+ 4. Gambling
+You can’t get something for nothing. Gambling nourishes the cheating mentality, giving birth to greed, selfishness, and envy – all of which are diametrically opposed to the spiritual qualities that help us achieve an undistorted experience of reality.
+
+Gambling is another tool of the used to keep the population docile. Another false hope for happiness which occupies our time and divers us from real personal and social advancement.
+
+Positive Spirituality
+As the four preliminaries are being practiced, our instruments are getting tuned up and polished, fit to begin directly perceiving God and the spiritual world.
+
+I divided this article into two main sections, “preliminary preparation” and “positive spirituality.” But it’s not like one has to be perfectly complete before you can proceed to the other.
+
+The two are not sequential. Rather, they both give strength to the other.
+
+Now, we can say that there are two knowables: things and persons, or objects and subjects.
+
+If you want to know an object, you can stick it under your microscope, heat it up, stretch it out, hurl it through space, whatever. It’s an object, and you can control it. You can experiment with it as you like.
+
+If you want to get to know a person, you don’t bring him into the laboratory and stick litmus paper on him. You do nice things for him. You develop friendship and gain his trust. Gradually he will tell you all his most intimate secrets. Only then can you really know a person.
+
+God is a subject, not an object; a person, not a “thing.” We can’t stick God on a slide and clamp Him under our microscope. As long as we treat Him like an object to be conquered by our intelligence, we will never understand or experience Him.
+
+Spiritual reality is personal, and Krishna is a person. To know this person, do nice things for Him – simple devotional service.
+
+Develop a friendly relationship. Gradually, He will reveal His intimate secrets to you – even to the point of coming directly before you in an intimate relationship.
+
+The key element in experiencing spiritual reality, more important than an impressive vocabulary and a high IQ, is this: service.
+
+Service to Krishna is very simple and easy. You can quickly become dear to Krishna just by rendering a little simple service to Him. Respecting our free will, Krishna allows us the choice to leave Him and do our own thing in the material world. But that unfortunate decision brings only headache and grief. Krishna wants happiness for everyone. He looks forward to our return to the spiritual sky.
+
+The most potent and simple service of all is just singing or chanting Krishna’s names:
+
+Hare Krishna, Hare Krishna,Krishna Krishna, Hare Hare, Hare Rama, Hare Rama,Rama Rama, Hare Hare.`
+  },
+  {
+    "question": "How to join the ‘Hare Krishna Movement’ centre today?",
+    "answer": `The very first step is to just come to the temple and gradually understand and take part in the Philosophical sessions, process of chanting and temple programs under the association of Devotees which will make you automatically become a member of the Movement !`
+  },
+  {
+    "question": " What do you mean by 'Krishna consciousness'?  ",
+    "answer": `‘Krishna’ means God. We are all intimately connected with Him because He is our original father. But we have forgotten this connection. When we become interested in knowing “What is my connection with God? What is the aim of life?” then we are God conscious or Krishna conscious.`
+  },
+  {
+    "question": "What are the practices that should be done in Krishna Consciousness?",
+    "answer": `There are four simple practices in Krishna consciousness.
+
+Reading (Shravanarn)
+
+Reading provides the intellectual satisfaction that is essential to developing faith in any spiritual practise. Without a comprehensive body of philosophical knowledge, any religious tradition can easily become a system of unfounded beliefs and rituals. Vedic literature offers logical answers to profound questions, and when carefully studied, books like Bhagavad-Gita will allow the inquisitive reader an opportunity to explore many new ideas and concepts.
+
+The books of His Divine Grace A.C. Bhaktivedanta Swami Prabhupada are translations and commentaries upon India’s timeless spiritual classics, written over a period of twenty years. His writings comprise a complete course of study in bhakti-yoga, and are the basis of the spiritual lives of Hare Krishna members around the world.
+
+Studies usually begin with Bhagavad-Gita, Isopanishad, Srimad Bhagavatam and The Teachings of Lord Chaitanya. Devotees study at least a few minutes daily, reserving a quiet period when they can read without disturbance.
+
+Chanting (Kirtanam)
+
+Recitation of the Hare Krishna mantra is the essential practise of Krishna consciousness. Devotees may spend from 10 minutes to 2 hours per day chanting japa. Once around the circle of 108 beads is called a ’round’ and devotees will chant anywhere between one and sixteen ’rounds’ per day as their time and inclination permits. Chanting is done either sitting or walking, usually in the morning. At first the language of the mantra may feel strange but as the profound nature of the sound vibration is experienced any feelings of awkwardness disappear.
+
+Anyone who chants with sincerity, pronouncing the words distinctly and listening attentively, will become peaceful and experience a sense of happiness. One who continues the process becomes advanced in the techniques of mantra meditation and enjoys an awakening of the soul’s natural, original qualities of eternity, knowledge, and bliss.
+
+Friendship (Sat-sangam)
+
+Our friendships have tremendous influence upon the way we think and act. We may enthusiastically take to a more spiritual way of life, but if our friendships with others are not similarly transformed, our personal development may become checked. Associating with others who are spiritually inclined is therefore one of the most important and rewarding aspects of the Hare Krishna way of life.
+
+New members of ISKCON usually start off by linking up with others in the same town or county. Regular meetings now take place in many parts of the world, even where there is no proper temple, in hired rooms or devotee’s homes. People are often surprised when they come to these meetings to find themselves developing very gratifying friendships.
+
+Apart from local meetings, members cultivate friendships with others through correspondence, or by hosting visits, from travelling teachers. large events like the yearly London Chariot Festival (Rathayatra) are social and spiritual gatherings where thousands of members meet up both to celebrate and enjoy each others company. The network of Krishna centres, meetings, shops and temples, is steadily growing. As it does, many more people are discovering the personal benefits of being part of a spiritual community.
+
+Remembering (Smaranam)
+
+The aim of Krishna consciousness is to cultivate a constant flow of awakened states of consciousness wherein we remember our spiritual identity and our relationship with Krishna. Vaishnavas therefore begin the day with a combination of practices, which help to focus the mind spiritually. Rising early, bathing, japa meditation and study, all purify the mind from its sleepiness and create a mental state suitable for an entire day of spiritual progress.
+
+The Vedic literature teaches that our daily actions should lead us to develop valuable personal qualities such as peacefulness, tolerance, honesty and compassion. To this end, members also adopt regulative principles like vegetarianism as part of their personal lifestyle. In this way, even our most basic daily function of eating, can be an integral part of our spiritual path.`
+  },
+  {
+    "question": "What is parampara?",
+    "answer": `“Parampara” means disciplic succession. The transcendental knowledge (divya jnana) is like a river flowing from one acarya to the next. It’s source is Krishna who directs it to a qualified disciple who realizes, preserves and directs it to his qualified disciple who again realizes, preserves and directs it to his successor and so on until it arrives here. There are four disciplic successions, namely the Brahma parampara, Siva parampara, Laksmi parampara and the Kumara parampara. Divya jnana, transcendental knowledge, is not limited to material considerations and therefore the parampara is not a bodily succession. Transcendental knowledge may as well flow from one member of the parampara to the other without any bodily contact or official initiation. Predecessor and disciple may dwell on different planets or even different universes. We should not think that the parampara is simply a row of material bodies or that transcendental knowledge is ordinary knowledge. The river parampara sometimes flows according to the official initiation or bodily succession of master and disciple and then sometimes prefers to flow underground. Parampara and transcendental knowledge are both eternal but it sometimes happens that the connection is lost and then Krishna comes to revive or renew the system again.!`
+  },
+  {
+    "question": "What is your parampara?",
+    "answer": `Following A.C. Bhaktivedanta Swami Prabhupada we are in the Brahma-Madhva-Gauidya-sampradaya (Group). And this is our revered parampara (disciplic succession)
+
+ 1) Krsna, 2) Brahma, 3) Narada; 4) Vyasa, 5) Madhva, 6) Padmanabha, 7) Nrhari, 8) Madhava, 9) Aksobhya, 10) Jaya Tirtha, 11) Jnanasindhu, 12) Dayanidhi, 13) Vidyanidhi, 14) Rajendra, 15) Jayadharma, 16) Purusottama, 17) Brahmanya Tirtha, 18) Vyasa Tirtha, 19) Laksmipati, 20) Madhavendra Puri, 21) Isvara Puri, (Nityananda, Advaita), 22) Lord Caitanya, 23) Rupa, (Svarupa, Sanatana), 24) Raghunatha, Jiva, 25) Krsnadasa, 26) Narottama, 27) Visvanatha, 28) (Baladeva) Jagannatha, 29) Bhaktivinoda, 30) Gaurakisora, 31) Bhaktisiddhanta Sarasvati, 32) His Divine Grace A. C. Bhaktivedanta Swami Prabhupada.`
+  },
 ];
 
 export default function IAmNew() {

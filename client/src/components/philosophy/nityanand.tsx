@@ -15,7 +15,7 @@ const Nityanand = () => {
         {/* Verse and Image Row */}
         <div className="flex flex-col md:flex-row gap-6 mb-10">
           <img
-            src="/np2.jpg"
+            src="/philosophy/np2.jpeg"
             alt="Sri Nityananda Prabhu"
             className="w-full md:w-1/2 rounded-lg shadow"
           />
@@ -42,40 +42,57 @@ const Nityanand = () => {
             </div>
             {/* 📸 Image */}
             <img
-            src="/np3.jpg"
+            src="/philosophy/np3.jpg"
             alt="Nityananda Prabhu"
             className="rounded-xl shadow-lg mb-10 w-full md:w-2/3 lg:w-1/2 max-h-[480px] object-cover mx-auto"
             />
         </div>
 
         {/* Section 1 */}
-        <h2 className="text-3xl font-bold text-purple-800 mb-4">Birth and Childhood Pastimes: </h2>
-        <p className="text-lg text-gray-700 mb-10 leading-relaxed">
-        Nityananda Prabhu was born in Ekachakra, a small village in present West Bengal, around the year 1474 to a pious brahmanical couple Hadai Ojha and Padmavati. His birth site is commemorated by a temple named Garbhavasa and is visited by pilgrims even today. <br />
-        Nityananda Prabhu was born on the auspicious thirteenth day (trayodashi) of the bright fortnight of the month of Magha. As a child, Nitai loved to enact the pastimes of Sri Krishna and Sri Rama.
-        On one occasion, one of the boys dressed as Akrura, took Krishna and Balarama away from Vrindavana on the order of Kamsa. Nitai cried in grief, feeling the separation of the cowherd girls from Krishna. Tears of love flowed from His eyes. His acting was so authentic that it made all who watched question whether He was merely acting or in some way experiencing the part He played. This was true whether He was playing Krishna, Balarama, or even Vamana and other Incarnations of the Lord. When questioned, Nitai would respond: "These are My own divine pastimes, and I am allowing you to see them."
-        Among His most convincing roles was that of Lakshmana, brother of Rama, which intimated His divine identity as Balarama. For His first twelve years, Nityananda Prabhu stayed in Ekachakra and shared loving pastimes with His neighbors.<br /> 
-        </p>
+        <div className="flex flex-col md:flex-row items-center gap-8 mb-16">
+          {/* Left: Text Section */}
+          <div className="flex-1">
+            <img
+              src="/philosophy/np4.jpeg"
+              alt="Early Life"
+              className="rounded-xl shadow-lg w-full max-h-[480px] object-cover"
+            />
+          </div>
+          
+          {/* Right: Image Section */}
+          <div className="flex-1">
+            <h2 className="text-3xl font-bold text-purple-800 mb-4">Birth and Childhood Pastimes:</h2>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Nityananda Prabhu was born in Ekachakra, a small village in present West Bengal, around the year 1474 to a pious brahmanical couple Hadai Ojha and Padmavati. His birth site is commemorated by a temple named Garbhavasa and is visited by pilgrims even today. <br /><br />
+              Nityananda Prabhu was born on the auspicious thirteenth day (trayodashi) of the bright fortnight of the month of Magha. As a child, Nitai loved to enact the pastimes of Sri Krishna and Sri Rama.
+              On one occasion, one of the boys dressed as Akrura, took Krishna and Balarama away from Vrindavana on the order of Kamsa. Nitai cried in grief, feeling the separation of the cowherd girls from Krishna. Tears of love flowed from His eyes. His acting was so authentic that it made all who watched question whether He was merely acting or in some way experiencing the part He played. This was true whether He was playing Krishna, Balarama, or even Vamana and other Incarnations of the Lord. When questioned, Nitai would respond: "These are My own divine pastimes, and I am allowing you to see them."
+              Among His most convincing roles was that of Lakshmana, brother of Rama, which intimated His divine identity as Balarama. For His first twelve years, Nityananda Prabhu stayed in Ekachakra and shared loving pastimes with His neighbors.
+            </p>
+          </div>
 
-        <img
-          src="/np4.jpg"
-          alt="Early Life"
-          className="rounded-xl shadow-lg mb-10 w-full max-h-[480px] object-cover"
-        />
+        </div>
 
         {/* Section 2 */}
-        <h2 className="text-3xl font-bold text-purple-800 mb-4">Uniting With Chaitanya Mahaprabhu:</h2>
-        <p className="text-lg text-gray-700 mb-10 leading-relaxed">
-        Before uniting with Lord Chaitanya in 1506, Nityananda toured extensively with a sannyasi who was overjoyed to see Little Nitai’s devotion. Nityananda Prabhu was always in a trance-like state of devotion although the travel. <br /> 
-        Finally, Nityananda Prabhu reached the land of Nadiya, where Chaitanya Mahaprabhu resided. When the two Lords saw each other for the first time, they were immediately overtaken by waves of ecstasy. Nitai was roughly thirty-two years old, and Mahaprabhu was twenty. They each felt that their lives were now perfectly complete. Embracing, they cried what seemed like rivers of ecstasy.<br /> 
-        Each of them revered the other as Spiritual Master and as Lord Chaitanya was trying to do Vyasa Pooja worship ceremony to Lord Nityananda, Nityananda Prabhu protested and grabbed all of the worship articles from Mahaprabhu and worshiped Him instead. Nityananda Prabhu kept repeating, "Nimai Pandita [Mahaprabhu] is my Lord and master! Nimai Pandita is my Lord and master!" There was constant competition as to who would serve whom. Their transcendental love for one another is indescribable.<br /> 
-        </p>
+        <div className="flex flex-col md:flex-row items-center gap-8 mb-16">
+          {/* Left: Text Section */}
+          <div className="flex-1">
+            <h2 className="text-3xl font-bold text-purple-800 mb-4">Uniting With Chaitanya Mahaprabhu:</h2>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Before uniting with Lord Chaitanya in 1506, Nityananda toured extensively with a sannyasi who was overjoyed to see Little Nitai’s devotion. Nityananda Prabhu was always in a trance-like state of devotion although the travel. <br /><br />
+              Finally, Nityananda Prabhu reached the land of Nadiya, where Chaitanya Mahaprabhu resided. When the two Lords saw each other for the first time, they were immediately overtaken by waves of ecstasy. Nitai was roughly thirty-two years old, and Mahaprabhu was twenty. They each felt that their lives were now perfectly complete. Embracing, they cried what seemed like rivers of ecstasy. <br /><br />
+              Each of them revered the other as Spiritual Master and as Lord Chaitanya was trying to do Vyasa Pooja worship ceremony to Lord Nityananda, Nityananda Prabhu protested and grabbed all of the worship articles from Mahaprabhu and worshiped Him instead. Nityananda Prabhu kept repeating, "Nimai Pandita [Mahaprabhu] is my Lord and master! Nimai Pandita is my Lord and master!" There was constant competition as to who would serve whom. Their transcendental love for one another is indescribable.
+            </p>
+          </div>
 
-        <img
-          src="/np5.jpg"
-          alt="Meeting Mahaprabhu"
-          className="rounded-xl shadow-lg mb-10 w-full max-h-[480px] object-cover"
-        />
+          {/* Right: Image Section */}
+          <div className="flex-1">
+            <img
+              src="/philosophy/np5.jpg"
+              alt="Meeting Mahaprabhu"
+              className="rounded-xl shadow-lg w-full max-h-[480px] object-cover"
+            />
+          </div>
+        </div>
 
         <h2 className="text-3xl font-bold text-purple-800 mb-4">Spreading the Sankirtana Movement</h2>
         <p className="text-lg text-gray-700 mb-10 leading-relaxed">After accepting Sannyasa and touring South India Lord Chaitanya returned to Jagannath Puri and was satisfied to see the Sankīrtana movement spread rapidly by Lord Nityananda’s efforts. He sent Lord Nityananda,His most reliable sankirtana commander,  to Bengal to preach there.<br />
@@ -85,7 +102,7 @@ const Nityanand = () => {
 
         <div className="flex flex-col md:flex-row gap-6 mb-10"> 
             <img
-            src="/np6.jpg"
+            src="/philosophy/np6.jpg"
             alt="Mercy"
             className="rounded-xl shadow-lg mb-10 w-full md:w-2/3 lg:w-1/2 max-h-[480px] object-cover mx-auto"
             />
@@ -102,22 +119,43 @@ const Nityanand = () => {
         </div>
 
         {/* Section 3 */}
-        <h2 className="text-3xl font-bold text-purple-800 mb-4">The Liberation of Jagai and Madhai</h2>
-        <p className="text-lg text-gray-700 mb-10 leading-relaxed">
-        Lord Nityananda’s mercy knew no bounds. Here's an enduring  story.<br />
-        To spread the message of Love of God to every home in Navadvipa, the stalwart devotees, Lord Nityananda and Haridasa Thakura were chosen by Mahaprabhu. They went door-to-door preaching this Gospel. It was at this point that Nityananda and Haridasa met the two sinful brothers Jagai and Madhai. Though descendants of an illustrious priestly dynasty, yet they have abandoned the pious ways of their forefathers for a life of debauchery. When the two emissaries of Mahaprabhu's mercy first met them, Jagai and Madhai were in a drunken stupor, creating havoc throughout the village. Nityananda felt compassion on these fallen souls and reasoned that if they could be rectified, then Mahaprabhu's mission would become even more well received in Navadvipa. Approaching the two wayward brothers on the street, Nitai out of his causeless mercy, begged them to chant the holy name of Krishna and to taste the sweet nectar of Krishna Consciousness. But the two villains just chased Nityananda down the road, shouting profanities and calling Him foul names. One of the sinful duo, Madhai threw a broken clay pot that came crashing down on Nityananda's divine head, causing Him to bleed. (Although Nityananda's body is perfectly spiritual, He manifested this pastime so that Jagai and Madhai could attain liberation.)
-        When Mahaprabhu heard what had happened, He became infuriated and rushed to the area Himself. How could anyone harm a gentle soul like Nityananda? Summoning His divine disk-like weapon Sudarśana, which is flaming and radiant, Mahaprabhu was prepared to kill the two repellent brothers on the spot, forcing them to taste the wrath of God. <br />
+        {/* Two-column layout for intro part */}
+        <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
+          {/* Text Preview */}
+          <div className="flex-1">
+            <h2 className="text-3xl font-bold text-purple-800 mb-4">The Liberation of Jagai and Madhai</h2>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Lord Nityananda’s mercy knew no bounds. Here's an enduring story. <br /><br />
+              To spread the message of Love of God to every home in Navadvipa, the stalwart devotees, Lord Nityananda and Haridasa Thakura were chosen by Mahaprabhu. They went door-to-door preaching this Gospel. It was at this point that Nityananda and Haridasa met the two sinful brothers Jagai and Madhai.
+              Though descendants of an illustrious priestly dynasty, yet they have abandoned the pious ways of their forefathers for a life of debauchery. When the two emissaries of Mahaprabhu's mercy first met them, Jagai and Madhai were in a drunken stupor, creating havoc throughout the village. Nityananda felt compassion on these fallen souls and reasoned that if they could be rectified, then Mahaprabhu's mission would become even more well received in Navadvipa.<br /><br />
+            </p>
+          </div>
 
-        His anger, however, was assuaged by Nityananda Prabhu, who reminded the Lord that the majority of people in this age are as fallen as Jagai and Madhai, and that it is His mission to liberate them with love, not violence. Hearing these words, Mahaprabhu was willing to forgive Jagai. But Madhai, who had perpetrated the evil deed, needed to be forgiven by Nityananda Prabhu Himself. Nityananda Prabhu's mercy knows no bounds, and He quickly forgave Madhai for all that he had done.
-        When Jagai and Madhai saw the loving exchange between Mahaprabhu and Nityananda and observed Nityananda's forgiving nature toward them, their hearts were changed. They resolved to become devotees and enthusiastic supporters of Mahaprabhu's sankirtana mission. Seeing their sincerity, Mahaprabhu took all of their sins on His own head. For a few brief moments, His beautiful golden body turned an unsightly blackish color. 
-        Indeed, when Yamaraja's assistant Chitragupta tried to tally Jagai and Madhai's collective sins, he could not do so, and collapsed from exhaustion. After the incident with Nitai, however, Jagai and Madhai set the highest standard of devotional service by constantly chanting the holy names of Krishna and instructing others in devotion to Him.<br />
-        </p>
+          {/* Image */}
+          <div className="flex-1">
+            <img
+              src="/philosophy/np7.jpg"
+              alt="Mercy"
+              className="rounded-xl shadow-lg w-full max-h-[480px] object-cover"
+            />
+          </div>
+        </div>
 
-        <img
-          src="/np7.jpg"
-          alt="Mercy"
-          className="rounded-xl shadow-lg mb-10 w-full max-h-[480px] object-cover"
-        />
+        {/* Full-width continuation text */}
+        <div className="mb-16">
+          <p className="text-lg text-gray-700 leading-relaxed">
+
+            Approaching the two wayward brothers on the street, Nitai out of his causeless mercy, begged them to chant the holy name of Krishna and to taste the sweet nectar of Krishna Consciousness. But the two villains just chased Nityananda down the road, shouting profanities and calling Him foul names. One of the sinful duo, Madhai threw a broken clay pot that came crashing down on Nityananda's divine head, causing Him to bleed. (Although Nityananda's body is perfectly spiritual, He manifested this pastime so that Jagai and Madhai could attain liberation.)<br /><br />
+
+            When Mahaprabhu heard what had happened, He became infuriated and rushed to the area Himself. How could anyone harm a gentle soul like Nityananda? Summoning His divine disk-like weapon Sudarśana, which is flaming and radiant, Mahaprabhu was prepared to kill the two repellent brothers on the spot, forcing them to taste the wrath of God. <br /><br />
+
+            His anger, however, was assuaged by Nityananda Prabhu, who reminded the Lord that the majority of people in this age are as fallen as Jagai and Madhai, and that it is His mission to liberate them with love, not violence. Hearing these words, Mahaprabhu was willing to forgive Jagai. But Madhai, who had perpetrated the evil deed, needed to be forgiven by Nityananda Prabhu Himself. Nityananda Prabhu's mercy knows no bounds, and He quickly forgave Madhai for all that he had done.<br /><br />
+
+            When Jagai and Madhai saw the loving exchange between Mahaprabhu and Nityananda and observed Nityananda's forgiving nature toward them, their hearts were changed. They resolved to become devotees and enthusiastic supporters of Mahaprabhu's sankirtana mission. Seeing their sincerity, Mahaprabhu took all of their sins on His own head. For a few brief moments, His beautiful golden body turned an unsightly blackish color. <br /><br />
+
+            Indeed, when Yamaraja's assistant Chitragupta tried to tally Jagai and Madhai's collective sins, he could not do so, and collapsed from exhaustion. After the incident with Nitai, however, Jagai and Madhai set the highest standard of devotional service by constantly chanting the holy names of Krishna and instructing others in devotion to Him.
+          </p>
+        </div>
 
         {/* Section 3 */}
         <h2 className="text-3xl font-bold text-purple-800 mb-4">Household Life and Final Pastimes:</h2>

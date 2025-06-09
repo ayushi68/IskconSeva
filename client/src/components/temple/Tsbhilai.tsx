@@ -120,50 +120,136 @@ const TempleScheduleB: React.FC = () => {
     { time: '7:20 AM', event: 'Guru Puja' },
     { time: '7:45 AM', event: 'Srimad Bhagavatam Class' },
     { time: 'Weekdays 12:00 PM – 3:00 PM', event: 'Restaurant & Gift Shop' },
-    { time: 'Tuesdays 7:00 PM', event: 'Bhakti School' },
+    { time: 'Tuesdays 7:00 PM', event: 'Krishna Ashraya Class' },
+    { time: 'Sundays 9:00 AM – 11:00 AM', event: 'Gopal Sakha Class (Sunday School for Children)' },
     { time: 'Sunday 4:30 PM', event: 'Bhajans & Kirtans' },
     { time: 'Sunday 6:30 PM', event: 'Sunday Feast Lecture' },
     { time: 'Sunday 7:30 PM', event: 'Sunday Feast Served' },
     { time: 'Sunday 4:00 PM – 8:00 PM', event: 'Govinda’s Gifts Open' },
   ];
 
+  const activities = [
+    {
+      title: 'Youth Empowerment (FOLK)',
+      description: 'Friends of Lord Krishna (FOLK) helps youth learn timeless wisdom from the Bhagavad Gita and Srimad Bhagavatam, enabling them to become more focused, cultivate positive value systems, develop interpersonal skills, increase operational skills, and enhance personal growth. Weekend programs include Vedic science classes and yoga retreat sessions.',
+    },
+    {
+      title: 'Corporate Workshops',
+      description: 'Designed for professionals, these workshops promote a stress-free life enriched with spiritual values, helping participants become more efficient at the workplace and enhance productivity in their fields.',
+    },
+    {
+      title: 'Hostel Facility',
+      description: 'Available for FOLK participants, the hostel provides a conducive atmosphere near the temple to enhance spiritual advancement.',
+    },
+    {
+      title: 'Krishna Ashraya Class',
+      description: 'This class helps members learn Lord Krishna’s instructions from the Bhagavad Gita and Srimad Bhagavatam through Srila Prabhupada’s teachings, focusing on practicing bhakti yoga principles.',
+    },
+    {
+      title: 'Gopal Sakha Class',
+      description: 'A Sunday school for children aged 3 to 15, held every Sunday, focusing on inculcating a positive value system through scriptural study of the Bhagavad Gita and Srimad Bhagavatam.',
+    },
+    {
+      title: 'Culture Camp',
+      description: 'A 15-day summer program for children, featuring six-hour daily sessions with Bhagavad Gita classes, Vedic story sessions, creative arts, dance, and drama to prepare them for life’s challenges.',
+    },
+    {
+      title: 'Heritage Festival',
+      description: 'Held during Janmashtami, this festival provides a platform for school children to participate in competitions based on tradition and culture, fostering spiritual interest and reviving traditional arts.',
+    },
+    {
+      title: 'Nagar Sankirtana',
+      description: 'Frequent city-wide events where devotees sing the Hare Krishna Mahamantra with kartal and mridanga, spreading the transcendental sound vibration to cleanse inauspiciousness.',
+    },
+    {
+      title: 'Spiritual Trips',
+      description: 'Organized to holy places like Vrindavan, Puri, and Mayapur, these trips offer devotees a chance to visit sacred sites, chant, sing kirtan, and experience spiritual rejuvenation.',
+    },
+    {
+      title: 'Nitya Annadana',
+      description: 'Krishna prasadam is distributed, especially on Sundays, after being offered to the Lord. This sanctified food elevates consciousness towards God, making it an integral part of devotional service.',
+    },
+    {
+      title: 'Agricultural Farming',
+      description: 'Organic farming of wheat, paddy, and vegetables is conducted without pesticides. The pure yields are used for offerings to the Lord.',
+    },
+    {
+      title: 'Spiritual Books & Paraphernalia',
+      description: 'Over 60 volumes of Srila Prabhupada’s authoritative translations and commentaries on Vedic classics are available at the temple book stall, along with Lord’s paraphernalia, deities, tulsi mala, chanting bags, and t-shirts.',
+    },
+    {
+      title: 'Gaushala',
+      description: 'A goshala is maintained to protect cows, ensuring offerings are prepared with pure milk and ghee. Devotees can contribute to cow protection, which brings religiosity and piety.',
+    },
+    {
+      title: 'Sunday Love Feast',
+      description: 'A weekly festival since 1966, featuring kirtan, spiritual discourse, and a free vegetarian feast. Held every Sunday from 7:00 AM – 9:30 AM and 7:00 PM – 9:30 PM, open to all for a culturally rich experience of bhakti yoga.',
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-100 font-sans">
-      {/* Slogan Section */}
-      <section className="bg-indigo-600 text-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold mb-4">Welcome to Sri Sri Radha Krishnachandra Mandir</h1>
-          <blockquote className="text-lg italic">
-            “Temple means people should come, people should learn the science of God. Temple means spiritual educational shelter. People should come and learn what is spiritual life, what is God, what is my relationship with God.”
-            <span className="block mt-2 font-semibold">— Srila Prabhupada</span>
+    <div className="min-h-screen bg-gradient-to-b from-yellow-50 to-orange-50 font-serif">
+      {/* Header Section */}
+      <section className="bg-gradient-to-r from-indigo-700 to-purple-600 text-white py-16 relative overflow-hidden">
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <h1 className="text-5xl font-extrabold mb-6 tracking-tight drop-shadow-md">
+            Sri Sri Radha Krishnachandra Mandir
+          </h1>
+          <p className="text-xl mb-6 max-w-2xl mx-auto leading-relaxed">
+            The Hare Krishna Movement in Bhilai rejuvenates Vedic culture through bhakti yoga, as taught by Srila Prabhupada, guiding devotees to reconnect with Lord Krishna.
+          </p>
+          <blockquote className="text-lg italic max-w-3xl mx-auto">
+            “Temple means people should come, people should learn the science of God. Temple means spiritual educational shelter.”
+            <span className="block mt-3 font-semibold text-yellow-200">— Srila Prabhupada</span>
           </blockquote>
+        </div>
+        <div className="absolute inset-0 bg-[url('https://source.unsplash.com/random/1200x400?temple')] opacity-20 bg-cover bg-center"></div>
+      </section>
+
+      {/* Activities Section */}
+      <section className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold text-indigo-800 mb-6 text-center">Our Activities</h2>
+        <p className="text-gray-700 mb-8 text-center max-w-3xl mx-auto">
+          The Hare Krishna Movement Bhilai offers a variety of programs to revive Vedic culture, fostering spiritual growth and a deeper connection with Lord Krishna through bhakti yoga.
+        </p>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {activities.map((activity, index) => (
+            <div
+              key={index}
+              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-indigo-500"
+            >
+              <h3 className="text-xl font-semibold text-indigo-600 mb-3">{activity.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{activity.description}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Morning Programme Introduction */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Morning Programme</h2>
-        <p className="text-gray-600 mb-4">
-          There are several services throughout the day at Sri Sri Radha Krishnachandra Mandir to which everyone is welcome to attend. Aside from these times, it is open daily from 4:30 AM - 8:30 PM for pilgrims and guests.
+      <section className="container mx-auto px-6 py-12 bg-white rounded-xl shadow-md">
+        <h2 className="text-3xl font-bold text-indigo-800 mb-6 text-center">Morning Programme</h2>
+        <p className="text-gray-700 mb-4 max-w-3xl mx-auto text-center">
+          Join us for daily services open to all. The temple welcomes pilgrims and guests from 4:30 AM to 8:30 PM.
         </p>
-        <p className="text-gray-600 mb-4">
-          The scriptures recommend that spiritual activities performed in the auspicious time of brahma-muhurta (one and a half hours before sunrise) have greater effect. Srila Prabhupada mandated that devotees should wake up early in the morning at 3:30 AM and prepare themselves for rendering devotional service. This mandate is strictly followed by all the devotees who practice the principles of Krishna consciousness.
+        <p className="text-gray-700 mb-4 max-w-3xl mx-auto text-center">
+          Spiritual activities during brahma-muhurta (one and a half hours before sunrise) are especially potent, as recommended by scriptures. Devotees follow Srila Prabhupada’s mandate to rise at 3:30 AM for devotional service.
         </p>
-        <p className="text-gray-600">
-          Come experience the peace and joy of starting your day with devotion.
-        </p>
+        <p className="text-gray-700 text-center">Experience the serenity of starting your day with devotion.</p>
       </section>
 
       {/* Morning Programme Schedule */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Morning Programme Schedule</h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <section className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold text-indigo-800 mb-6 text-center">Morning Programme Schedule</h2>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {morningProgramme.map((item, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-medium text-indigo-600">{item.event}</h3>
-              <p className="text-gray-600 font-medium">{item.time}</p>
+            <div
+              key={index}
+              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-yellow-400"
+            >
+              <h3 className="text-xl font-semibold text-indigo-600 mb-2">{item.event}</h3>
+              <p className="text-gray-600 font-medium mb-3">{item.time}</p>
               {item.description.map((desc, i) => (
-                <p key={i} className="text-gray-600 mt-2">{desc}</p>
+                <p key={i} className="text-gray-600 leading-relaxed mb-2">{desc}</p>
               ))}
             </div>
           ))}
@@ -171,23 +257,26 @@ const TempleScheduleB: React.FC = () => {
       </section>
 
       {/* Evening Programme Introduction */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Evening Programme</h2>
-        <p className="text-gray-600">
-          As the sun begins to set, the temple atmosphere becomes calm and spiritually vibrant. The evening programme offers a wonderful opportunity to wind down the day in the divine presence of the Lord.
+      <section className="container mx-auto px-6 py-12 bg-white rounded-xl shadow-md">
+        <h2 className="text-3xl font-bold text-indigo-800 mb-6 text-center">Evening Programme</h2>
+        <p className="text-gray-700 max-w-3xl mx-auto text-center">
+          As the sun sets, the temple transforms into a serene and spiritually vibrant space, offering a perfect opportunity to conclude your day in the divine presence of the Lord.
         </p>
       </section>
 
       {/* Evening Programme Schedule */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Evening Programme Schedule</h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <section className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold text-indigo-800 mb-6 text-center">Evening Programme Schedule</h2>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {eveningProgramme.map((item, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-medium text-indigo-600">{item.event}</h3>
-              <p className="text-gray-600 font-medium">{item.time}</p>
+            <div
+              key={index}
+              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-yellow-400"
+            >
+              <h3 className="text-xl font-semibold text-indigo-600 mb-2">{item.event}</h3>
+              <p className="text-gray-600 font-medium mb-3">{item.time}</p>
               {item.description.map((desc, i) => (
-                <p key={i} className="text-gray-600 mt-2">{desc}</p>
+                <p key={i} className="text-gray-600 leading-relaxed mb-2">{desc}</p>
               ))}
             </div>
           ))}
@@ -195,14 +284,18 @@ const TempleScheduleB: React.FC = () => {
       </section>
 
       {/* Darshan Times */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Darshan Times</h2>
-        <p className="text-gray-600 mb-4">Temple Altar is open to see the Deities</p>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <ul className="space-y-2">
+      <section className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold text-indigo-800 mb-6 text-center">Darshan Times</h2>
+        <p className="text-gray-700 mb-6 text-center">Temple Altar is open to see the Deities</p>
+        <div className="bg-white p-8 rounded-xl shadow-lg">
+          <ul className="space-y-4">
             {darshanTimes.map((item, index) => (
-              <li key={index} className="text-gray-600">
-                <span className="font-medium">{item.time}:</span> {item.event}
+              <li
+                key={index}
+                className="text-gray-700 flex items-center space-x-2 hover:text-indigo-600 transition-colors duration-200"
+              >
+                <span className="font-medium text-indigo-600">{item.time}:</span>
+                <span>{item.event}</span>
               </li>
             ))}
           </ul>
@@ -210,13 +303,17 @@ const TempleScheduleB: React.FC = () => {
       </section>
 
       {/* Services and Classes */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Services and Classes</h2>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <ul className="space-y-2">
+      <section className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold text-indigo-800 mb-6 text-center">Services and Classes</h2>
+        <div className="bg-white p-8 rounded-xl shadow-lg">
+          <ul className="space-y-4">
             {servicesAndClasses.map((item, index) => (
-              <li key={index} className="text-gray-600">
-                <span className="font-medium">{item.time}:</span> {item.event}
+              <li
+                key={index}
+                className="text-gray-700 flex items-center space-x-2 hover:text-indigo-600 transition-colors duration-200"
+              >
+                <span className="font-medium text-indigo-600">{item.time}:</span>
+                <span>{item.event}</span>
               </li>
             ))}
           </ul>
@@ -224,15 +321,13 @@ const TempleScheduleB: React.FC = () => {
       </section>
 
       {/* Temple Hours */}
-      <section className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Temple Hours</h2>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <p className="text-gray-600">4:30 AM – 12:30 PM</p>
-          <p className="text-gray-600">4:30 PM – 8:30 PM</p>
+      <section className="container mx-auto px-6 py-12">
+        <h2 className="text-3xl font-bold text-indigo-800 mb-6 text-center">Temple Hours</h2>
+        <div className="bg-white p-8 rounded-xl shadow-lg text-center">
+          <p className="text-gray-700 mb-2">4:30 AM – 12:30 PM</p>
+          <p className="text-gray-700">4:30 PM – 8:30 PM</p>
         </div>
       </section>
-
-      
     </div>
   );
 };

@@ -2,102 +2,158 @@ import React from 'react';
 
 const Catering: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100 text-gray-800">
-      {/* Header Section */}
-      <header className="bg-green-600 text-white py-12 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Catering Services</h1>
-        <p className="text-lg md:text-xl max-w-3xl mx-auto">
-          Experience Divine Prasadam at HKM Bhilai Raipur
-        </p>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-100 to-blue-100 font-inter">
+      {/* Hero Section */}
+      <header className="relative bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-500 text-white py-24 text-center overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-15"></div>
+        <div className="relative max-w-5xl mx-auto">
+          <h1 className="text-6xl font-extrabold mb-4 animate-slide-in">Catering Services</h1>
+          <p className="text-2xl mb-8 text-purple-100">
+            Savor the Divine Prasadam at HKM Bhilai Raipur
+          </p>
+          <button
+            onClick={() => document.getElementById('vedic-thoughts')?.scrollIntoView({ behavior: 'smooth' })}
+            className="bg-purple-200 text-purple-800 px-8 py-4 rounded-full font-semibold text-lg hover:bg-purple-300 transition transform hover:scale-105 shadow-md"
+          >
+            Explore Our Catering
+          </button>
+        </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
         {/* Vedic Thoughts Section */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-semibold text-green-700 mb-6">Thoughts on Good Food as Described by Vedic Scriptures</h2>
+        <section id="vedic-thoughts" className="space-y-8">
+          <h2 className="text-4xl font-bold text-center text-purple-600 mb-6 animate-fade-in">Vedic Thoughts on Good Food</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold text-green-600 mb-2">Purity of Ingredients</h3>
-              <p>Food prepared with love, devotion, and purity, and offered to the Divine, becomes sanctified and nourishes both body and soul. It transcends mere sustenance and becomes a medium of spiritual enlightenment.</p>
+            <div className="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-purple-200">
+              <img
+                src="https://images.unsplash.com/photo-1504672281656-e3ce286bfb45?auto=format&fit=crop&w=400&q=80"
+                alt="Purity of Ingredients"
+                className="w-full h-32 object-cover rounded-t-xl mb-4"
+              />
+              <h3 className="text-xl font-semibold text-purple-600 mb-2">Purity of Ingredients</h3>
+              <p className="text-gray-700">Food prepared with love, devotion, and purity, offered to the Divine, nourishes both body and soul, becoming a medium for spiritual enlightenment.</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold text-green-600 mb-2">Sattvic Quality</h3>
-              <p>As per the Vedic scriptures, food prepared with a calm, peaceful mind and with devotion is known as 'Sattvic' food. Such food brings clarity, wisdom, and happiness, and helps in the spiritual journey of an individual.</p>
+            <div className="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-purple-200">
+              <img
+                src="https://images.unsplash.com/photo-1513104890138-7c749659a680?auto=format&fit=crop&w=400&q=80"
+                alt="Sattvic Quality"
+                className="w-full h-32 object-cover rounded-t-xl mb-4"
+              />
+              <h3 className="text-xl font-semibold text-purple-600 mb-2">Sattvic Quality</h3>
+              <p className="text-gray-700">Sattvic food, prepared with a calm, devotional mind, brings clarity, wisdom, and happiness, aiding the spiritual journey.</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold text-green-600 mb-2">Offering to the Divine</h3>
-              <p>The Bhagavad Gita emphasizes that food offered first to the Lord purifies the eater and sanctifies the act of eating. Such prasadam not only satisfies hunger but uplifts the spirit and aligns one's consciousness with divine grace.</p>
+            <div className="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-purple-200">
+              <img
+                src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=400&q=80"
+                alt="Offering to the Divine"
+                className="w-full h-32 object-cover rounded-t-xl mb-4"
+              />
+              <h3 className="text-xl font-semibold text-purple-600 mb-2">Offering to the Divine</h3>
+              <p className="text-gray-700">Food offered to the Lord, as per the Bhagavad Gita, purifies the eater, uplifting the spirit and aligning with divine grace.</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold text-green-600 mb-2">Impact on Consciousness</h3>
-              <p>Food is a reflection of the mind that prepares it. Therefore, food prepared with positive intentions and devotional feelings can elevate one's consciousness and foster a sense of inner peace and contentment.</p>
+            <div className="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-purple-200">
+              <img
+                src="https://images.unsplash.com/photo-1505253716362-afaea1d3e1e2?auto=format&fit=crop&w=400&q=80"
+                alt="Impact on Consciousness"
+                className="w-full h-32 object-cover rounded-t-xl mb-4"
+              />
+              <h3 className="text-xl font-semibold text-purple-600 mb-2">Impact on Consciousness</h3>
+              <p className="text-gray-700">Food prepared with positive intentions elevates consciousness, fostering inner peace and contentment.</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg md:col-span-2">
-              <h3 className="text-xl font-semibold text-green-600 mb-2">Connection with the Divine</h3>
-              <p>In the Vedic tradition, sharing food offered to the Divine fosters a sense of community and devotion. It is believed that prasadam, blessed by the Lord, connects the devotee with divine energy and imparts divine blessings.</p>
+            <div className="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 border border-purple-200 md:col-span-2">
+              <img
+                src="https://images.unsplash.com/photo-1509048197708-4c6c6a5c96e0?auto=format&fit=crop&w=600&q=80"
+                alt="Connection with the Divine"
+                className="w-full h-32 object-cover rounded-t-xl mb-4"
+              />
+              <h3 className="text-xl font-semibold text-purple-600 mb-2">Connection with the Divine</h3>
+              <p className="text-gray-700">Sharing prasadam fosters community and devotion, connecting devotees with divine energy and blessings.</p>
             </div>
           </div>
         </section>
 
         {/* Catering Services Section */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-semibold text-green-700 mb-6">Our Catering Services</h2>
-          <p className="text-lg leading-relaxed mb-4">
-            “You are what you eat,” as famously stated by French lawyer Anthelme Brillat-Savarin, resonates strongly with the philosophy that food is not just fuel for the body but nourishment for the soul. At HKM Bhilai Raipur, we bring this deep truth to life through our divine prasadam.
-          </p>
-          <p className="text-lg leading-relaxed mb-4">
-            Who says vegetarian food, especially without onion and garlic, lacks flavor? At our HKM Bhilai food stall, we defy this idea with an array of delectable, lovingly prepared dishes that are both hot and fresh. Our options range from savory snacks to full meals, catering to every palate while enriching your soul.
-          </p>
-          <blockquote className="border-l-4 border-green-600 pl-4 italic text-lg mb-4">
-            “The devotees of the Lord are released from all kinds of sins because they eat food which is offered first for sacrifice. Others, who prepare food for personal sense pleasure, verily eat only sin.” — <span className="font-semibold">Bhagavad Gita 3.13</span>
-          </blockquote>
-          <p className="text-lg leading-relaxed mb-4">
-            This shows the sanctity of prasadam that we serve. Our food not only satisfies your hunger but also keeps you in a sattvic mode, nourishing your soul and satisfying your taste desires.
-          </p>
-          <blockquote className="border-l-4 border-green-600 pl-4 italic text-lg mb-4">
-            “Everything should be so clean that not even a single fly should be seen. After the first batch of prasadam is made, it will be offered to Lord Caitanya with arati, then the prasadam for the rest of the day will be considered offered. Tapes can play of our kirtanas...” — <span className="font-semibold">Srila Prabhupada</span>
-          </blockquote>
+        <section className="space-y-8">
+          <h2 className="text-4xl font-bold text-center text-purple-600 mb-6 animate-fade-in">Our Catering Services</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1512058564366-4c7e9d09b6d6?auto=format&fit=crop&w=600&q=80"
+                alt="Prasadam Preparation"
+                className="rounded-lg shadow-md w-full h-64 object-cover"
+              />
+            </div>
+            <div>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                At HKM Bhilai Raipur, our prasadam embodies the philosophy that food nourishes both body and soul. Our vegetarian dishes, free from onion and garlic, are bursting with flavor, from savory snacks to wholesome meals.
+              </p>
+              <blockquote className="border-l-4 border-purple-600 pl-4 italic text-gray-700 mb-4">
+                “The devotees of the Lord are released from all kinds of sins because they eat food offered first for sacrifice.” — <span className="font-semibold">Bhagavad Gita 3.13</span>
+              </blockquote>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                Our sattvic prasadam satisfies hunger while uplifting your spirit, keeping you in a state of purity and devotion.
+              </p>
+            </div>
+          </div>
+          <div className="text-center">
+            <blockquote className="border-l-4 border-purple-600 pl-4 italic text-gray-700 mb-4 mx-auto max-w-3xl">
+              “Everything should be so clean that not even a single fly should be seen. After the first batch of prasadam is made, it will be offered to Lord Caitanya with arati...” — <span className="font-semibold">Srila Prabhupada</span>
+            </blockquote>
+          </div>
         </section>
 
         {/* Events Section */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-semibold text-green-700 mb-6">Catering for All Occasions</h2>
-          <p className="text-lg leading-relaxed mb-4">
-            Whether it’s a birthday party, a grand wedding, a social gathering, a business meeting, or even if you're simply looking for a respite from cooking, let us take care of your catering needs. From cakes and cookies to blending dinners and savory snacks, we’ve got you covered.
-          </p>
-          <ul className="list-disc list-inside text-lg space-y-2">
-            <li>Marriage Ceremonies</li>
-            <li>Gruha Pravesha (Housewarming)</li>
-            <li>Upanayanam (Sacred Thread Ceremony)</li>
-            <li>Seemantha (Kubsa) (Pregnancy Ritual)</li>
-            <li>Birthdays</li>
-            <li>Wedding Anniversaries</li>
-            <li>Corporate Events</li>
-            <li>Business Lunches/Dinners</li>
-            <li>Any Other Social and Religious Functions</li>
-          </ul>
-          <p className="text-lg leading-relaxed mt-4">
-            Our cakes, cookies, breads, and sweets have won hearts for their simplicity in taste. For larger events, please place your order a week in advance.
-          </p>
+        <section className="space-y-8">
+          <h2 className="text-4xl font-bold text-center text-purple-600 mb-6 animate-fade-in">Catering for All Occasions</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                From birthdays to grand weddings, our catering services bring divine prasadam to every occasion. Enjoy cakes, cookies, breads, and savory snacks that delight the palate and soul.
+              </p>
+              <ul className="list-disc list-inside text-gray-700 space-y-2">
+                <li>Marriage Ceremonies</li>
+                <li>Gruha Pravesha (Housewarming)</li>
+                <li>Upanayanam (Sacred Thread Ceremony)</li>
+                <li>Seemantha (Kubsa) (Pregnancy Ritual)</li>
+                <li>Birthdays</li>
+                <li>Wedding Anniversaries</li>
+                <li>Corporate Events</li>
+                <li>Business Lunches/Dinners</li>
+                <li>Any Other Social and Religious Functions</li>
+              </ul>
+            </div>
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1519996529931-28324d48471b?auto=format&fit=crop&w=600&q=80"
+                alt="Catering for Events"
+                className="rounded-lg shadow-md w-full h-64 object-cover"
+              />
+            </div>
+          </div>
+          <p className="text-gray-700 text-lg text-center">For larger events, please place your order a week in advance.</p>
         </section>
 
         {/* Visit Us */}
-        <section className="text-center bg-green-200 p-8 rounded-lg">
-          <h2 className="text-3xl font-semibold text-green-700 mb-4">Visit or Order</h2>
-          <p className="text-lg mb-4">
-            May it be a grand party or a simple gathering, let us serve you with prasadam that is as spiritually uplifting as it is delicious. Visit our Temple’s stall or place your order a week in advance for larger events.
-          </p>
-          <p className="text-lg font-semibold mb-2">Visiting Timings: 9 AM - 9 PM</p>
-          <p className="text-lg">
-            For queries or to place an order, contact us at: 
-            <a href="tel:+918770552285" className="text-green-600 hover:underline"> +91-87705 52285</a>
-          </p>
+        <section className="text-center bg-purple-200/90 backdrop-blur-sm p-8 rounded-2xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-10"></div>
+          <div className="relative">
+            <h2 className="text-4xl font-bold text-purple-600 mb-4 animate-fade-in">Visit or Order</h2>
+            <p className="text-gray-700 text-lg mb-4">
+              Let us serve you divine prasadam for any occasion, from grand parties to simple gatherings, uplifting both body and soul.
+            </p>
+            <p className="text-gray-700 text-lg font-semibold mb-2">Visiting Timings: 9 AM - 9 PM</p>
+            <p className="text-gray-700 text-lg">
+              For queries or to place an order, contact us at:{' '}
+              <a href="tel:+918770552285" className="text-purple-600 hover:underline">+91-87705 52285</a>
+            </p>
+          </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-green-600 text-white text-center py-6">
+      <footer className="bg-purple-600 text-white text-center py-6">
         <p>HKM Bhilai Raipur - Divine Prasadam for Every Occasion</p>
       </footer>
     </div>

@@ -3,68 +3,68 @@ import React, { useState } from 'react';
 const services = [
   {
     title: "Annadana Seva ",
-    img: "/Annadana.jpg",
-    description: "We provide comprehensive outsourcing solutions tailored to your business needs.",
+    img: "/Activity/annadana_seva_02.jpg",
+    description: "Annadana Seva is a noble initiative to provide free meals to those in need, ensuring that no one goes hungry.",
     link: "/Annadana"
   },
   {
     title: "Gaushala Seva",
-    img: "/gaushala.jpg",
-    description: "Bespoke software development designed to solve your unique business challenges.",
+    img: "/Activity/gaushala_01.jpg",
+    description: "Gaushala Seva is dedicated to the care and protection of cows, promoting their well-being and importance in our culture.",
     link: "/Gaushala"
   },
   {
     title: "Youth's Corner(FOLK)",
-    img: "/download.jpg",
-    description: "Innovative product design services from concept to final implementation.",
+    img: "/Activity/folk_yatra_02.jpg",
+    description: "Youth's Corner (FOLK) is a vibrant space for young people to explore their creativity and cultural heritage through folk arts.",
     link: "/Youthcorner"
   },
   {
     title: "Kid's Corner",
-    img: "/festivalpuja.jpg",
-    description: "Innovative product design services from concept to final implementation.",
+    img: "/Activity/culture_camp_02.jpg",
+    description: "Kid's Corner is a playful and educational space designed for children to learn and grow through interactive activities.",
     link: "/Kidscorner"
   },
   {
     title: "Family's Corner",
-    img: "/nityaseva.jpg",
-    description: "Innovative product design services from concept to final implementation.",
+    img: "/Activity/hare_krishna_satsang _01.jpg",
+    description: "Family's Corner is a welcoming space for families to come together, share experiences, and participate in community activities.",
     link: "/Familycorner"
   },
   {
     title: "Book Distribution",
-    img: "/vigraha.jpg",
-    description: "Innovative product design services from concept to final implementation.",
+    img: "/Activity/gifts_and_araphernalia_02.jpg",
+    description: "Book Distribution is a community initiative aimed at promoting literacy and education by providing free books to those in need.",
     link: "/Bookscorner"
   },
   {
     title: "Harinam Mantapa",
-    img: "/youthseva.jpg",
-    description: "Innovative product design services from concept to final implementation.",
+    img: "/Activity/harinaam_mandap_01.jpg",
+    description: "Harinam Mantapa is a spiritual space dedicated to the chanting of the holy names and fostering a sense of community.",
     link: "/Harinam"
   },
   {
     title: "Gifts ",
-    img: "/specialpuja.jpg",
-    description: "Innovative product design services from concept to final implementation.",
+    img: "/Activity/gifts_and_araphernalia_01.jpg",
+    description: "Gifts is a thoughtful initiative aimed at providing meaningful presents to those in need, spreading joy and kindness.",
     link: "/Gifts"
   },
   {
     title: "Catering Services",
-    img: "/hq720.jpg",
-    description: "Innovative product design services from concept to final implementation.",
+    img: "/Activity/catering_service_01.jpg",
+    description: "Catering Services offers a range of delicious and nutritious meal options for events and gatherings.",
     link: "/Catering"
   },
   {
     title: "Akshaya Patra",
-    img: "/rajbhogseva.jpg",
-    description: "Innovative product design services from concept to final implementation.",
+    img: "/Activity/akshaya_patra_02.jpg",
+    description: "Akshaya Patra is a mid-day meal program aimed at combating hunger and promoting education.",
     link: "/Akshaypatra"
   },
   {
     title: "Pilgrimage Tours",
-    img: "/download.jpg",
-    description: "Innovative product design services from concept to final implementation.",
+    img: "/Activity/vrindavan_dham_yatra.jpg",
+    description: "Pilgrimage Tours offers curated travel experiences to sacred sites, fostering spiritual growth and community.",
     link: "/Pilgrimage"
   },
 ];

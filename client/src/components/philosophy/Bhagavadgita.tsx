@@ -16,7 +16,7 @@ const Bhagavadgita = () => {
       <div className="grid md:grid-cols-2 gap-6 mb-6">
         <div className="bg-white/70 shadow-xl rounded-2xl p-4 flex flex-col justify-between">
           <motion.img
-            src="/bg9.jpg"
+            src="/philosophy/bg9.jpg"
             alt="Krishna and Arjuna"
             className="rounded-xl mb-4 w-full h-74 object-cover"
             whileHover={{ scale: 1.03 }}
@@ -28,7 +28,7 @@ const Bhagavadgita = () => {
 
         <div className="bg-white/70 shadow-xl rounded-2xl p-4 flex flex-col justify-between">
           <motion.img
-            src="/bg13.bmp"
+            src="/philosophy/bg13.bmp"
             alt="Srila Prabhupada"
             className="rounded-xl mb-4 w-full h-74 object-cover"
             whileHover={{ scale: 1.03 }}
@@ -119,7 +119,7 @@ const Bhagavadgita = () => {
       {/* Final two-column section with image and text side by side */}
       <div className="flex flex-col md:flex-row gap-6 mb-10">
         <img
-          src="/bg3.jpg"
+          src="/philosophy/bg3.jpg"
           alt="Bhagavadgita"
           className="w-full md:w-1/2 h-auto rounded-lg shadow object-cover"
         />
