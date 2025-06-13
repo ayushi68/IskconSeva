@@ -107,7 +107,7 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
           host: "localhost",
         },
         () => {
-          log(`Server running on http://0.0.0.0:${port}`);
+          log(`Server running on http://localhost:${port}`);
         }
       );
   } catch (error) {
