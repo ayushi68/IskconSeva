@@ -30,6 +30,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, "../public")));
 
+// Serve static files from the client build
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// Fallback to index.html for SPA routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
 // Request logging middleware
 app.use((req: Request, res: Response, next: NextFunction) => {
   const start = Date.now();
@@ -96,10 +104,10 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
       server.listen(
         {
           port,
-          host: "0.0.0.0",
+          host: "localhost",
         },
         () => {
-          log(`Server running on http://0.0.0.0:${port}`);
+          log(`Server running on http://localhost:${port}`);
         }
       );
   } catch (error) {
