@@ -30,6 +30,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, "../public")));
 
+// Serve static files from the client build
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// Fallback to index.html for SPA routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
 // Request logging middleware
 app.use((req: Request, res: Response, next: NextFunction) => {
   const start = Date.now();
@@ -93,15 +101,15 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 
     // Start server
     const port = Number(process.env.PORT) || 5000;
-    server.listen(
-      {
-        port,
-        host: "localhost",
-      },
-      () => {
-        log(`Server running on http://localhost:${port}`);
-      }
-    );
+      server.listen(
+        {
+          port,
+          host: "0.0.0.0",
+        },
+        () => {
+          log(`Server running on http://0.0.0.0:${port}`);
+        }
+      );
   } catch (error) {
     log(`Failed to start server: ${error instanceof Error ? error.message : "Unknown error"}`);
     process.exit(1);
