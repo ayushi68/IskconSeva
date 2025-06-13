@@ -92,16 +92,16 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     }
 
     // Start server
-    const port = 5000;
-    server.listen(
-      {
-        port,
-        host: "0.0.0.0",
-      },
-      () => {
-        log(`Server running on http://0.0.0.0:${port}`);
-      }
-    );
+    const port = Number(process.env.PORT) || 5000;
+      server.listen(
+        {
+          port,
+          host: "0.0.0.0",
+        },
+        () => {
+          log(`Server running on http://0.0.0.0:${port}`);
+        }
+      );
   } catch (error) {
     log(`Failed to start server: ${error instanceof Error ? error.message : "Unknown error"}`);
     process.exit(1);
