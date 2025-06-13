@@ -104,7 +104,7 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
       server.listen(
         {
           port,
-          host: "0.0.0.0",
+          host: "localhost",
         },
         () => {
           log(`Server running on http://0.0.0.0:${port}`);
