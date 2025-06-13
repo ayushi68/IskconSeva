@@ -9,7 +9,7 @@ const Harinam: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-teal-50 via-cyan-100 to-blue-100 font-inter">
       {/* Hero Section */}
       <header className="relative bg-gradient-to-r from-teal-600 via-cyan-500 to-blue-500 text-white py-24 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/Activity/harinaam_mandap_02.jpg')] bg-cover bg-center opacity-15"></div>
+        <div className="absolute inset-0 bg-[url('')] bg-cover bg-center opacity-15"></div>
         <div className="relative max-w-5xl mx-auto">
           <h1 className="text-6xl font-extrabold mb-4 animate-slide-in">Harinaam Mantapa</h1>
           <p className="text-2xl mb-8 text-teal-100">

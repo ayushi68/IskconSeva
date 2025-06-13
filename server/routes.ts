@@ -2,7 +2,7 @@ import express, { type Express, type Request, type Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
-import * as schema from "@shared/schema";
+import * as schema from "server/schema";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";

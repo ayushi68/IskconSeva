@@ -147,7 +147,7 @@ export default function Home() {
 
       <section className="relative py-24 px-6 bg-gradient-to-b from-amber-50 via-white to-amber-50 overflow-hidden">
         {/* Decorative Background Elements */}
-        <div className="absolute inset-0 bg-[url('/home/prabhupadabg.png')] bg-no-repeat bg-cover bg-center opacity-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('')] bg-no-repeat bg-cover bg-center opacity-10 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-orange-100/30 via-transparent to-orange-100/30" />
 
         {/* Define Principles */}
@@ -328,7 +328,7 @@ export default function Home() {
 
     <section className="relative py-20 bg-white overflow-hidden">
       {/* Decorative Background */}
-      <div className="absolute inset-0 bg-[url('/images/festivals/pattern.png')] bg-repeat bg-[length:150px_150px] opacity-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('')] bg-repeat bg-[length:150px_150px] opacity-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Images Row */}

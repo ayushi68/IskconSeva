@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { log } from "./vite";
-import { type User, type InsertUser } from "@shared/schema";
+import { type User, type InsertUser } from "server/schema";
 import { GopalForm, CulturalForm, HeritageForm, FolkForm, type IFolkForm } from "../db/registration.model";
 import Donation, { type IDonation } from "../db/Donation.model";
 
