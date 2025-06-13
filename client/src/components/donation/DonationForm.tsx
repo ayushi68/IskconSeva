@@ -510,8 +510,8 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
             />
             <p className="text-sm mt-2">
               By continuing, you agree to our{" "}
-              <a href="/terms-and-services" className="text-teal-600">terms and conditions</a> and{" "}
-              <a href="/privacy-policy" className="text-teal-600">privacy policy</a>.
+              <a href="/terms-and-services" className="text-teal-600">Terms and Conditions</a> and{" "}
+              <a href="/privacy-policy" className="text-teal-600">Privacy Policy</a>.
             </p>
           </div>
         </section>
@@ -607,10 +607,10 @@ const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) =>
 
         <button
           onClick={handlePayment}
-          className="w-full py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-500 hover:to-teal-600"
+          className="w-full py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600"
           disabled={isLoading}
         >
-          {isLoading ? "Processing..." : "Complete Donation"}
+          {isLoading ? "Processing..." : "Offer Seva"}
         </button>
       </div>
     </div>
