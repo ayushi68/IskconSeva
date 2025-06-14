@@ -1,33 +1,82 @@
 import mongoose from "mongoose";
-import { log } from "./vite";
-import { type User, type InsertUser } from "server/schema";
-import { GopalForm, CulturalForm, HeritageForm, FolkForm, type IFolkForm } from "../db/registration.model";
-import Donation, { type IDonation } from "../db/Donation.model";
+import { Schema, model } from "mongoose";
+import { log } from "./vite.js";
+import Donation, { type IDonation } from "../db/Donation.model.js";
+import {
+  GopalForm,
+  CulturalForm,
+  HeritageForm,
+  FolkForm,
+  type IFolkForm,
+} from "../db/registration.model.js";
 
-// Ensure connection is ready before operations
-const ensureConnection = async (retryCount = 3, retryDelay = 1000): Promise<mongoose.mongo.Db> => {
-  for (let i = 0; i < retryCount; i++) {
-    try {
-      if (mongoose.connection.readyState === 0) {
-        await connectDB();
-      }
-      if (mongoose.connection.readyState === 1 && mongoose.connection.db) {
-        log(`MongoDB connection successful, state: ${mongoose.connection.readyState}`);
-        return mongoose.connection.db;
-      }
-      throw new Error(
-        `MongoDB connection not ready: state ${mongoose.connection.readyState}, db ${mongoose.connection.db ? "exists" : "undefined"}`
-      );
-    } catch (error) {
-      log(`Connection attempt ${i + 1} failed, retrying in ${retryDelay}ms: ${error instanceof Error ? error.message : "Unknown error"}`);
-      if (i === retryCount - 1) {
-        throw new Error(`Failed to connect to MongoDB after ${retryCount} attempts: ${error instanceof Error ? error.message : "Unknown error"}`);
-      }
-      await new Promise((resolve) => setTimeout(resolve, retryDelay));
-    }
-  }
-  throw new Error("Failed to establish MongoDB connection after retries");
-};
+// Mongoose schemas for MongoDB
+// Seva Category schema
+const sevaCategorySchema = new Schema({
+  name: { type: String, required: [true, "Name is required"] },
+  slug: { type: String, required: [true, "Slug is required"], unique: true },
+  description: { type: String },
+  imageUrl: { type: String },
+  createdAt: { type: Date, default: Date.now, required: true },
+});
+export const SevaCategory = model("SevaCategory", sevaCategorySchema, "sevaCategories");
+
+// Seva Options schema
+const sevaOptionSchema = new Schema({
+  name: { type: String, required: [true, "Name is required"] },
+  description: { type: String },
+  categoryId: {
+    type: Schema.Types.ObjectId,
+    ref: "SevaCategory",
+    required: [true, "Category ID is required"],
+  },
+  createdAt: { type: Date, default: Date.now, required: true },
+});
+export const SevaOption = model("SevaOption", sevaOptionSchema, "sevaOptions");
+
+// Seva Amounts schema
+const sevaAmountSchema = new Schema({
+  sevaOptionId: {
+    type: Schema.Types.ObjectId,
+    ref: "SevaOption",
+    required: [true, "Seva option ID is required"],
+  },
+  amount: { type: Number, required: [true, "Amount is required"] },
+  isPopular: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now, required: true },
+});
+export const SevaAmount = model("SevaAmount", sevaAmountSchema, "sevaAmounts");
+
+// Donors schema
+const donorSchema = new Schema({
+  fullName: { type: String, required: [true, "Full name is required"] },
+  email: {
+    type: String,
+    required: [true, "Email is required"],
+    match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email format"],
+  },
+  phone: { type: String, required: [true, "Phone is required"] },
+  address: { type: String },
+  city: { type: String },
+  pincode: { type: String },
+  panCard: { type: String },
+  createdAt: { type: Date, default: Date.now, required: true },
+});
+export const Donor = model("Donor", donorSchema, "donors");
+
+// Testimonials schema
+const testimonialSchema = new Schema({
+  donorId: {
+    type: Schema.Types.ObjectId,
+    ref: "Donor",
+    required: [true, "Donor ID is required"],
+  },
+  testimonialText: { type: String, required: [true, "Testimonial text is required"] },
+  rating: { type: Number, required: [true, "Rating is required"], min: 1, max: 5 },
+  isApproved: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now, required: true },
+});
+export const Testimonial = model("Testimonial", testimonialSchema, "testimonials");
 
 // MongoDB connection setup using Mongoose
 export const connectDB = async () => {
@@ -73,6 +122,41 @@ mongoose.connection.on("reconnected", () => {
   log("MongoDB reconnected");
 });
 
+// Ensure connection is ready before operations
+const ensureConnection = async (retryCount = 3, retryDelay = 1000): Promise<mongoose.mongo.Db> => {
+  for (let i = 0; i < retryCount; i++) {
+    try {
+      if (mongoose.connection.readyState === 0) {
+        await connectDB();
+      }
+      if (mongoose.connection.readyState === 1 && mongoose.connection.db) {
+        log(`MongoDB connection successful, state: ${mongoose.connection.readyState}`);
+        return mongoose.connection.db;
+      }
+      throw new Error(
+        `MongoDB connection not ready: state ${mongoose.connection.readyState}, db ${
+          mongoose.connection.db ? "exists" : "undefined"
+        }`
+      );
+    } catch (error) {
+      log(
+        `Connection attempt ${i + 1} failed, retrying in ${retryDelay}ms: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      );
+      if (i === retryCount - 1) {
+        throw new Error(
+          `Failed to connect to MongoDB after ${retryCount} attempts: ${
+            error instanceof Error ? error.message : "Unknown error"
+          }`
+        );
+      }
+      await new Promise((resolve) => setTimeout(resolve, retryDelay));
+    }
+  }
+  throw new Error("Failed to establish MongoDB connection after retries");
+};
+
 // Save contact form using Mongoose
 export async function saveContactForm(data: {
   name: string;
@@ -92,6 +176,17 @@ export async function saveContactForm(data: {
   }
 }
 
+// User and InsertUser interfaces (placeholder, replace with actual definitions)
+export interface User {
+  id: number;
+  username: string;
+}
+
+export interface InsertUser {
+  username: string;
+}
+
+// Storage interface
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
@@ -112,7 +207,7 @@ export interface IStorage {
   saveFolkForm(formData: IFolkFormData): Promise<IFolkForm>;
 }
 
-interface IFolkFormData {
+export interface IFolkFormData {
   name: string;
   phone: string;
   whatsapp: string;
@@ -154,12 +249,7 @@ export class MongoStorage implements IStorage {
   async createUser(user: InsertUser): Promise<User> {
     try {
       const db = await ensureConnection();
-      const lastUser = await db
-        .collection("users")
-        .find()
-        .sort({ id: -1 })
-        .limit(1)
-        .toArray();
+      const lastUser = await db.collection("users").find().sort({ id: -1 }).limit(1).toArray();
       const nextId = lastUser[0]?.id + 1 || 1;
       const newUser: User = { ...user, id: nextId };
       await db.collection("users").insertOne(newUser);
@@ -362,3 +452,6 @@ export class MongoStorage implements IStorage {
 }
 
 export const storage = new MongoStorage();
+
+// Export Donation model
+export { Donation, IDonation };

@@ -1,26 +1,38 @@
-import express, { type Express, type Request, type Response } from "express";
+import express from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { storage, type IFolkFormData } from "./storage.js";
 import { z } from "zod";
-import * as schema from "server/schema";
-import fs from "fs";
-import path from "path";
+import { join, resolve, dirname } from "path";
+import { readdir } from "fs";
 import { fileURLToPath } from "url";
-import Contact from "../db/contact.model";
 import multer from "multer";
-import { GopalForm, CulturalForm, HeritageForm, FolkForm } from "../db/registration.model";
+import Contact from "../db/contact.model.js";
+import {
+  GopalForm,
+  CulturalForm,
+  HeritageForm,
+  FolkForm,
+} from "../db/registration.model.js";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
 const router = express.Router();
 
-// Multer config with enhanced file validation
+// -------------------------
+// ✅ Multer configuration
+// -------------------------
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
   fileFilter: (req, file, cb) => {
-    const allowedTypes = ["image/jpeg", "image/png", "image/gif", "application/pdf"];
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "application/pdf",
+    ];
     if (allowedTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
@@ -29,23 +41,19 @@ const upload = multer({
   },
 });
 
-// Multer error handling middleware
-router.use((err: any, req: Request, res: Response, next: Function) => {
+// -------------------------
+// ✅ Multer Error Handler
+// -------------------------
+function multerErrorHandler(err: any, req: Request, res: Response, next: NextFunction) {
   if (err instanceof multer.MulterError) {
     console.error("Multer error:", err);
-    return res.status(400).json({
-      success: false,
-      error: `File upload error: ${err.message}`,
-    });
+    return res.status(400).json({ success: false, error: `Upload error: ${err.message}` });
   } else if (err) {
     console.error("File filter error:", err);
-    return res.status(400).json({
-      success: false,
-      error: err.message,
-    });
+    return res.status(400).json({ success: false, error: err.message });
   }
   next();
-});
+}
 
 // Folkform validation schema
 const folkFormSchema = z.object({
@@ -68,6 +76,14 @@ const folkFormSchema = z.object({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Serve static files from the client directory
+  app.use(express.static(join(__dirname, "../client")));
+
+  // Optionally, serve index.html for all non-API routes (SPA fallback)
+  app.get(/^\/(?!api).*/, (req: Request, res: Response) => {
+    res.sendFile(join(__dirname, "../client/index.html"));
+  });
+
   // Global error handler to ensure JSON responses
   app.use((err: any, req: Request, res: Response, next: Function) => {
     console.error("Global error handler:", err);
@@ -80,7 +96,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form route
   router.post("/contact", async (req: Request, res: Response) => {
     try {
-      const { name, mobile, email, dob ,message, temple } = req.body;
+      const { name, mobile, email, dob, message, temple } = req.body;
 
       const newContact = new Contact({
         name,
@@ -394,134 +410,133 @@ export async function registerRoutes(app: Express): Promise<Server> {
   );
 
   // Heritage registration form route
-router.post('/heritage-form', async (req: Request, res: Response) => {
-  try {
-    console.log('Heritage Request body:', JSON.stringify(req.body, null, 2));
+  router.post("/heritage-form", async (req: Request, res: Response) => {
+    try {
+      console.log("Heritage Request body:", JSON.stringify(req.body, null, 2));
 
-    const {
-      registrationId,
-      name,
-      gender,
-      dateOfBirth,
-      category,
-      schoolName,
-      customSchoolName,
-      address,
-      contactNumber,
-      email,
-      guardianName,
-      guardianContactNumber,
-      activities: activitiesString,
-      regTxnId,
-    } = req.body;
+      const {
+        registrationId,
+        name,
+        gender,
+        dateOfBirth,
+        category,
+        schoolName,
+        customSchoolName,
+        address,
+        contactNumber,
+        email,
+        guardianName,
+        guardianContactNumber,
+        activities: activitiesString,
+        regTxnId,
+      } = req.body;
 
-    // Parse activities
-    let activities: string[];
+      // Parse activities
+      let activities: string[];
       try {
-        // If it's already a string, check if it looks like a JSON array
         if (Array.isArray(activitiesString)) {
-          activities = activitiesString; // Direct from body if parsed
-        } else if (typeof activitiesString === 'string') {
-          activities = activitiesString.trim().startsWith('[')
-            ? JSON.parse(activitiesString) // Handle proper JSON string
-            : [activitiesString]; // Handle plain single string like "Coloring"
+          activities = activitiesString;
+        } else if (typeof activitiesString === "string") {
+          activities = activitiesString.trim().startsWith("[")
+            ? JSON.parse(activitiesString)
+            : [activitiesString];
         } else {
-          throw new Error('Activities must be a string or array');
+          throw new Error("Activities must be a string or array");
         }
 
         if (!Array.isArray(activities)) {
-          throw new Error('Activities must be an array');
+          throw new Error("Activities must be an array");
         }
       } catch (error) {
-        console.error('Error parsing activities:', error);
+        console.error("Error parsing activities:", error);
         return res.status(400).json({
           success: false,
-          error: 'Invalid activities format',
+          error: "Invalid activities format",
         });
       }
 
-    // Validate required fields
-    const requiredFields = {
-      registrationId,
-      name,
-      gender,
-      dateOfBirth,
-      category,
-      schoolName: schoolName || customSchoolName,
-      address,
-      contactNumber,
-      email,
-      guardianName,
-      guardianContactNumber,
-      activities,
-      regTxnId,
-    };
+      // Validate required fields
+      const requiredFields = {
+        registrationId,
+        name,
+        gender,
+        dateOfBirth,
+        category,
+        schoolName: schoolName || customSchoolName,
+        address,
+        contactNumber,
+        email,
+        guardianName,
+        guardianContactNumber,
+        activities,
+        regTxnId,
+      };
 
-    for (const [field, value] of Object.entries(requiredFields)) {
-      if (!value || (field === 'activities' && activities.length === 0)) {
-        console.log(`Missing or invalid required field: ${field}`);
+      for (const [field, value] of Object.entries(requiredFields)) {
+        if (!value || (field === "activities" && activities.length === 0)) {
+          console.log(`Missing or invalid required field: ${field}`);
+          return res.status(400).json({
+            success: false,
+            error: `Missing required field: ${field}`,
+          });
+        }
+      }
+
+      // Additional validation
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         return res.status(400).json({
           success: false,
-          error: `Missing required field: ${field}`,
+          error: "Invalid email format",
         });
       }
-    }
+      if (!/^[0-9]{10}$/.test(contactNumber) || !/^[0-9]{10}$/.test(guardianContactNumber)) {
+        return res.status(400).json({
+          success: false,
+          error: "Contact numbers must be 10 digits",
+        });
+      }
 
-    // Additional validation
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return res.status(400).json({
+      // Prepare form data
+      const formData = {
+        registrationId,
+        name,
+        gender,
+        dob: dateOfBirth,
+        category,
+        schoolName: schoolName || customSchoolName || "",
+        customSchoolName: customSchoolName || "",
+        address,
+        contactNumber,
+        email,
+        guardianName,
+        guardianContactNumber,
+        activities,
+        regTxnId,
+      };
+
+      console.log("Saving Heritage form data to MongoDB:", JSON.stringify(formData, null, 2));
+      const savedForm = await storage.saveHeritageForm(formData);
+      console.log("Heritage form saved successfully");
+
+      res.status(201).json({
+        success: true,
+        message: "Heritage form submitted successfully",
+        form: savedForm,
+      });
+    } catch (error: any) {
+      console.error("Error submitting Heritage form:", error);
+      if (error.code === 11000) {
+        return res.status(400).json({
+          success: false,
+          error: `Registration ID '${req.body.registrationId}' is already in use`,
+        });
+      }
+      res.status(500).json({
         success: false,
-        error: 'Invalid email format',
+        error: error instanceof Error ? error.message : "Failed to submit form",
       });
     }
-    if (!/^[0-9]{10}$/.test(contactNumber) || !/^[0-9]{10}$/.test(guardianContactNumber)) {
-      return res.status(400).json({
-        success: false,
-        error: 'Contact numbers must be 10 digits',
-      });
-    }
-
-    // Prepare form data
-    const formData = {
-      registrationId,
-      name,
-      gender,
-      dob: dateOfBirth,
-      category,
-      schoolName: schoolName || customSchoolName || '',
-      customSchoolName: customSchoolName || '',
-      address,
-      contactNumber,
-      email,
-      guardianName,
-      guardianContactNumber,
-      activities,
-      regTxnId,
-    };
-
-    console.log('Saving Heritage form data to MongoDB:', JSON.stringify(formData, null, 2));
-    const savedForm = await storage.saveHeritageForm(formData);
-    console.log('Heritage form saved successfully');
-
-    res.status(201).json({
-      success: true,
-      message: 'Heritage form submitted successfully',
-      form: savedForm,
-    });
-  } catch (error: any) {
-    console.error('Error submitting Heritage form:', error);
-    if (error.code === 11000) {
-      return res.status(400).json({
-        success: false,
-        error: `Registration ID '${req.body.registrationId}' is already in use`,
-      });
-    }
-    res.status(500).json({
-      success: false,
-      error: error instanceof Error ? error.message : 'Failed to submit form',
-    });
-  }
-});
+  });
 
   // Folkform registration route
   router.post("/register", async (req: Request, res: Response) => {
@@ -531,7 +546,7 @@ router.post('/heritage-form', async (req: Request, res: Response) => {
       console.log("Folkform Request body:", req.body);
 
       // Validate request body
-      const validatedData = folkFormSchema.parse(req.body);
+      const validatedData = folkFormSchema.parse(req.body) as IFolkFormData;
 
       console.log("Saving Folkform data to MongoDB:", validatedData);
       console.log("Attempting to save Folkform...");
@@ -595,46 +610,21 @@ router.post('/heritage-form', async (req: Request, res: Response) => {
 
   // Public image access
   router.get("/public-images", (req: Request, res: Response) => {
-    const publicDir = path.resolve(__dirname, "../public");
+    const publicDir = resolve(__dirname, "../public");
 
-    fs.readdir(publicDir, (err, files) => {
+    readdir(publicDir, (err: NodeJS.ErrnoException | null, files: string[]) => {
       if (err) {
         console.error("Error reading public directory:", err);
         return res.status(500).json({ error: "Failed to read images" });
       }
 
-      const imageFiles = files.filter((file) =>
+      const imageFiles = files.filter((file: string) =>
         /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(file)
       );
 
-      const imageUrls = imageFiles.map((file) => `/${file}`);
+      const imageUrls = imageFiles.map((file: string) => `/${file}`);
       res.json(imageUrls);
     });
-  });
-
-  // Testimonial submission
-  router.post("/testimonials", async (req: Request, res: Response) => {
-    try {
-      const testimonialData = schema.testimonialInsertSchema.parse({
-        donorId: req.body.donorId,
-        testimonialText: req.body.testimonialText,
-        rating: req.body.rating,
-        isApproved: false,
-      });
-
-      const testimonial = await storage.createTestimonial(testimonialData);
-      res.status(201).json({
-        success: true,
-        testimonialId: testimonial.id,
-        message: "Thank you for your testimonial. It will be reviewed shortly.",
-      });
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        return res.status(400).json({ errors: error.errors });
-      }
-      console.error("Error submitting testimonial:", error);
-      res.status(500).json({ error: "Failed to submit testimonial" });
-    }
   });
 
   // Attach router to app with /api prefix

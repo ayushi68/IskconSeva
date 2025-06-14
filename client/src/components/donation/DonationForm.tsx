@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useRoute } from "wouter";
 import { donationCategories, DonationCategory, SubCategory, SuperSubCategory } from "../../lib/donationdata";
+import { SevaOption, SevaAmount } from "../../lib/types";
 
 interface DonationFormProps {
   preselectedCategoryId?: string;
+  sevaOption?: SevaOption;
+  selectedAmount?: SevaAmount;
+  onClose?: () => void;
 }
 
 const DonationForm: React.FC<DonationFormProps> = ({ preselectedCategoryId }) => {

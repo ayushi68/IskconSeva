@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { SevaOption, SevaAmount, SevaCategory } from "@/lib/types";
 import { formatCurrency } from "@/lib/utils";
-import { DonationForm } from "@/components/donation/DonationForm";
+import  DonationForm  from "@/components/donation/DonationForm";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 interface GaushalaSevaProps {
