@@ -78,10 +78,10 @@ app.use(express.urlencoded({ extended: false }));
     server.listen(
       {
         port,
-        host: "localhost",
+        host: "0.0.0.0",
       },
       () => {
-        log(`Server running on http://localhost:${port}`);
+        log(`Server running on http://0.0.0.0:${port}`);
       }
     );
   } catch (error) {
