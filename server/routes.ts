@@ -76,8 +76,10 @@ const folkFormSchema = z.object({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Serve static files from the client directory
-  app.use(express.static(join(__dirname, "../client")));
+  // Serve static files from the client directory only in development
+  if (app.get("env") === "development") {
+    app.use(express.static(join(__dirname, "../client")));
+  }
 
   // Optionally, serve index.html for all non-API routes (SPA fallback)
   app.get(/^\/(?!api).*/, (req: Request, res: Response) => {

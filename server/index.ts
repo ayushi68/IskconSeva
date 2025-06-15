@@ -41,14 +41,32 @@ app.use(express.urlencoded({ extended: false }));
     log("Successfully connected to MongoDB");
 
     let server = await registerRoutes(app);
+
     if (app.get("env") === "development") {
+      // Use Vite as middleware in development
       await setupVite(app, server);
       log("Vite development server setup complete");
     } else {
-      serveStatic(app);
-      log("Serving static files for production");
+      // Serve Vite build output in production
+      const staticDir = join(__dirname, "../dist/public");
+      app.use(
+        express.static(staticDir, {
+          setHeaders: (res, filePath) => {
+            if (filePath.endsWith(".js")) {
+              res.setHeader("Content-Type", "application/javascript");
+            }
+            // Explicitly prevent serving .tsx files
+            if (filePath.endsWith(".tsx")) {
+              res.status(403).end("Forbidden: .tsx files are not served in production");
+            }
+          },
+        })
+      );
+      log("Serving static files for production from " + staticDir);
+
+      // Fallback for SPA
       app.get("*", (req: Request, res: Response) => {
-        res.sendFile(join(__dirname, "../dist/index.html"));
+        res.sendFile(join(staticDir, "index.html"));
       });
     }
 

@@ -1,5 +1,3 @@
-// vite.js
-
 import express from "express";
 import type { Express } from "express";
 import { promises as fs } from "fs";
@@ -68,8 +66,10 @@ export async function setupVite(app: Express, server: Server) {
       );
 
       const page = await vite.transformIndexHtml(url, template);
+      log(`Serving transformed index.html for ${url}`);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
+      log(`Error transforming index.html for ${url}: ${e instanceof Error ? e.message : e}`);
       vite.ssrFixStacktrace(e as Error);
       next(e);
     }
@@ -84,7 +84,7 @@ export async function serveStatic(app: Express) {
     await fs.stat(staticAssetsPath);
     app.use(express.static(staticAssetsPath));
   } catch {
-    // Optional: log or ignore if public dir not found
+    log("Public directory not found, skipping static asset serving");
   }
 
   // Serve built React/Vite app from client/dist
