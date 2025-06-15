@@ -2,8 +2,8 @@
   "include": ["client/src/**/*", "db/**/*", "server/**/*"],
   "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
   "compilerOptions": {
-    "allowImportingTsExtensions": true, // Allow importing .ts files directly
-    "noEmit": true, // Required for allowImportingTsExtensions
+     // Allow importing .ts files directly
+    "noEmit": false, // Allow TypeScript to emit compiled JS files
     "target": "es6", // Modern JS features and private fields
     "incremental": true,
     "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
