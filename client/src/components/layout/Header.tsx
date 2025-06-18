@@ -34,15 +34,15 @@ const GoogleTranslate = () => {
     window.googleTranslateElementInit = function () {
       new window.google.translate.TranslateElement(
         {
-          pageLanguage: 'en',
-          includedLanguages: 'en,hi,bn,gu,ta,te,kn,ml,mr,pa',
+          pageLanguage: "en",
+          includedLanguages: "en,hi,bn,gu,ta,te,kn,ml,mr,pa",
           layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
         },
-        'google_translate_element'
+        "google_translate_element"
       );
     };
 
-    const script = document.createElement('script');
+    const script = document.createElement("script");
     script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
     script.async = true;
     document.body.appendChild(script);
@@ -53,29 +53,20 @@ const GoogleTranslate = () => {
   }, []);
 
   return (
-    <div
-      className="relative flex items-center justify-center"
-      style={{ width: 32, height: 32, minWidth: 0, minHeight: 0 }}
-    >
+    <div className="relative flex items-center justify-center" style={{ width: 32, height: 32, minWidth: 0, minHeight: 0 }}>
       <div
         className="absolute inset-0 flex items-center justify-center rounded-full bg-indigo-100 hover:bg-indigo-200 transition-all duration-200 cursor-pointer"
         style={{ width: 32, height: 32, zIndex: 2 }}
         onMouseEnter={() => {
-          const el = document.getElementById('google_translate_element');
-          if (el) el.style.display = 'block';
+          const el = document.getElementById("google_translate_element");
+          if (el) el.style.display = "block";
         }}
         onMouseLeave={() => {
-          const el = document.getElementById('google_translate_element');
-          if (el) el.style.display = 'none';
+          const el = document.getElementById("google_translate_element");
+          if (el) el.style.display = "none";
         }}
       >
-        <svg
-          className="w-5 h-5 text-indigo-700"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          viewBox="0 0 24 24"
-        >
+        <svg className="w-5 h-5 text-indigo-700" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -87,15 +78,15 @@ const GoogleTranslate = () => {
         id="google_translate_element"
         className="absolute left-10 top-0 z-50"
         style={{
-          display: 'none',
+          display: "none",
           minWidth: 120,
-          background: 'white',
+          background: "white",
           borderRadius: 8,
-          boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+          boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
           padding: 4,
         }}
-        onMouseEnter={e => (e.currentTarget.style.display = 'block')}
-        onMouseLeave={e => (e.currentTarget.style.display = 'none')}
+        onMouseEnter={(e) => (e.currentTarget.style.display = "block")}
+        onMouseLeave={(e) => (e.currentTarget.style.display = "none")}
       />
     </div>
   );
@@ -128,14 +119,12 @@ export default function Header() {
   // Mock weather fetch (replace with real API if available)
   useEffect(() => {
     // Placeholder for weather API call
-    // Example: fetch('https://api.openweathermap.org/data/2.5/weather?q=City&appid=YOUR_API_KEY')
-    // For now, using mock data (28°C)
     setTemperature(28);
   }, []);
 
-  // Check Darshan timing based on current time (07:41 PM IST on June 07, 2025)
+  // Check Darshan timing based on current time (01:17 PM IST on June 18, 2025)
   useEffect(() => {
-    const currentTime = new Date('2025-06-07T19:41:00+05:30'); // Current date and time: 07:41 PM IST on June 07, 2025
+    const currentTime = new Date("2025-06-18T13:17:00+05:30"); // Current date and time
     const currentHour = currentTime.getHours();
     const currentMinute = currentTime.getMinutes();
     const currentTimeInMinutes = currentHour * 60 + currentMinute;
@@ -360,56 +349,73 @@ export default function Header() {
       <div className="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white text-sm py-3 px-4 shadow-lg sticky top-0 z-50">
         <div className="container mx-auto flex flex-wrap items-center justify-between">
           <div className="flex items-center space-x-5">
-            <Link href="/temple/schedule-bhilai" className="flex items-center space-x-2 hover:text-yellow-200 transition-all duration-300 group">
-              <Clock className={`transition-all duration-300 ${isScrolled ? 'w-4 h-4' : 'w-5 h-5'} group-hover:scale-110`} />
+            <Link
+              href="/temple/schedule-bhilai"
+              className="flex items-center space-x-2 hover:text-yellow-200 transition-all duration-300 group"
+            >
+              <Clock className={`transition-all duration-300 ${isScrolled ? "w-4 h-4" : "w-5 h-5"} group-hover:scale-110`} />
               <span className="font-medium">Temple Schedule</span>
             </Link>
             <div className="hidden md:flex items-center space-x-5">
               {/* Weather Section with Temperature */}
               <div className="flex items-center space-x-2 hover:text-yellow-200 transition-all duration-300 group">
-                <CloudSun className={`transition-all duration-300 ${isScrolled ? 'w-4 h-4' : 'w-5 h-5'} group-hover:scale-110`} />
-                <span className="font-medium">{temperature ? `${temperature}°C` : 'Loading...'}</span>
+                <CloudSun className={`transition-all duration-300 ${isScrolled ? "w-4 h-4" : "w-5 h-5"} group-hover:scale-110`} />
+                <span className="font-medium">{temperature ? `${temperature}°C` : "Loading..."}</span>
               </div>
               {/* Darshan Timing with Conditional Color */}
               <Link
                 href="/darshan"
                 className={`flex items-center space-x-2 transition-all duration-300 group ${
-                  isDarshanOpen ? 'text-green-200 hover:text-green-100' : 'text-red-200 hover:text-red-100'
+                  isDarshanOpen ? "text-green-200 hover:text-green-100" : "text-red-200 hover:text-red-100"
                 }`}
               >
-                <Clock className={`transition-all duration-300 ${isScrolled ? 'w-4 h-4' : 'w-5 h-5'} group-hover:scale-110`} />
-                <span className="font-medium">{isDarshanOpen ? 'Darshan Open' : 'Darshan Closed'}</span>
+                <Clock className={`transition-all duration-300 ${isScrolled ? "w-4 h-4" : "w-5 h-5"} group-hover:scale-110`} />
+                <span className="font-medium">{isDarshanOpen ? "Darshan Open" : "Darshan Closed"}</span>
               </Link>
             </div>
           </div>
 
-          <div className={`flex-shrink-0 mx-6 md:mx-10 transition-all duration-300 ${isScrolled ? 'scale-90' : 'scale-100'}`}>
-            <img src="/hkmheader.png" alt="Logo" className={`transition-all duration-300 ${isScrolled ? 'h-9 md:h-11' : 'h-14 md:h-16'}`} />
-          </div>
+          {/* <div className={`flex-shrink-0 mx-6 md:mx-10 transition-all duration-300 ${isScrolled ? "scale-90" : "scale-100"}`}>
+            <img src="/hkmheader.png" alt="Hare Krishna Movement Logo" className={`transition-all duration-300 ${isScrolled ? "h-9 md:h-11" : "h-14 md:h-16"}`} />
+          </div> */}
 
           <div className="flex items-center space-x-5">
             <div className="flex space-x-4">
-              <a href="https://www.facebook.com/HKMBHLRPR/" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-200 transition-all duration-300 group">
-                <Facebook className={`transition-all duration-300 ${isScrolled ? 'w-4 h-4' : 'w-5 h-5'} group-hover:scale-110`} />
+              <a
+                href="https://www.facebook.com/HKMBHLRPR/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-yellow-200 transition-all duration-300 group"
+              >
+                <Facebook className={`transition-all duration-300 ${isScrolled ? "w-4 h-4" : "w-5 h-5"} group-hover:scale-110`} />
               </a>
-              <a href="https://www.youtube.com/@harekrishnabhlrpr/featured" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-200 transition-all duration-300 group">
-                <Youtube className={`transition-all duration-300 ${isScrolled ? 'w-4 h-4' : 'w-5 h-5'} group-hover:scale-110`} />
+              <a
+                href="https://www.youtube.com/@harekrishnabhlrpr/featured"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-yellow-200 transition-all duration-300 group"
+              >
+                <Youtube className={`transition-all duration-300 ${isScrolled ? "w-4 h-4" : "w-5 h-5"} group-hover:scale-110`} />
               </a>
-              <a href="https://www.instagram.com/hkm_bhilai_raipur/" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-200 transition-all duration-300 group">
-                <Instagram className={`transition-all duration-300 ${isScrolled ? 'w-4 h-4' : 'w-5 h-5'} group-hover:scale-110`} />
+              <a
+                href="https://www.instagram.com/hkm_bhilai_raipur/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-yellow-200 transition-all duration-300 group"
+              >
+                <Instagram className={`transition-all duration-300 ${isScrolled ? "w-4 h-4" : "w-5 h-5"} group-hover:scale-110`} />
               </a>
             </div>
             <div className="hidden md:flex items-center space-x-5">
               <Link href="/donation" className="flex items-center space-x-2 hover:text-yellow-200 transition-all duration-300 group">
-                <HeartHandshake className={`transition-all duration-300 ${isScrolled ? 'w-4 h-4' : 'w-5 h-5'} group-hover:scale-110`} />
+                <HeartHandshake className={`transition-all duration-300 ${isScrolled ? "w-4 h-4" : "w-5 h-5"} group-hover:scale-110`} />
                 <span className="font-medium">Offer Seva</span>
               </Link>
               <Link href="/donation/nitya-seva" className="flex items-center space-x-2 hover:text-yellow-200 transition-all duration-300 group">
-                <HeartHandshake className={`transition-all duration-300 ${isScrolled ? 'w-4 h-4' : 'w-5 h-5'} group-hover:scale-110`} />
+                <HeartHandshake className={`transition-all duration-300 ${isScrolled ? "w-4 h-4" : "w-5 h-5"} group-hover:scale-110`} />
                 <span className="font-medium">Become a Nitya Sevak</span>
               </Link>
-              {/* Translation Section */}
-              <GoogleTranslate />
+              {/* <GoogleTranslate /> */}
             </div>
           </div>
         </div>
@@ -418,12 +424,15 @@ export default function Header() {
       {/* Lower Header Section (Navigation Bar) - Fixed */}
       <div
         ref={headerRef}
-        className={`bg-white/95 backdrop-blur-lg shadow-md transition-all duration-300 ${
-          isScrolled ? 'py-2' : 'py-4'
-        } sticky top-[calc(theme(spacing.3)+theme(spacing.4)+theme(spacing.3))] z-40 border-b border-gray-100`}
+        className={`bg-white/95 backdrop-blur-lg shadow-md transition-all duration-300 ${isScrolled ? "py-2" : "py-3"} sticky top-[calc(theme(spacing.3)+theme(spacing.4)+theme(spacing.3))] z-40 border-b border-gray-100`}
       >
-        <div className="container mx-auto px-4 flex justify-center items-center relative">
-          <nav className="hidden md:flex justify-center items-center text-base font-semibold" ref={dropdownRef}>
+        <div className="container mx-auto px-4 flex items-center relative">
+          {/* Logo in Lower Header */}
+          <div className={`flex-shrink-0 mx-6 md:mx-10 transition-all duration-300 ${isScrolled ? "scale-90" : "scale-100"}`}>
+            <img src="/hkmheader.png" alt="Hare Krishna Movement Logo" className={`transition-all duration-300 ${isScrolled ? "h-10 md:h-12" : "h-16 md:h-18"}`} />
+          </div>
+
+          <nav className="flex flex-1 justify-center items-center text-base font-semibold" ref={dropdownRef}>
             {navLinks.map((nav) => (
               <div
                 key={nav.label}
@@ -452,9 +461,7 @@ export default function Header() {
                   <>
                     <Link
                       href={nav.href}
-                      className={`transition-all duration-300 ${
-                        location === nav.href ? 'text-indigo-700 font-bold' : 'text-gray-900 hover:text-indigo-700'
-                      } group-hover:scale-105 inline-block`}
+                      className={`transition-all duration-300 ${location === nav.href ? "text-indigo-700 font-bold" : "text-gray-900 hover:text-indigo-700"} group-hover:scale-105 inline-block`}
                       onClick={() => {
                         console.log(`Navigating to top-level: ${nav.href}`);
                         setOpenDropdown(null);
@@ -466,7 +473,7 @@ export default function Header() {
                     {nav.megaMenu && openDropdown === nav.label && (
                       <div
                         className="absolute z-[1000] left-0 mt-3 bg-white shadow-2xl rounded-xl border border-gray-100 pointer-events-auto transform animate-[dropdownFade_0.3s_ease-out]"
-                        style={{ minWidth: nav.narrowMenu ? '240px' : '300px' }}
+                        style={{ minWidth: nav.narrowMenu ? "240px" : "300px" }}
                         onMouseEnter={() => {
                           if (timeoutRef.current) clearTimeout(timeoutRef.current);
                         }}
@@ -545,27 +552,32 @@ export default function Header() {
           <div className="md:hidden absolute top-4 right-4 z-[60]">
             <Button variant="ghost" size="icon" onClick={toggleMobileMenu} className="text-indigo-700 hover:bg-indigo-100 rounded-full">
               {mobileMenuOpen ? (
-                <X className={`transition-all duration-300 ${isScrolled ? 'w-5 h-5' : 'w-6 h-6'}`} />
+                <X className={`transition-all duration-300 ${isScrolled ? "w-5 h-5" : "w-6 h-6"}`} />
               ) : (
-                <Menu className={`transition-all duration-300 ${isScrolled ? 'w-5 h-5' : 'w-6 h-6'}`} />
+                <Menu className={`transition-all duration-300 ${isScrolled ? "w-5 h-5" : "w-6 h-6"}`} />
               )}
             </Button>
           </div>
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-0 z-50 bg-black/70" onClick={() => setMobileMenuOpen(false)}></div>
       )}
-
       <div
         className={`md:hidden fixed top-0 right-0 h-full w-80 bg-white z-[999] transition-transform duration-300 ${
-          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         } shadow-2xl`}
       >
         <div className="flex justify-between items-center p-4 bg-gradient-to-r from-indigo-600 to-indigo-800 text-white">
-          <img src="/hkm-logo.jpg" alt="Logo" className="h-10 w-auto" />
-          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)} className="text-white hover:bg-indigo-700 rounded-full">
+          <img src="/hkm-logo.jpg" alt="Hare Krishna Movement Logo" className="h-10 w-auto" />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setMobileMenuOpen(false)}
+            className="text-white hover:bg-indigo-700 rounded-full"
+          >
             <X className="w-6 h-6" />
           </Button>
         </div>
@@ -626,26 +638,26 @@ export default function Header() {
                       <ul className="space-y-1">
                         {section.links.map((link) => (
                           <li key={link.label} className="relative">
-                            <Link
-                              href={link.href}
-                              className="block text-sm text-gray-800 py-1.5 hover:text-indigo-700 pointer-events-auto"
-                              onClick={() => {
-                                console.log(`Navigating to mobile megamenu item: ${link.href}`);
-                                setMobileMenuOpen(false);
-                              }}
-                              data-testid={`mobile-megamenu-link-${link.label}`}
-                              role="menuitem"
-                              aria-label={link.label}
-                            >
-                              {link.label}
-                            </Link>
-                            {link.subLinks && (
-                              <>
+                            <div className="flex items-center justify-between">
+                              <Link
+                                href={link.href}
+                                className="block text-sm text-gray-800 py-1.5 hover:text-indigo-700 pointer-events-auto"
+                                onClick={() => {
+                                  console.log(`Navigating to mobile megamenu item: ${link.href}`);
+                                  setMobileMenuOpen(false);
+                                }}
+                                data-testid={`mobile-megamenu-link-${link.label}`}
+                                role="menuitem"
+                                aria-label={link.label}
+                              >
+                                {link.label}
+                              </Link>
+                              {link.subLinks && (
                                 <Button
                                   variant="ghost"
                                   size="icon"
                                   onClick={() => toggleSubMenu(link.label)}
-                                  className="absolute right-0 top-1 text-indigo-700 hover:bg-indigo-100 rounded-full"
+                                  className="text-indigo-700 hover:bg-indigo-100 rounded-full"
                                 >
                                   {expandedSubMenu === link.label ? (
                                     <ChevronUp className="w-4 h-4" />
@@ -653,28 +665,28 @@ export default function Header() {
                                     <ChevronDown className="w-4 h-4" />
                                   )}
                                 </Button>
-                                {expandedSubMenu === link.label && (
-                                  <ul className="pl-4 space-y-1">
-                                    {link.subLinks.map((subLink) => (
-                                      <li key={subLink.label}>
-                                        <Link
-                                          href={subLink.href}
-                                          className="block text-sm text-gray-700 py-1.5 hover:text-indigo-700 pointer-events-auto"
-                                          onClick={() => {
-                                            console.log(`Navigating to mobile submenu item: ${subLink.href}`);
-                                            setMobileMenuOpen(false);
-                                          }}
-                                          data-testid={`mobile-submenu-link-${subLink.label}`}
-                                          role="menuitem"
-                                          aria-label={subLink.label}
-                                        >
-                                          {subLink.label}
-                                        </Link>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                )}
-                              </>
+                              )}
+                            </div>
+                            {link.subLinks && expandedSubMenu === link.label && (
+                              <ul className="pl-4 space-y-1">
+                                {link.subLinks.map((subLink) => (
+                                  <li key={subLink.label}>
+                                    <Link
+                                      href={subLink.href}
+                                      className="block text-sm text-gray-700 py-1.5 hover:text-indigo-700 pointer-events-auto"
+                                      onClick={() => {
+                                        console.log(`Navigating to mobile submenu item: ${subLink.href}`);
+                                        setMobileMenuOpen(false);
+                                      }}
+                                      data-testid={`mobile-submenu-link-${subLink.label}`}
+                                      role="menuitem"
+                                      aria-label={subLink.label}
+                                    >
+                                      {subLink.label}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
                             )}
                           </li>
                         ))}

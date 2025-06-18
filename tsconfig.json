@@ -1,17 +1,17 @@
 {
-  "include": ["client/src/**/*", "db/**/*", "server/**/*"],
+  "include": ["client/src/**/*", "server/db/**/*", "server/**/*"],
   "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
   "compilerOptions": {
-     // Allow importing .ts files directly
-    "noEmit": false, // Allow TypeScript to emit compiled JS files
-    "target": "es6", // Modern JS features and private fields
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "target": "es2020",
     "incremental": true,
     "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
-    "outDir": "dist", // Output directory for compiled JS
-    "module": "esnext", // ESM support
+    "outDir": "dist",
+    "module": "ESNext",
     "moduleResolution": "bundler",
     "strict": true,
-    "lib": ["esnext", "dom", "dom.iterable", "es2020"],
+    "lib": ["esnext", "dom", "dom.iterable", "ES2020"],
     "downlevelIteration": true,
     "jsx": "preserve",
     "esModuleInterop": true,
@@ -19,10 +19,9 @@
     "baseUrl": ".",
     "types": ["node", "vite/client"],
     "paths": {
-      "@db": ["./db/index.ts"],
-      "@db/*": ["./db/*"],
-      "@/*": ["./client/src/*"],
-      "@shared/*": ["./shared/*"]
+      "@db": ["server/db/index.ts"],
+      "@db/*": ["server/db/*"],
+      "@/*": ["./client/src/*"]
     }
   }
 }

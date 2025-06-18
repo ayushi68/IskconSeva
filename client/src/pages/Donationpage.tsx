@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import FeaturedDonations from "@/components/FeaturedDonations";
-import DonationForm from "@/components/donation/DonationForm";
+import FeaturedDonations from "../components/FeaturedDonations";
+import DonationForm from "../components/donation/DonationForm";
 
 const DonationPage = () => {
   useEffect(() => {

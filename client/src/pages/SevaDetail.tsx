@@ -1,9 +1,9 @@
 import { useRoute } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
-import AnnadanaSeva from "@/components/seva/AnnadanaSeva";
-import GaushalaSeva from "@/components/seva/GaushalaSeva";
-import RecentDonors from "@/components/home/RecentDonors";
+// import AnnadanaSeva from "@/components/seva/AnnadanaSeva";
+// import GaushalaSeva from "@/components/seva/GaushalaSeva";
+// import RecentDonors from "@/components/home/RecentDonors";
 // import ContactInfo from "@/components/home/ContactInfo";
 // import FAQ from "@/components/home/FAQ";
 import { SevaCategory } from "@/lib/types";

@@ -1,19 +1,41 @@
 import express from "express";
 import type { Express, Request, Response, NextFunction } from "express";
-import { createServer, type Server } from "http";
-import { storage, type IFolkFormData } from "./storage.js";
+import { storage } from "./storage";
 import { z } from "zod";
 import { join, resolve, dirname } from "path";
 import { readdir } from "fs";
 import { fileURLToPath } from "url";
 import multer from "multer";
-import Contact from "../db/contact.model.js";
+import Contact from "./db/contact.model"; // Corrected import for Contact model
+import Donation from "./db/Donation.model"; // Corrected import for Donation model
 import {
   GopalForm,
   CulturalForm,
   HeritageForm,
   FolkForm,
-} from "../db/registration.model.js";
+  IFolkForm,
+} from "./db/registration.model";
+import { connectDB } from "./storage";
+
+// Define folkFormSchema based on IFolkForm interface
+const folkFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  phone: z.string().min(1, "Phone is required"),
+  whatsapp: z.string().min(1, "WhatsApp number is required"),
+  email: z.string().email("Invalid email format"),
+  gender: z.string().min(1, "Gender is required"),
+  course: z.string().min(1, "Course is required"),
+  occupation: z.string().min(1, "Occupation is required"),
+  qualification: z.string().min(1, "Qualification is required"),
+  message: z.string().optional(),
+  academicQual1: z.string().optional(),
+  academicQual2: z.string().optional(),
+  dob: z.string().refine(
+    (val) => !isNaN(new Date(val).getTime()),
+    { message: "Invalid date format for dob" }
+  ),
+  location: z.string().min(1, "Location is required"),
+});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -21,7 +43,7 @@ const __dirname = dirname(__filename);
 const router = express.Router();
 
 // -------------------------
-// ✅ Multer configuration
+// Multer configuration
 // -------------------------
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -42,7 +64,7 @@ const upload = multer({
 });
 
 // -------------------------
-// ✅ Multer Error Handler
+// Multer Error Handler
 // -------------------------
 function multerErrorHandler(err: any, req: Request, res: Response, next: NextFunction) {
   if (err instanceof multer.MulterError) {
@@ -55,38 +77,11 @@ function multerErrorHandler(err: any, req: Request, res: Response, next: NextFun
   next();
 }
 
-// Folkform validation schema
-const folkFormSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  phone: z.string().min(1, "Phone is required"),
-  whatsapp: z.string().min(1, "WhatsApp number is required"),
-  email: z.string().email("Invalid email format"),
-  gender: z.string().min(1, "Gender is required"),
-  course: z.string().min(1, "Course is required"),
-  occupation: z.string().min(1, "Occupation is required"),
-  qualification: z.string().min(1, "Qualification is required"),
-  message: z.string().optional(),
-  academicQual1: z.string().optional(),
-  academicQual2: z.string().optional(),
-  dob: z.string().refine(
-    (val) => !isNaN(new Date(val).getTime()),
-    { message: "Invalid date format for dob" }
-  ),
-  location: z.string().min(1, "Location is required"),
-});
+export async function registerRoutes(app: Express): Promise<void> {
+  // Ensure MongoDB connection
+  await connectDB();
 
-export async function registerRoutes(app: Express): Promise<Server> {
-  // Serve static files from the client directory only in development
-  if (app.get("env") === "development") {
-    app.use(express.static(join(__dirname, "../client")));
-  }
-
-  // Optionally, serve index.html for all non-API routes (SPA fallback)
-  app.get(/^\/(?!api).*/, (req: Request, res: Response) => {
-    res.sendFile(join(__dirname, "../client/index.html"));
-  });
-
-  // Global error handler to ensure JSON responses
+  // Global error handler for JSON responses
   app.use((err: any, req: Request, res: Response, next: Function) => {
     console.error("Global error handler:", err);
     res.status(500).json({
@@ -98,8 +93,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form route
   router.post("/contact", async (req: Request, res: Response) => {
     try {
-      const { name, mobile, email, dob, message, temple } = req.body;
-
+      const contactSchema = z.object({
+        name: z.string().min(1, "Name is required"),
+        mobile: z.string().min(1, "Mobile is required"),
+        email: z.string().email("Invalid email format"),
+        dob: z.string().refine(
+          (val) => !isNaN(new Date(val).getTime()),
+          { message: "Invalid date format for dob" }
+        ),
+        message: z.string().optional(),
+        temple: z.string().optional(),
+      });
+      const validatedData = contactSchema.parse(req.body);
+      const { name, mobile, email, dob, message, temple } = validatedData;
       const newContact = new Contact({
         name,
         mobile,
@@ -108,12 +114,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
         message,
         temple,
       });
-
       await newContact.save();
-      res.status(200).json({ message: "Contact saved successfully" });
+      res.status(200).json({ success: true, message: "Contact saved successfully" });
     } catch (err) {
       console.error("Error saving contact:", err);
-      res.status(500).json({ message: "Something went wrong" });
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          errors: err.errors.map((e) => ({
+            field: e.path.join("."),
+            message: e.message,
+          })),
+        });
+      }
+      res.status(500).json({
+        success: false,
+        error: err instanceof Error ? err.message : "Something went wrong",
+      });
     }
   });
 
@@ -121,29 +138,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
   router.post("/donations", async (req: Request, res: Response) => {
     try {
       const donationSchema = z.object({
-        firstName: z.string().min(2),
-        email: z.string().email(),
+        firstName: z.string().min(2, "First name is required"),
+        email: z.string().email("Invalid email format"),
         phoneNumber: z.string().optional(),
-        donationCategory: z.string(),
+        donationCategory: z.string().min(1, "Donation category is required"),
         subCategory: z.string().optional(),
         superSubCategory: z.string().optional(),
-        customAmount: z.string(),
+        customAmount: z.string().min(1, "Custom amount is required"),
         message: z.string().optional(),
         receiptNeeded: z.boolean().default(false),
         paymentMethod: z.enum(["credit_card", "paypal", "bank_transfer", "upi"]),
-        razorpay_payment_id: z.string(),
-        razorpay_order_id: z.string(),
-        razorpay_signature: z.string(),
-        amount: z.number(),
+        razorpay_payment_id: z.string().min(1, "Razorpay payment ID is required"),
+        razorpay_order_id: z.string().min(1, "Razorpay order ID is required"),
+        razorpay_signature: z.string().min(1, "Razorpay signature is required"),
+        amount: z.number().min(1, "Amount is required"),
       });
 
       const validatedData = donationSchema.parse(req.body);
-      const savedDonation = await storage.saveDonation(validatedData);
+      const newDonation = new Donation(validatedData);
+      await newDonation.save();
 
       res.status(201).json({
         success: true,
         message: "Donation saved successfully",
-        donation: savedDonation,
+        donation: newDonation,
       });
     } catch (error) {
       console.error("Error saving donation:", error);
@@ -171,66 +189,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
       { name: "regTxnFile", maxCount: 1 },
       { name: "transTxnFile", maxCount: 1 },
     ]),
+    multerErrorHandler,
     async (req: Request, res: Response) => {
       try {
         console.log("Gopal Request body:", req.body);
         console.log("Gopal Files:", req.files);
 
-        const {
-          name,
-          gender,
-          contact,
-          dob,
-          classGroup,
-          schoolName,
-          address,
-          center,
-          bloodGroup,
-          guardianName,
-          guardianOccupation,
-          guardianContact,
-          guardianEmail,
-          referralSource,
-          issues,
-          joiningDate,
-          reason,
-          regTxnId,
-          regReceiptNo,
-          transTxnId,
-          transReceiptNo,
-        } = req.body;
+        const gopalSchema = z.object({
+          name: z.string().min(1, "Name is required"),
+          gender: z.string().min(1, "Gender is required"),
+          contact: z.string().min(1, "Contact is required"),
+          dob: z.string().min(1, "Date of birth is required"),
+          classGroup: z.string().min(1, "Class group is required"),
+          schoolName: z.string().min(1, "School name is required"),
+          address: z.string().min(1, "Address is required"),
+          center: z.string().min(1, "Center is required"),
+          bloodGroup: z.string().min(1, "Blood group is required"),
+          guardianName: z.string().min(1, "Guardian name is required"),
+          guardianOccupation: z.string().optional(),
+          guardianContact: z.string().min(1, "Guardian contact is required"),
+          guardianEmail: z.string().email("Invalid email format"),
+          referralSource: z.string().min(1, "Referral source is required"),
+          issues: z.string().min(1, "Issues field is required"),
+          joiningDate: z.string().min(1, "Joining date is required"),
+          reason: z.string().min(1, "Reason is required"),
+          regTxnId: z.string().min(1, "Registration transaction ID is required"),
+          regReceiptNo: z.string().optional(),
+          transTxnId: z.string().optional(),
+          transReceiptNo: z.string().optional(),
+        });
 
-        // Validate required fields
-        const requiredFields = {
-          name,
-          gender,
-          contact,
-          dob,
-          classGroup,
-          schoolName,
-          address,
-          center,
-          bloodGroup,
-          guardianName,
-          guardianContact,
-          guardianEmail,
-          referralSource,
-          issues,
-          joiningDate,
-          reason,
-          regTxnId,
-        };
-        for (const [field, value] of Object.entries(requiredFields)) {
-          if (!value) {
-            return res.status(400).json({
-              success: false,
-              error: `Missing required field: ${field}`,
-            });
-          }
-        }
-
-        // Safely access files
+        const validatedData = gopalSchema.parse(req.body);
         const files = req.files as { [fieldname: string]: Express.Multer.File[] } | undefined;
+
         if (!files || !files["regTxnFile"] || files["regTxnFile"].length === 0) {
           return res.status(400).json({
             success: false,
@@ -238,29 +229,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           });
         }
 
-        // Prepare form data
         const formData = {
-          name,
-          gender,
-          contact,
-          dob,
-          classGroup,
-          schoolName,
-          address,
-          center,
-          bloodGroup,
-          guardianName,
-          guardianOccupation,
-          guardianContact,
-          guardianEmail,
-          referralSource,
-          issues,
-          joiningDate,
-          reason,
-          regTxnId,
-          regReceiptNo,
-          transTxnId,
-          transReceiptNo,
+          ...validatedData,
           regTxnFile: {
             data: files["regTxnFile"][0].buffer,
             contentType: files["regTxnFile"][0].mimetype,
@@ -278,9 +248,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         await form.save();
         console.log("Gopal form saved successfully");
 
-        res.status(201).json({ success: true, message: "Form submitted successfully" });
+        res.status(201).json({ success: true, message: "Gopal form submitted successfully" });
       } catch (error) {
         console.error("Error submitting Gopal form:", error);
+        if (error instanceof z.ZodError) {
+          return res.status(400).json({
+            success: false,
+            errors: error.errors.map((e) => ({
+              field: e.path.join("."),
+              message: e.message,
+            })),
+          });
+        }
         res.status(500).json({
           success: false,
           error: error instanceof Error ? error.message : "Failed to submit form",
@@ -296,111 +275,90 @@ export async function registerRoutes(app: Express): Promise<Server> {
       { name: "regTxnFile", maxCount: 1 },
       { name: "transFeeFile", maxCount: 1 },
     ]),
+    multerErrorHandler,
     async (req: Request, res: Response) => {
       try {
         console.log("Cultural Request body:", req.body);
         console.log("Cultural Files:", req.files);
 
-        const {
-          registrationId,
-          childName,
-          dob,
-          gender,
-          classGroup,
-          schoolName,
-          GuardianName,
-          GuardianPhone,
-          GuardianOccupation,
-          address,
-          landline,
-          mobile,
-          email,
-          referralSource,
-          attendedBefore,
-          isClubMember,
-          issues,
-          module,
-          regFeeMethod,
-          transportFeeArea,
-          acceptTerms,
-        } = req.body;
+        const culturalSchema = z.object({
+          registrationId: z.string().min(1, "Registration ID is required"),
+          childName: z.string().min(1, "Child's name is required"),
+          dob: z.string().min(1, "Date of birth is required"),
+          gender: z.string().min(1, "Gender is required"),
+          classGroup: z.string().optional(),
+          schoolName: z.string().min(1, "School name is required"),
+          GuardianName: z.string().optional(),
+          GuardianPhone: z.string().optional(),
+          GuardianOccupation: z.string().optional(),
+          address: z.string().optional(),
+          landline: z.string().optional(),
+          mobile: z.string().min(1, "Mobile number is required"),
+          email: z.string().email("Invalid email format").optional(),
+          referralSource: z.string().optional(),
+          attendedBefore: z.string().optional(),
+          isClubMember: z.string().optional(),
+          issues: z.string().optional(),
+          module: z.string().min(1, "Module is required"),
+          regFeeMethod: z.string().optional(),
+          transportFeeArea: z.string().optional(),
+          acceptTerms: z
+            .any()
+            .refine((val) => val === true || val === "true", {
+              message: "You must accept the terms and conditions",
+            }),
+        });
 
-        // Validate required fields
-        const requiredFields = {
-          registrationId,
-          childName,
-          dob,
-          gender,
-          schoolName,
-          mobile,
-          module,
-          acceptTerms,
-        };
-        for (const [field, value] of Object.entries(requiredFields)) {
-          if (!value) {
-            console.log(`Missing required field: ${field}`);
-            return res.status(400).json({
-              success: false,
-              error: `Missing required field: ${field}`,
-            });
-          }
-        }
-
-        // Validate acceptTerms
-        if (acceptTerms !== "true") {
-          console.log("acceptTerms must be true");
-          return res.status(400).json({
-            success: false,
-            error: "You must accept the terms and conditions",
-          });
-        }
-
-        // Validate regTxnFile
+        const validatedData = culturalSchema.parse(req.body);
         const files = req.files as { [fieldname: string]: Express.Multer.File[] } | undefined;
-        if (!files || !files?.["regTxnFile"]?.[0]) {
-          console.log("Registration transaction file is required");
+
+        if (!files || !files["regTxnFile"] || files["regTxnFile"].length === 0) {
           return res.status(400).json({
             success: false,
             error: "Registration transaction file is required",
           });
         }
 
-        // Prepare form data
         const formData = {
-          registrationId,
-          childName,
-          dob,
-          classGroup,
-          gender,
-          schoolName,
-          GuardianName,
-          GuardianPhone,
-          GuardianOccupation,
-          address,
-          landline,
-          mobile,
-          email,
-          referralSource,
-          attendedBefore,
-          isClubMember,
-          issues,
-          module,
-          regFeeMethod,
-          transportFeeArea,
-          acceptTerms: acceptTerms === "true",
+          ...validatedData,
+          acceptTerms: validatedData.acceptTerms === "true" || validatedData.acceptTerms === true,
+          regTxnFile: {
+            data: files["regTxnFile"][0].buffer,
+            contentType: files["regTxnFile"][0].mimetype,
+          },
+          transFeeFile: files["transFeeFile"]?.[0]
+            ? {
+                data: files["transFeeFile"][0].buffer,
+                contentType: files["transFeeFile"][0].mimetype,
+              }
+            : undefined,
         };
 
         console.log("Saving Cultural form data to MongoDB:", formData);
-        const savedForm = await storage.saveCulturalForm(formData);
+        const form = new CulturalForm(formData);
+        await form.save();
         console.log("Cultural form saved successfully");
 
-        res.status(201).json({ success: true, message: "Cultural form submitted successfully", form: savedForm });
+        res.status(201).json({
+          success: true,
+          message: "Cultural form submitted successfully",
+          form,
+        });
       } catch (error: any) {
         console.error("Error submitting Cultural form:", error);
         if (error.code === 11000) {
           return res.status(400).json({
             success: false,
             error: `Registration ID '${req.body.registrationId}' is already in use`,
+          });
+        }
+        if (error instanceof z.ZodError) {
+          return res.status(400).json({
+            success: false,
+            errors: error.errors.map((e) => ({
+              field: e.path.join("."),
+              message: e.message,
+            })),
           });
         }
         res.status(500).json({
@@ -416,26 +374,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       console.log("Heritage Request body:", JSON.stringify(req.body, null, 2));
 
-      const {
-        registrationId,
-        name,
-        gender,
-        dateOfBirth,
-        category,
-        schoolName,
-        customSchoolName,
-        address,
-        contactNumber,
-        email,
-        guardianName,
-        guardianContactNumber,
-        activities: activitiesString,
-        regTxnId,
-      } = req.body;
+      const heritageSchema = z.object({
+        registrationId: z.string().min(1, "Registration ID is required"),
+        name: z.string().min(1, "Name is required"),
+        gender: z.string().min(1, "Gender is required"),
+        dateOfBirth: z.string().min(1, "Date of birth is required"),
+        category: z.string().min(1, "Category is required"),
+        schoolName: z.string().optional(),
+        customSchoolName: z.string().optional(),
+        address: z.string().min(1, "Address is required"),
+        contactNumber: z.string().min(1, "Contact number is required"),
+        email: z.string().email("Invalid email format"),
+        guardianName: z.string().min(1, "Guardian name is required"),
+        guardianContactNumber: z.string().min(1, "Guardian contact number is required"),
+        activities: z.any().refine((val) => Array.isArray(val) || typeof val === "string", {
+          message: "Activities must be a string or array",
+        }),
+        regTxnId: z.string().min(1, "Registration transaction ID is required"),
+      });
 
-      // Parse activities
+      const validatedData = heritageSchema.parse(req.body);
+
       let activities: string[];
       try {
+        const activitiesString = validatedData.activities;
         if (Array.isArray(activitiesString)) {
           activities = activitiesString;
         } else if (typeof activitiesString === "string") {
@@ -457,73 +419,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Validate required fields
-      const requiredFields = {
-        registrationId,
-        name,
-        gender,
-        dateOfBirth,
-        category,
-        schoolName: schoolName || customSchoolName,
-        address,
-        contactNumber,
-        email,
-        guardianName,
-        guardianContactNumber,
-        activities,
-        regTxnId,
-      };
-
-      for (const [field, value] of Object.entries(requiredFields)) {
-        if (!value || (field === "activities" && activities.length === 0)) {
-          console.log(`Missing or invalid required field: ${field}`);
-          return res.status(400).json({
-            success: false,
-            error: `Missing required field: ${field}`,
-          });
-        }
-      }
-
-      // Additional validation
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (!validatedData.schoolName && !validatedData.customSchoolName) {
         return res.status(400).json({
           success: false,
-          error: "Invalid email format",
+          error: "School name or custom school name is required",
         });
       }
-      if (!/^[0-9]{10}$/.test(contactNumber) || !/^[0-9]{10}$/.test(guardianContactNumber)) {
+
+      if (!/^[0-9]{10}$/.test(validatedData.contactNumber) || !/^[0-9]{10}$/.test(validatedData.guardianContactNumber)) {
         return res.status(400).json({
           success: false,
           error: "Contact numbers must be 10 digits",
         });
       }
 
-      // Prepare form data
       const formData = {
-        registrationId,
-        name,
-        gender,
-        dob: dateOfBirth,
-        category,
-        schoolName: schoolName || customSchoolName || "",
-        customSchoolName: customSchoolName || "",
-        address,
-        contactNumber,
-        email,
-        guardianName,
-        guardianContactNumber,
+        registrationId: validatedData.registrationId,
+        name: validatedData.name,
+        gender: validatedData.gender,
+        dob: validatedData.dateOfBirth,
+        category: validatedData.category,
+        schoolName: validatedData.schoolName || validatedData.customSchoolName || "",
+        customSchoolName: validatedData.customSchoolName || "",
+        address: validatedData.address,
+        contactNumber: validatedData.contactNumber,
+        email: validatedData.email,
+        guardianName: validatedData.guardianName,
+        guardianContactNumber: validatedData.guardianContactNumber,
         activities,
-        regTxnId,
+        regTxnId: validatedData.regTxnId,
       };
 
       console.log("Saving Heritage form data to MongoDB:", JSON.stringify(formData, null, 2));
-      const savedForm = await storage.saveHeritageForm(formData);
+      const form = new HeritageForm(formData);
+      await form.save();
       console.log("Heritage form saved successfully");
 
       res.status(201).json({
         success: true,
         message: "Heritage form submitted successfully",
-        form: savedForm,
+        form,
       });
     } catch (error: any) {
       console.error("Error submitting Heritage form:", error);
@@ -531,6 +466,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({
           success: false,
           error: `Registration ID '${req.body.registrationId}' is already in use`,
+        });
+      }
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          errors: error.errors.map((e) => ({
+            field: e.path.join("."),
+            message: e.message,
+          })),
         });
       }
       res.status(500).json({
@@ -541,23 +485,234 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Folkform registration route
-  router.post("/register", async (req: Request, res: Response) => {
+  router.post("/folk-form", async (req: Request, res: Response) => {
     try {
-      console.log("Request URL:", req.originalUrl);
-      console.log("Request Headers:", req.headers);
       console.log("Folkform Request body:", req.body);
 
-      // Validate request body
-      const validatedData = folkFormSchema.parse(req.body) as IFolkFormData;
+      const validatedData = folkFormSchema.parse(req.body);
 
-      console.log("Saving Folkform data to MongoDB:", validatedData);
-      console.log("Attempting to save Folkform...");
-      const savedForm = await storage.saveFolkForm(validatedData);
+      const formData = {
+        ...validatedData,
+        dob: new Date(validatedData.dob),
+      };
+
+      console.log("Saving Folkform data to MongoDB:", formData);
+      const form = new FolkForm(formData);
+      await form.save();
       console.log("Folkform saved successfully");
 
-      res.status(201).json({ success: true, message: "Form submitted successfully", form: savedForm });
+      res.status(201).json({
+        success: true,
+        message: "Folkform submitted successfully",
+        form,
+      });
     } catch (error: any) {
       console.error("Error submitting Folkform:", error);
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          errors: error.errors.map((e) => ({
+            field: e.path.join("."),
+            message: e.message,
+          })),
+        });
+      }
+      res.status(500).json({
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to submit form",
+      });
+    }
+  });
+
+  // GopalSakha registration form route
+  router.post(
+    "/gopal-sakha-form",
+    upload.fields([
+      { name: "regTxnFile", maxCount: 1 },
+      { name: "transTxnFile", maxCount: 1 },
+    ]),
+    multerErrorHandler,
+    async (req: Request, res: Response) => {
+      try {
+        console.log("GopalSakha Request body:", req.body);
+        console.log("GopalSakha Files:", req.files);
+
+        const gopalSakhaSchema = z.object({
+          name: z.string().min(1, "Name is required"),
+          gender: z.string().min(1, "Gender is required"),
+          contact: z.string().min(1, "Contact is required"),
+          dob: z.string().min(1, "Date of birth is required"),
+          classGroup: z.string().min(1, "Class group is required"),
+          schoolName: z.string().min(1, "School name is required"),
+          address: z.string().min(1, "Address is required"),
+          center: z.string().min(1, "Center is required"),
+          bloodGroup: z.string().min(1, "Blood group is required"),
+          guardianName: z.string().min(1, "Guardian name is required"),
+          guardianOccupation: z.string().optional(),
+          guardianContact: z.string().min(1, "Guardian contact is required"),
+          guardianEmail: z.string().email("Invalid email format"),
+          referralSource: z.string().min(1, "Referral source is required"),
+          issues: z.string().min(1, "Issues field is required"),
+          joiningDate: z.string().min(1, "Joining date is required"),
+          reason: z.string().min(1, "Reason is required"),
+          regTxnId: z.string().min(1, "Registration transaction ID is required"),
+          regReceiptNo: z.string().optional(),
+          transTxnId: z.string().optional(),
+          transReceiptNo: z.string().optional(),
+        });
+
+        const validatedData = gopalSakhaSchema.parse(req.body);
+        const files = req.files as { [fieldname: string]: Express.Multer.File[] } | undefined;
+
+        if (!files || !files["regTxnFile"] || files["regTxnFile"].length === 0) {
+          return res.status(400).json({
+            success: false,
+            error: "Registration transaction file is required",
+          });
+        }
+
+        const formData = {
+          ...validatedData,
+          regTxnFile: {
+            data: files["regTxnFile"][0].buffer,
+            contentType: files["regTxnFile"][0].mimetype,
+          },
+          transTxnFile: files["transTxnFile"]?.[0]
+            ? {
+                data: files["transTxnFile"][0].buffer,
+                contentType: files["transTxnFile"][0].mimetype,
+              }
+            : undefined,
+        };
+
+        console.log("Saving GopalSakha form data to MongoDB:", formData);
+        const form = new GopalForm(formData); // Using GopalForm model as assumed
+        await form.save();
+        console.log("GopalSakha form saved successfully");
+
+        res.status(201).json({
+          success: true,
+          message: "GopalSakha form submitted successfully",
+          form,
+        });
+      } catch (error) {
+        console.error("Error submitting GopalSakha form:", error);
+        if (error instanceof z.ZodError) {
+          return res.status(400).json({
+            success: false,
+            errors: error.errors.map((e) => ({
+              field: e.path.join("."),
+              message: e.message,
+            })),
+          });
+        }
+        res.status(500).json({
+          success: false,
+          error: error instanceof Error ? error.message : "Failed to submit form",
+        });
+      }
+    }
+  );
+
+  // HeritageFest registration form route
+  router.post("/heritage-fest-form", async (req: Request, res: Response) => {
+    try {
+      console.log("HeritageFest Request body:", JSON.stringify(req.body, null, 2));
+
+      const heritageFestSchema = z.object({
+        registrationId: z.string().min(1, "Registration ID is required"),
+        name: z.string().min(1, "Name is required"),
+        gender: z.string().min(1, "Gender is required"),
+        dateOfBirth: z.string().min(1, "Date of birth is required"),
+        category: z.string().min(1, "Category is required"),
+        schoolName: z.string().optional(),
+        customSchoolName: z.string().optional(),
+        address: z.string().min(1, "Address is required"),
+        contactNumber: z.string().min(1, "Contact number is required"),
+        email: z.string().email("Invalid email format"),
+        guardianName: z.string().min(1, "Guardian name is required"),
+        guardianContactNumber: z.string().min(1, "Guardian contact number is required"),
+        activities: z.any().refine((val) => Array.isArray(val) || typeof val === "string", {
+          message: "Activities must be a string or array",
+        }),
+        regTxnId: z.string().min(1, "Registration transaction ID is required"),
+      });
+
+      const validatedData = heritageFestSchema.parse(req.body);
+
+      let activities: string[];
+      try {
+        const activitiesString = validatedData.activities;
+        if (Array.isArray(activitiesString)) {
+          activities = activitiesString;
+        } else if (typeof activitiesString === "string") {
+          activities = activitiesString.trim().startsWith("[")
+            ? JSON.parse(activitiesString)
+            : [activitiesString];
+        } else {
+          throw new Error("Activities must be a string or array");
+        }
+
+        if (!Array.isArray(activities)) {
+          throw new Error("Activities must be an array");
+        }
+      } catch (error) {
+        console.error("Error parsing activities:", error);
+        return res.status(400).json({
+          success: false,
+          error: "Invalid activities format",
+        });
+      }
+
+      if (!validatedData.schoolName && !validatedData.customSchoolName) {
+        return res.status(400).json({
+          success: false,
+          error: "School name or custom school name is required",
+        });
+      }
+
+      if (!/^[0-9]{10}$/.test(validatedData.contactNumber) || !/^[0-9]{10}$/.test(validatedData.guardianContactNumber)) {
+        return res.status(400).json({
+          success: false,
+          error: "Contact numbers must be 10 digits",
+        });
+      }
+
+      const formData = {
+        registrationId: validatedData.registrationId,
+        name: validatedData.name,
+        gender: validatedData.gender,
+        dob: validatedData.dateOfBirth,
+        category: validatedData.category,
+        schoolName: validatedData.schoolName || validatedData.customSchoolName || "",
+        customSchoolName: validatedData.customSchoolName || "",
+        address: validatedData.address,
+        contactNumber: validatedData.contactNumber,
+        email: validatedData.email,
+        guardianName: validatedData.guardianName,
+        guardianContactNumber: validatedData.guardianContactNumber,
+        activities,
+        regTxnId: validatedData.regTxnId,
+      };
+
+      console.log("Saving HeritageFest form data to MongoDB:", JSON.stringify(formData, null, 2));
+      const form = new HeritageForm(formData); // Using HeritageForm model as assumed
+      await form.save();
+      console.log("HeritageFest form saved successfully");
+
+      res.status(201).json({
+        success: true,
+        message: "HeritageFest form submitted successfully",
+        form,
+      });
+    } catch (error: any) {
+      console.error("Error submitting HeritageFest form:", error);
+      if (error.code === 11000) {
+        return res.status(400).json({
+          success: false,
+          error: `Registration ID '${req.body.registrationId}' is already in use`,
+        });
+      }
       if (error instanceof z.ZodError) {
         return res.status(400).json({
           success: false,
@@ -631,7 +786,4 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Attach router to app with /api prefix
   app.use("/api", router);
-
-  const httpServer = createServer(app);
-  return httpServer;
 }

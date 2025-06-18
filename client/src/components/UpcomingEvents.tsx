@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { events as allEvents } from '@/data/events';
 import { format } from 'date-fns';
-import CountdownTimer from '@/components/CountdownTimer';
+import CountdownTimer from '../components/CountdownTimer';
 import { FestivalEvent } from '../data/events';
-import EventModal from '@/components/Eventmodal';
+import EventModal from '../components/Eventmodal';
 
 const AnimatedHeading: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -45,8 +45,8 @@ const UpcomingEvents: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<FestivalEvent | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Filter events for current or upcoming dates (on or after June 07, 2025, 07:20 PM IST)
-  const today = new Date('2025-06-07T19:20:00+05:30'); // Current date and time: 07:20 PM IST on June 07, 2025
+  // Filter events for current or upcoming dates (on or after June 18, 2025, 01:03 PM IST)
+  const today = new Date('2025-06-18T13:03:00+05:30'); // Updated to current date and time
   const upcomingEvents = allEvents
     .filter((event) => {
       const eventDate = new Date(event.date);
@@ -95,12 +95,10 @@ const UpcomingEvents: React.FC = () => {
           <h3 className="text-4xl italic text-black font-dmserif text-center uppercase mb-4">
             & Festivals
           </h3>
-          <p className="text-xl text-black text-center uppercase tracking-wider">
-            <span className="inline">Celebrate with </span>
-            <span className="inline">
-              <AnimatedHeading />
-            </span>
-          </p>
+          <div className="text-xl text-black text-center uppercase tracking-wider flex justify-center items-center gap-2">
+            <span>Celebrate with</span>
+            <AnimatedHeading />
+          </div>
         </div>
 
         <div className="flex items-center justify-center mb-10 gap-4">

@@ -1,4 +1,4 @@
-import { db } from "@db";
+import { db } from "server/db";
 import { ObjectId } from "mongodb";
 
 // Define types for categoryData

@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 import { Schema, model } from "mongoose";
-import { log } from "./vite.js";
-import Donation, { type IDonation } from "../db/Donation.model.js";
+import { log } from "./vite";
+import Donation, { type IDonation } from "./db/Donation.model";
 import {
   GopalForm,
   CulturalForm,
   HeritageForm,
   FolkForm,
   type IFolkForm,
-} from "../db/registration.model.js";
+} from "./db/registration.model";
 
 // Mongoose schemas for MongoDB
 // Seva Category schema

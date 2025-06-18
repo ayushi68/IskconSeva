@@ -1,91 +1,52 @@
 import express from "express";
-import type { Request, Response, Express } from "express";
 import cors from "cors";
-import { registerRoutes } from "./routes.js";
-import { setupVite, serveStatic, log } from "./vite.js";
-import { join, dirname } from "path";
+import { setupVite, log } from "./vite";
+import { createServer } from "http";
 import dotenv from "dotenv";
-import { connectDB } from "./storage.js";
-import { fileURLToPath } from "url";
+import { registerRoutes } from "./routes"; // Custom API routes
 
-// Load environment variables
 dotenv.config();
 
-let __dirname = "";
-try {
-  __dirname = dirname(fileURLToPath(import.meta.url));
-} catch (e) {
-  log(`Failed to resolve __dirname: ${e instanceof Error ? e.message : e}`);
-}
+const app = express();
+const server = createServer(app);
+const port = 5173;
 
-const app: Express = express();
-
-// Configure CORS
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-
-// Middleware
+// Middlewares
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
-// Initialize server and connect to MongoDB
+// Optional: enable CORS only if needed (if frontend is on different domain in prod)
+// app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
+// Log all requests (useful for debugging)
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.url}`);
+  next();
+});
+
 (async () => {
   try {
-    // Connect to MongoDB
-    await connectDB();
-    log("Successfully connected to MongoDB");
+    // ✅ Register your API routes first
+    await registerRoutes(app);
+    log("✅ API routes registered");
 
-    let server = await registerRoutes(app);
+    // ✅ Then setup Vite middleware (should be LAST)
+    await setupVite(app, server);
+    log("✅ Vite dev middleware setup complete");
 
-    if (app.get("env") === "development") {
-      // Use Vite as middleware in development
-      await setupVite(app, server);
-      log("Vite development server setup complete");
-    } else {
-      // Serve Vite build output in production
-      const staticDir = join(__dirname, "../dist/public");
-      app.use(
-        express.static(staticDir, {
-          setHeaders: (res, filePath) => {
-            if (filePath.endsWith(".js")) {
-              res.setHeader("Content-Type", "application/javascript");
-            }
-            // Explicitly prevent serving .tsx files
-            if (filePath.endsWith(".tsx")) {
-              res.status(403).end("Forbidden: .tsx files are not served in production");
-            }
-          },
-        })
-      );
-      log("Serving static files for production from " + staticDir);
+    // ✅ Start server
+    server.listen(port, "localhost", () => {
+      log(`🚀 Server running at: http://localhost:${port}`);
 
-      // Fallback for SPA
-      app.get("*", (req: Request, res: Response) => {
-        res.sendFile(join(staticDir, "index.html"));
-      });
-    }
-
-    // Set server timeout to 30 seconds
-    server.setTimeout(30000);
-
-    // Start server
-    const port = Number(process.env.PORT) || 5000;
-    server.listen(
-      {
-        port,
-        host: "0.0.0.0",
-      },
-      () => {
-        log(`Server running on http://0.0.0.0:${port}`);
+      const mongoUri = process.env.MONGODB_URI;
+      if (mongoUri) {
+        const maskedUri = mongoUri.replace(/(mongodb(?:\+srv)?:\/\/)([^@]+)@/, "$1****:****@");
+        log(`✅ MongoDB URI: ${maskedUri}`);
+      } else {
+        log("⚠️ No MongoDB URI found in environment variables.");
       }
-    );
+    });
   } catch (error) {
-    log(`Failed to start server: ${error instanceof Error ? error.message : "Unknown error"}`);
+    log(`❌ Server startup failed: ${error instanceof Error ? error.message : "Unknown error"}`);
     process.exit(1);
   }
 })();
