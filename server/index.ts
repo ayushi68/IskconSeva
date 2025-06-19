@@ -15,7 +15,7 @@ const port = 8080;
 app.use(express.json());
 
 // Optional: enable CORS only if needed (if frontend is on different domain in prod)
-// app.use(cors({ origin: "http://localhost:8080", credentials: true }));
+app.use(cors({ origin: "http://0.0.0.0:8080", credentials: true }));
 
 // Log all requests (useful for debugging)
 app.use((req, res, next) => {
