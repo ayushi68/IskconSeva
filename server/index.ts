@@ -34,8 +34,8 @@ app.use((req, res, next) => {
     log("✅ Vite dev middleware setup complete");
 
     // ✅ Start server
-    server.listen(port, "localhost", () => {
-      log(`🚀 Server running at: http://localhost:${port}`);
+    server.listen(port, "0.0.0.0", () => {
+      log(`🚀 Server running at: http://0.0.0.0:${port}`);
 
       const mongoUri = process.env.MONGODB_URI;
       if (mongoUri) {
