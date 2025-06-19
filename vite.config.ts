@@ -23,9 +23,9 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
   },
-  server: {
-    host: '0.0.0.0',
-    port: 8080,
-    allowedHosts: ['all'], // 👈 this is what fixes it
-  },
+  // server: {
+  //   host: '0.0.0.0',
+  //   port: 8080,
+  //   allowedHosts: ['all'], // 👈 this is what fixes it
+  // },
 });
