@@ -25,6 +25,7 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
-    allowedHosts: ['iskconseva.onrender.com'], // 👈 this is what fixes it
+    port: 5173,
+    allowedHosts: ['all'], // 👈 this is what fixes it
   },
 });
