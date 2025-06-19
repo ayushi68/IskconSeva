@@ -9,13 +9,13 @@ dotenv.config();
 
 const app = express();
 const server = createServer(app);
-const port = 5173;
+const port = 8080;
 
 // Middlewares
 app.use(express.json());
 
 // Optional: enable CORS only if needed (if frontend is on different domain in prod)
-// app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+// app.use(cors({ origin: "http://localhost:8080", credentials: true }));
 
 // Log all requests (useful for debugging)
 app.use((req, res, next) => {
