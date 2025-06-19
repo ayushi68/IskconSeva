@@ -15,7 +15,22 @@ const port = 5173;
 app.use(express.json());
 
 // Optional: enable CORS only if needed (if frontend is on different domain in prod)
-app.use(cors({ origin: "http://0.0.0.0:5173", credentials: true }));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://iskconseva.onrender.com"
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
 
 // Log all requests (useful for debugging)
 app.use((req, res, next) => {
