@@ -15,22 +15,7 @@ const port = 5173;
 app.use(express.json());
 
 // Optional: enable CORS only if needed (if frontend is on different domain in prod)
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://iskconseva.onrender.com"
-];
-
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true
-}));
-
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 // Log all requests (useful for debugging)
 app.use((req, res, next) => {
@@ -49,8 +34,8 @@ app.use((req, res, next) => {
     log("✅ Vite dev middleware setup complete");
 
     // ✅ Start server
-    server.listen(port, "0.0.0.0", () => {
-      log(`🚀 Server running at: http://0.0.0.0:${port}`);
+    server.listen(port, "localhost", () => {
+      log(`🚀 Server running at: http://localhost:${port}`);
 
       const mongoUri = process.env.MONGODB_URI;
       if (mongoUri) {
