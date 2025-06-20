@@ -9,13 +9,13 @@ dotenv.config();
 
 const app = express();
 const server = createServer(app);
-const port = 5173;
+//const port = 5173;
 
 // Middlewares
 app.use(express.json());
 
 // Optional: enable CORS only if needed (if frontend is on different domain in prod)
-app.use(cors({ origin: "http://0.0.0.0:5173", credentials: true }));
+//app.use(cors({ origin: "https://iskconseva.onrender.com", credentials: true }));
 
 // Log all requests (useful for debugging)
 app.use((req, res, next) => {
@@ -34,8 +34,8 @@ app.use((req, res, next) => {
     log("✅ Vite dev middleware setup complete");
 
     // ✅ Start server
-    server.listen(port, "0.0.0.0", () => {
-      log(`🚀 Server running at: http://0.0.0.0:${port}`);
+    server.listen(5173, "0.0.0.0", () => {
+      log(`🚀 Server running at: http://0.0.0.0:5173`);
 
       const mongoUri = process.env.MONGODB_URI;
       if (mongoUri) {

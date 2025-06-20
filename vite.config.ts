@@ -12,19 +12,22 @@ export default defineConfig({
     react(),
     runtimeErrorOverlay(),
   ],
-  resolve: {
-    alias: {
-      "@db": path.resolve(import.meta.dirname, "db"),
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-    },
-  },
-  root: path.resolve(import.meta.dirname, "client"),
+  root: path.resolve(__dirname, "client"), // React app root
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    outDir: path.resolve(__dirname, "dist/public"), // Output to dist/public for Express to serve
     emptyOutDir: true,
   },
+  resolve: {
+    alias: {
+      "@db": path.resolve(__dirname, "db"),
+      "@": path.resolve(__dirname, "client", "src"),
+    },
+  },
+  // 👇 Optional for local dev, ignored in production
   server: {
-    host: true,
+    host: "0.0.0.0", // ensures accessibility in Docker/Render/local
     port: 5173,
+    allowedHosts: ["https://iskconseva.onrender.com/"], // allows access from any host
+    // strictPort: true, // fails if port is already in use
   },
 });
