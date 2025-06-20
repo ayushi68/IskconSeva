@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 const server = createServer(app);
-//const port = 5173;
+const port = process.env.PORT || 5173;
 
 // Middlewares
 app.use(express.json());
@@ -34,8 +34,8 @@ app.use((req, res, next) => {
     log("✅ Vite dev middleware setup complete");
 
     // ✅ Start server
-    server.listen(5173, "0.0.0.0", () => {
-      log(`🚀 Server running at: http://0.0.0.0:5173`);
+    server.listen(port, () => {
+      log(`🚀 Server running at: http://0.0.0.0:${port}`);
 
       const mongoUri = process.env.MONGODB_URI;
       if (mongoUri) {
