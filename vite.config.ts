@@ -24,10 +24,10 @@ export default defineConfig({
     },
   },
   // 👇 Optional for local dev, ignored in production
-  server: {
-    host: "0.0.0.0", // ensures accessibility in Docker/Render/local
-    port: 5173,
-    allowedHosts: ["https://iskconseva.onrender.com/"], // allows access from any host
-    // strictPort: true, // fails if port is already in use
-  },
+  // server: {
+  //   host: "0.0.0.0", // ensures accessibility in Docker/Render/local
+  //   port: 5173,
+  //   allowedHosts: ["https://iskconseva.onrender.com/"], // allows access from any host
+  //   // strictPort: true, // fails if port is already in use
+  // },
 });
